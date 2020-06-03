@@ -25,26 +25,31 @@ view: admin_orders_retention_tbl {
   dimension: gift_blankets {
     type: number
     sql: ${TABLE}.gift_blankets ;;
+    hidden: yes
   }
 
   dimension: gift_mps {
     type: number
     sql: ${TABLE}.gift_MPs ;;
+    hidden: yes
   }
 
   dimension: gift_pillows {
     type: number
     sql: ${TABLE}.gift_pillows ;;
+    hidden: yes
   }
 
   dimension: gift_sheets {
     type: number
     sql: ${TABLE}.gift_sheets ;;
+    hidden: yes
   }
 
   dimension: gross_sales {
     type: number
     sql: ${TABLE}.gross_sales ;;
+    hidden: yes
   }
 
   dimension: is_repeat_user {
@@ -79,41 +84,49 @@ view: admin_orders_retention_tbl {
   dimension: paid_bedframes {
     type: number
     sql: ${TABLE}.paid_bedframes ;;
+    hidden: yes
   }
 
   dimension: paid_blankets {
     type: number
     sql: ${TABLE}.paid_blankets ;;
+    hidden: yes
   }
 
   dimension: paid_furniture {
     type: number
     sql: ${TABLE}.paid_furniture ;;
+    hidden: yes
   }
 
   dimension: paid_mattresses {
     type: number
     sql: ${TABLE}.paid_mattresses ;;
+    hidden: yes
   }
 
   dimension: paid_mps {
     type: number
     sql: ${TABLE}.paid_MPs ;;
+    hidden: yes
   }
 
   dimension: paid_pillows {
     type: number
     sql: ${TABLE}.paid_pillows ;;
+    hidden: yes
   }
 
   dimension: paid_rugs {
     type: number
     sql: ${TABLE}.paid_rugs ;;
+    hidden: yes
   }
 
   dimension: paid_sheets {
     type: number
     sql: ${TABLE}.paid_sheets ;;
+    hidden: yes
   }
 
   dimension_group: previous_order_ts {
@@ -169,4 +182,175 @@ view: admin_orders_retention_tbl {
     type: count
     drill_fields: []
   }
+
+  dimension: retention_or_acquisition {
+    type: string
+    sql: case when ${is_repeat_user} = true then 'Retention' else 'Acquisition' end ;;
+  }
+
+# Date dimensions and parameters
+
+  dimension: not_today {
+    type: yesno
+    sql: ${order_created_date} < current_date() ;;
+  }
+
+  parameter: date_granularity {
+    type: string
+    allowed_value: {
+      label: "Day"
+      value: "Day"
+    }
+    allowed_value: {
+      label: "Week"
+      value: "Week"
+    }
+    allowed_value: {
+      label: "Month"
+      value: "Month"
+    }
+    allowed_value: {
+      label: "Quarter"
+      value: "Quarter"
+    }
+    allowed_value: {
+      label: "Year"
+      value: "Year"
+    }
+
+    allowed_value: {
+      label: "None"
+      value: "None"
+    }
+
+  }
+
+  dimension: date {
+    label_from_parameter: date_granularity
+    sql:
+            CASE
+             WHEN {% parameter date_granularity %} = 'Day' THEN cast(${order_created_date} as string)
+             WHEN {% parameter date_granularity %} = 'Week' THEN cast(${order_created_week} as string)
+             WHEN {% parameter date_granularity %} = 'Month' THEN cast(${order_created_month} as string)
+             WHEN {% parameter date_granularity %} = 'Quarter' THEN cast(${order_created_quarter} as string)
+             WHEN {% parameter date_granularity %} = 'Year' THEN cast(${order_created_year} as string)
+            ELSE null
+            END ;;
+  }
+
+
+  dimension:  dow_num {
+    type:  string
+    sql: EXTRACT(DAYOFWEEK FROM ${order_created_date}) ;;
+    hidden: yes
+  }
+
+
+  dimension:  day_of_week {
+    label: "Day of Week"
+    type:  string
+    sql: case
+          when ${dow_num} = 1 then 'Sunday'
+          when ${dow_num} = 2 then 'Monday'
+          when ${dow_num} = 3 then 'Tuesday'
+          when ${dow_num} = 4 then 'Wednesday'
+          when ${dow_num} = 5 then 'Thursday'
+          when ${dow_num} = 6 then 'Friday'
+          when ${dow_num} = 7 then 'Saturday'
+        end ;;
+    order_by_field: dow_num
+  }
+
+
+  # Item measures
+
+  measure: total_paid_bedframes {
+    type: sum
+    sql: ${paid_bedframes} ;;
+    value_format: "#,##0"
+  }
+
+  measure: total_paid_blankets {
+    type: sum
+    sql: ${paid_blankets} ;;
+    value_format: "#,##0"
+  }
+
+  measure: total_paid_furniture {
+    type: sum
+    sql: ${paid_furniture} ;;
+    value_format: "#,##0"
+  }
+
+  measure: total_paid_mattresses {
+    type: sum
+    sql: ${paid_mattresses} ;;
+    value_format: "#,##0"
+  }
+
+  measure: total_paid_mps {
+    label: "Total Paid MPs"
+    type: sum
+    sql: ${paid_mps} ;;
+    value_format: "#,##0"
+  }
+
+  measure: total_paid_pillows {
+    type: sum
+    sql: ${paid_pillows} ;;
+    value_format: "#,##0"
+  }
+
+  measure: total_paid_rugs {
+    type: sum
+    sql: ${paid_rugs} ;;
+    value_format: "#,##0"
+  }
+
+  measure: total_paid_sheets {
+    type: sum
+    sql: ${paid_sheets} ;;
+    value_format: "#,##0"
+  }
+
+  measure: total_gift_blankets {
+    type: sum
+    sql: ${gift_blankets} ;;
+    value_format: "#,##0"
+  }
+
+  measure: total_gift_mps {
+    label: "Total Gift MPs"
+    type: sum
+    sql: ${gift_mps} ;;
+    value_format: "#,##0"
+  }
+
+  measure: total_gift_pillows {
+    type: sum
+    sql: ${gift_pillows} ;;
+    value_format: "#,##0"
+  }
+
+  measure: total_gift_sheets {
+    type: sum
+    sql: ${gift_sheets} ;;
+    value_format: "#,##0"
+  }
+
+    # Other measures
+
+  measure: total_gross_sales {
+    type: sum
+    sql: ${gross_sales} ;;
+    value_format: "$#,##0"
+  }
+
+  measure: total_orders {
+    type: count_distinct
+    sql: ${short_id} ;;
+    value_format: "#,##0"
+  }
+
+
 }
