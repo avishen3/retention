@@ -144,6 +144,7 @@ view: admin_orders_retention_tbl {
   }
 
   dimension: short_id {
+    label: "Order ID"
     type: string
     sql: ${TABLE}.short_id ;;
   }
@@ -344,6 +345,26 @@ view: admin_orders_retention_tbl {
     type: sum
     sql: ${gross_sales} ;;
     value_format: "$#,##0"
+
+  }
+
+  measure: total_retention {
+    type: sum
+    sql: case when ${is_retention} = true then ${gross_sales} else 0 end ;;
+    value_format: "$#,##0"
+  }
+
+  measure: total_acquisition {
+    type: sum
+    sql: case when ${is_retention} = false then ${gross_sales} else 0 end ;;
+    value_format: "$#,##0"
+  }
+
+  measure: retention_rate {
+    description: "revenue from retention / total revenue"
+    type: number
+    sql: ${total_retention} / nullif(${total_gross_sales}, 0) ;;
+    value_format: "0.00%"
   }
 
   measure: total_orders {
@@ -352,5 +373,56 @@ view: admin_orders_retention_tbl {
     value_format: "#,##0"
   }
 
+  measure: total_repeat_orders {
+    type: count_distinct
+    sql: case when ${is_retention} = true then ${short_id} else null end ;;
+    value_format: "#,##0"
+  }
+
+  measure: repeat_order_rate {
+    description: "repeat orders / total users"
+    type: number
+    sql: ${total_repeat_orders} / nullif(${total_orders}, 0) ;;
+    value_format: "0.00%"
+  }
+
+  measure: total_customers {
+    type: count_distinct
+    sql: ${email} ;;
+    value_format: "#,##0"
+  }
+
+  measure: total_repeat_customers {
+    type: count_distinct
+    sql: case when ${is_repeat_user} = true then ${email} else null end ;;
+    value_format: "#,##0"
+  }
+
+  measure: repeat_customer_rate {
+    description: "repeat users / total users"
+    type: number
+    sql: ${total_repeat_customers} / nullif(${total_customers}, 0) ;;
+    value_format: "0.00%"
+  }
+
+  measure: aov {
+    label: "AOV"
+    type: number
+    sql: ${total_gross_sales} / nullif(${total_orders}, 0) ;;
+    value_format: "$#,##0"
+  }
+
+  measure: arpu {
+    label: "ARPU"
+    type: number
+    sql: ${total_gross_sales} / nullif(${total_customers}, 0) ;;
+    value_format: "$#,##0"
+  }
+
+  measure: avg_days_from_previous_order {
+    type:  average
+    sql: ${days_from_previous_order} ;;
+    value_format: "#,##0"
+  }
 
 }
