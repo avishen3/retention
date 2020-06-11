@@ -46,6 +46,19 @@ view: admin_orders_retention_tbl {
     hidden: yes
   }
 
+  dimension: other_gifts {
+    type: number
+    sql: ${TABLE}.other_gifts ;;
+    hidden: yes
+  }
+
+  dimension: all_gifts {
+    type: number
+    sql: ${TABLE}.all_gifts ;;
+    hidden: yes
+  }
+
+
   dimension: gross_sales {
     type: number
     sql: ${TABLE}.gross_sales ;;
@@ -129,6 +142,24 @@ view: admin_orders_retention_tbl {
     hidden: yes
   }
 
+  dimension: other_paid_items {
+    type: number
+    sql: ${TABLE}.other_paid_items ;;
+    hidden: yes
+  }
+
+  dimension: non_mattress_paid_items {
+    type: number
+    sql: ${TABLE}.non_mattress_paid_items ;;
+    hidden: yes
+  }
+
+  dimension: all_paid_items {
+    type: number
+    sql: ${TABLE}.all_paid_items ;;
+    hidden: yes
+  }
+
   dimension_group: previous_order_ts {
     type: time
     timeframes: [
@@ -177,6 +208,17 @@ view: admin_orders_retention_tbl {
   dimension: yotpo_sentiment {
     type: number
     sql: ${TABLE}.yotpo_sentiment ;;
+  }
+
+  dimension: paid_items_included {
+    type: string
+    sql: ${TABLE}.paid_items_included ;;
+    drill_fields: [gifts_included]
+  }
+
+  dimension: gifts_included {
+    type: string
+    sql: ${TABLE}.gifts_included ;;
   }
 
   measure: count {
@@ -269,24 +311,28 @@ view: admin_orders_retention_tbl {
     type: sum
     sql: ${paid_bedframes} ;;
     value_format: "#,##0"
+    group_label: "Paid Categories"
   }
 
   measure: total_paid_blankets {
     type: sum
     sql: ${paid_blankets} ;;
     value_format: "#,##0"
+    group_label: "Paid Categories"
   }
 
   measure: total_paid_furniture {
     type: sum
     sql: ${paid_furniture} ;;
     value_format: "#,##0"
+    group_label: "Paid Categories"
   }
 
   measure: total_paid_mattresses {
     type: sum
     sql: ${paid_mattresses} ;;
     value_format: "#,##0"
+    group_label: "Paid Categories"
   }
 
   measure: total_paid_mps {
@@ -294,30 +340,42 @@ view: admin_orders_retention_tbl {
     type: sum
     sql: ${paid_mps} ;;
     value_format: "#,##0"
+    group_label: "Paid Categories"
   }
 
   measure: total_paid_pillows {
     type: sum
     sql: ${paid_pillows} ;;
     value_format: "#,##0"
+    group_label: "Paid Categories"
   }
 
   measure: total_paid_rugs {
     type: sum
     sql: ${paid_rugs} ;;
     value_format: "#,##0"
+    group_label: "Paid Categories"
   }
 
   measure: total_paid_sheets {
     type: sum
     sql: ${paid_sheets} ;;
     value_format: "#,##0"
+    group_label: "Paid Categories"
+  }
+
+  measure: total_other_paid_items {
+    type: sum
+    sql: ${other_paid_items} ;;
+    value_format: "#,##0"
+    group_label: "Paid Categories"
   }
 
   measure: total_gift_blankets {
     type: sum
     sql: ${gift_blankets} ;;
     value_format: "#,##0"
+    group_label: "Gift Categories"
   }
 
   measure: total_gift_mps {
@@ -325,18 +383,28 @@ view: admin_orders_retention_tbl {
     type: sum
     sql: ${gift_mps} ;;
     value_format: "#,##0"
+    group_label: "Gift Categories"
   }
 
   measure: total_gift_pillows {
     type: sum
     sql: ${gift_pillows} ;;
     value_format: "#,##0"
+    group_label: "Gift Categories"
   }
 
   measure: total_gift_sheets {
     type: sum
     sql: ${gift_sheets} ;;
     value_format: "#,##0"
+    group_label: "Gift Categories"
+  }
+
+  measure: total_other_gifts {
+    type: sum
+    sql: ${other_gifts} ;;
+    value_format: "#,##0"
+    group_label: "Gift Categories"
   }
 
     # Other measures
@@ -419,10 +487,19 @@ view: admin_orders_retention_tbl {
     value_format: "$#,##0"
   }
 
+  # Days between orders
+
   measure: avg_days_from_previous_order {
     type:  average
     sql: ${days_from_previous_order} ;;
     value_format: "#,##0"
+  }
+
+  dimension: grouped_days_from_previous_order {
+    type: tier
+    tiers: [1,51,101,201,301,401,501]
+    style: integer
+    sql: ${days_from_previous_order} ;;
   }
 
 }
