@@ -14,4 +14,8 @@ explore: admin_orders_retention_tbl {
   label: "Retention - Orders"
 }
 
+explore: customers_retention_tbl {
+  label: "Retention - Customers"
+}
+
 case_sensitive: no

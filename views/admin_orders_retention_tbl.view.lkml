@@ -413,7 +413,6 @@ view: admin_orders_retention_tbl {
     type: sum
     sql: ${gross_sales} ;;
     value_format: "$#,##0"
-
   }
 
   measure: total_retention {
