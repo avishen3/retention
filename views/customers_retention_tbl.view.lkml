@@ -49,6 +49,7 @@ view: customers_retention_tbl {
   }
 
   dimension: first_order_gifts_included_included {
+    label: "First Order Gifts Included"
     type: string
     sql: ${TABLE}.first_order_gifts_included_included ;;
   }
@@ -202,5 +203,27 @@ view: customers_retention_tbl {
     value_format: "#,##0"
   }
 
+# Other
+
+dimension: first_order_paid_items_included_no_gift_drill {
+  type: string
+  sql: case when lower(${first_order_paid_items_included}) like '%mattress%' then "Includes Mattresses"
+       else ${first_order_paid_items_included} end;;
+  drill_fields: [first_order_paid_items_included]
+}
+
+  dimension: second_order_paid_items_included_no_gift_drill {
+    type: string
+    sql: case when lower(${second_order_paid_items_included}) like '%mattress%' then "Includes Mattresses"
+      else ${second_order_paid_items_included} end;;
+    drill_fields: [second_order_paid_items_included]
+  }
+
+  dimension: third_order_paid_items_included_no_gift_drill {
+    type: string
+    sql: case when lower(${third_order_paid_items_included}) like '%mattress%' then "Includes Mattresses"
+      else ${third_order_paid_items_included} end;;
+    drill_fields: [third_order_paid_items_included]
+  }
 
 }

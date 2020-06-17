@@ -501,4 +501,6 @@ view: admin_orders_retention_tbl {
     sql: ${days_from_previous_order} ;;
   }
 
+    # Reviews
+
 }
