@@ -231,6 +231,12 @@ view: admin_orders_retention_tbl {
     sql: case when ${is_repeat_user} = true then 'Retention' else 'Acquisition' end ;;
   }
 
+  dimension: new_or_repeat_users {
+    type: string
+    sql: case when ${is_repeat_user} = true then 'Repeat Users' else 'New Users' end ;;
+  }
+
+
 # Date dimensions and parameters
 
   dimension: not_today {
@@ -502,5 +508,23 @@ view: admin_orders_retention_tbl {
   }
 
     # Reviews
+
+  measure: avg_yopto_score {
+    type: average
+    sql: ${yotpo_score} ;;
+    value_format: "0.0"
+  }
+
+  measure: avg_typeform_score {
+    type: average
+    sql: ${typeform_score} ;;
+    value_format: "0.0"
+  }
+
+  measure: avg_yopto_sentiment {
+    type: average
+    sql: ${yotpo_sentiment} ;;
+    value_format: "0.00"
+  }
 
 }
