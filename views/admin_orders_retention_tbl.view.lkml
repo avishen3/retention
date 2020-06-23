@@ -205,11 +205,6 @@ view: admin_orders_retention_tbl {
     sql: ${TABLE}.yotpo_score ;;
   }
 
-  dimension: yotpo_sentiment {
-    type: number
-    sql: ${TABLE}.yotpo_sentiment ;;
-  }
-
   dimension: paid_items_included {
     type: string
     sql: ${TABLE}.paid_items_included ;;
@@ -519,12 +514,6 @@ view: admin_orders_retention_tbl {
     type: average
     sql: ${typeform_score} ;;
     value_format: "0.0"
-  }
-
-  measure: avg_yopto_sentiment {
-    type: average
-    sql: ${yotpo_sentiment} ;;
-    value_format: "0.00"
   }
 
 }
