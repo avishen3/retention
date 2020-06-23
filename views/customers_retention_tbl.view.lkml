@@ -150,6 +150,55 @@ view: customers_retention_tbl {
     drill_fields: [third_order_gifts_included]
   }
 
+  dimension: pred_mattress_share_from_2nd_order {
+    type: number
+    sql: ${TABLE}.pred_mattress_share_from_2nd_order ;;
+    value_format: "0.0%"
+  }
+
+  dimension: pred_avg_days_to_mattress_order {
+    type: number
+    sql: ${TABLE}.pred_avg_days_to_mattress_order ;;
+    value_format: "0"
+  }
+
+  dimension: pred_bedframe_share_from_2nd_order {
+    type: number
+    sql: ${TABLE}.pred_bedframe_share_from_2nd_order ;;
+    value_format: "0.0%"
+  }
+
+  dimension: pred_avg_days_to_bedframe_order {
+    type: number
+    sql: ${TABLE}.pred_avg_days_to_bedframe_order ;;
+    value_format: "0"
+  }
+
+  dimension: pred_MP_share_from_2nd_order {
+    type: number
+    sql: ${TABLE}.pred_MP_share_from_2nd_order ;;
+    value_format: "0.0%"
+  }
+
+  dimension: pred_avg_days_to_MP_order {
+    type: number
+    sql: ${TABLE}.pred_avg_days_to_MP_order ;;
+    value_format: "0"
+  }
+
+  dimension: pred_pillows_share_from_2nd_order {
+    type: number
+    sql: ${TABLE}.pred_pillows_share_from_2nd_order ;;
+    value_format: "0.0%"
+  }
+
+  dimension: pred_avg_days_to_pillows_order {
+    type: number
+    sql: ${TABLE}.pred_avg_days_to_pillows_order ;;
+    value_format: "0"
+  }
+
+
   measure: count {
     type: count
     drill_fields: []
