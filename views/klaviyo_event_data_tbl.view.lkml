@@ -21,6 +21,11 @@ view: klaviyo_event_data_tbl {
     sql: ${TABLE}.email_subject ;;
   }
 
+  dimension: event_id {
+    type: string
+    sql: ${TABLE}.event_id ;;
+  }
+
   dimension: event_name {
     type: string
     sql: ${TABLE}.event_name ;;
@@ -61,6 +66,7 @@ view: klaviyo_event_data_tbl {
       raw,
       time,
       date,
+      day_of_week,
       week,
       month,
       quarter,
@@ -129,24 +135,162 @@ view: klaviyo_event_data_tbl {
             END ;;
   }
 
-  dimension:  reporting_dow_num {
-    type:  string
-    sql: EXTRACT(DAYOFWEEK FROM ${reporting_date}) ;;
-    hidden: yes
+  # measures - from sending to receiving
+
+  measure: total_received_emails {
+    type: count_distinct
+    sql: case when ${event_name} = 'Received Email' then ${event_id} else null end ;;
+    value_format: "#,##0"
   }
 
-  dimension:  reporting_day_of_week {
-    type:  string
-    sql: case
-          when ${reporting_dow_num} = 1 then 'Sunday'
-          when ${reporting_dow_num} = 2 then 'Monday'
-          when ${reporting_dow_num} = 3 then 'Tuesday'
-          when ${reporting_dow_num} = 4 then 'Wednesday'
-          when ${reporting_dow_num} = 5 then 'Thursday'
-          when ${reporting_dow_num} = 6 then 'Friday'
-          when ${reporting_dow_num} = 7 then 'Saturday'
-        end ;;
-    order_by_field: reporting_dow_num
+  measure: total_bounced_emails {
+    type: count_distinct
+    sql: case when ${event_name} = 'Bounced Email' then ${event_id} else null end ;;
+    value_format: "#,##0"
+  }
+
+  measure: total_dropped_emails {
+    type: count_distinct
+    sql: case when ${event_name} = 'Dropped Email' then ${event_id} else null end ;;
+    value_format: "#,##0"
+  }
+
+  measure: total_sent_emails {
+    type: number
+    sql: ${total_received_emails} + ${total_bounced_emails} + ${total_dropped_emails} ;;
+    value_format: "#,##0"
+  }
+
+  measure: deliverability_rate {
+    type: number
+    sql: ${total_received_emails} / nullif(${total_sent_emails}, 0) ;;
+    value_format: "0.00%"
+  }
+
+  measure: bounce_rate {
+    type: number
+    sql: ${total_bounced_emails} / nullif(${total_sent_emails}, 0) ;;
+    value_format: "0.00%"
+  }
+
+  measure: drop_rate {
+    type: number
+    sql: ${total_dropped_emails} / nullif(${total_sent_emails}, 0) ;;
+    value_format: "0.00%"
+  }
+
+  # measures - after receiving
+
+  ### wrong ###
+  measure: total_opened_emails {
+    type: count_distinct
+    sql: case when ${event_name} = 'Opened Email' then ${event_id} else null end ;;
+    value_format: "#,##0"
+  }
+
+  ### wrong ###
+  measure: total_clicked_emails {
+    type: count_distinct
+    sql: case when ${event_name} = 'Clicked Email' then ${event_id} else null end ;;
+    value_format: "#,##0"
+  }
+
+  measure: total_orders {
+    type: count_distinct
+    sql: ${order_id};;
+    value_format: "#,##0"
+  }
+
+  measure: open_rate {
+    type: number
+    sql: ${total_opened_emails} / nullif(${total_received_emails}, 0) ;;
+    value_format: "0.00%"
+  }
+
+  measure: ctr {
+    label: "CTR"
+    type: number
+    sql: ${total_clicked_emails} / nullif(${total_received_emails}, 0) ;;
+    value_format: "0.00%"
+  }
+
+  measure: ctor {
+    label: "CTOR"
+    description: "Click-to-open rate"
+    type: number
+    sql: ${total_clicked_emails} / nullif(${total_opened_emails}, 0) ;;
+    value_format: "0.00%"
+  }
+
+  measure: cvr {
+    label: "CVR"
+    type: number
+    sql: ${total_orders} / nullif(${total_clicked_emails}, 0) ;;
+    value_format: "0.00%"
+  }
+
+  # measures - user preferences
+
+  measure: total_unsubscribes {
+    type: count_distinct
+    sql: case when ${event_name} = 'Unsubscribed' then ${event_id} else null end ;;
+    value_format: "#,##0"
+  }
+
+  measure: total_unsubscribes_from_list {
+    type: count_distinct
+    sql: case when ${event_name} = 'Unsubscribed from List' then ${event_id} else null end ;;
+    value_format: "#,##0"
+  }
+
+  measure: total_subscribes_to_list {
+    type: count_distinct
+    sql: case when ${event_name} = 'Subscribed to List' then ${event_id} else null end ;;
+    value_format: "#,##0"
+  }
+
+  measure: total_emails_marked_as_spam {
+    type: count_distinct
+    sql: case when ${event_name} = 'Marked Email as Spam' then ${event_id} else null end ;;
+    value_format: "#,##0"
+  }
+
+  measure: total_updated_email_preferences {
+    type: count_distinct
+    sql: case when ${event_name} = 'Updated Email Preferences' then ${event_id} else null end ;;
+    value_format: "#,##0"
+  }
+
+  measure: unsubscribe_rate {
+    type: number
+    sql: ${total_unsubscribes} / nullif(${total_received_emails}, 0) ;;
+    value_format: "0.00%"
+  }
+
+  measure: unsubscribe_from_list_rate {
+    type: number
+    sql: ${total_unsubscribes_from_list} / nullif(${total_received_emails}, 0) ;;
+    value_format: "0.00%"
+  }
+
+  measure: subscribe_to_list_rate {
+    type: number
+    sql: ${total_subscribes_to_list} / nullif(${total_received_emails}, 0) ;;
+    value_format: "0.00%"
+  }
+
+  measure: spam_rate {
+    type: number
+    sql: ${total_emails_marked_as_spam} / nullif(${total_received_emails}, 0) ;;
+    value_format: "0.00%"
+  }
+
+  # other measures
+
+  measure: total_users {
+    type: count_distinct
+    sql: ${email} ;;
+    value_format: "#,##0"
   }
 
 }
