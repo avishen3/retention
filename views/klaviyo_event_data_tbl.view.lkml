@@ -14,6 +14,7 @@ view: klaviyo_event_data_tbl {
   dimension: email {
     type: string
     sql: ${TABLE}.email ;;
+    label: "Email Address"
   }
 
   dimension: email_subject {
@@ -160,7 +161,7 @@ view: klaviyo_event_data_tbl {
   }
 
 
-  # measures - from sending to receiving
+  # email measures - from sending to receiving
 
   measure: total_unique_emails {
     type: count_distinct
@@ -210,13 +211,7 @@ view: klaviyo_event_data_tbl {
     value_format: "0.00%"
   }
 
-  # measures - after receiving
-
-  measure: total_opens {
-    type: count_distinct
-    sql: case when ${event_name} = 'Opened Email' then ${event_id} else null end ;;
-    value_format: "#,##0"
-  }
+  # email measures - after receiving
 
   measure: total_opened_emails {
     type: count_distinct
@@ -224,21 +219,9 @@ view: klaviyo_event_data_tbl {
     value_format: "#,##0"
   }
 
-  measure: total_clicks {
-    type: count_distinct
-    sql: case when ${event_name} = 'Clicked Email' then ${event_id} else null end ;;
-    value_format: "#,##0"
-  }
-
   measure: total_clicked_emails {
     type: count_distinct
     sql: case when ${event_name} = 'Clicked Email' then ${unique_email_id} else null end ;;
-    value_format: "#,##0"
-  }
-
-  measure: total_orders {
-    type: count_distinct
-    sql: ${order_id};;
     value_format: "#,##0"
   }
 
@@ -253,6 +236,27 @@ view: klaviyo_event_data_tbl {
     type: number
     sql: ${total_clicked_emails} / nullif(${total_unique_emails}, 0) ;;
     value_format: "0.00%"
+  }
+
+
+  # event measures - after receiving
+
+  measure: total_opens {
+    type: count_distinct
+    sql: case when ${event_name} = 'Opened Email' then ${event_id} else null end ;;
+    value_format: "#,##0"
+  }
+
+  measure: total_clicks {
+    type: count_distinct
+    sql: case when ${event_name} = 'Clicked Email' then ${event_id} else null end ;;
+    value_format: "#,##0"
+  }
+
+  measure: total_orders {
+    type: count_distinct
+    sql: ${order_id};;
+    value_format: "#,##0"
   }
 
   measure: ctor {
@@ -270,8 +274,7 @@ view: klaviyo_event_data_tbl {
     value_format: "0.00%"
   }
 
-
-  # measures - user preferences
+  # email measures - user preferences
 
   measure: total_unsubscribed_emails {
     type: count_distinct
@@ -304,6 +307,7 @@ view: klaviyo_event_data_tbl {
   }
 
   measure: unsubscribe_rate {
+    description: "Total Unsubscribed Emails / Total Received Emails"
     type: number
     sql: ${total_unsubscribed_emails} / nullif(${total_received_emails}, 0) ;;
     value_format: "0.00%"
@@ -327,6 +331,19 @@ view: klaviyo_event_data_tbl {
     type: count_distinct
     sql: ${email} ;;
     value_format: "#,##0"
+  }
+
+  measure: total_unsubscribers {
+    type: count_distinct
+    sql: case when ${is_unsubscriber} = true then ${email} else null end ;;
+    value_format: "#,##0"
+  }
+
+  measure: unsubscription_rate {
+    description: "Total Unsubscribers / Total Users"
+    type: number
+    sql: ${total_unsubscribers} / nullif(${total_users}, 0) ;;
+    value_format: "0.00%"
   }
 
 }
