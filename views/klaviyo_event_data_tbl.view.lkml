@@ -46,6 +46,20 @@ view: klaviyo_event_data_tbl {
     sql: ${TABLE}.order_id ;;
   }
 
+  dimension_group: email_created {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    sql: ${TABLE}.email_created ;;
+  }
+
   dimension_group: person_created {
     type: time
     timeframes: [
@@ -60,7 +74,7 @@ view: klaviyo_event_data_tbl {
     sql: ${TABLE}.person_created ;;
   }
 
-  dimension_group: reporting {
+  dimension_group: event {
     type: time
     timeframes: [
       raw,
@@ -72,12 +86,22 @@ view: klaviyo_event_data_tbl {
       quarter,
       year
     ]
-    sql: ${TABLE}.reporting_date ;;
+    sql: ${TABLE}.event_date ;;
   }
 
   dimension: url {
     type: string
     sql: ${TABLE}.url ;;
+  }
+
+  dimension: is_unsubscriber {
+    type: yesno
+    sql: ${TABLE}.is_unsubscriber ;;
+  }
+
+  dimension: unique_email_id {
+    type: string
+    sql: ${TABLE}.unique_email_id ;;
   }
 
   measure: count {
@@ -89,10 +113,10 @@ view: klaviyo_event_data_tbl {
 
   dimension: not_today {
     type: yesno
-    sql: ${reporting_date} < current_date() ;;
+    sql: ${email_created_date} < current_date() ;;
   }
 
-  parameter: reporting_date_granularity {
+  parameter: email_created_granularity {
     type: string
     allowed_value: {
       label: "Day"
@@ -122,36 +146,43 @@ view: klaviyo_event_data_tbl {
 
   }
 
-  dimension: granular_reporting_date {
-    label_from_parameter: reporting_date_granularity
+  dimension: granular_email_created {
+    label_from_parameter: email_created_granularity
     sql:
             CASE
-             WHEN {% parameter reporting_date_granularity %} = 'Day' THEN cast(${reporting_date} as string)
-             WHEN {% parameter reporting_date_granularity %} = 'Week' THEN cast(${reporting_week} as string)
-             WHEN {% parameter reporting_date_granularity %} = 'Month' THEN cast(${reporting_month} as string)
-             WHEN {% parameter reporting_date_granularity %} = 'Quarter' THEN cast(${reporting_quarter} as string)
-             WHEN {% parameter reporting_date_granularity %} = 'Year' THEN cast(${reporting_year} as string)
+             WHEN {% parameter email_created_granularity %} = 'Day' THEN cast(${email_created_date} as string)
+             WHEN {% parameter email_created_granularity %} = 'Week' THEN cast(${email_created_week} as string)
+             WHEN {% parameter email_created_granularity %} = 'Month' THEN cast(${email_created_month} as string)
+             WHEN {% parameter email_created_granularity %} = 'Quarter' THEN cast(${email_created_quarter} as string)
+             WHEN {% parameter email_created_granularity %} = 'Year' THEN cast(${email_created_year} as string)
             ELSE null
             END ;;
   }
 
+
   # measures - from sending to receiving
+
+  measure: total_unique_emails {
+    type: count_distinct
+    sql: ${unique_email_id} ;;
+    value_format: "#,##0"
+  }
 
   measure: total_received_emails {
     type: count_distinct
-    sql: case when ${event_name} = 'Received Email' then ${event_id} else null end ;;
+    sql: case when ${event_name} = 'Received Email' then ${unique_email_id} else null end ;;
     value_format: "#,##0"
   }
 
   measure: total_bounced_emails {
     type: count_distinct
-    sql: case when ${event_name} = 'Bounced Email' then ${event_id} else null end ;;
+    sql: case when ${event_name} = 'Bounced Email' then ${unique_email_id} else null end ;;
     value_format: "#,##0"
   }
 
   measure: total_dropped_emails {
     type: count_distinct
-    sql: case when ${event_name} = 'Dropped Email' then ${event_id} else null end ;;
+    sql: case when ${event_name} = 'Dropped Email' then ${unique_email_id} else null end ;;
     value_format: "#,##0"
   }
 
@@ -181,17 +212,27 @@ view: klaviyo_event_data_tbl {
 
   # measures - after receiving
 
-  ### wrong ###
-  measure: total_opened_emails {
+  measure: total_opens {
     type: count_distinct
     sql: case when ${event_name} = 'Opened Email' then ${event_id} else null end ;;
     value_format: "#,##0"
   }
 
-  ### wrong ###
-  measure: total_clicked_emails {
+  measure: total_opened_emails {
+    type: count_distinct
+    sql: case when ${event_name} = 'Opened Email' then ${unique_email_id} else null end ;;
+    value_format: "#,##0"
+  }
+
+  measure: total_clicks {
     type: count_distinct
     sql: case when ${event_name} = 'Clicked Email' then ${event_id} else null end ;;
+    value_format: "#,##0"
+  }
+
+  measure: total_clicked_emails {
+    type: count_distinct
+    sql: case when ${event_name} = 'Clicked Email' then ${unique_email_id} else null end ;;
     value_format: "#,##0"
   }
 
@@ -203,14 +244,14 @@ view: klaviyo_event_data_tbl {
 
   measure: open_rate {
     type: number
-    sql: ${total_opened_emails} / nullif(${total_received_emails}, 0) ;;
+    sql: ${total_opened_emails} / nullif(${total_unique_emails}, 0) ;;
     value_format: "0.00%"
   }
 
   measure: ctr {
     label: "CTR"
     type: number
-    sql: ${total_clicked_emails} / nullif(${total_received_emails}, 0) ;;
+    sql: ${total_clicked_emails} / nullif(${total_unique_emails}, 0) ;;
     value_format: "0.00%"
   }
 
@@ -218,40 +259,41 @@ view: klaviyo_event_data_tbl {
     label: "CTOR"
     description: "Click-to-open rate"
     type: number
-    sql: ${total_clicked_emails} / nullif(${total_opened_emails}, 0) ;;
+    sql: ${total_clicks} / nullif(${total_opens}, 0) ;;
     value_format: "0.00%"
   }
 
   measure: cvr {
     label: "CVR"
     type: number
-    sql: ${total_orders} / nullif(${total_clicked_emails}, 0) ;;
+    sql: ${total_orders} / nullif(${total_clicks}, 0) ;;
     value_format: "0.00%"
   }
 
+
   # measures - user preferences
 
-  measure: total_unsubscribes {
+  measure: total_unsubscribed_emails {
     type: count_distinct
-    sql: case when ${event_name} = 'Unsubscribed' then ${event_id} else null end ;;
+    sql: case when ${event_name} = 'Unsubscribed' then ${unique_email_id} else null end ;;
     value_format: "#,##0"
   }
 
-  measure: total_unsubscribes_from_list {
+  measure: total_unsubscribed_emails_from_list {
     type: count_distinct
-    sql: case when ${event_name} = 'Unsubscribed from List' then ${event_id} else null end ;;
+    sql: case when ${event_name} = 'Unsubscribed from List' then ${unique_email_id} else null end ;;
     value_format: "#,##0"
   }
 
-  measure: total_subscribes_to_list {
+  measure: total_unsubscribed_emails_to_list {
     type: count_distinct
-    sql: case when ${event_name} = 'Subscribed to List' then ${event_id} else null end ;;
+    sql: case when ${event_name} = 'Subscribed to List' then ${unique_email_id} else null end ;;
     value_format: "#,##0"
   }
 
   measure: total_emails_marked_as_spam {
     type: count_distinct
-    sql: case when ${event_name} = 'Marked Email as Spam' then ${event_id} else null end ;;
+    sql: case when ${event_name} = 'Marked Email as Spam' then ${unique_email_id} else null end ;;
     value_format: "#,##0"
   }
 
@@ -263,19 +305,13 @@ view: klaviyo_event_data_tbl {
 
   measure: unsubscribe_rate {
     type: number
-    sql: ${total_unsubscribes} / nullif(${total_received_emails}, 0) ;;
+    sql: ${total_unsubscribed_emails} / nullif(${total_received_emails}, 0) ;;
     value_format: "0.00%"
   }
 
   measure: unsubscribe_from_list_rate {
     type: number
-    sql: ${total_unsubscribes_from_list} / nullif(${total_received_emails}, 0) ;;
-    value_format: "0.00%"
-  }
-
-  measure: subscribe_to_list_rate {
-    type: number
-    sql: ${total_subscribes_to_list} / nullif(${total_received_emails}, 0) ;;
+    sql: ${total_unsubscribed_emails_from_list} / nullif(${total_received_emails}, 0) ;;
     value_format: "0.00%"
   }
 
@@ -285,7 +321,7 @@ view: klaviyo_event_data_tbl {
     value_format: "0.00%"
   }
 
-  # other measures
+  # user measures
 
   measure: total_users {
     type: count_distinct
