@@ -14,4 +14,8 @@ explore: klaviyo_event_data_tbl {
   label: "Klaviyo Data"
 }
 
+explore: retail_emails {
+  label: "Retail Emails"
+}
+
 case_sensitive: no
