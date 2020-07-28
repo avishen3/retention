@@ -89,9 +89,9 @@ view: retail_emails {
     sql: ${TABLE}.first_visit_traffic_source ;;
   }
 
-  dimension: has_also_purchaced_on_site {
+  dimension: has_also_purchased_on_site {
     type: yesno
-    sql: ${TABLE}.has_also_purchaced_on_site ;;
+    sql: ${TABLE}.has_also_purchased_on_site ;;
   }
 
   dimension: has_been_on_site {
