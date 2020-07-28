@@ -32,6 +32,16 @@ view: klaviyo_event_data_tbl {
     sql: ${TABLE}.event_name ;;
   }
 
+  dimension: flow_id {
+    type: string
+    sql: ${TABLE}.flow_id ;;
+  }
+
+  dimension: flow_name {
+    type: string
+    sql: ${TABLE}.flow_name ;;
+  }
+
   dimension: geo {
     type: string
     sql: ${TABLE}.geo ;;
@@ -53,6 +63,7 @@ view: klaviyo_event_data_tbl {
       raw,
       time,
       date,
+      day_of_week,
       week,
       month,
       quarter,
@@ -67,6 +78,7 @@ view: klaviyo_event_data_tbl {
       raw,
       time,
       date,
+      day_of_week,
       week,
       month,
       quarter,
@@ -114,7 +126,7 @@ view: klaviyo_event_data_tbl {
 
   dimension: not_today {
     type: yesno
-    sql: ${email_created_date} < current_date() ;;
+    sql: ${event_date} < current_date() ;;
   }
 
   parameter: email_created_granularity {
@@ -167,48 +179,56 @@ view: klaviyo_event_data_tbl {
     type: count_distinct
     sql: ${unique_email_id} ;;
     value_format: "#,##0"
+    group_label: "Email Measures"
   }
 
   measure: total_received_emails {
     type: count_distinct
     sql: case when ${event_name} = 'Received Email' then ${unique_email_id} else null end ;;
     value_format: "#,##0"
+    group_label: "Email Measures"
   }
 
   measure: total_bounced_emails {
     type: count_distinct
     sql: case when ${event_name} = 'Bounced Email' then ${unique_email_id} else null end ;;
     value_format: "#,##0"
+    group_label: "Email Measures"
   }
 
   measure: total_dropped_emails {
     type: count_distinct
     sql: case when ${event_name} = 'Dropped Email' then ${unique_email_id} else null end ;;
     value_format: "#,##0"
+    group_label: "Email Measures"
   }
 
   measure: total_sent_emails {
     type: number
     sql: ${total_received_emails} + ${total_bounced_emails} + ${total_dropped_emails} ;;
     value_format: "#,##0"
+    group_label: "Email Measures"
   }
 
   measure: deliverability_rate {
     type: number
     sql: ${total_received_emails} / nullif(${total_sent_emails}, 0) ;;
     value_format: "0.00%"
+    group_label: "Email Measures"
   }
 
   measure: bounce_rate {
     type: number
     sql: ${total_bounced_emails} / nullif(${total_sent_emails}, 0) ;;
     value_format: "0.00%"
+    group_label: "Email Measures"
   }
 
   measure: drop_rate {
     type: number
     sql: ${total_dropped_emails} / nullif(${total_sent_emails}, 0) ;;
     value_format: "0.00%"
+    group_label: "Email Measures"
   }
 
   # email measures - after receiving
@@ -217,18 +237,21 @@ view: klaviyo_event_data_tbl {
     type: count_distinct
     sql: case when ${event_name} = 'Opened Email' then ${unique_email_id} else null end ;;
     value_format: "#,##0"
+    group_label: "Email Measures"
   }
 
   measure: total_clicked_emails {
     type: count_distinct
     sql: case when ${event_name} = 'Clicked Email' then ${unique_email_id} else null end ;;
     value_format: "#,##0"
+    group_label: "Email Measures"
   }
 
   measure: open_rate {
     type: number
     sql: ${total_opened_emails} / nullif(${total_unique_emails}, 0) ;;
     value_format: "0.00%"
+    group_label: "Email Measures"
   }
 
   measure: ctr {
@@ -236,6 +259,7 @@ view: klaviyo_event_data_tbl {
     type: number
     sql: ${total_clicked_emails} / nullif(${total_unique_emails}, 0) ;;
     value_format: "0.00%"
+    group_label: "Email Measures"
   }
 
 
@@ -245,6 +269,7 @@ view: klaviyo_event_data_tbl {
     type: count_distinct
     sql: case when ${event_name} = 'Opened Email' then ${event_id} else null end ;;
     value_format: "#,##0"
+    group_label: "Event Measures"
   }
 
   measure: total_clicks {
@@ -257,6 +282,7 @@ view: klaviyo_event_data_tbl {
     type: count_distinct
     sql: ${order_id};;
     value_format: "#,##0"
+    group_label: "Event Measures"
   }
 
   measure: ctor {
@@ -265,6 +291,7 @@ view: klaviyo_event_data_tbl {
     type: number
     sql: ${total_clicks} / nullif(${total_opens}, 0) ;;
     value_format: "0.00%"
+    group_label: "Event Measures"
   }
 
   measure: cvr {
@@ -272,6 +299,7 @@ view: klaviyo_event_data_tbl {
     type: number
     sql: ${total_orders} / nullif(${total_clicks}, 0) ;;
     value_format: "0.00%"
+    group_label: "Event Measures"
   }
 
   # email measures - user preferences
@@ -280,30 +308,35 @@ view: klaviyo_event_data_tbl {
     type: count_distinct
     sql: case when ${event_name} = 'Unsubscribed' then ${unique_email_id} else null end ;;
     value_format: "#,##0"
+    group_label: "Email Measures"
   }
 
   measure: total_unsubscribed_emails_from_list {
     type: count_distinct
     sql: case when ${event_name} = 'Unsubscribed from List' then ${unique_email_id} else null end ;;
     value_format: "#,##0"
+    group_label: "Email Measures"
   }
 
   measure: total_unsubscribed_emails_to_list {
     type: count_distinct
     sql: case when ${event_name} = 'Subscribed to List' then ${unique_email_id} else null end ;;
     value_format: "#,##0"
+    group_label: "Email Measures"
   }
 
   measure: total_emails_marked_as_spam {
     type: count_distinct
     sql: case when ${event_name} = 'Marked Email as Spam' then ${unique_email_id} else null end ;;
     value_format: "#,##0"
+    group_label: "Email Measures"
   }
 
   measure: total_updated_email_preferences {
     type: count_distinct
     sql: case when ${event_name} = 'Updated Email Preferences' then ${event_id} else null end ;;
     value_format: "#,##0"
+    group_label: "Email Measures"
   }
 
   measure: unsubscribe_rate {
@@ -311,18 +344,21 @@ view: klaviyo_event_data_tbl {
     type: number
     sql: ${total_unsubscribed_emails} / nullif(${total_received_emails}, 0) ;;
     value_format: "0.00%"
+    group_label: "Email Measures"
   }
 
   measure: unsubscribe_from_list_rate {
     type: number
     sql: ${total_unsubscribed_emails_from_list} / nullif(${total_received_emails}, 0) ;;
     value_format: "0.00%"
+    group_label: "Email Measures"
   }
 
   measure: spam_rate {
     type: number
     sql: ${total_emails_marked_as_spam} / nullif(${total_received_emails}, 0) ;;
     value_format: "0.00%"
+    group_label: "Email Measures"
   }
 
   # user measures
@@ -331,12 +367,14 @@ view: klaviyo_event_data_tbl {
     type: count_distinct
     sql: ${email} ;;
     value_format: "#,##0"
+    group_label: "User Measures"
   }
 
   measure: total_unsubscribers {
     type: count_distinct
     sql: case when ${is_unsubscriber} = true then ${email} else null end ;;
     value_format: "#,##0"
+
   }
 
   measure: unsubscription_rate {
@@ -344,6 +382,7 @@ view: klaviyo_event_data_tbl {
     type: number
     sql: ${total_unsubscribers} / nullif(${total_users}, 0) ;;
     value_format: "0.00%"
+    group_label: "User Measures"
   }
 
 }
