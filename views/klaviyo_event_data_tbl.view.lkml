@@ -69,6 +69,8 @@ view: klaviyo_event_data_tbl {
       quarter,
       year
     ]
+    convert_tz: no
+    datatype: date
     sql: ${TABLE}.email_created ;;
   }
 
@@ -84,6 +86,8 @@ view: klaviyo_event_data_tbl {
       quarter,
       year
     ]
+    convert_tz: no
+    datatype: date
     sql: ${TABLE}.person_created ;;
   }
 
@@ -99,6 +103,8 @@ view: klaviyo_event_data_tbl {
       quarter,
       year
     ]
+    convert_tz: no
+    datatype: date
     sql: ${TABLE}.event_date ;;
   }
 
@@ -122,12 +128,12 @@ view: klaviyo_event_data_tbl {
     drill_fields: [campaign_name, event_name]
   }
 
-# Date dimensions and parameters
-
   dimension: not_today {
     type: yesno
     sql: ${event_date} < current_date() ;;
   }
+
+# Email Date dimensions and parameters
 
   parameter: email_created_granularity {
     type: string
@@ -172,6 +178,92 @@ view: klaviyo_event_data_tbl {
             END ;;
   }
 
+  parameter: dow_or_not_email_created {
+    type: string
+    allowed_value: {
+      label: "Yes"
+      value: "Yes"
+    }
+    allowed_value: {
+      label: "No"
+      value: "No"
+    }
+
+  }
+
+  dimension: dow_email_created {
+    description: "Select 'No' in 'DOW?' selector to deactivate the DOW display"
+    sql:
+          CASE WHEN {% parameter dow_or_not_email_created %} = 'Yes' THEN ${email_created_day_of_week}
+          ELSE null
+          END ;;
+  }
+
+# Event Date dimensions and parameters
+
+  parameter: event_date_granularity {
+    type: string
+    allowed_value: {
+      label: "Day"
+      value: "Day"
+    }
+    allowed_value: {
+      label: "Week"
+      value: "Week"
+    }
+    allowed_value: {
+      label: "Month"
+      value: "Month"
+    }
+    allowed_value: {
+      label: "Quarter"
+      value: "Quarter"
+    }
+    allowed_value: {
+      label: "Year"
+      value: "Year"
+    }
+
+    allowed_value: {
+      label: "None"
+      value: "None"
+    }
+
+  }
+
+  dimension: granular_event_date {
+    label_from_parameter: event_date_granularity
+    sql:
+            CASE
+             WHEN {% parameter event_date_granularity %} = 'Day' THEN cast(${event_date} as string)
+             WHEN {% parameter event_date_granularity %} = 'Week' THEN cast(${event_week} as string)
+             WHEN {% parameter event_date_granularity %} = 'Month' THEN cast(${event_month} as string)
+             WHEN {% parameter event_date_granularity %} = 'Quarter' THEN cast(${event_quarter} as string)
+             WHEN {% parameter event_date_granularity %} = 'Year' THEN cast(${event_year} as string)
+            ELSE null
+            END ;;
+  }
+
+  parameter: dow_or_not_event {
+    type: string
+    allowed_value: {
+      label: "Yes"
+      value: "Yes"
+    }
+    allowed_value: {
+      label: "No"
+      value: "No"
+    }
+
+  }
+
+  dimension: dow_event {
+    description: "Select 'No' in 'DOW?' selector to deactivate the DOW display"
+    sql:
+          CASE WHEN {% parameter dow_or_not_event %} = 'Yes' THEN ${event_day_of_week}
+          ELSE null
+          END ;;
+  }
 
   # email measures - from sending to receiving
 
@@ -276,6 +368,7 @@ view: klaviyo_event_data_tbl {
     type: count_distinct
     sql: case when ${event_name} = 'Clicked Email' then ${event_id} else null end ;;
     value_format: "#,##0"
+    group_label: "Event Measures"
   }
 
   measure: total_orders {
@@ -374,7 +467,7 @@ view: klaviyo_event_data_tbl {
     type: count_distinct
     sql: case when ${is_unsubscriber} = true then ${email} else null end ;;
     value_format: "#,##0"
-
+    group_label: "User Measures"
   }
 
   measure: unsubscription_rate {
