@@ -341,7 +341,7 @@ view: klaviyo_event_data_tbl {
 
   measure: open_rate {
     type: number
-    sql: ${total_opened_emails} / nullif(${total_unique_emails}, 0) ;;
+    sql: ${total_opened_emails} / nullif(${total_received_emails}, 0) ;;
     value_format: "0.00%"
     group_label: "Email Measures"
   }
@@ -349,7 +349,7 @@ view: klaviyo_event_data_tbl {
   measure: ctr {
     label: "CTR"
     type: number
-    sql: ${total_clicked_emails} / nullif(${total_unique_emails}, 0) ;;
+    sql: ${total_clicked_emails} / nullif(${total_received_emails}, 0) ;;
     value_format: "0.00%"
     group_label: "Email Measures"
   }
@@ -404,20 +404,6 @@ view: klaviyo_event_data_tbl {
     group_label: "Email Measures"
   }
 
-  measure: total_unsubscribed_emails_from_list {
-    type: count_distinct
-    sql: case when ${event_name} = 'Unsubscribed from List' then ${unique_email_id} else null end ;;
-    value_format: "#,##0"
-    group_label: "Email Measures"
-  }
-
-  measure: total_unsubscribed_emails_to_list {
-    type: count_distinct
-    sql: case when ${event_name} = 'Subscribed to List' then ${unique_email_id} else null end ;;
-    value_format: "#,##0"
-    group_label: "Email Measures"
-  }
-
   measure: total_emails_marked_as_spam {
     type: count_distinct
     sql: case when ${event_name} = 'Marked Email as Spam' then ${unique_email_id} else null end ;;
@@ -436,13 +422,6 @@ view: klaviyo_event_data_tbl {
     description: "Total Unsubscribed Emails / Total Received Emails"
     type: number
     sql: ${total_unsubscribed_emails} / nullif(${total_received_emails}, 0) ;;
-    value_format: "0.00%"
-    group_label: "Email Measures"
-  }
-
-  measure: unsubscribe_from_list_rate {
-    type: number
-    sql: ${total_unsubscribed_emails_from_list} / nullif(${total_received_emails}, 0) ;;
     value_format: "0.00%"
     group_label: "Email Measures"
   }
