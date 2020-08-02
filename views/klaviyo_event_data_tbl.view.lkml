@@ -9,6 +9,11 @@ view: klaviyo_event_data_tbl {
   dimension: campaign_name {
     type: string
     sql: ${TABLE}.campaign_name ;;
+    link: {
+      label: "Link to Email Overview"
+      url: "https://residenthome.eu.looker.com/dashboards/367?Campaign%20Name={{ value | url_encode }}"
+      icon_url: "https://looker.com/favicon.ico"
+    }
   }
 
   dimension: email {
@@ -40,6 +45,11 @@ view: klaviyo_event_data_tbl {
   dimension: flow_name {
     type: string
     sql: ${TABLE}.flow_name ;;
+    link: {
+      label: "Link to Email Overview"
+      url: "https://residenthome.eu.looker.com/dashboards/367?Flow%20Name={{ value | url_encode }}"
+      icon_url: "https://looker.com/favicon.ico"
+    }
   }
 
   dimension: geo {
@@ -356,6 +366,13 @@ view: klaviyo_event_data_tbl {
 
 
   # event measures - after receiving
+
+  measure: total_receives {
+    type: count_distinct
+    sql: case when ${event_name} = 'Received Email' then ${event_id} else null end ;;
+    value_format: "#,##0"
+    group_label: "Event Measures"
+  }
 
   measure: total_opens {
     type: count_distinct
