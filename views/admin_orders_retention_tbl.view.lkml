@@ -448,7 +448,7 @@ view: admin_orders_retention_tbl {
   }
 
   measure: repeat_order_rate {
-    description: "repeat orders / total order"
+    description: "repeat orders / total orders"
     type: number
     sql: ${total_repeat_orders} / nullif(${total_orders}, 0) ;;
     value_format: "0.00%"
