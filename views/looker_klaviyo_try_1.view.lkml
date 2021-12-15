@@ -167,6 +167,25 @@ view: looker_klaviyo_try_1 {
     group_label: "Email Measures"
   }
 
+## convertion rate
+
+  measure: Opened_rate_recived_open{
+    label: "% of opened email out of received emails"
+    type: number
+    sql: ${total_opened_emails}/${total_received_emails}  ;;
+    value_format: "0.00%"
+    group_label: "Email Measures"
+  }
+
+  measure: Opened_rate_sent_open{
+    label: "% of opened email out of sent emails"
+    type: number
+    sql: ${total_opened_emails}/${total_sent_emails}  ;;
+    value_format: "0.00%"
+    group_label: "Email Measures"
+  }
+
+
 ## date dimensions
 
   dimension: not_today {
