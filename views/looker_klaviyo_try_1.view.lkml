@@ -117,6 +117,7 @@ view: looker_klaviyo_try_1 {
 
 
 ## from Klaviyo_event_data_tbl
+  #total measures
 
   measure: total_unique_emails {
     type: count_distinct
@@ -208,7 +209,7 @@ view: looker_klaviyo_try_1 {
   measure: Opened_rate_sent_open {
     label: "% of opened email out of sent emails"
     type: number
-    sql: ${total_opened_emails}/ nullif(${total_sent_emails}, 0)  ;;
+    sql: ${total_opened_emails}/ nullif(${total_email_sent}, 0)  ;;
     value_format: "0.00%"
     group_label: "Email Measures"
   }
