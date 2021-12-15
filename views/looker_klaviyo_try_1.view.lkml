@@ -169,10 +169,38 @@ view: looker_klaviyo_try_1 {
 
 ## convertion rate
 
+    # sending to reciving
+
+  measure: deliverability_rate {
+    label: "recevied out of sent"
+    type: number
+    sql: ${total_received_emails} / nullif(${total_sent_emails}, 0) ;;
+    value_format: "0.00%"
+    group_label: "Email Measures"
+  }
+
+  measure: bounce_rate {
+    label: "bounced out of sent"
+    type: number
+    sql: ${total_bounced_emails} / nullif(${total_sent_emails}, 0) ;;
+    value_format: "0.00%"
+    group_label: "Email Measures"
+  }
+
+  measure: drop_rate {
+    label: "drop out of sent"
+    type: number
+    sql: ${total_dropped_emails} / nullif(${total_sent_emails}, 0) ;;
+    value_format: "0.00%"
+    group_label: "Email Measures"
+  }
+
+  # after reciving
+
   measure: Opened_rate_recived_open {
     label: "% of opened email out of received emails"
     type: number
-    sql: ${total_opened_emails}/${total_received_emails}  ;;
+    sql: ${total_opened_emails}/ nullif(${total_received_emails}, 0)  ;;
     value_format: "0.00%"
     group_label: "Email Measures"
   }
@@ -180,7 +208,7 @@ view: looker_klaviyo_try_1 {
   measure: Opened_rate_sent_open {
     label: "% of opened email out of sent emails"
     type: number
-    sql: ${total_opened_emails}/${total_sent_emails}  ;;
+    sql: ${total_opened_emails}/ nullif(${total_sent_emails}, 0)  ;;
     value_format: "0.00%"
     group_label: "Email Measures"
   }
@@ -188,7 +216,7 @@ view: looker_klaviyo_try_1 {
   measure: Clicked_rates {
     label: "% of clicked email out of opened emails"
     type: number
-    sql: ${total_clicked_emails}/${total_opened_emails}  ;;
+    sql: ${total_clicked_emails}/ nullif(${total_opened_emails}, 0)  ;;
     value_format: "0.00%"
     group_label: "Email Measures"
   }
