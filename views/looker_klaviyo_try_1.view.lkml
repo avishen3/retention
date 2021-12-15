@@ -109,10 +109,10 @@ view: looker_klaviyo_try_1 {
 
 ## new masures
 
-  measure: total_email_sent {
-    type: count_distinct
-    sql: ${unique_email_id} ;;
-      }
+  ## measure: total_email_sent {
+  ##  type: count_distinct
+  ##  sql: ${unique_email_id} ;;
+  ##    }
 
 
 
@@ -163,7 +163,7 @@ view: looker_klaviyo_try_1 {
 
   measure: total_sent_emails {
     type: number
-    sql: ${total_received_emails} + ${total_bounced_emails} + ${total_dropped_emails} ;;
+    sql: $ ${unique_email_id}  ;;
     value_format: "#,##0"
     group_label: "Email Measures"
   }
@@ -209,7 +209,7 @@ view: looker_klaviyo_try_1 {
   measure: Opened_rate_sent_open {
     label: "% of opened email out of sent emails"
     type: number
-    sql: ${total_opened_emails}/ nullif(${total_email_sent}, 0)  ;;
+    sql: ${total_opened_emails}/ nullif(${total_sent_emails}, 0)  ;;
     value_format: "0.00%"
     group_label: "Email Measures"
   }
