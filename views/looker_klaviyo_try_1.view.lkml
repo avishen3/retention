@@ -169,7 +169,7 @@ view: looker_klaviyo_try_1 {
 
 ## convertion rate
 
-  measure: Opened_rate_recived_open{
+  measure: Opened_rate_recived_open {
     label: "% of opened email out of received emails"
     type: number
     sql: ${total_opened_emails}/${total_received_emails}  ;;
@@ -177,10 +177,18 @@ view: looker_klaviyo_try_1 {
     group_label: "Email Measures"
   }
 
-  measure: Opened_rate_sent_open{
+  measure: Opened_rate_sent_open {
     label: "% of opened email out of sent emails"
     type: number
     sql: ${total_opened_emails}/${total_sent_emails}  ;;
+    value_format: "0.00%"
+    group_label: "Email Measures"
+  }
+
+  measure: Clicked_rates {
+    label: "% of cliced email out of opened emails"
+    type: number
+    sql: ${total_clicked_emails}/${total_opened_emails}  ;;
     value_format: "0.00%"
     group_label: "Email Measures"
   }
