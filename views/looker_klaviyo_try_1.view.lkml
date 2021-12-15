@@ -163,7 +163,7 @@ view: looker_klaviyo_try_1 {
 
   measure: total_sent_emails {
     type: number
-    sql: $ ${unique_email_id}  ;;
+    sql: ${unique_email_id}  ;;
     value_format: "#,##0"
     group_label: "Email Measures"
   }
