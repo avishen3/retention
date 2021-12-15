@@ -106,4 +106,13 @@ view: looker_klaviyo_try_1 {
     type: count
     drill_fields: [campaign_name, event_name]
   }
+
+
+  measure: total_email_sent {
+    type: count_distinct
+    sql: ${unique_email_id} ;;
+      }
+
+
+
 }
