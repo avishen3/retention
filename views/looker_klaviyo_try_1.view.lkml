@@ -107,11 +107,69 @@ view: looker_klaviyo_try_1 {
     drill_fields: [campaign_name, event_name]
   }
 
+## new masures
 
   measure: total_email_sent {
     type: count_distinct
     sql: ${unique_email_id} ;;
       }
+
+
+
+## date dimensions
+
+  dimension: not_today {
+    type: yesno
+    sql: ${event_date} < current_date('America/Los_Angeles') ;;
+    group_label: "Date Filters"
+    description: "Filters any date after today (including today)"
+  }
+
+  parameter: date_granularity {
+    type: string
+    description: "Use this selector to change the date granularity of 'Date' dimension only"
+    allowed_value: {
+      label: "Day"
+      value: "Day"
+    }
+    allowed_value: {
+      label: "Week"
+      value: "Week"
+    }
+    allowed_value: {
+      label: "Month"
+      value: "Month"
+    }
+    allowed_value: {
+      label: "Quarter"
+      value: "Quarter"
+    }
+    allowed_value: {
+      label: "Year"
+      value: "Year"
+    }
+
+    allowed_value: {
+      label: "None"
+      value: "None"
+    }
+
+  }
+
+  dimension: date {
+    label_from_parameter: date_granularity
+    description: "Use 'Date Granularity' selector to modify the date granularity"
+    sql:
+            CASE
+             WHEN {% parameter date_granularity %} = 'Day' THEN cast(${event_date} as string)
+             WHEN {% parameter date_granularity %} = 'Week' THEN cast(${event_date} as string)
+             WHEN {% parameter date_granularity %} = 'Month' THEN cast(${event_date} as string)
+             WHEN {% parameter date_granularity %} = 'Quarter' THEN cast(${event_date} as string)
+             WHEN {% parameter date_granularity %} = 'Year' THEN cast(${event_date} as string)
+            ELSE null
+            END ;;
+  }
+
 
 
 
