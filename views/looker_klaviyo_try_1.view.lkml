@@ -186,7 +186,7 @@ view: looker_klaviyo_try_1 {
   }
 
   measure: Clicked_rates {
-    label: "% of cliced email out of opened emails"
+    label: "% of clicked email out of opened emails"
     type: number
     sql: ${total_clicked_emails}/${total_opened_emails}  ;;
     value_format: "0.00%"
