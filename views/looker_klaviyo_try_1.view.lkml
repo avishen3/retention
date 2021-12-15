@@ -132,6 +132,13 @@ view: looker_klaviyo_try_1 {
     group_label: "Email Measures"
   }
 
+  measure: total_clicked_emails {
+    type: count_distinct
+    sql: case when ${event_name} = 'Clicked Email' then ${unique_email_id} else null end ;;
+    value_format: "#,##0"
+    group_label: "Email Measures"
+  }
+
   measure: total_received_emails {
     type: count_distinct
     sql: case when ${event_name} = 'Received Email' then ${unique_email_id} else null end ;;
