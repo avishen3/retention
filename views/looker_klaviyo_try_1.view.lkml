@@ -116,6 +116,50 @@ view: looker_klaviyo_try_1 {
 
 
 
+## from Klaviyo_event_data_tbl
+
+  measure: total_unique_emails {
+    type: count_distinct
+    sql: ${unique_email_id} ;;
+    value_format: "#,##0"
+    group_label: "Email Measures"
+  }
+
+  measure: total_opened_emails {
+    type: count_distinct
+    sql: case when ${event_name} = 'Opened Email' then ${unique_email_id} else null end ;;
+    value_format: "#,##0"
+    group_label: "Email Measures"
+  }
+
+  measure: total_received_emails {
+    type: count_distinct
+    sql: case when ${event_name} = 'Received Email' then ${unique_email_id} else null end ;;
+    value_format: "#,##0"
+    group_label: "Email Measures"
+  }
+
+  measure: total_bounced_emails {
+    type: count_distinct
+    sql: case when ${event_name} = 'Bounced Email' then ${unique_email_id} else null end ;;
+    value_format: "#,##0"
+    group_label: "Email Measures"
+  }
+
+  measure: total_dropped_emails {
+    type: count_distinct
+    sql: case when ${event_name} = 'Dropped Email' then ${unique_email_id} else null end ;;
+    value_format: "#,##0"
+    group_label: "Email Measures"
+  }
+
+  measure: total_sent_emails {
+    type: number
+    sql: ${total_received_emails} + ${total_bounced_emails} + ${total_dropped_emails} ;;
+    value_format: "#,##0"
+    group_label: "Email Measures"
+  }
+
 ## date dimensions
 
   dimension: not_today {
