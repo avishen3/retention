@@ -75,7 +75,7 @@ view: looker_email_lead_sent_web_events_klaviyo {
 
   measure: ratio_lead_cap_to_first_email {
     type: number
-    sql:${TABLE}.num_of_email_created_by_day_lead_created/ nullif(${TABLE}.num_send_first_email),0) ;;
+    sql:(sum(${TABLE}.num_of_email_created_by_day_lead_created)/ nullif(sum(${TABLE}.num_send_first_email)),0) ;;
     value_format: "0.00%"
   }
 
