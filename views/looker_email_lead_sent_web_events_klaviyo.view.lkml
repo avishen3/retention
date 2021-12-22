@@ -67,6 +67,18 @@ view: looker_email_lead_sent_web_events_klaviyo {
     value_format: "#,##0"
   }
 
+  measure: total_first_email_sent {
+    type: sum
+    sql:${TABLE}.num_send_first_email ;;
+    value_format: "#,##0"
+  }
+
+  measure: ratio_lead_cap_to_first_email {
+    type: number
+    sql:${TABLE}.num_of_email_created_by_day_lead_created/${TABLE}.num_send_first_email ;;
+    value_format: "#,##0"
+  }
+
 
 
 }
