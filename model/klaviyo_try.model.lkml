@@ -13,11 +13,7 @@ include: "/views/*.view.lkml"                # include all views in the views/ f
 
 }
 
-explore: looker_email_lead_sent_web_events_klaviyo {
-  label: "Email cap to sent overlook"
-  description: "nectar email cap to sent overlook"
 
-}
 
 
 #   join: orders {
