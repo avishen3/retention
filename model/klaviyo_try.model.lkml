@@ -13,6 +13,12 @@ include: "/views/*.view.lkml"                # include all views in the views/ f
 
 }
 
+explore: looker_email_lead_sent_web_events_klaviyo {
+  label: "lead cap email sent overlook"
+  description: "trying to make this work"
+
+}
+
 
 
 
