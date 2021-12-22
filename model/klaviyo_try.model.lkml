@@ -12,6 +12,14 @@ include: "/views/*.view.lkml"                # include all views in the views/ f
   description: "trying to make this work"
 
 }
+
+explore: looker_email_lead_sent_web_events_klaviyo {
+  label: "Email cap to sent overlook"
+  description: "nectar email cap to sent overlook"
+
+}
+
+
 #   join: orders {
 #     relationship: many_to_one
 #     sql_on: ${orders.id} = ${order_items.order_id} ;;
