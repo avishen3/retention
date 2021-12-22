@@ -1,4 +1,4 @@
-view: looker_email_lead_sent_web_events_klaviyo {
+view: looker_to_delea{
   sql_table_name: `omega-post-184817.Keshet.looker_email_lead_sent_web_events_klaviyo`
     ;;
 
