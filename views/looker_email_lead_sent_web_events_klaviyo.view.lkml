@@ -13,7 +13,7 @@ view: looker_email_lead_sent_web_events_klaviyo {
       quarter,
       year
     ]
-    convert_tz: no
+   ## convert_tz: no
     datatype: date
     sql: ${TABLE}.Date ;;
   }
