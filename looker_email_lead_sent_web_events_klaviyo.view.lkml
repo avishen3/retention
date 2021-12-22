@@ -2,7 +2,7 @@ view: looker_email_lead_sent_web_events_klaviyo {
   sql_table_name: `omega-post-184817.Keshet.looker_email_lead_sent_web_events_klaviyo`
     ;;
 
-  dimension_group: date {
+  dimension_group: date_time {
     type: time
     timeframes: [
       raw,
@@ -14,7 +14,7 @@ view: looker_email_lead_sent_web_events_klaviyo {
     ]
     convert_tz: no
     datatype: date
-    sql: ${TABLE}.date ;;
+    sql: ${TABLE}.date_time ;;
   }
 
   dimension: email_web_events {
@@ -56,4 +56,9 @@ view: looker_email_lead_sent_web_events_klaviyo {
     type: count
     drill_fields: []
   }
+
+
+
+
+
 }
