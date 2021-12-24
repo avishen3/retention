@@ -56,7 +56,66 @@ view: looker_email_lead_sent_web_events_klaviyo {
   measure: count {
     type: count
     drill_fields: []
+
   }
+
+
+## date dimensions
+
+  dimension: not_today {
+    type: yesno
+    sql: ${date_date} < current_date('America/Los_Angeles') ;;
+    group_label: "Date Filters"
+    description: "Filters any date after today (including today)"
+  }
+
+  parameter: date_granularity {
+    type: string
+    description: "Use this selector to change the date granularity of 'Date' dimension only"
+    allowed_value: {
+      label: "Day"
+      value: "Day"
+    }
+    allowed_value: {
+      label: "Week"
+      value: "Week"
+    }
+    allowed_value: {
+      label: "Month"
+      value: "Month"
+    }
+    allowed_value: {
+      label: "Quarter"
+      value: "Quarter"
+    }
+    allowed_value: {
+      label: "Year"
+      value: "Year"
+    }
+
+    allowed_value: {
+      label: "None"
+      value: "None"
+    }
+
+  }
+
+  dimension: date {
+    label_from_parameter: date_granularity
+    description: "Use 'Date Granularity' selector to modify the date granularity"
+    sql:
+            CASE
+             WHEN {% parameter date_granularity %} = 'Day' THEN cast(${date_date} as string)
+             WHEN {% parameter date_granularity %} = 'Week' THEN cast(${date_date} as string)
+             WHEN {% parameter date_granularity %} = 'Month' THEN cast(${date_date} as string)
+             WHEN {% parameter date_granularity %} = 'Quarter' THEN cast(${date_date} as string)
+             WHEN {% parameter date_granularity %} = 'Year' THEN cast(${date_date} as string)
+            ELSE null
+            END ;;
+  }
+
+
+
 
   ## measures
 
