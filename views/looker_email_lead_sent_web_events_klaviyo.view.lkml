@@ -106,10 +106,10 @@ view: looker_email_lead_sent_web_events_klaviyo {
     sql:
             CASE
              WHEN {% parameter date_granularity %} = 'Day' THEN cast(${date_date} as string)
-             WHEN {% parameter date_granularity %} = 'Week' THEN cast(${date_date} as string)
-             WHEN {% parameter date_granularity %} = 'Month' THEN cast(${date_date} as string)
-             WHEN {% parameter date_granularity %} = 'Quarter' THEN cast(${date_date} as string)
-             WHEN {% parameter date_granularity %} = 'Year' THEN cast(${date_date} as string)
+             WHEN {% parameter date_granularity %} = 'Week' THEN cast(${date_week} as string)
+             WHEN {% parameter date_granularity %} = 'Month' THEN cast(${date_month} as string)
+             WHEN {% parameter date_granularity %} = 'Quarter' THEN cast(${date_quarter} as string)
+             WHEN {% parameter date_granularity %} = 'Year' THEN cast(${date_year} as string)
             ELSE null
             END ;;
   }
