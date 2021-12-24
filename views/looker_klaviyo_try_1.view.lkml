@@ -301,5 +301,44 @@ view: looker_klaviyo_try_1 {
     order_by_field: dow_num
   }
 
+  # date comparison
+
+  filter: date_filter {
+    type: date
+    group_label: "Date Filters"
+  }
+
+  dimension: date_filter_length {
+    type: number
+    sql: date_diff(date({% date_end date_filter %}),date({% date_start date_filter %}), day)  ;;
+    hidden: yes
+  }
+
+  dimension: period {
+    type: string
+    sql: case when {% condition date_filter %} timestamp(${event_date}) {% endcondition %} then 'Selected period'
+            when {% condition date_filter %} timestamp(date_add(${event_date}, INTERVAL ${date_filter_length}  day)) {% endcondition %} then 'Previous period'
+        end
+    ;;
+    hidden: yes
+  }
+
+  filter: date_filter_2 {
+    type: date
+    group_label: "Date Filters"
+    description: "Second date filter for 'Date Comparison' dashboard"
+  }
+
+  dimension: compared_period {
+    type: string
+    sql:
+            case
+              when {% condition date_filter %} timestamp(${event_date}) {% endcondition %} then 'First period'
+              when {% condition date_filter_2 %} timestamp(${event_date}) {% endcondition %} then 'Second period'
+            end ;;
+  }
+
+
+
 
 }
