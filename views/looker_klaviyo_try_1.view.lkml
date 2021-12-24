@@ -269,10 +269,10 @@ view: looker_klaviyo_try_1 {
     sql:
             CASE
              WHEN {% parameter date_granularity %} = 'Day' THEN cast(${event_date} as string)
-             WHEN {% parameter date_granularity %} = 'Week' THEN cast(${event_date} as string)
-             WHEN {% parameter date_granularity %} = 'Month' THEN cast(${event_date} as string)
-             WHEN {% parameter date_granularity %} = 'Quarter' THEN cast(${event_date} as string)
-             WHEN {% parameter date_granularity %} = 'Year' THEN cast(${event_date} as string)
+             WHEN {% parameter date_granularity %} = 'Week' THEN cast(${event_week} as string)
+             WHEN {% parameter date_granularity %} = 'Month' THEN cast(${event_month} as string)
+             WHEN {% parameter date_granularity %} = 'Quarter' THEN cast(${event_quarter} as string)
+             WHEN {% parameter date_granularity %} = 'Year' THEN cast(${event_year} as string)
             ELSE null
             END ;;
   }
