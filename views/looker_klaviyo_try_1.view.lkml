@@ -22,7 +22,7 @@ view: looker_klaviyo_try_1 {
     sql: ${TABLE}.email_subject ;;
   }
 
-  dimension_group: event {
+  dimension_group: event_time {
     type: time
     timeframes: [
       raw,
@@ -231,7 +231,7 @@ view: looker_klaviyo_try_1 {
 
   dimension: not_today {
     type: yesno
-    sql: ${event_date} < current_date('America/Los_Angeles') ;;
+    sql: ${event_time_date} < current_date('America/Los_Angeles') ;;
     group_label: "Date Filters"
     description: "Filters any date after today (including today)"
   }
@@ -272,12 +272,11 @@ view: looker_klaviyo_try_1 {
     description: "Use 'Date Granularity' selector to modify the date granularity"
     sql:
             CASE
-            WHEN {% parameter date_granularity %} = 'Hour' THEN cast(${event_hour} as string)
-             WHEN {% parameter date_granularity %} = 'Day' THEN cast(${event_date} as string)
-             WHEN {% parameter date_granularity %} = 'Week' THEN cast(${event_week} as string)
-             WHEN {% parameter date_granularity %} = 'Month' THEN cast(${event_month} as string)
-             WHEN {% parameter date_granularity %} = 'Quarter' THEN cast(${event_quarter} as string)
-             WHEN {% parameter date_granularity %} = 'Year' THEN cast(${event_year} as string)
+             WHEN {% parameter date_granularity %} = 'Day' THEN cast(${event_time_date} as string)
+             WHEN {% parameter date_granularity %} = 'Week' THEN cast(${event_time_week} as string)
+             WHEN {% parameter date_granularity %} = 'Month' THEN cast(${event_time_month} as string)
+             WHEN {% parameter date_granularity %} = 'Quarter' THEN cast(${event_time_quarter} as string)
+             WHEN {% parameter date_granularity %} = 'Year' THEN cast(${event_time_year} as string)
             ELSE null
             END ;;
   }
@@ -285,7 +284,7 @@ view: looker_klaviyo_try_1 {
 
   dimension:  dow_num {
     type:  string
-    sql: EXTRACT(DAYOFWEEK FROM ${event_date}) ;;
+    sql: EXTRACT(DAYOFWEEK FROM ${event_time_date}) ;;
     hidden: yes
   }
 
@@ -403,9 +402,9 @@ view: looker_klaviyo_try_1 {
       sql:
        {% if current_date_range._is_filtered %}
          CASE
-           WHEN {% condition current_date_range %}  ${event_raw} {% endcondition %}
+           WHEN {% condition current_date_range %}  ${event_time_raw}} {% endcondition %}
            THEN "This {% parameter compare_to %}"
-           WHEN ${event_raw} between ${period_2_start} and ${period_2_end}
+           WHEN ${event_time_raw} between ${period_2_start} and ${period_2_end}
            THEN "Last {% parameter compare_to %}"
          END
        {% else %}
@@ -423,9 +422,9 @@ view: looker_klaviyo_try_1 {
       sql:
        {% if current_date_range._is_filtered %}
          CASE
-           WHEN {% condition current_date_range %} ${event_raw} /*findme6*/{% endcondition %}
+           WHEN {% condition current_date_range %} ${event_time_raw} /*findme6*/{% endcondition %}
            THEN 1
-           WHEN ${event_raw} between ${period_2_start} and ${period_2_end}
+           WHEN ${event_time_raw} between ${period_2_start} and ${period_2_end}
            THEN 2
          END
        {% else %}
@@ -462,11 +461,11 @@ view: looker_klaviyo_try_1 {
       sql:
           {% if current_date_range._is_filtered %}
             CASE
-              WHEN {% condition current_date_range %} ${event_raw} {% endcondition %}
-              THEN TIMESTAMP_DIFF(${event_raw},{% date_start current_date_range %},minute)+1
+              WHEN {% condition current_date_range %} ${event_time_raw}} {% endcondition %}
+              THEN TIMESTAMP_DIFF(${event_time_raw},{% date_start current_date_range %},minute)+1
 
-              WHEN ${event_raw} between ${period_2_start} and ${period_2_end}
-              THEN TIMESTAMP_DIFF(${event_raw}, ${period_2_start},minute)+1
+              WHEN ${event_time_raw} between ${period_2_start} and ${period_2_end}
+              THEN TIMESTAMP_DIFF(${event_time_raw}, ${period_2_start},minute)+1
               else null
             END
 
@@ -484,11 +483,11 @@ view: looker_klaviyo_try_1 {
       sql:
           {% if current_date_range._is_filtered %}
             CASE
-              WHEN {% condition current_date_range %} ${event_raw} {% endcondition %}
-              THEN TIMESTAMP_DIFF(${event_raw},{% date_start current_date_range %},DAY)+1
+              WHEN {% condition current_date_range %} ${event_time_raw} {% endcondition %}
+              THEN TIMESTAMP_DIFF(${event_time_raw},{% date_start current_date_range %},DAY)+1
 
-              WHEN ${event_raw} between ${period_2_start} and ${period_2_end}
-              THEN TIMESTAMP_DIFF(${event_raw}, ${period_2_start},DAY)+1
+              WHEN ${event_time_raw} between ${period_2_start} and ${period_2_end}
+              THEN TIMESTAMP_DIFF(${event_time_raw}, ${period_2_start},DAY)+1
             END
 
           {% else %} NULL
