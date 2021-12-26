@@ -307,43 +307,6 @@ view: looker_klaviyo_try_1 {
 
   # date comparison
 
-  filter: date_filter {
-    type: date
-    group_label: "Date Filters"
-  }
-
-  dimension: date_filter_length {
-    type: number
-    sql: date_diff(date({% date_end date_filter %}),date({% date_start date_filter %}), day)  ;;
-    hidden: yes
-  }
-
-  dimension: period_1 {
-    type: string
-    sql: case when {% condition date_filter %} timestemp(${event_raw}) {% endcondition %} then 'Selected period'
-            when {% condition date_filter %} timestemp(date_add(${event_raw}, INTERVAL ${date_filter_length}  day)) {% endcondition %} then 'Previous period'
-        end
-    ;;
-    hidden: yes
-  }
-
-  filter: date_filter_2 {
-    type: date
-    group_label: "Date Filters"
-    description: "Second date filter for 'Date Comparison' dashboard"
-  }
-
-  dimension: compared_period {
-    type: string
-    sql:
-            case
-              when {% condition date_filter %} timestemp(${event_date}) {% endcondition %} then 'First period'
-              when {% condition date_filter_2 %} timestemp(${event_date}) {% endcondition %} then 'Second period'
-            end ;;
-  }
-
-
-
 
 ## Comparison - from web events Ecommerce
 
