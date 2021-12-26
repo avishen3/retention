@@ -316,8 +316,8 @@ view: looker_klaviyo_try_1 {
 
   dimension: period {
     type: string
-    sql: case when {% condition date_filter %} timestamp(${event_date}) {% endcondition %} then 'Selected period'
-            when {% condition date_filter %} timestamp(date_add(${event_date}, INTERVAL ${date_filter_length}  day)) {% endcondition %} then 'Previous period'
+    sql: case when {% condition date_filter %} datetime(${event_date}) {% endcondition %} then 'Selected period'
+            when {% condition date_filter %} datetime(date_add(${event_date}, INTERVAL ${date_filter_length}  day)) {% endcondition %} then 'Previous period'
         end
     ;;
     hidden: yes
@@ -333,8 +333,8 @@ view: looker_klaviyo_try_1 {
     type: string
     sql:
             case
-              when {% condition date_filter %} timestamp(${event_date}) {% endcondition %} then 'First period'
-              when {% condition date_filter_2 %} timestamp(${event_date}) {% endcondition %} then 'Second period'
+              when {% condition date_filter %} datetime(${event_date}) {% endcondition %} then 'First period'
+              when {% condition date_filter_2 %} datetime(${event_date}) {% endcondition %} then 'Second period'
             end ;;
   }
 
