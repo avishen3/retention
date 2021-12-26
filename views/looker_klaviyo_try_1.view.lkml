@@ -481,10 +481,10 @@ view: looker_klaviyo_try_1 {
       label_from_parameter: date_granularity
       sql:
             CASE
-             WHEN {% parameter date_granularity %} = 'Day' THEN cast(${event_date} as string)
-             WHEN {% parameter date_granularity %} = 'Week' THEN cast(${event_week} as string)
-             WHEN {% parameter date_granularity %} = 'Month' THEN cast(${event_month} as string)
-             WHEN {% parameter date_granularity %} = 'Quarter' THEN cast(${event_quarter} as string)
+             WHEN {% parameter date_granularity %} = 'Day' THEN cast(${date_in_period_date} as string)
+             WHEN {% parameter date_granularity %} = 'Week' THEN cast(${date_in_period_week} as string)
+             WHEN {% parameter date_granularity %} = 'Month' THEN cast(${date_in_period_month} as string)
+             WHEN {% parameter date_granularity %} = 'Quarter' THEN cast(${date_in_period_quarter} as string)
             ELSE null
             END ;;
     }
