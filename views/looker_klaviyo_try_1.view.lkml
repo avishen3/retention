@@ -231,7 +231,7 @@ view: looker_klaviyo_try_1 {
 
   dimension: not_today {
     type: yesno
-    sql: ${event_raw} < current_date('America/Los_Angeles') ;;
+    sql: ${event_date} < current_date('America/Los_Angeles') ;;
     group_label: "Date Filters"
     description: "Filters any date after today (including today)"
   }
