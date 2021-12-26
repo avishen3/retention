@@ -19,6 +19,16 @@ explore: looker_email_lead_sent_web_events_klaviyo {
 
 }
 
+explore: looker__klaviyo_events__email_type_and_num_in_flow {
+  label: "Klaviyo web events "
+  description: "try 2 "
+
+}
+
+
+
+
+
 
 
 
