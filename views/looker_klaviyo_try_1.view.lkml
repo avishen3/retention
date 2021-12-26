@@ -37,7 +37,7 @@ view: looker_klaviyo_try_1 {
     ]
     convert_tz: no
     datatype: date
-    sql: ${TABLE}.EventTime ;;
+    sql: ${TABLE}.Event ;;
   }
 
   dimension: event_id {
