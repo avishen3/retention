@@ -33,7 +33,7 @@ view: looker_klaviyo_try_1 {
       year
     ]
     convert_tz: no
-    datatype: date
+    datatype: timestamp
     sql: ${TABLE}.event_date ;;
   }
 
