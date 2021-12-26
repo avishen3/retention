@@ -272,6 +272,7 @@ view: looker_klaviyo_try_1 {
     description: "Use 'Date Granularity' selector to modify the date granularity"
     sql:
             CASE
+            WHEN {% parameter date_granularity %} = 'Hour' THEN cast(${event_hour} as string)
              WHEN {% parameter date_granularity %} = 'Day' THEN cast(${event_date} as string)
              WHEN {% parameter date_granularity %} = 'Week' THEN cast(${event_week} as string)
              WHEN {% parameter date_granularity %} = 'Month' THEN cast(${event_month} as string)
@@ -442,7 +443,7 @@ view: looker_klaviyo_try_1 {
          CASE
            WHEN {% condition current_date_range %}  ${event_raw} {% endcondition %}
            THEN "This {% parameter compare_to %}"
-           WHEN ${event_raw} between ${period_2_start} and ${period_2_end}
+           WHEN ${event_raw} between DATE(${period_2_start}) and DATE(${period_2_end})
            THEN "Last {% parameter compare_to %}"
          END
        {% else %}
@@ -462,7 +463,7 @@ view: looker_klaviyo_try_1 {
          CASE
            WHEN {% condition current_date_range %} ${event_raw} /*findme6*/{% endcondition %}
            THEN 1
-           WHEN ${event_raw} between ${period_2_start} and ${period_2_end}
+           WHEN ${event_raw} between DATE(${period_2_start}) and DATE(${period_2_end})
            THEN 2
          END
        {% else %}
