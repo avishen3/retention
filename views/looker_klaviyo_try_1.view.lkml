@@ -30,7 +30,10 @@ view: looker_klaviyo_try_1 {
       week,
       month,
       quarter,
-      year
+      year,
+      hour,
+      time,
+      day_of_week
     ]
     convert_tz: no
     datatype: date
