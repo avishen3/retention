@@ -320,8 +320,8 @@ view: looker_klaviyo_try_1 {
 
   dimension: period_1 {
     type: string
-    sql: case when {% condition date_filter %} timestemp(${event_date}) {% endcondition %} then 'Selected period'
-            when {% condition date_filter %} timestemp(date_add(${event_date}, INTERVAL ${date_filter_length}  day)) {% endcondition %} then 'Previous period'
+    sql: case when {% condition date_filter %} timestemp(${event_raw}) {% endcondition %} then 'Selected period'
+            when {% condition date_filter %} timestemp(date_add(${event_raw}, INTERVAL ${date_filter_length}  day)) {% endcondition %} then 'Previous period'
         end
     ;;
     hidden: yes
