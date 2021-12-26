@@ -37,7 +37,7 @@ view: looker_klaviyo_try_1 {
     ]
     convert_tz: no
     datatype: date
-    sql: ${TABLE}.event_date ;;
+    sql: ${TABLE}.EventTime ;;
   }
 
   dimension: event_id {
@@ -318,7 +318,7 @@ view: looker_klaviyo_try_1 {
     hidden: yes
   }
 
-  dimension: period {
+  dimension: period_1 {
     type: string
     sql: case when {% condition date_filter %} timestemp(${event_date}) {% endcondition %} then 'Selected period'
             when {% condition date_filter %} timestemp(date_add(${event_date}, INTERVAL ${date_filter_length}  day)) {% endcondition %} then 'Previous period'
@@ -347,7 +347,6 @@ view: looker_klaviyo_try_1 {
 
 ## Comparison - from web events Ecommerce
 
-##### Comparison
 
   filter: current_date_range {
     view_label: "Timeline Comparison Fields"
@@ -432,7 +431,7 @@ view: looker_klaviyo_try_1 {
     }
 
 
-    dimension: period_com{
+    dimension: period {
       view_label: "Timeline Comparison Fields"
       label: "Period"
       description: "Pivot me! Returns the period the metric covers, i.e. either the 'This Period', 'Previous Period' or '3 Periods Ago'"
@@ -443,7 +442,7 @@ view: looker_klaviyo_try_1 {
          CASE
            WHEN {% condition current_date_range %}  ${event_raw} {% endcondition %}
            THEN "This {% parameter compare_to %}"
-           WHEN ${event_raw} between DATE(${period_2_start}) and DATE(${period_2_end})
+           WHEN ${event_raw} between ${period_2_start} and ${period_2_end}
            THEN "Last {% parameter compare_to %}"
          END
        {% else %}
@@ -463,7 +462,7 @@ view: looker_klaviyo_try_1 {
          CASE
            WHEN {% condition current_date_range %} ${event_raw} /*findme6*/{% endcondition %}
            THEN 1
-           WHEN ${event_raw} between DATE(${period_2_start}) and DATE(${period_2_end})
+           WHEN ${event_raw} between ${period_2_start} and ${period_2_end}
            THEN 2
          END
        {% else %}
@@ -485,9 +484,10 @@ view: looker_klaviyo_try_1 {
       label_from_parameter: date_granularity
       sql:
             CASE
+             WHEN {% parameter date_granularity %} = 'Hour' THEN cast(${date_in_period_hour} as string)
              WHEN {% parameter date_granularity %} = 'Day' THEN cast(${date_in_period_date} as string)
              WHEN {% parameter date_granularity %} = 'Week' THEN cast(${date_in_period_week} as string)
-             WHEN {% parameter date_granularity %} = 'Month' THEN cast(${date_in_period_month} as string)
+             WHEN {% parameter date_granularity %} = 'Month' THEN cast(${date_in_period_year} as string)
              WHEN {% parameter date_granularity %} = 'Quarter' THEN cast(${date_in_period_quarter} as string)
             ELSE null
             END ;;
@@ -533,7 +533,6 @@ view: looker_klaviyo_try_1 {
           ;;
       hidden: no
     }
-
 
 
 
