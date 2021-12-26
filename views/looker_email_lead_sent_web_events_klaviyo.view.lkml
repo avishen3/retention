@@ -14,7 +14,7 @@ view: looker_email_lead_sent_web_events_klaviyo {
       year
     ]
    ## convert_tz: no
-    datatype: date
+    datatype: timestamp
     sql: ${TABLE}.Date ;;
   }
 
