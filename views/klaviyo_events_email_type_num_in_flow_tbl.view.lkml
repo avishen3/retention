@@ -26,14 +26,13 @@ view: klaviyo_events_email_type_num_in_flow_tbl {
     type: time
     timeframes: [
       raw,
+      time,
       date,
       week,
       month,
       quarter,
       year
     ]
-    convert_tz: no
-    datatype: date
     sql: ${TABLE}.event_date ;;
   }
 
@@ -81,14 +80,13 @@ view: klaviyo_events_email_type_num_in_flow_tbl {
     type: time
     timeframes: [
       raw,
+      time,
       date,
       week,
       month,
       quarter,
       year
     ]
-    convert_tz: no
-    datatype: date
     sql: ${TABLE}.person_created ;;
   }
 
@@ -116,8 +114,6 @@ view: klaviyo_events_email_type_num_in_flow_tbl {
     type: count
     drill_fields: [campaign_name, event_name]
   }
-
-  ### from previous trys
 
 ## from Klaviyo_event_data_tbl
   #total measures
@@ -439,8 +435,8 @@ view: klaviyo_events_email_type_num_in_flow_tbl {
           ;;
       hidden: no
 
-
     }
+
 
 
 
