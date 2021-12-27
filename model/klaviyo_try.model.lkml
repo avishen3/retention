@@ -19,18 +19,7 @@ explore: looker_email_lead_sent_web_events_klaviyo {
 
 }
 
-explore: looker__klaviyo_events__email_type_and_num_in_flow {
-  label: "Klaviyo web events "
-  description: "try 2 "
 
-}
-
-
-explore: klaviyo_events_email_type_num_in_flow_tbl {
-  label: "Klaviyo web events "
-  description: "daily updated"
-
-  }
 
 
 #   join: orders {
