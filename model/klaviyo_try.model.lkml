@@ -26,10 +26,11 @@ explore: looker__klaviyo_events__email_type_and_num_in_flow {
 }
 
 
+explore: klaviyo_events_email_type_num_in_flow_tbl {
+  label: "Klaviyo web events "
+  description: "daily updated"
 
-
-
-
+  }
 
 
 #   join: orders {
