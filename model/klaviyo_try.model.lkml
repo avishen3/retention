@@ -21,6 +21,11 @@ explore: looker_email_lead_sent_web_events_klaviyo {
 
 
 
+explore: klaviyo_events_email_type_num_in_flow_tbl {
+  label: "klaviyo events"
+  description: "date as timesemp"
+}
+
 
 #   join: orders {
 #     relationship: many_to_one
