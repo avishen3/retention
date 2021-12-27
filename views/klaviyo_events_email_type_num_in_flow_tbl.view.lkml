@@ -425,11 +425,11 @@ view: klaviyo_events_email_type_num_in_flow_tbl {
       sql:
           {% if current_date_range._is_filtered %}
             CASE
-              WHEN {% condition current_date_range %} ${event_raw} {% endcondition %}
-              THEN TIMESTAMP_DIFF(${event_raw},{% date_start current_date_range %},DAY)+1
+              WHEN {% condition current_date_range %} ${event_date} {% endcondition %}
+              THEN TIMESTAMP_DIFF(${event_date},{% date_start current_date_range %},DAY)+1
 
-              WHEN ${event_raw} between ${period_2_start} and ${period_2_end}
-              THEN TIMESTAMP_DIFF(${event_raw}, ${period_2_start},DAY)+1
+              WHEN ${event_date} between ${period_2_start} and ${period_2_end}
+              THEN TIMESTAMP_DIFF(${event_date}, ${period_2_start},DAY)+1
             END
 
           {% else %} NULL
