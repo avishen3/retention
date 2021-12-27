@@ -344,9 +344,9 @@ view: klaviyo_events_email_type_num_in_flow_tbl {
       sql:
        {% if current_date_range._is_filtered %}
          CASE
-           WHEN {% condition current_date_range %}  ${event_raw} {% endcondition %}
+           WHEN {% condition current_date_range %}  ${event_date} {% endcondition %}
            THEN "This {% parameter compare_to %}"
-           WHEN ${event_raw} between ${period_2_start} and ${period_2_end}
+           WHEN ${event_date} between ${period_2_start} and ${period_2_end}
            THEN "Last {% parameter compare_to %}"
          END
        {% else %}
@@ -364,9 +364,9 @@ view: klaviyo_events_email_type_num_in_flow_tbl {
       sql:
        {% if current_date_range._is_filtered %}
          CASE
-           WHEN {% condition current_date_range %} ${event_raw} /*findme6*/{% endcondition %}
+           WHEN {% condition current_date_range %} ${event_date} /*findme6*/{% endcondition %}
            THEN 1
-           WHEN ${event_raw} between ${period_2_start} and ${period_2_end}
+           WHEN ${event_date} between ${period_2_start} and ${period_2_end}
            THEN 2
          END
        {% else %}
