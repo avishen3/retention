@@ -236,7 +236,7 @@ view: klaviyo_events_email_type_num_in_flow_tbl {
     description: "Filters any date after today (including today)"
   }
 
-  parameter: date_granularity {
+  parameter: Date_granularity {
     type: string
     description: "Use this selector to change the date granularity of 'Date' dimension only"
     allowed_value: {
@@ -269,15 +269,15 @@ view: klaviyo_events_email_type_num_in_flow_tbl {
 
 
   dimension: date {
-    label_from_parameter: date_granularity
+    label_from_parameter: Date_granularity
     description: "Use 'Date Granularity' selector to modify the date granularity"
     sql:
             CASE
-             WHEN {% parameter date_granularity %} = 'Day' THEN cast(${event_date} as string)
-             WHEN {% parameter date_granularity %} = 'Week' THEN cast(${event_week} as string)
-             WHEN {% parameter date_granularity %} = 'Month' THEN cast(${event_month} as string)
-             WHEN {% parameter date_granularity %} = 'Quarter' THEN cast(${event_quarter} as string)
-             WHEN {% parameter date_granularity %} = 'Year' THEN cast(${event_year} as string)
+             WHEN {% parameter Date_granularity %} = 'Day' THEN cast(${event_date} as string)
+             WHEN {% parameter Date_granularity %} = 'Week' THEN cast(${event_week} as string)
+             WHEN {% parameter Date_granularity %} = 'Month' THEN cast(${event_month} as string)
+             WHEN {% parameter Date_granularity %} = 'Quarter' THEN cast(${event_quarter} as string)
+             WHEN {% parameter Date_granularity %} = 'Year' THEN cast(${event_year} as string)
             ELSE null
             END ;;
   }
@@ -442,14 +442,14 @@ view: klaviyo_events_email_type_num_in_flow_tbl {
     }
 
     dimension: Current_Period {
-      label_from_parameter: date_granularity
+      label_from_parameter: Date_granularity
       sql:
             CASE
-             WHEN {% parameter date_granularity %} = 'Hour' THEN cast(${date_in_period_hour} as string)
-             WHEN {% parameter date_granularity %} = 'Day' THEN cast(${date_in_period_date} as string)
-             WHEN {% parameter date_granularity %} = 'Week' THEN cast(${date_in_period_week} as string)
-             WHEN {% parameter date_granularity %} = 'Month' THEN cast(${date_in_period_year} as string)
-             WHEN {% parameter date_granularity %} = 'Quarter' THEN cast(${date_in_period_quarter} as string)
+             WHEN {% parameter Date_granularity %} = 'Hour' THEN cast(${date_in_period_hour} as string)
+             WHEN {% parameter Date_granularity %} = 'Day' THEN cast(${date_in_period_date} as string)
+             WHEN {% parameter Date_granularity %} = 'Week' THEN cast(${date_in_period_week} as string)
+             WHEN {% parameter Date_granularity %} = 'Month' THEN cast(${date_in_period_year} as string)
+             WHEN {% parameter Date_granularity %} = 'Quarter' THEN cast(${date_in_period_quarter} as string)
             ELSE null
             END ;;
     }
