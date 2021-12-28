@@ -26,7 +26,6 @@ view: klaviyo_events_email_type_num_in_flow_tbl {
     type: time
     timeframes: [
       raw,
-      time,
       date,
       day_of_week,
       week,
@@ -36,7 +35,7 @@ view: klaviyo_events_email_type_num_in_flow_tbl {
     ]
    convert_tz: no
    datatype: date
-    sql: ${TABLE}.event_date ;;
+   sql: ${TABLE}.event_date ;;
   }
 
   dimension: event_id {
