@@ -392,7 +392,7 @@ view: klaviyo_events_email_type_num_in_flow_tbl {
       view_label: "Timeline Comparison Fields"
       label: "Period"
       description: "Pivot me! Returns the period the metric covers, i.e. either the 'This Period', 'Previous Period' or '3 Periods Ago'"
-      type: string
+      type: date
       order_by_field: order_for_period
       sql:
        {% if current_date_range._is_filtered %}
@@ -413,7 +413,7 @@ view: klaviyo_events_email_type_num_in_flow_tbl {
       view_label: "Timeline Comparison Fields"
       label: "Period"
       description: "Pivot me! Returns the period the metric covers, i.e. either the 'This Period', 'Previous Period' or '3 Periods Ago'"
-      type: string
+      type: date
       sql:
        {% if current_date_range._is_filtered %}
          CASE
