@@ -34,7 +34,7 @@ view: klaviyo_events_email_type_num_in_flow_tbl {
       year
     ]
    convert_tz: no
-   datatype: date
+   datatype: datetime
    sql: ${TABLE}.event_date ;;
   }
 
