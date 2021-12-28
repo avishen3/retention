@@ -432,6 +432,7 @@ view: klaviyo_events_email_type_num_in_flow_tbl {
       description: "Use this as your date dimension when comparing periods. Aligns the all previous periods onto the current period"
       label: "Current Period"
       type: time
+      datatype: datetime
       sql: TIMESTAMP_ADD({% date_start current_date_range %},INTERVAL (${minute_in_period}-1) minute) ;;
       view_label: "Timeline Comparison Fields"
       timeframes: [date, week, month, quarter, year,time,hour]
