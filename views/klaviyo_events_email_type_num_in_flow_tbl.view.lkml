@@ -116,6 +116,22 @@ view: klaviyo_events_email_type_num_in_flow_tbl {
     drill_fields: [campaign_name, event_name]
   }
 
+
+## segment
+
+
+
+
+  dimension: email_group_type {
+    type: string
+    sql: case when lower(${type_of_email}) in ('welcome') then 'Welcome'
+              when lower(${type_of_email}) in ('abandon') then 'Abandon'
+              when lower(${type_of_email}) in ('promo') then 'Promo'
+              when lower(${type_of_email}) like '%order%' then 'Post Purchase'
+              else 'Other' end ;;
+  }
+
+
 ## from Klaviyo_event_data_tbl
   #total measures
 
