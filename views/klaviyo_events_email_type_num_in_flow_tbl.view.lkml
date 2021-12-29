@@ -132,6 +132,25 @@ view: klaviyo_events_email_type_num_in_flow_tbl {
   }
 
 
+  dimension: email_num {
+    type: string
+    sql: case when lower(${number_of_email_in_flow_1}) like '%1%' then 'Email num 1'
+         case when lower(${number_of_email_in_flow_1}) like '%2%' then 'Email num 2'
+         case when lower(${number_of_email_in_flow_1}) like '%3%' then 'Email num 3'
+         case when lower(${number_of_email_in_flow_1}) like '%4%' then 'Email num 4'
+         case when lower(${number_of_email_in_flow_1}) like '%5%' then 'Email num 5'
+         case when lower(${number_of_email_in_flow_1}) like '%6%' then 'Email num 6'
+         case when lower(${number_of_email_in_flow_1}) like '%7%' then 'Email num 7'
+         case when lower(${number_of_email_in_flow_1}) like '%8%' then 'Email num 8'
+         case when lower(${number_of_email_in_flow_1}) like '%9%' then 'Email num 9'
+         case when lower(${number_of_email_in_flow_1}) like '%10%' then 'Email num 10'
+         case when lower(${number_of_email_in_flow_1}) like '%11%' then 'Email num 11'
+         case when lower(${number_of_email_in_flow_1}) like '%12%' then 'Email num 12'
+         case when lower(${number_of_email_in_flow_1}) like '%13%' then 'Email num 13'
+              else 'Other' end ;;
+  }
+
+
 ## from Klaviyo_event_data_tbl
   #total measures
 
