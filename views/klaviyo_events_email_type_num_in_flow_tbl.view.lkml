@@ -196,6 +196,11 @@ view: klaviyo_events_email_type_num_in_flow_tbl {
     group_label: "Email Measures"
   }
 
+
+
+
+
+
   # after reciving
 
   measure: Opened_rate_recived_open {
@@ -218,6 +223,15 @@ view: klaviyo_events_email_type_num_in_flow_tbl {
     label: "% of clicked email out of opened emails"
     type: number
     sql: ${total_clicked_emails}/ nullif(${total_opened_emails}, 0)  ;;
+    value_format: "0.00%"
+    group_label: "Email Measures"
+  }
+
+
+  measure: Clicked_rate_from_sent{
+    label: "% of clicked email out of opened emails"
+    type: number
+    sql: ${total_clicked_emails}/ nullif(${total_sent_emails}, 0)  ;;
     value_format: "0.00%"
     group_label: "Email Measures"
   }
