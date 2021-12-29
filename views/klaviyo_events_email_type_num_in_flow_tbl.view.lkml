@@ -229,7 +229,7 @@ view: klaviyo_events_email_type_num_in_flow_tbl {
 
 
   measure: Clicked_rate_from_sent{
-    label: "% of clicked email out of opened emails"
+    label: "% of clicked email out of sent emails"
     type: number
     sql: ${total_clicked_emails}/ nullif(${total_sent_emails}, 0)  ;;
     value_format: "0.00%"
