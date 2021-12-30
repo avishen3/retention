@@ -13,7 +13,7 @@ include: "/views/*.view.lkml"                # include all views in the views/ f
 
 }
 
-explore: looker_email_lead_sent_web_events_klaviyo {
+explore: web_events_klaviyo_lead_capture_tbl {
   label: "lead cap email sent overlook"
   description: "trying to make this work"
 
@@ -25,6 +25,9 @@ explore: klaviyo_events_email_type_num_in_flow_tbl {
   label: "klaviyo events"
   description: "date as timesemp"
 }
+
+
+
 
 
 #   join: orders {
