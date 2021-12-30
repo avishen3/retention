@@ -14,8 +14,8 @@ include: "/views/*.view.lkml"                # include all views in the views/ f
 }
 
 explore: web_events_klaviyo_lead_capture_tbl {
-  label: "lead cap email sent overlook"
-  description: "trying to make this work"
+  label: "Web events / Klaviyo "
+  description: "Lead cap / first sent Email "
 
 }
 
