@@ -13,7 +13,6 @@ view: web_events_klaviyo_lead_capture_tbl {
       year
     ]
     convert_tz: no
-    datatype: date
     sql: timestamp(${TABLE}.date) ;;
   }
 
