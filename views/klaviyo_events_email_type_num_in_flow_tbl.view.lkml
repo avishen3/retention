@@ -165,7 +165,7 @@ view: klaviyo_events_email_type_num_in_flow_tbl {
       WHEN  lower(${campaign_name}) like '%reactivation%' then 'Reactivation Flow'
       WHEN  lower(${campaign_name}) like '%reactivation%' then 'Reactivation Flow'
       WHEN  lower(${campaign_name}) like '%refund%' then 'Refund/Cancellation'
-      WHEN  lower(${campaign_name}) like '%confirmation%' or lower(${campaign_name}) like '%delay%'
+      WHEN  (lower(${campaign_name}) like '%confirmation%' or lower(${campaign_name}) like '%delay%'
                                                            or lower(${campaign_name}) like '%nps%' or lower(${campaign_name}) like '%post_purchase%'
                                                            or lower(${campaign_name}) like '%my account%' or lower(${campaign_name})='check order status'
                                                            or lower(${campaign_name}) like '%confrimation%' or lower(${campaign_name}) like '%survey%') then 'Post Purchase'
