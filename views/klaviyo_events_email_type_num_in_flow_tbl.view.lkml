@@ -154,7 +154,7 @@ view: klaviyo_events_email_type_num_in_flow_tbl {
 ## from web evens- definition :
 
 
-  dimension: email_type {
+  dimension: email_type_web_event_based {
     type: string
     sql: CASE
       WHEN (lower(${campaign_name}) like '%welcome%' or lower(${campaign_name}) like '%pxxegk%'
@@ -298,7 +298,7 @@ view: klaviyo_events_email_type_num_in_flow_tbl {
   }
 
   measure: Clicked_rates {
-    label: "% of clicked email out of opened emails"
+    label: "Click-to-Open Rate"
     type: number
     sql: ${total_clicked_emails}/ nullif(${total_opened_emails}, 0)  ;;
     value_format: "0.00%"
@@ -307,7 +307,7 @@ view: klaviyo_events_email_type_num_in_flow_tbl {
 
 
   measure: Clicked_rate_from_sent{
-    label: "% of clicked email out of sent emails"
+    label: "Click thru Rate"
     type: number
     sql: ${total_clicked_emails}/ nullif(${total_sent_emails}, 0)  ;;
     value_format: "0.00%"

@@ -22,9 +22,15 @@ explore: web_events_klaviyo_lead_capture_tbl {
 
 
 explore: klaviyo_events_email_type_num_in_flow_tbl {
+  join:  web_events_klaviyo_lead_capture_tbl {
+    type:  full_outer
+    relationship: one_to_many
+    sql_on:${klaviyo_events_email_type_num_in_flow_tbl.event_date} =${web_events_klaviyo_lead_capture_tbl.date_date} ;;}
   label: "klaviyo events"
   description: "date as timesemp"
 }
+
+
 
 
 
