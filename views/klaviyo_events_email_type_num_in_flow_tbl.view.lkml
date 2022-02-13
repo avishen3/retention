@@ -585,6 +585,11 @@ view: klaviyo_events_email_type_num_in_flow_tbl {
     }
 
 
+  dimension: date_formatted {
+    sql: ${event_date} ;;
+    html: {{ rendered_value | date: "%h %d" }} ;;
+
+  }
 
 
 

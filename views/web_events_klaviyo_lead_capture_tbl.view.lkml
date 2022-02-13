@@ -137,7 +137,11 @@ view: web_events_klaviyo_lead_capture_tbl {
     value_format: "0.00%"
   }
 
+  dimension: date_formatted {
+    sql: ${date} ;;
+    html: {{ rendered_value | date: "%h %d" }} ;;
 
+  }
 
 
 
