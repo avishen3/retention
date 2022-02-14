@@ -36,4 +36,19 @@ view: upsell_by_agents_tbl {
     type: count
     drill_fields: [exchanged_agent_full_name]
   }
+
+  ## measures
+
+
+    measure: total_upsell {
+    type: sum
+    sql: ${num_of} ;;
+    value_format: "###"
+  }
+
+
+
+
+
+
 }
