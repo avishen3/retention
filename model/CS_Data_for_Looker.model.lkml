@@ -22,9 +22,19 @@ include: "/views/*.view.lkml"                # include all views in the views/ f
 explore: upsell_by_agents_tbl {
   label: "daily agent upsell"
   description: "Daily upsell by agent"
+}
+
+explore: sales_by_agents_looker_try_tbl {
+  label: "SALES BY AGENTS "
+  description: "FIRST TRY"
 
 }
 
+explore: admin_line_item_cogs {
+  label: "admin line item cogs "
+  description: "FIRST TRY"
+
+}
 
 
 
