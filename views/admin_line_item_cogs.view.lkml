@@ -870,8 +870,13 @@ view: admin_line_item_cogs {
             END ;;
   }
 
+####
 
-
+  measure: sum_total_price {
+    type: sum
+    sql: ${total_price} ;;
+    value_format: "$#,##0"
+  }
 
 
   # ----- Sets of fields for drilling ------
