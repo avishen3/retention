@@ -37,6 +37,11 @@ explore: admin_line_item_cogs {
 }
 
 
+explore: cs_sale_by_agents_for_looker {
+  label: "CS Sales by agents"
+  description: "all + chat data"
+}
+
 
 
 # }
