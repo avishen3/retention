@@ -124,6 +124,7 @@ view: cs_sale_by_agents_for_looker {
 
   dimension: order_source_channel_fix {
     type: string
+    label: "CS Order Source"
     sql: ${TABLE}.order_source_channel_fix ;;
   }
 
