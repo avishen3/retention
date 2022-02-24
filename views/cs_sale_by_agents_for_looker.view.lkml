@@ -279,6 +279,17 @@ view: cs_sale_by_agents_for_looker {
   }
 
 
+  measure: num_of_orders  {
+    type: sum
+    sql: ${short_id} ;;
+
+  }
+
+  measure: AOV {
+  type: number
+  sql: ${total_revenue}/${num_of_orders} ;;
+  value_format: "$#,##0.00"
+  }
 
 
 
