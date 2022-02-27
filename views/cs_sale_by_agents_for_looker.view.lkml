@@ -280,7 +280,7 @@ view: cs_sale_by_agents_for_looker {
 
 
   measure: num_of_orders  {
-    type: sum
+    type: count_distinct
     sql: ${short_id} ;;
 
   }
