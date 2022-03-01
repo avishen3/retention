@@ -15,7 +15,7 @@ view: cart_mix_for_looker_tbl {
   }
 
   dimension: campaign_name {
-    hidden: yes
+    hidden: no
     sql: ${TABLE}.campaign_name ;;
   }
 
@@ -35,17 +35,17 @@ view: cart_mix_for_looker_tbl {
   }
 
   dimension: customer_type {
-    hidden: yes
+    hidden: no
     sql: ${TABLE}.customer_type ;;
   }
 
   dimension: email_num {
-    hidden: yes
+    hidden: no
     sql: ${TABLE}.email_num ;;
   }
 
   dimension: flow {
-    hidden: yes
+    hidden: no
     sql: ${TABLE}.flow ;;
   }
 
@@ -75,7 +75,7 @@ view: cart_mix_for_looker_tbl {
   }
 
   dimension: offer {
-    hidden: yes
+    hidden: no
     sql: ${TABLE}.offer ;;
   }
 
@@ -94,6 +94,31 @@ view: cart_mix_for_looker_tbl {
     sql: ${TABLE}.order_created ;;
   }
 
+
+  parameter: Date_Granularity_order_date {
+    type: string
+    allowed_value: { value: "Day" }
+    allowed_value: { value: "Week" }
+    allowed_value: { value: "Month" }
+    allowed_value: { value: "Quarter" }
+    allowed_value: { value: "Year" }
+  }
+
+  dimension: Order_Date {
+    label_from_parameter: Date_Granularity_order_date
+    sql:
+            CASE
+             WHEN {% parameter Date_Granularity_order_date %} = 'Day' THEN cast(${order_created_date} as string)
+             WHEN {% parameter Date_Granularity_order_date %} = 'Week' THEN cast(${order_created_week} as string)
+             WHEN {% parameter Date_Granularity_order_date %} = 'Month' THEN cast(${order_created_month} as string)
+             WHEN {% parameter Date_Granularity_order_date %} = 'Quarter' THEN cast(${order_created_quarter} as string)
+             WHEN {% parameter Date_Granularity_order_date %} = 'Year' THEN cast(${order_created_year} as string)
+            ELSE null
+            END ;;
+  }
+
+
+
   dimension: promo {
     type: string
     sql: ${TABLE}.promo ;;
@@ -110,54 +135,12 @@ view: cart_mix_for_looker_tbl {
   }
 
   dimension: sub_flow {
-    hidden: yes
+    hidden: no
     sql: ${TABLE}.sub_flow ;;
   }
 
   measure: count {
     type: count
     drill_fields: [campaign_name]
-  }
-}
-
-view: cart_mix_for_looker_tbl__flow {
-  dimension: cart_mix_for_looker_tbl__flow {
-    type: string
-    sql: cart_mix_for_looker_tbl__flow ;;
-  }
-}
-
-view: cart_mix_for_looker_tbl__offer {
-  dimension: cart_mix_for_looker_tbl__offer {
-    type: string
-    sql: cart_mix_for_looker_tbl__offer ;;
-  }
-}
-
-view: cart_mix_for_looker_tbl__sub_flow {
-  dimension: cart_mix_for_looker_tbl__sub_flow {
-    type: string
-    sql: cart_mix_for_looker_tbl__sub_flow ;;
-  }
-}
-
-view: cart_mix_for_looker_tbl__email_num {
-  dimension: cart_mix_for_looker_tbl__email_num {
-    type: string
-    sql: cart_mix_for_looker_tbl__email_num ;;
-  }
-}
-
-view: cart_mix_for_looker_tbl__customer_type {
-  dimension: cart_mix_for_looker_tbl__customer_type {
-    type: string
-    sql: cart_mix_for_looker_tbl__customer_type ;;
-  }
-}
-
-view: cart_mix_for_looker_tbl__campaign_name {
-  dimension: cart_mix_for_looker_tbl__campaign_name {
-    type: string
-    sql: cart_mix_for_looker_tbl__campaign_name ;;
   }
 }
