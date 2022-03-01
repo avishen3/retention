@@ -19,6 +19,12 @@ explore: web_events_klaviyo_lead_capture_tbl {
 
 }
 
+explore: cart_mix_for_looker_tbl{
+  label: "cart_mix"
+  description: "cart_mix"
+  }
+
+
 
 
 explore: klaviyo_events_email_type_num_in_flow_tbl {
@@ -29,8 +35,6 @@ explore: klaviyo_events_email_type_num_in_flow_tbl {
   label: "klaviyo events"
   description: "date as timesemp"
 }
-
-
 
 
 
