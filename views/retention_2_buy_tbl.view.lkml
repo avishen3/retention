@@ -82,11 +82,21 @@ view: retention_2_buy_tbl {
     drill_fields: []
   }
 
-measure: Date_diff_from_buys {
+measure: datediff {
   sql: datediff(${order_num_1_date}-${order_num_2_date}) ;;
 }
 
+  dimension_group: days_between_buys {
 
+    type: duration
+
+    intervals: [hour, day]
+
+    sql_start: ${order_num_1_raw} ;;
+
+    sql_end: ${order_num_2_raw};;
+
+  }
 
 
 
