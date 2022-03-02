@@ -36,7 +36,10 @@ explore: klaviyo_events_email_type_num_in_flow_tbl {
   description: "date as timesemp"
 }
 
+explore: retention_2_buy_tbl {
+  label: "retention - 2 buy"
 
+}
 
 
 
