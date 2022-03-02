@@ -87,13 +87,9 @@ measure: datediff {
 }
 
   dimension_group: days_between_buys {
-
     type: duration
-
     intervals: [hour, day]
-
     sql_start: ${order_num_1_raw} ;;
-
     sql_end: ${order_num_2_raw};;
 
   }
