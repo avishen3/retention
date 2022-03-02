@@ -146,11 +146,16 @@ view: cart_mix_for_looker_tbl {
   }
 
 
-  measure: num_of_salea{
+  measure: num_of_sales{
   type: count_distinct
   sql: ${short_id} ;;
   }
 
+  measure: total_sales {
+    type: sum
+    sql: ${revenue} ;;
+    value_format: "$#,###"
+  }
 
 
 
