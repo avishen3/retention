@@ -151,7 +151,7 @@ view: cart_mix_for_looker_tbl {
   sql: ${short_id} ;;
   }
 
-  measure: total_sales {
+  measure: total_revenue {
     type: sum
     sql: ${revenue} ;;
     value_format: "$#,###"
