@@ -132,6 +132,7 @@ view: acquisition_source_email_orders_tbl {
   measure: total_sale {
     type: sum
     sql: ${price} ;;
+    value_format: "$#,###"
   }
 
 
