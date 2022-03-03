@@ -41,6 +41,10 @@ explore: retention_2_buy_tbl {
 
 }
 
+explore: acquisition_source_email_orders_tbl {
+  label: "Email order acquisition source "
+}
+
 
 
 #   join: orders {
