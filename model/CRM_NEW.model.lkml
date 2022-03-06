@@ -46,6 +46,10 @@ explore: acquisition_source_email_orders_tbl {
 }
 
 
+explore: acquisition_source_email_visit_and_orders_tbl{
+label: "Email visit and order acquisition source "
+}
+
 
 #   join: orders {
 #     relationship: many_to_one
