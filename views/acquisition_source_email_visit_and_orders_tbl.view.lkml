@@ -146,6 +146,30 @@ view: acquisition_source_email_visit_and_orders_tbl {
     sql: ${TABLE}.visitStartTime ;;
   }
 
+# date granularity - visit start#
+
+  parameter: Date_Granularity_visit_start {
+    type: string
+    allowed_value: { value: "Day" }
+    allowed_value: { value: "Week" }
+    allowed_value: { value: "Month" }
+    allowed_value: { value: "Quarter" }
+    allowed_value: { value: "Year" }
+  }
+
+  dimension: visir_start {
+    label_from_parameter: Date_Granularity_order_date
+    sql:
+            CASE
+             WHEN {% parameter Date_Granularity_order_date %} = 'Day' THEN cast(${visit_start_time_date} as string)
+             WHEN {% parameter Date_Granularity_order_date %} = 'Week' THEN cast(${visit_start_time_week} as string)
+             WHEN {% parameter Date_Granularity_order_date %} = 'Month' THEN cast(${visit_start_time_month} as string)
+             WHEN {% parameter Date_Granularity_order_date %} = 'Quarter' THEN cast(${visit_start_time_quarter} as string)
+             WHEN {% parameter Date_Granularity_order_date %} = 'Year' THEN cast(${visit_start_time_year} as string)
+            ELSE null
+            END ;;
+  }
+
   dimension: visit_transactionid {
     type: string
     sql: ${TABLE}.visit_transactionid ;;
