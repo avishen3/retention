@@ -168,5 +168,11 @@ view: acquisition_source_email_visit_and_orders_tbl {
       ;;
   }
 
+  measure: total_visit{
+    type: count_distinct
+    sql: ${cart_cookie_id}
+      ;;
+  }
+
 
 }
