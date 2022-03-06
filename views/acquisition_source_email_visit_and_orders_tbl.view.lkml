@@ -157,7 +157,7 @@ view: acquisition_source_email_visit_and_orders_tbl {
     allowed_value: { value: "Year" }
   }
 
-  dimension: visir_start {
+  dimension: visit_start {
     label_from_parameter: Date_Granularity_order_date
     sql:
             CASE
