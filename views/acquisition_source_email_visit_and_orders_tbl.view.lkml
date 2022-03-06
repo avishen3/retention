@@ -151,6 +151,12 @@ view: acquisition_source_email_visit_and_orders_tbl {
     sql: ${TABLE}.visit_transactionid ;;
   }
 
+dimension: uniqe_visit {
+  type: string
+  sql: ${TABLE}.uniqe_visit
+ ;;
+}
+
   measure: count {
     type: count
     drill_fields: []
@@ -170,7 +176,7 @@ view: acquisition_source_email_visit_and_orders_tbl {
 
   measure: total_visit{
     type: count_distinct
-    sql: ${cart_cookie_id}
+    sql: ${uniqe_visit}
       ;;
   }
 
