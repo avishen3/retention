@@ -1,5 +1,5 @@
 view: cart_mix_for_looker_tbl {
-  sql_table_name: `omega-post-184817.Keshet.cart_mix_for_looker_tbl`
+  sql_table_name: `omega-post-184817.crm_new.cart_mix_for_looker_tbl`
     ;;
 
   dimension: brand {

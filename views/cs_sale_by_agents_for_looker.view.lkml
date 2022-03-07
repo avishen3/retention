@@ -1,5 +1,5 @@
 view: cs_sale_by_agents_for_looker {
-  sql_table_name: `omega-post-184817.crm_new.cart_mix_for_looker_tbl`
+  sql_table_name: `omega-post-184817.CS_NEW.CS_sale_by_agents_for_looker`
     ;;
 
   dimension: agent_email {
