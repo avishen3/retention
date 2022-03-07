@@ -1,5 +1,5 @@
 view: acquisition_source_email_visit_and_orders_tbl {
-  sql_table_name: `omega-post-184817.Keshet.Acquisition_Source_Email_Visit_and_Orders_tbl`
+  sql_table_name: `omega-post-184817.crm_new.Acquisition_Source_Email_Visit_and_Orders_tbl`
     ;;
 
   dimension: brand {
