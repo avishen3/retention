@@ -92,6 +92,52 @@ view: cart_mix_for_looker_tbl {
     sql: ${TABLE}.order_created ;;
   }
 
+##the_nectar_mattress nectar_premier_mattress nectar_premier_copper_mattress  dreamcloud_premier_mattress the_dreamcloud_mattress the_dreamcloud_premier_rest Dreamcloud_Mattress Nectar_Mattress##
+
+dimension: the_nectar_mattress {
+  type: string
+  sql: ${TABLE}.the_nectar_mattress ;;
+}
+
+  dimension: nectar_premier_mattress {
+    type: string
+    sql: ${TABLE}.nectar_premier_mattress ;;
+  }
+
+
+  dimension: nectar_premier_copper_mattress {
+    type: string
+    sql: ${TABLE}.nectar_premier_copper_mattress ;;
+  }
+
+
+  dimension: dreamcloud_premier_mattress {
+    type: string
+    sql: ${TABLE}.dreamcloud_premier_mattress ;;
+  }
+
+  dimension: the_dreamcloud_mattress {
+    type: string
+    sql: ${TABLE}.the_dreamcloud_mattress ;;
+  }
+
+  dimension: the_dreamcloud_premier_rest {
+    type: string
+    sql: ${TABLE}.the_dreamcloud_premier_rest ;;
+  }
+
+  dimension: Dreamcloud_Mattress {
+    type: string
+    sql: ${TABLE}.the_dreamcloud_premier_rest ;;
+  }
+
+
+  dimension: Nectar_Mattress {
+    type: string
+    sql: ${TABLE}.Nectar_Mattress ;;
+  }
+
+
   ### Date_granularty
 
 # date granularity - Order Date #
