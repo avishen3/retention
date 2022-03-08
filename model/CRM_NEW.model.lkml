@@ -19,6 +19,8 @@ explore: web_events_klaviyo_lead_capture_tbl {
 
 }
 
+### cart mix data
+
 explore: cart_mix_for_looker_tbl{
   label: "cart_mix"
   description: "cart_mix"
@@ -41,6 +43,8 @@ explore: retention_2_buy_tbl {
 
 }
 
+#### acquisition data
+
 explore: acquisition_source_email_orders_tbl {
   label: "Email order acquisition source "
 }
@@ -49,6 +53,11 @@ explore: acquisition_source_email_orders_tbl {
 explore: acquisition_source_email_visit_and_orders_tbl{
 label: "Email visit and order acquisition source "
 }
+
+## basic dashboarde re build
+
+
+
 
 
 #   join: orders {
