@@ -1,5 +1,5 @@
 view: klaviyo_events_n_dc_tbl {
-  sql_table_name: `omega-post-184817.crm_new.Klaviyo_events_N_DC_tbl`
+  sql_table_name: `omega-post-184817.crm.Klaviyo_events_N_DC_tbl`
     ;;
 
   dimension: brand {
