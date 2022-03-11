@@ -49,7 +49,7 @@ view: klaviyo_events_n_dc_tbl {
       year
     ]
     datatype: datetime
-    sql: ${TABLE}.event_date ;;
+    sql: timestamp(${TABLE}.event_date) ;;
   }
 
   dimension: event_id {
