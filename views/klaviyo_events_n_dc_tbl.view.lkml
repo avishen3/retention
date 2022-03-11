@@ -564,22 +564,22 @@ view: klaviyo_events_n_dc_tbl {
   dimension: email_type_web_event_based {
     type: string
     sql: CASE
-      WHEN (lower(${campaign_name}) like '%welcome%' or lower(${campaign_name}) like '%pxxegk%'
-                                          or lower(${campaign_name}) like '%ngud66%') then 'Welcome Flow'
+      WHEN (lower(${full_campaign_name}) like '%welcome%' or lower(${full_campaign_name}) like '%pxxegk%'
+                                          or lower(${full_campaign_name}) like '%ngud66%') then 'Welcome Flow'
 
-      WHEN  lower(${campaign_name}) like '%browse%' then 'Browse Flow'
-      WHEN  lower(${campaign_name}) like '%abandon%' then 'Abandon Cart Flow'
-      WHEN  lower(${campaign_name}) like '%reactivation%' then 'Reactivation Flow'
-      WHEN  lower(${campaign_name}) like '%reactivation%' then 'Reactivation Flow'
-      WHEN  lower(${campaign_name}) like '%refund%' then 'Refund/Cancellation'
-      WHEN  (lower(${campaign_name}) like '%confirmation%' or lower(${campaign_name}) like '%delay%'
-                                                           or lower(${campaign_name}) like '%nps%' or lower(${campaign_name}) like '%post_purchase%'
-                                                           or lower(${campaign_name}) like '%my account%' or lower(${campaign_name})='check order status'
-                                                           or lower(${campaign_name}) like '%confrimation%' or lower(${campaign_name}) like '%survey%') then 'Post Purchase'
-      WHEN  regexp_extract(lower(${campaign_name}), r' \([a-zA-Z0-9_]+\)')
+      WHEN  lower(${full_campaign_name}) like '%browse%' then 'Browse Flow'
+      WHEN  lower(${full_campaign_name}) like '%abandon%' then 'Abandon Cart Flow'
+      WHEN  lower(${full_campaign_name}) like '%reactivation%' then 'Reactivation Flow'
+      WHEN  lower(${full_campaign_name}) like '%reactivation%' then 'Reactivation Flow'
+      WHEN  lower(${full_campaign_name}) like '%refund%' then 'Refund/Cancellation'
+      WHEN  (lower(${full_campaign_name}) like '%confirmation%' or lower(${full_campaign_name}) like '%delay%'
+                                                           or lower(${full_campaign_name}) like '%nps%' or lower(${full_campaign_name}) like '%post_purchase%'
+                                                           or lower(${full_campaign_name}) like '%my account%' or lower(${full_campaign_name})='check order status'
+                                                           or lower(${full_campaign_name}) like '%confrimation%' or lower(${full_campaign_name}) like '%survey%') then 'Post Purchase'
+      WHEN  regexp_extract(lower(${full_campaign_name}), r' \([a-zA-Z0-9_]+\)')
               in ('(yj3gkl)','(vxgmtk)','(xtb3tt)','(xjmkgt)','(wr2yxr)','(ucdvdk)','(sdwnmd)','(qnibtg)','(qiqt8e)'
               ,'(qfbhgj)','(qazjwm)','(pmp9as)','(lepblh)','(lxekdu)','(jsgfcn)','(ptg39k)','(ty95t2)')  then 'Post Purchase'
-      When  lower(${campaign_name}) like '%_promo_%' then 'Campaigns'
+      When  lower(${full_campaign_name}) like '%_promo_%' then 'Campaigns'
       else 'Other' end  ;;
   }
 
