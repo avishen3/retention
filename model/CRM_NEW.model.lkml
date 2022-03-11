@@ -49,6 +49,12 @@ explore: acquisition_source_email_orders_tbl {
   label: "Email order acquisition source "
 }
 
+### retention
+
+explore: first_seconed_buy_brand_database_for_looker_tbl {
+label: "retention first two buys"
+}
+
 
 explore: acquisition_source_email_visit_and_orders_tbl{
 label: "Email visit and order acquisition source "
@@ -56,6 +62,9 @@ label: "Email visit and order acquisition source "
 
 ## basic dashboarde re build
 
+explore: klaviyo_events_n_dc_tbl {
+label: "Klaviyo Events - New"
+}
 
 
 
