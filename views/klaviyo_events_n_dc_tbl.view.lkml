@@ -48,7 +48,6 @@ view: klaviyo_events_n_dc_tbl {
       quarter,
       year
     ]
-    datatype: datetime
     sql: timestamp(${TABLE}.event_date) ;;
   }
 
@@ -123,7 +122,6 @@ view: klaviyo_events_n_dc_tbl {
       quarter,
       year
     ]
-    datatype: datetime
     sql: timestamp(${TABLE}.person_created) ;;
   }
 
