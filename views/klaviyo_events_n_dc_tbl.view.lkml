@@ -124,7 +124,7 @@ view: klaviyo_events_n_dc_tbl {
       year
     ]
     datatype: datetime
-    sql: ${TABLE}.person_created ;;
+    sql: timestamp(${TABLE}.person_created) ;;
   }
 
   dimension: promo {
