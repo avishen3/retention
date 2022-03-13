@@ -47,6 +47,20 @@ view: first_seconed_buy_brand_database_for_looker_tbl {
     sql: ${TABLE}.is_mattress_buys ;;
   }
 
+  dimension: is_contain_mattress {
+    type: string
+    sql:
+    CASE
+      WHEN ${is_mattress_buys} = "one_matt_two_matt" = THEN "Both sales contain a mattress"
+      WHEN ${is_mattress_buys} = "one_matt_two_no" = THEN "Only the first purchase contains a mattress"
+      WHEN ${is_mattress_buys} = "one_no_two_matt" = THEN "Only the second purchase contains a mattress"
+      WHEN ${is_mattress_buys} = "no_matt_at_all" = THEN "Neither purchases contain a mattress"
+      ELSE null
+      END
+    ;;
+  }
+
+
   dimension: item_1 {
     type: string
     sql: ${TABLE}.item_1
