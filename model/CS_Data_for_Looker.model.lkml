@@ -42,6 +42,11 @@ explore: cs_sale_by_agents_for_looker {
   description: "all + chat data"
 }
 
+explore: cs_call_data_for_looker_tb{
+  label: "CS inbound calls data"
+  description: "manually updated"
+}
+
 
 
 # }
