@@ -132,7 +132,7 @@ view: nacter_attentive_first_try_for_looker_tbl {
     allowed_value: { value: "Year" }
   }
 
-  dimension: Order_Date {
+  dimension: Event_Date_Granularity {
     label_from_parameter: Date_Granularity_order_date
     sql:
             CASE
