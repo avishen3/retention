@@ -66,6 +66,12 @@ explore: klaviyo_events_n_dc_tbl {
 label: "Klaviyo Events - New"
 }
 
+## attantive data
+
+
+explore: nacter_attentive_first_try_for_looker_tbl {
+  label: "attentive_nectar_data_first_try"
+}
 
 
 
