@@ -101,4 +101,50 @@ view: nacter_attentive_first_try_for_looker_tbl {
     type: count
     drill_fields: [creative_name, message_name]
   }
+
+  #####
+
+  dimension_group: event_date {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    datatype: datetime
+    sql: ${TABLE}.event_date ;;
+  }
+
+### Date_granularty
+
+# date granularity - Order Date #
+
+  parameter: Date_Granularity_order_date {
+    type: string
+    allowed_value: { value: "Day" }
+    allowed_value: { value: "Week" }
+    allowed_value: { value: "Month" }
+    allowed_value: { value: "Quarter" }
+    allowed_value: { value: "Year" }
+  }
+
+  dimension: Order_Date {
+    label_from_parameter: Date_Granularity_order_date
+    sql:
+            CASE
+             WHEN {% parameter Date_Granularity_order_date %} = 'Day' THEN cast(${event_date_date} as string)
+             WHEN {% parameter Date_Granularity_order_date %} = 'Week' THEN cast(${event_date_week} as string)
+             WHEN {% parameter Date_Granularity_order_date %} = 'Month' THEN cast(${event_date_month} as string)
+             WHEN {% parameter Date_Granularity_order_date %} = 'Quarter' THEN cast(${event_date_quarter} as string)
+             WHEN {% parameter Date_Granularity_order_date %} = 'Year' THEN cast(${event_date_year} as string)
+            ELSE null
+            END ;;
+  }
+
+
+
 }
