@@ -123,7 +123,7 @@ view: nacter_attentive_first_try_for_looker_tbl {
 
 # date granularity - Order Date #
 
-  parameter: Date_Granularity_order_date {
+  parameter: Date_Granularity_event_date {
     type: string
     allowed_value: { value: "Day" }
     allowed_value: { value: "Week" }
@@ -133,14 +133,14 @@ view: nacter_attentive_first_try_for_looker_tbl {
   }
 
   dimension: Event_Date_Granularity {
-    label_from_parameter: Date_Granularity_order_date
+    label_from_parameter: Date_Granularity_event_date
     sql:
             CASE
-             WHEN {% parameter Date_Granularity_order_date %} = 'Day' THEN cast(${event_date_date} as string)
-             WHEN {% parameter Date_Granularity_order_date %} = 'Week' THEN cast(${event_date_week} as string)
-             WHEN {% parameter Date_Granularity_order_date %} = 'Month' THEN cast(${event_date_month} as string)
-             WHEN {% parameter Date_Granularity_order_date %} = 'Quarter' THEN cast(${event_date_quarter} as string)
-             WHEN {% parameter Date_Granularity_order_date %} = 'Year' THEN cast(${event_date_year} as string)
+             WHEN {% parameter Date_Granularity_event_date %} = 'Day' THEN cast(${event_date_date} as string)
+             WHEN {% parameter Date_Granularity_event_date %} = 'Week' THEN cast(${event_date_week} as string)
+             WHEN {% parameter Date_Granularity_event_date %} = 'Month' THEN cast(${event_date_month} as string)
+             WHEN {% parameter Date_Granularity_event_date %} = 'Quarter' THEN cast(${event_date_quarter} as string)
+             WHEN {% parameter Date_Granularity_event_date %} = 'Year' THEN cast(${event_date_year} as string)
             ELSE null
             END ;;
   }
