@@ -48,5 +48,11 @@ explore: cs_call_data_for_looker_tb{
 }
 
 
+explore: daily_cs_agents_cartlink_remote_cart_tb {
+  label: "cartlink and remote cart data"
+
+}
+
+
 
 # }
