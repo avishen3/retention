@@ -49,7 +49,9 @@ view: daily_cs_agents_cartlink_remote_cart_tb {
 
   dimension: order_source_channel_fix {
     type: string
-    sql: ${TABLE}.order_source_channel_fix ;;
+    label: "Cartlink or Remote cart"
+    sql: ${TABLE}.order_source_channel_fix
+    ;;
   }
 
   dimension: ordered_carts {
