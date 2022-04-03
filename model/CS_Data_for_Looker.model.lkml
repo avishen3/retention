@@ -36,6 +36,12 @@ explore: admin_line_item_cogs {
 
 }
 
+explore: admin_orders {
+  label: "admin orders "
+  description: "FIRST TRY"
+}
+
+
 
 explore: cs_sale_by_agents_for_looker {
   label: "CS Sales by agents"
