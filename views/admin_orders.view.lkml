@@ -764,35 +764,41 @@ view: admin_orders {
 
 measure: total_price {
   type: sum
-  sql: ${price} ;;
+  sql: ${price}
+  value_format: "$#,##0";;
 
 }
 
   measure: total_tax{
     type: sum
-    sql: ${tax} ;;
+    sql: ${tax}
+    value_format: "$#,##0";;
   }
 
   measure: total_revenue {
     type: sum
-    sql: ${price}-${tax} ;;
+    sql: ${price}-${tax}
+    value_format: "$#,##0";;
 
   }
 
   measure: total_refound_amount {
     type: sum
-    sql: ${refund_amount} ;;
+    sql: ${refund_amount}
+    value_format: "$#,##0";;
 
   }
 
   measure: total_refund_amount_exc_tax {
     type: sum
-    sql: ${refund_amount_exc_tax} ;;
+    sql: ${refund_amount_exc_tax}
+    value_format: "$#,##0";;
   }
 
   measure: total_commision_amount{
     type: sum
-    sql: ${price}-${tax}-${refund_amount}  ;;
+    sql: ${price}-${tax}-${refund_amount}
+    value_format: "$#,##0";;
   }
 
 
