@@ -48,10 +48,23 @@ explore: cs_sale_by_agents_for_looker {
   description: "all + chat data"
 }
 
+
+####
 explore: cs_call_data_for_looker_tb{
   label: "CS inbound calls data"
   description: "manually updated"
 }
+
+
+
+
+explore: cs_calls_data_for_looker_nano_niv_tbl{
+  label: "CS inbound calls data with nano and nav"
+  description: "manually updated"
+}
+
+
+###
 
 explore: cartlink_source_data_tbl {
   label: "cartlink source data"
