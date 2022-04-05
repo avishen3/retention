@@ -94,41 +94,41 @@ view: cs_calls_data_for_looker_nano_niv_tbl {
   }
 
   measure: call_to_visit_ratio_mesure{
-    sql: (${total_inbound_Calls}/${total_site_visits} ;;
+    sql: (${total_inbound_Calls}/${total_site_visits}) ;;
   }
 
   measure: nanobar_all_call_to_visit_ratio_mesure{
-    sql: (${total_nano_bar_all_calls}/${total_site_visits} ;;
+    sql: (${total_nano_bar_all_calls}/${total_site_visits}) ;;
   }
 
   measure: nanobar_only_inbound_call_to_visit_ratio_mesure{
-    sql: (${total_nano_bar_only_inbound_Calls}/${total_site_visits} ;;
+    sql: (${total_nano_bar_only_inbound_Calls}/${total_site_visits}) ;;
   }
 
   measure: nanobar_all_call_to_all_calls_ratio_mesure{
-    sql: (${total_nano_bar_all_calls}/${total_inbound_Calls} ;;
+    sql: (${total_nano_bar_all_calls}/${total_inbound_Calls}) ;;
   }
 
   measure: nanobar_only_inbound_call_to_all_calls_ratio_mesure{
-    sql: (${total_nano_bar_only_inbound_Calls}/${total_inbound_Calls} ;;
+    sql: (${total_nano_bar_only_inbound_Calls}/${total_inbound_Calls}) ;;
   }
 
  ##@
 
   measure: navbar_all_call_to_visit_ratio_mesure{
-    sql: (${total_nav_bar_all_calls}/${total_site_visits} ;;
+    sql: (${total_nav_bar_all_calls}/${total_site_visits}) ;;
   }
 
   measure: navbar_only_inbound_call_to_visit_ratio_mesure{
-    sql: (${total_nav_bar_only_inbound_Calls}/${total_site_visits} ;;
+    sql: (${total_nav_bar_only_inbound_Calls}/${total_site_visits}) ;;
   }
 
   measure: navbar_all_call_to_all_calls_ratio_mesure{
-    sql: (${total_nav_bar_all_calls}/${total_inbound_Calls} ;;
+    sql: (${total_nav_bar_all_calls}/${total_inbound_Calls}) ;;
   }
 
   measure: navbar_only_inbound_call_to_all_calls_ratio_mesure{
-    sql: (${total_nav_bar_only_inbound_Calls}/${total_inbound_Calls} ;;
+    sql: (${total_nav_bar_only_inbound_Calls}/${total_inbound_Calls}) ;;
   }
 
 
