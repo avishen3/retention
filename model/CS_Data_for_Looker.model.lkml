@@ -53,12 +53,13 @@ explore: cs_call_data_for_looker_tb{
   description: "manually updated"
 }
 
+explore: cartlink_source_data_tbl {
+  label: "cartlink source data"
+}
 
-explore: daily_cs_agents_cartlink_remote_cart_tb {
-  label: "cartlink and remote cart data"
-
+explore: cartlink_by_agent_count_for_looker_tbl {
+  label: "cartlink by agents"
 }
 
 
-
-# }
+#}
