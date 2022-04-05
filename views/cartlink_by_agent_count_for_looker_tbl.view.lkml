@@ -22,6 +22,33 @@ view: cartlink_by_agent_count_for_looker_tbl {
     sql: ${TABLE}.creation_date ;;
   }
 
+# date granularity - Order Date #
+
+  parameter: Date_Granularity_Created_date {
+    type: string
+    allowed_value: { value: "Day" }
+    allowed_value: { value: "Week" }
+    allowed_value: { value: "Month" }
+    allowed_value: { value: "Quarter" }
+    allowed_value: { value: "Year" }
+  }
+
+  dimension: Created_Date {
+    label_from_parameter: Date_Granularity_Created_date
+    sql:
+            CASE
+             WHEN {% parameter Date_Granularity_Created_date %} = 'Day' THEN cast(${creation_date} as string)
+             WHEN {% parameter Date_Granularity_Created_date %} = 'Week' THEN cast(${creation_week} as string)
+             WHEN {% parameter Date_Granularity_Created_date %} = 'Month' THEN cast(${creation_month} as string)
+             WHEN {% parameter Date_Granularity_Created_date %} = 'Quarter' THEN cast(${creation_quarter} as string)
+             WHEN {% parameter Date_Granularity_Created_date %} = 'Year' THEN cast(${creation_year} as string)
+            ELSE null
+            END ;;
+  }
+
+
+
+
   dimension: email {
     type: string
     sql: ${TABLE}.email ;;
