@@ -73,4 +73,22 @@ view: cartlink_by_agent_count_for_looker_tbl {
     type: count
     drill_fields: []
   }
+
+
+  measure: total_created_carts {
+    type: sum
+    sql: ${created_carts} ;;
+  }
+
+  measure: total_cart_turned_to_order{
+    type: sum
+    sql: ${orders_not_final};;
+  }
+
+  measure: total_cart_turned_to_order_with_status{
+    type: sum
+    sql: ${orders_with_status};;
+  }
+
+
 }
