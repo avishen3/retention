@@ -80,7 +80,7 @@ view: cartlink_by_agent_count_for_looker_tbl {
     sql: ${created_carts} ;;
   }
 
-  measure: total_cart_turned_to_order{
+  measure: total_carts_turned_to_order{
     type: sum
     sql: ${orders_not_final};;
   }
