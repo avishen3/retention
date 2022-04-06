@@ -292,5 +292,16 @@ measure: total_unique_phones{
   }
 
 
+## convertion rate
+
+  measure: sms_link_click_rate {
+    label: "click linked out of message receipt"
+    type: number
+    sql: ${total_message_receipt} / nullif(${total_message_link_click}, 0) ;;
+    value_format: "0.00%"
+    group_label: "SMS Measures"
+  }
+
+
 
 }
