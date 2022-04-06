@@ -311,5 +311,14 @@ measure: total_unique_phones{
   }
 
 
+  measure: count_dist_phones{
+    type: count_distinct
+    sql: ${phone} ;;
+    value_format: "#,##0"
+  }
+
+
+
+
 
 }
