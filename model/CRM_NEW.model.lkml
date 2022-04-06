@@ -70,7 +70,7 @@ label: "Klaviyo Events - New"
 
 
 explore: attentive_all_brands_full_data_for_looker_tbl {
-label: "Attebtive events "
+label: "Attentive events "
 }
 
 
