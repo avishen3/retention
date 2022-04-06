@@ -214,6 +214,13 @@ view: attentive_all_brands_full_data_for_looker_tbl {
     sql: ${TABLE}.phone ;;
   }
 
+
+  dimension: phone_string {
+    type: string
+    sql: ${TABLE}.phone_string ;;
+  }
+
+
   dimension: subscription_type {
     type: string
     sql: ${TABLE}.subscription_type ;;
@@ -235,28 +242,28 @@ view: attentive_all_brands_full_data_for_looker_tbl {
 
 measure: total_unique_phones{
   type: count_distinct
-  sql: ${phone} ;;
+  sql: ${phone_string} ;;
   value_format: "#,##0"
   group_label: "SMS Measures"
 }
 
   measure: total_join {
     type: count_distinct
-    sql: case when ${type} = 'join' then ${phone} else null end ;;
+    sql: case when ${type} = 'join' then ${phone_string} else null end ;;
     value_format: "#,##0"
     group_label: "SMS Measures"
   }
 
   measure: total_click {
     type: count_distinct
-    sql: case when ${type} = 'click' then ${phone} else null end ;;
+    sql: case when ${type} = 'click' then ${phone_string} else null end ;;
     value_format: "#,##0"
     group_label: "SMS Measures"
   }
 
   measure: total_impression {
     type: count_distinct
-    sql: case when ${type} = 'impression' then ${phone} else null end ;;
+    sql: case when ${type} = 'impression' then ${phone_string} else null end ;;
     value_format: "#,##0"
     group_label: "SMS Measures"
   }
@@ -264,7 +271,7 @@ measure: total_unique_phones{
 
   measure: total_message_link_click {
     type: count_distinct
-    sql: case when ${type} = 'message_link_click' then ${phone} else null end ;;
+    sql: case when ${type} = 'message_link_click' then ${phone_string} else null end ;;
     value_format: "#,##0"
     group_label: "SMS Measures"
   }
@@ -272,21 +279,21 @@ measure: total_unique_phones{
 
   measure: total_message_receipt {
     type: count_distinct
-    sql: case when ${type} = 'message_receipt' then ${phone} else null end ;;
+    sql: case when ${type} = 'message_receipt' then ${phone_string} else null end ;;
     value_format: "#,##0"
     group_label: "SMS Measures"
   }
 
   measure: total_purchase {
     type: count_distinct
-    sql: case when ${type} = 'purchase' then ${phone} else null end ;;
+    sql: case when ${type} = 'purchase' then ${phone_string} else null end ;;
     value_format: "#,##0"
     group_label: "SMS Measures"
   }
 
   measure: total_email_save {
     type: count_distinct
-    sql: case when ${type} = 'email_save' then ${phone} else null end ;;
+    sql: case when ${type} = 'email_save' then ${phone_string} else null end ;;
     value_format: "#,##0"
     group_label: "SMS Measures"
   }
@@ -313,7 +320,7 @@ measure: total_unique_phones{
 
   measure: count_dist_phones{
     type: count_distinct
-    sql: ${phone} ;;
+    sql: ${phone_string} ;;
     value_format: "#,##0"
   }
 
