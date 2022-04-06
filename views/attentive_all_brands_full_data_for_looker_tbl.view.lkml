@@ -302,6 +302,14 @@ measure: total_unique_phones{
     group_label: "SMS Measures"
   }
 
+  measure: sms_click_to_buy_rate {
+    label: "purchase out of click linked "
+    type: number
+    sql: ${total_purchase} / nullif(${total_message_link_click}, 0) ;;
+    value_format: "0.00%"
+    group_label: "SMS Measures"
+  }
+
 
 
 }
