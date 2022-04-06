@@ -101,11 +101,13 @@ view: cs_calls_data_for_looker_nano_niv_tbl {
   measure: nanobar_all_call_to_visit_ratio_mesure{
     sql: (${total_nano_bar_all_calls}/${total_site_visits}) ;;
     value_format: "0.00%"
+
   }
 
   measure: nanobar_only_inbound_call_to_visit_ratio_mesure{
     sql: (${total_nano_bar_only_inbound_Calls}/${total_site_visits}) ;;
     value_format: "0.00%"
+    label: "nanobar inbound sales call to visit ratio"
   }
 
   measure: nanobar_all_call_to_all_calls_ratio_mesure{
@@ -116,6 +118,7 @@ view: cs_calls_data_for_looker_nano_niv_tbl {
   measure: nanobar_only_inbound_call_to_all_calls_ratio_mesure{
     sql: (${total_nano_bar_only_inbound_Calls}/${total_inbound_Calls}) ;;
     value_format: "0.00%"
+    label: "nanobar inbound sales call to all inbound sales call ratio"
   }
 
  ##@
@@ -128,6 +131,7 @@ view: cs_calls_data_for_looker_nano_niv_tbl {
   measure: navbar_only_inbound_call_to_visit_ratio_mesure{
     sql: (${total_nav_bar_only_inbound_Calls}/${total_site_visits}) ;;
     value_format: "0.00%"
+    label: "navbar inbound sales call to visit ratio"
   }
 
   measure: navbar_all_call_to_all_calls_ratio_mesure{
@@ -138,6 +142,8 @@ view: cs_calls_data_for_looker_nano_niv_tbl {
   measure: navbar_only_inbound_call_to_all_calls_ratio_mesure{
     sql: (${total_nav_bar_only_inbound_Calls}/${total_inbound_Calls}) ;;
     value_format: "0.00%"
+    label: "navobar inbound sales call to all inbound sales call ratio"
+
   }
 
 
