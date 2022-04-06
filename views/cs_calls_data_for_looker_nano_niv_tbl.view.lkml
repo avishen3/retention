@@ -60,16 +60,20 @@ view: cs_calls_data_for_looker_nano_niv_tbl {
   measure: total_inbound_Calls{
     type: sum
     sql: ${inbound_calls} ;;
+    label: "Total inbound sales calls"
+
   }
 
   measure: total_nano_bar_all_calls{
     type: sum
     sql: ${nano_bar_all_skills} ;;
+    label: "Nano bar - Total  calls"
   }
 
   measure: total_nano_bar_only_inbound_Calls{
     type: sum
     sql: ${nano_bar_inbound_calls} ;;
+    label: "Nano bar - Total inbound sales calls"
   }
 
 
@@ -77,11 +81,14 @@ view: cs_calls_data_for_looker_nano_niv_tbl {
   measure: total_nav_bar_all_calls{
     type: sum
     sql: ${nav_bar_all_skills} ;;
+    label: "Nav bar - Total  calls"
   }
 
   measure: total_nav_bar_only_inbound_Calls{
     type: sum
     sql: ${nav_bar_inbound_calls} ;;
+    label: "Nav bar - Total inbound sales calls"
+
   }
 
 
