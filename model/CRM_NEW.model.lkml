@@ -69,8 +69,8 @@ label: "Klaviyo Events - New"
 ## attantive data
 
 
-explore: nacter_attentive_first_try_for_looker_tbl {
-  label: "attentive_nectar_data_first_try"
+explore: attentive_all_brands_full_data_for_looker_tbl {
+label: "Attebtive events "
 }
 
 
