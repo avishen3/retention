@@ -69,9 +69,9 @@ label: "Klaviyo Events - New"
 ## attantive data
 
 
-explore: attentive_all_brands_full_data_for_looker_tbl {
-label: "Attentive events "
-}
+##explore: attentive_all_brands_full_data_for_looker_tbl {
+##label: "Attentive events "
+##}
 
 
 
