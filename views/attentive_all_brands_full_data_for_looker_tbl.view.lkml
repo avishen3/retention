@@ -176,18 +176,18 @@ view: attentive_all_brands_full_data_for_looker_tbl {
 
   measure: total_uniqe_phones{
     type: count_distinct
-    sql: ${phone} ;;
+    sql: ${TABLE}.phone ;;
   }
 
 
   measure: total_uniqe_phones_string{
     type: count_distinct
-    sql: ${phone_string} ;;
+    sql: (${TABLE}.phone_string;;
   }
 
 measure:total_message_id {
   type: count_distinct
-  sql: ${message_id};;
+  sql: ${TABLE}.message_id.;;
 }
 
 }
