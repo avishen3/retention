@@ -175,9 +175,10 @@ view: attentive_all_brands_full_data_for_looker_tbl {
   }
 
 
-measure: client_id_count {
+measure: total_phone{
   type: count_distinct
-  sql: ${client_id} ;;
+  sql: ${phone} ;;
+
 }
 
 
