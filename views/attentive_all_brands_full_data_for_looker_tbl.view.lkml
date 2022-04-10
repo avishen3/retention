@@ -185,5 +185,9 @@ view: attentive_all_brands_full_data_for_looker_tbl {
     sql: ${phone_string} ;;
   }
 
+measure:total_message_id {
+  type: count_distinct
+  sql: ${message_id};;
+}
 
 }
