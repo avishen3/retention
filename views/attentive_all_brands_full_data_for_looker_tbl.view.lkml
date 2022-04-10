@@ -174,29 +174,12 @@ view: attentive_all_brands_full_data_for_looker_tbl {
     drill_fields: [creative_name, massage_name]
   }
 
-  measure: total_uniqe_phones{
-    type: count_distinct
-    sql: ${TABLE}.phone ;;
-  }
 
-
-  measure: total_uniqe_phones_string{
-    type: count_distinct
-    sql: ${TABLE}.phone_string;;
-  }
-
-measure:total_message_id {
+measure: client_id_count {
   type: count_distinct
-  sql: ${TABLE}.message_id.;;
+  sql: ${client_id} ;;
 }
 
-###
-
-  measure: total_unique_phone_A {
-    type: count_distinct
-    sql: ${phone_string} ;;
-    value_format: "#,##0"
-  }
 
 
 }
