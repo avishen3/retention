@@ -277,13 +277,21 @@ view: attentive_all_brands_full_data_for_looker_tbl {
 
   }
 
+  measure: total_join  {
+    type: count_distinct
+    sql: case when ${type} = 'join' then ${phone} else null end ;;
+    value_format: "#,##0"
+    group_label: "phone Measures"
+
+  }
+
 
   measure: Opened_rate_recived_open {
     label: "% of clicked message out of received SMS"
     type: number
     sql: ${total_message_link_click}/ nullif(${total_message_receipt}, 0)  ;;
     value_format: "0.00%"
-    group_label: "Email Measures"
+    group_label: "phone Measures"
   }
 
 
