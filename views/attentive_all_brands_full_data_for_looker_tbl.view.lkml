@@ -61,6 +61,64 @@ view: attentive_all_brands_full_data_for_looker_tbl {
     sql: ${TABLE}.event_timestemp ;;
   }
 
+
+## date dimensions
+
+ ## dimension: not_today {
+##    type: yesno
+##    sql: ${event_timestemp} < current_date('America/Los_Angeles') ;;
+##    group_label: "Date Filters"
+##    description: "Filters any date after today (including today)"
+##  }
+
+  parameter: event_date_granularity {
+    type: string
+    description: "Use this selector to change the date granularity of 'Date' dimension only"
+    allowed_value: {
+      label: "Day"
+      value: "Day"
+    }
+    allowed_value: {
+      label: "Week"
+      value: "Week"
+    }
+    allowed_value: {
+      label: "Month"
+      value: "Month"
+    }
+    allowed_value: {
+      label: "Quarter"
+      value: "Quarter"
+    }
+    allowed_value: {
+      label: "Year"
+      value: "Year"
+    }
+
+    allowed_value: {
+      label: "None"
+      value: "None"
+    }
+
+  }
+
+
+  dimension: date {
+    label_from_parameter: event_date_granularity
+    description: "Use 'Date Granularity' selector to modify the date granularity"
+    sql:
+            CASE
+             WHEN {% parameter event_date_granularity %} = 'Day' THEN cast(${event_timestemp_date} as string)
+             WHEN {% parameter event_date_granularity %} = 'Week' THEN cast(${event_timestemp_week} as string)
+             WHEN {% parameter event_date_granularity %} = 'Month' THEN cast(${event_timestemp_month} as string)
+             WHEN {% parameter event_date_granularity %} = 'Quarter' THEN cast(${event_timestemp_quarter} as string)
+             WHEN {% parameter event_date_granularity %} = 'Year' THEN cast(${event_timestemp_year} as string)
+            ELSE null
+            END ;;
+  }
+
+
+
   dimension_group: event_timestemp_day {
     type: time
     timeframes: [
@@ -175,11 +233,59 @@ view: attentive_all_brands_full_data_for_looker_tbl {
   }
 
 
-measure: total_phone{
-  type: count_distinct
-  sql: ${phone} ;;
+  measure: total_unique_phone {
+    type: count_distinct
+    sql: ${phone} ;;
+    value_format: "#,##0"
+    group_label: "phone Measures"
+  }
 
-}
+  measure: total_impression  {
+    type: count_distinct
+    sql: case when ${type} = 'impression' then ${phone} else null end ;;
+    value_format: "#,##0"
+    group_label: "phone Measures"
+
+    }
+
+    measure: total_message_receipt  {
+      type: count_distinct
+      sql: case when ${type} = 'message_receipt' then ${phone} else null end ;;
+      value_format: "#,##0"
+      group_label: "phone Measures"
+      }
+
+      measure: total_message_link_click  {
+        type: count_distinct
+        sql: case when ${type} = 'message_link_click' then ${phone} else null end ;;
+        value_format: "#,##0"
+        group_label: "phone Measures"
+        }
+
+        measure: total_click  {
+          type: count_distinct
+          sql: case when ${type} = 'message_link_click' then ${phone} else null end ;;
+          value_format: "#,##0"
+          group_label: "phone Measures"
+         }
+
+  measure: total_purchase  {
+    type: count_distinct
+    sql: case when ${type} = 'purchase' then ${phone} else null end ;;
+    value_format: "#,##0"
+    group_label: "phone Measures"
+
+  }
+
+
+  measure: Opened_rate_recived_open {
+    label: "% of clicked message out of received SMS"
+    type: number
+    sql: ${total_message_link_click}/ nullif(${total_message_receipt}, 0)  ;;
+    value_format: "0.00%"
+    group_label: "Email Measures"
+  }
+
 
 
 
