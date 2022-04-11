@@ -295,6 +295,14 @@ view: attentive_all_brands_full_data_for_looker_tbl {
   }
 
 
+  measure: clicked_to_purchase_rate {
+    label: "% of purchase out of clicked message "
+    type: number
+    sql: ${total_purchase}/ nullif(${total_message_link_click}, 0)  ;;
+    value_format: "0.00%"
+    group_label: "phone Measures"
+  }
+
 
 
 }
