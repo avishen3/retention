@@ -74,5 +74,9 @@ explore: cartlink_by_agent_count_for_looker_tbl {
   label: "cartlink by agents"
 }
 
+explore: cartlink_data_with_date_diff_billing_provider_tbl {
+  label: "cartlink data with date_diff and billing provider"
+}
+
 
 #}
