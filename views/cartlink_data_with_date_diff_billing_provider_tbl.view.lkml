@@ -142,4 +142,35 @@ view: cartlink_data_with_date_diff_billing_provider_tbl {
     type: count
     drill_fields: [id, last_name, first_name]
   }
+
+
+
+  measure: total_created_cart {
+    type: count_distinct
+    sql: ${id} ;;
+    value_format: "#,##0"
+  }
+
+  measure: total_created_order {
+    type: count_distinct
+    sql: ${order_id} ;;
+    value_format: "#,##0"
+  }
+
+  measure: total_order_with_status {
+    type: count_distinct
+    sql: case when ${status} is not null  then ${order_id} else null end ;;
+    value_format: "#,##0"
+  }
+
+
+    measure: total_order_placed {
+      type: count_distinct
+      sql: case when ${status} is in ("new","done","shipped","processing")  then ${order_id} else null end ;;
+      value_format: "#,##0"
+      }
+
+
+
+
 }
