@@ -166,7 +166,7 @@ view: cartlink_data_with_date_diff_billing_provider_tbl {
 
     measure: total_order_placed {
       type: count_distinct
-      sql: case when ${status} is in ("new","done","shipped","processing")  then ${order_id} else null end ;;
+      sql: case when ${status} in ("new","done","shipped","processing")  then ${order_id} else null end ;;
       value_format: "#,##0"
       }
 
