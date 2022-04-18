@@ -78,5 +78,12 @@ explore: cartlink_data_with_date_diff_billing_provider_tbl {
   label: "cartlink data with date_diff and billing provider"
 }
 
+explore: cartlink_souce_data_tbl_new {
+  label: "cartlink new for chacking "
+
+}
+
+
+
 
 #}

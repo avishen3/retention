@@ -1,5 +1,5 @@
-view: cartlink_data_with_date_diff_billing_provider_tbl {
-  sql_table_name: `omega-post-184817.CS_NEW.cartlink_data_with_date_diff_billing_provider_tbl`
+view: cartlink_souce_data_tbl_new {
+  sql_table_name: `omega-post-184817.CS_NEW.cartlink_souce_data_tbl_new`
     ;;
   drill_fields: [id]
 
@@ -12,11 +12,6 @@ view: cartlink_data_with_date_diff_billing_provider_tbl {
   dimension: agent_id {
     type: string
     sql: ${TABLE}.agent_id ;;
-  }
-
-  dimension: billing_provider {
-    type: string
-    sql: ${TABLE}.billing_provider ;;
   }
 
   dimension: brand {
@@ -34,11 +29,6 @@ view: cartlink_data_with_date_diff_billing_provider_tbl {
     sql: ${TABLE}.coupon_details_code ;;
   }
 
-  dimension: day_diff {
-    type: number
-    sql: ${TABLE}.day_diff ;;
-  }
-
   dimension: email {
     type: string
     sql: ${TABLE}.email ;;
@@ -47,11 +37,6 @@ view: cartlink_data_with_date_diff_billing_provider_tbl {
   dimension: first_name {
     type: string
     sql: ${TABLE}.first_name ;;
-  }
-
-  dimension: hour_diff {
-    type: number
-    sql: ${TABLE}.hour_diff ;;
   }
 
   dimension_group: initialized {
@@ -68,59 +53,9 @@ view: cartlink_data_with_date_diff_billing_provider_tbl {
     sql: ${TABLE}.initialized ;;
   }
 
-  dimension_group: initialized_datetime {
-    type: time
-    timeframes: [
-      raw,
-      time,
-      date,
-      week,
-      month,
-      quarter,
-      year
-    ]
-    datatype: datetime
-    sql: ${TABLE}.initialized_DATETIME ;;
-  }
-
   dimension: last_name {
     type: string
     sql: ${TABLE}.last_name ;;
-  }
-
-  dimension: minute_diff {
-    type: number
-    sql: ${TABLE}.minute_diff ;;
-  }
-
-  dimension_group: order_created {
-    type: time
-    timeframes: [
-      raw,
-      time,
-      date,
-      week,
-      month,
-      quarter,
-      year
-    ]
-    datatype: datetime
-    sql: ${TABLE}.order_created ;;
-  }
-
-  dimension_group: order_created_datetime {
-    type: time
-    timeframes: [
-      raw,
-      time,
-      date,
-      week,
-      month,
-      quarter,
-      year
-    ]
-    datatype: datetime
-    sql: ${TABLE}.order_created_DATETIME ;;
   }
 
   dimension: order_id {
@@ -143,8 +78,6 @@ view: cartlink_data_with_date_diff_billing_provider_tbl {
     drill_fields: [id, last_name, first_name]
   }
 
-
-
   measure: total_created_cart {
     type: count_distinct
     sql: ${id} ;;
@@ -158,14 +91,11 @@ view: cartlink_data_with_date_diff_billing_provider_tbl {
   }
 
 
-
-    measure: total_order_placed {
-      type: count_distinct
-      sql: case when ${status} in ("new","done","shipped","processing")  then ${order_id} else null end ;;
-      value_format: "#,##0"
-      }
-
-
+  measure: total_order_placed {
+    type: count_distinct
+    sql: case when ${status} in ("new","done","shipped","processing")  then ${order_id} else null end ;;
+    value_format: "#,##0"
+  }
 
 
 }
