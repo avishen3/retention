@@ -186,6 +186,19 @@ dimension: the_nectar_mattress {
     sql: ${TABLE}.sub_flow ;;
   }
 
+
+dimension:test_variance  {
+  type : string
+  sql:  ${TABLE}.test_variance;;
+}
+
+  dimension:test_name   {
+    type : string
+    sql:  ${TABLE}.test_name  ;;
+  }
+
+
+
   measure: count {
     type: count
     drill_fields: [campaign_name]
