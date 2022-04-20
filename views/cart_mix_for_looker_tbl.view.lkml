@@ -199,6 +199,11 @@ dimension:test_variance  {
 
 
 
+  dimension:Email_num_and_variance   {
+    type : string
+    sql:  ${TABLE}.Email_num_and_variance  ;;
+  }
+
   measure: count {
     type: count
     drill_fields: [campaign_name]
