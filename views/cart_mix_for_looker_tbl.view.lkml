@@ -223,5 +223,51 @@ dimension:test_variance  {
 
 
 
+  dimension: all_order_price {
+    type: number
+    sql: ${TABLE}.all_order_price ;;
+  }
+
+  dimension: all_order_tax {
+    type: number
+    sql: ${TABLE}.all_order_tax ;;
+  }
+
+  dimension: all_order_taxable_price {
+    type: number
+    sql: ${TABLE}.all_order_taxable_price ;;
+  }
+  dimension: all_order_payed_amount {
+    type: number
+    sql: ${TABLE}.all_order_payed_amount ;;
+  }
+
+
+
+  measure: total_all_order_price {
+    type: sum
+    sql: ${all_order_price} ;;
+    value_format: "$#,###"
+  }
+
+  measure: total_all_order_tax {
+    type: sum
+    sql: ${all_order_tax} ;;
+    value_format: "$#,###"
+  }
+
+  measure: total_all_order_taxable_price {
+    type: sum
+    sql: ${all_order_taxable_price} ;;
+    value_format: "$#,###"
+  }
+
+  measure: total_all_order_payed_amount {
+    type: sum
+    sql: ${all_order_payed_amount} ;;
+    value_format: "$#,###"
+  }
+
+
 
 }
