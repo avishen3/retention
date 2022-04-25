@@ -83,7 +83,9 @@ explore: cartlink_souce_data_tbl_new {
 
 }
 
-
+explore: cartlink_data_with_date_diff_billing_provider_and_cart_order_status_tbl {
+  label: "cartlink data with date diff billing provider and cart order status tbl"
+}
 
 
 #}

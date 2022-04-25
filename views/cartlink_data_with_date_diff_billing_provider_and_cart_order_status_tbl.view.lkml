@@ -202,7 +202,7 @@ view: cartlink_data_with_date_diff_billing_provider_and_cart_order_status_tbl {
 
   measure: total_cart_not_turned_into_order{
     type: count_distinct
-    sql: case when ${cart_order_status} = 'Cart not order' then ${total_cart_created} else null end ;;
+    sql: case when ${cart_order_status} = 'Cart not order' then ${id} else null end ;;
     value_format: "#,##0"
     group_label: "Cart count measures"
   }
@@ -211,7 +211,7 @@ view: cartlink_data_with_date_diff_billing_provider_and_cart_order_status_tbl {
 
   measure: total_cart_orders_only_completed{
     type: count_distinct
-    sql: case when ${cart_order_status} = 'only completed' then ${total_cart_created} else null end ;;
+    sql: case when ${cart_order_status} = 'only completed' then ${id} else null end ;;
     value_format: "#,##0"
     group_label: "Cart count measures"
   }
@@ -219,7 +219,7 @@ view: cartlink_data_with_date_diff_billing_provider_and_cart_order_status_tbl {
 
   measure: total_cart_orders_completed_and_paymentfailure{
     type: count_distinct
-    sql: case when ${cart_order_status} = 'completed and paymentfailure' then ${total_cart_created} else null end ;;
+    sql: case when ${cart_order_status} = 'completed and paymentfailure' then ${id} else null end ;;
     value_format: "#,##0"
     group_label: "Cart count measures"
   }
@@ -227,35 +227,35 @@ view: cartlink_data_with_date_diff_billing_provider_and_cart_order_status_tbl {
 
   measure: total_cart_orders_completed_and_pendingpayment{
     type: count_distinct
-    sql: case when ${cart_order_status} = 'completed and pendingpayment' then ${total_cart_created} else null end ;;
+    sql: case when ${cart_order_status} = 'completed and pendingpayment' then ${id} else null end ;;
     value_format: "#,##0"
     group_label: "Cart count measures"
   }
 
   measure: total_cart_orders_completed_and_pendingpayment_and_paymentfailure{
     type: count_distinct
-    sql: case when ${cart_order_status} = 'completed and pendingpayment and paymentfailure' then ${total_cart_created} else null end ;;
+    sql: case when ${cart_order_status} = 'completed and pendingpayment and paymentfailure' then ${id} else null end ;;
     value_format: "#,##0"
     group_label: "Cart count measures"
   }
 
-  measure: total_cart_orders_all-completed{
+  measure: total_cart_orders_all_completed{
     type: count_distinct
-    sql: case when ${cart_order_status} in ('completed and pendingpayment and paymentfailure', "completed and paymentfailure","completed and pendingpayment", "completed and pendingpayment and paymentfailure") then ${total_cart_created} else null end ;;
+    sql: case when ${cart_order_status} in ('completed and pendingpayment and paymentfailure', "completed and paymentfailure","completed and pendingpayment", "completed and pendingpayment and paymentfailure") then ${id} else null end ;;
     value_format: "#,##0"
     group_label: "Cart count measures"
   }
 
   measure: total_cart_orders_only_paymentfailure{
     type: count_distinct
-    sql: case when ${cart_order_status} = 'only paymentfailure' then ${total_cart_created} else null end ;;
+    sql: case when ${cart_order_status} = 'only paymentfailure' then ${id} else null end ;;
     value_format: "#,##0"
     group_label: "Cart count measures"
   }
 
   measure: total_cart_orders_only_pendingpayment{
     type: count_distinct
-    sql: case when ${cart_order_status} = 'only pendingpayment' then ${total_cart_created} else null end ;;
+    sql: case when ${cart_order_status} = 'only pendingpayment' then ${id} else null end ;;
     value_format: "#,##0"
     group_label: "Cart count measures"
   }
@@ -263,21 +263,21 @@ view: cartlink_data_with_date_diff_billing_provider_and_cart_order_status_tbl {
 
   measure: total_cart_orders_pendingpayment_and_paymentfailure{
     type: count_distinct
-    sql: case when ${cart_order_status} = 'pendingpayment and paymentfailure' then ${total_cart_created} else null end ;;
+    sql: case when ${cart_order_status} = 'pendingpayment and paymentfailure' then ${id} else null end ;;
     value_format: "#,##0"
     group_label: "Cart count measures"
   }
 
   measure: total_cart_orders_all_pendingpayment_and_or_paymentfailure{
     type: count_distinct
-    sql: case when ${cart_order_status} in ('only paymentfailure', "only pendingpayment","pendingpayment and paymentfailure") then ${total_cart_created} else null end ;;
+    sql: case when ${cart_order_status} in ('only paymentfailure', "only pendingpayment","pendingpayment and paymentfailure") then ${id} else null end ;;
     value_format: "#,##0"
     group_label: "Cart count measures"
   }
 
   measure: total_cart_orders_all_pendingpayment_and_or_paymentfailure_then_completed{
     type: count_distinct
-    sql: case when ${cart_order_status} in ('completed and paymentfailure', "completed and pendingpayment","completed and pendingpayment and paymentfailure") then ${total_cart_created} else null end ;;
+    sql: case when ${cart_order_status} in ('completed and paymentfailure', "completed and pendingpayment","completed and pendingpayment and paymentfailure") then ${id} else null end ;;
     value_format: "#,##0"
     group_label: "Cart count measures"
   }
