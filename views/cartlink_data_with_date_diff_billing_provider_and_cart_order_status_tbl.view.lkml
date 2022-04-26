@@ -316,7 +316,7 @@ view: cartlink_data_with_date_diff_billing_provider_and_cart_order_status_tbl {
     group_label: "Cart count measures"
   }
 
-  measure: total_carts_turned_orders{
+  measure: total_carts_turned_potanital_orders{
     type: count_distinct
     sql: case when ${cart_order_status} <> "Cart not order" then ${id} else null end ;;
     value_format: "#,##0"
