@@ -88,6 +88,35 @@ view: cartlink_data_with_date_diff_billing_provider_and_cart_order_status_tbl {
     sql: ${TABLE}.initialized ;;
   }
 
+
+# date granularity - initialized Date #
+
+  parameter: Date_Granularity_initialized_date {
+    type: string
+    allowed_value: { value: "Day" }
+    allowed_value: { value: "Week" }
+    allowed_value: { value: "Month" }
+    allowed_value: { value: "Quarter" }
+    allowed_value: { value: "Year" }
+  }
+
+
+
+  dimension: initialized {
+    label_from_parameter: Date_Granularity_initialized_date
+    sql:
+            CASE
+             WHEN {% parameter Date_Granularity_initialized_date %} = 'Day' THEN cast(${initialized_date} as string)
+             WHEN {% parameter Date_Granularity_initialized_date %} = 'Week' THEN cast(${initialized_week} as string)
+             WHEN {% parameter Date_Granularity_initialized_date %} = 'Month' THEN cast(${initialized_month} as string)
+             WHEN {% parameter Date_Granularity_initialized_date %} = 'Quarter' THEN cast(${initialized_quarter} as string)
+             WHEN {% parameter Date_Granularity_initialized_date %} = 'Year' THEN cast(${initialized_year} as string)
+            ELSE null
+            END ;;
+  }
+
+
+
   dimension_group: initialized_datetime {
     type: time
     timeframes: [
@@ -102,6 +131,11 @@ view: cartlink_data_with_date_diff_billing_provider_and_cart_order_status_tbl {
     datatype: datetime
     sql: ${TABLE}.initialized_DATETIME ;;
   }
+
+
+
+
+
 
   dimension: last_name {
     type: string
