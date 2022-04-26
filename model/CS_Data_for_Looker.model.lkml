@@ -88,4 +88,9 @@ explore: cartlink_data_with_date_diff_billing_provider_and_cart_order_status_tbl
 }
 
 
+explore: cartlink_overview_data_for_looker_tbl {
+  label: "cartlink overview data"
+}
+
+
 #}
