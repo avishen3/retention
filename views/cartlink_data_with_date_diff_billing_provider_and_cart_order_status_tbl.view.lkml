@@ -278,6 +278,7 @@ view: cartlink_data_with_date_diff_billing_provider_and_cart_order_status_tbl {
     sql: case when ${cart_order_status} in ('completed and pendingpayment and paymentfailure', "completed and paymentfailure","completed and pendingpayment", "completed and pendingpayment and paymentfailure" , "only completed" ) then ${id} else null end ;;
     value_format: "#,##0"
     group_label: "Cart count measures"
+    label: "Total Completed Orders"
   }
 
   measure: total_cart_orders_only_paymentfailure{
