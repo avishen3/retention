@@ -93,4 +93,8 @@ explore: cartlink_overview_data_for_looker_tbl {
 }
 
 
+explore: five9_data_check_tbl {
+  label: "five9 example data for dash building"
+}
+
 #}
