@@ -104,7 +104,7 @@ view: five9_data_check_tbl {
 
   ### transaction date Granularity
 
-# date granularity - initialized Date #
+# date granularity - transaction Date #
 
   parameter: Date_Granularity_transaction_date {
     type: string
@@ -117,7 +117,7 @@ view: five9_data_check_tbl {
 
 
 
-  dimension: initialized {
+  dimension: transaction {
     label_from_parameter: Date_Granularity_transaction_date
     sql:
             CASE
@@ -130,6 +130,13 @@ view: five9_data_check_tbl {
             END ;;
   }
 
+
+measure: total_session_id {
+  type: count_distinct
+  sql: ${provider_session_id} ;;
+  value_format: "#,##0"
+  group_label: "five9 Measures"
+}
 
 
 }
