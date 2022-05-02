@@ -138,5 +138,12 @@ measure: total_session_id {
   group_label: "five9 Measures"
 }
 
+  measure: total_customer_Id {
+    type: count_distinct
+    sql: ${customer_id} ;;
+    value_format: "#,##0"
+    group_label: "five9 Measures"
+  }
+
 
 }
