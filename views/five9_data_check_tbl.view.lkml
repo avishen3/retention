@@ -135,15 +135,65 @@ measure: total_session_id {
   type: count_distinct
   sql: ${provider_session_id} ;;
   value_format: "#,##0"
-  group_label: "five9 Measures"
+  group_label: "five9 Measures - session"
 }
 
   measure: total_customer_Id {
     type: count_distinct
     sql: ${customer_id} ;;
     value_format: "#,##0"
-    group_label: "five9 Measures"
+    group_label: "five9 Measures - customer"
   }
+
+
+  measure: total_session_with_orders{
+    type: count_distinct
+    sql: case when ${has_order} = true then ${provider_session_id} else null end ;;
+    value_format: "#,##0"
+    group_label: "five9 Measures - session"
+  }
+
+  measure: total_session_with_orders_before_interaction{
+    type: count_distinct
+    sql: case when ${has_order_before_interaction} = true then ${provider_session_id} else null end ;;
+    value_format: "#,##0"
+    group_label: "five9 Measures - session"
+  }
+
+
+  measure: total_session_with_order_within_48h{
+    type: count_distinct
+    sql: case when ${order_within_48h} = true then ${provider_session_id} else null end ;;
+    value_format: "#,##0"
+    group_label: "five9 Measures - session"
+  }
+
+
+
+
+
+  measure: total_customer_with_orders{
+    type: count_distinct
+    sql: case when ${has_order} = true then ${customer_id} else null end ;;
+    value_format: "#,##0"
+    group_label: "five9 Measures - customer"
+  }
+
+  measure: total_customer_with_orders_before_interaction{
+    type: count_distinct
+    sql: case when ${has_order_before_interaction} = true then ${customer_id} else null end ;;
+    value_format: "#,##0"
+    group_label: "five9 Measures - customer"
+  }
+
+
+  measure: total_customer_with_order_within_48h{
+    type: count_distinct
+    sql: case when ${order_within_48h} = true then ${customer_id} else null end ;;
+    value_format: "#,##0"
+    group_label: "five9 Measures - customer"
+  }
+
 
 
 }
