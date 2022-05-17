@@ -1,5 +1,5 @@
 view: five9_data_check_tbl {
-  sql_table_name: `omega-post-184817.Keshet.five9_data_check_tbl`
+  sql_table_name: `omega-post-184817.CS_NEW.five9_bq_data_tbl`
     ;;
 
   dimension: agent_email {
