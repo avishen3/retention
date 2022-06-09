@@ -102,6 +102,7 @@ view: cs_sale_by_agents_for_looker {
     timeframes: [
       raw,
       hour,
+      hour_of_day,
       time,
       date,
       week,
