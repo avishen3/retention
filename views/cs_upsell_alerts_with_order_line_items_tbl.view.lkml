@@ -1140,7 +1140,7 @@ view: cs_upsell_alerts_with_order_line_items_tbl {
 
   measure: total_upsell_orders{
     type: count_distinct
-    sql: case when ${exchanged_original_item_sku} in not null then ${short_id}  else null end ;;
+    sql: case when ${exchanged_original_item_sku} is not null then ${short_id}  else null end ;;
   }
 
 
