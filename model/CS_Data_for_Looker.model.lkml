@@ -97,4 +97,9 @@ explore: five9_data_check_tbl {
   label: "five9 example data for dash building"
 }
 
-#}
+
+
+## alerts
+explore: cs_upsell_alerts_with_order_line_items_tbl {
+  label: "cs_upsell_alerts"
+}
