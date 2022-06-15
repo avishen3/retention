@@ -125,7 +125,7 @@ view: cs_upsell_alerts_with_order_line_items_tbl {
       quarter,
       year
     ]
-    sql: ${TABLE}.created_alerts ;;
+    sql: ${TABLE}.created ;;
   }
 
 
