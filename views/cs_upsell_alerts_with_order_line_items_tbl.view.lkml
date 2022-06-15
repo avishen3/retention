@@ -147,7 +147,7 @@ view: cs_upsell_alerts_with_order_line_items_tbl {
     sql:
             CASE
              WHEN {% parameter Date_Granularity_created_alerts %} = 'Day' THEN cast(${created_date} as string)
-             WHEN {% parameter Date_Granularity_created_alerts %} = 'Week' THEN cast( ${created_time} as string)
+             WHEN {% parameter Date_Granularity_created_alerts %} = 'Week' THEN cast( ${created_week} as string)
              WHEN {% parameter Date_Granularity_created_alerts %} = 'Month' THEN cast(${created_month} as string)
              WHEN {% parameter Date_Granularity_created_alerts %} = 'Quarter' THEN cast(${created_quarter} as string)
              WHEN {% parameter Date_Granularity_created_alerts %} = 'Year' THEN cast(${created_year} as string)
