@@ -142,7 +142,7 @@ view: cs_upsell_alerts_with_order_line_items_tbl {
     allowed_value: { value: "Year" }
   }
 
-  dimension: Order_Date_gr {
+  dimension: created_date_gr {
     label_from_parameter: Date_Granularity_created_alerts
     sql:
             CASE
@@ -1133,7 +1133,7 @@ view: cs_upsell_alerts_with_order_line_items_tbl {
     sql: ${short_id} ;;
   }
 
-  measure: total_assgined_alerts{
+  measure: total_assigned_alerts{
     type: count_distinct
     sql: case when ${is_tesk_assigned} = true then ${short_id} else null end  ;;
   }
