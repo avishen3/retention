@@ -407,7 +407,12 @@ view: five9_prospect_customer_tbl {
     group_label: "five9 Measures - session"
   }
 
-
+  measure: total_session_with_order_within_48h_with_agent{
+    type: count_distinct
+    sql: case when ${order_within_48h_w_agent} is not null then ${provider_session_id} else null end ;;
+    value_format: "#,##0"
+    group_label: "five9 Measures - session"
+  }
 
 
 
@@ -433,6 +438,12 @@ view: five9_prospect_customer_tbl {
     group_label: "five9 Measures - customer"
   }
 
+  measure: total_customer_with_order_within_48h_with_agent{
+    type: count_distinct
+    sql: case when  ${order_within_48h_w_agent} is not null then ${customer_id} else null end ;;
+    value_format: "#,##0"
+    group_label: "five9 Measures - customer"
+  }
 
 
 
