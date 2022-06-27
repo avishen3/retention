@@ -1587,4 +1587,127 @@ view: nps_data_item_order_tbl {
       product_name
     ]
   }
+
+  ####
+
+  measure: total_orders {
+    type: count_distinct
+    sql: ${short_id} ;;
+  }
+
+
+
+  ####
+
+  # Survicate #
+
+  dimension: survicate_survey {
+    type: string
+    sql: ${TABLE}.survicate_survey_order_level ;;
+  }
+
+  dimension: survicate_survey_order {
+    type: number
+    hidden: yes
+    sql: Case when lower(${survicate_survey_order_level}) = 'order confirmation nps' then 1
+              when lower(${survicate_survey_order_level}) = 'in transit nps' then 2
+              when lower(${survicate_survey_order_level}) = 'full order delivery nps' then 3
+              when lower(${survicate_survey_order_level}) = 'one week check in nps' then 4
+              when lower(${survicate_survey_order_level}) = '30 days check in nps' then 5
+              when lower(${survicate_survey_order_level}) = '90 days check in nps' then 6
+              when ${survicate_survey_order_level} is null then 99
+              Else 100 End;;
+  }
+
+  dimension: survicate_score {
+    type: number
+    sql: ${TABLE}.survicate_score_order_level  ;;
+  }
+
+  dimension_group: survicate_review_created {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    sql: CAST(${TABLE}.survicate_review_created_order_level AS TIMESTAMP) ;;
+  }
+
+  # Survey Type Filter#
+
+  filter: survey_type_filter {
+    view_label: "Advanced"
+    type: string
+    suggest_dimension: survicate_survey_order_level
+  }
+
+  dimension: survey_type_satisfies_filter {
+    view_label: "Advanced"
+    type: yesno
+    hidden: yes
+    sql: {% condition survey_type_filter %} ${survicate_survey_order_level} {% endcondition %} ;;
+  }
+
+  # Survey NPS Score Calculation #
+
+  measure: survicate_surveys_filled {
+    type: count_distinct
+    sql: Case when ${survicate_survey_order_level} is not null then ${short_id} End ;;
+    filters: {
+      field: survey_type_satisfies_filter
+      value: "yes"
+    }
+  }
+
+  measure: survicate_surveys_filled_percentage {
+    type: number
+    sql: ${survicate_surveys_filled}/nullif(${total_orders},0) ;;
+    value_format: "0.0%"
+  }
+
+  # Survey NPS Score Calculation #
+  #order confirmation nps#
+
+  measure: detractors {
+    type: count_distinct
+    sql: Case when ${survicate_score}>=0 AND ${survicate_score}<=6 then ${short_id} End ;;
+    value_format: "0.00"
+    filters: {
+      field: survey_type_satisfies_filter
+      value: "yes"
+    }
+  }
+
+  measure: passives {
+    type: count_distinct
+    sql: Case when ${survicate_score}>=7 AND ${survicate_score}<=8 then ${short_id} End ;;
+    value_format: "0.00"
+    filters: {
+      field: survey_type_satisfies_filter
+      value: "yes"
+    }
+  }
+
+  measure: promoters {
+    type: count_distinct
+    sql: Case when ${survicate_score}>=9 AND ${survicate_score}<=10 then ${short_id} End ;;
+    value_format: "0.00"
+    filters: {
+      field: survey_type_satisfies_filter
+      value: "yes"
+    }
+  }
+
+  measure: nps_score {
+    type: number
+    sql: (${promoters} - ${detractors})/nullif(${survicate_surveys_filled},0)*100 ;;
+    value_format: "0.0"
+  }
+
+
 }
