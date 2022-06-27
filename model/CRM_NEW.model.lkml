@@ -73,7 +73,11 @@ explore: attentive_all_brands_full_data_for_looker_tbl {
 label: "Attentive events "
 }
 
+## nps
 
+explore: nps_data_item_order_tbl  {
+label: "nps data item order tbl"
+}
 
 #   join: orders {
 #     relationship: many_to_one
