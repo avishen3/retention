@@ -1592,7 +1592,7 @@ view: nps_data_item_order_tbl {
 
   measure: total_orders {
     type: count_distinct
-    sql: ${short_id} ;;
+    sql: ${short_id_order_level} ;;
   }
 
 
