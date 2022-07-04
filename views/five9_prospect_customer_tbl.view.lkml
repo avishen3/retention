@@ -385,6 +385,35 @@ view: five9_prospect_customer_tbl {
     sql: ${TABLE}.alert_created ;;
   }
 
+
+# date granularity - alert_created Date #
+
+  parameter: Date_Granularity_alert_created_date {
+    type: string
+    allowed_value: { value: "Day" }
+    allowed_value: { value: "Week" }
+    allowed_value: { value: "Month" }
+    allowed_value: { value: "Quarter" }
+    allowed_value: { value: "Year" }
+  }
+
+
+
+  dimension: alert_created {
+    label_from_parameter: Date_Granularity_alert_created_date
+    sql:
+            CASE
+             WHEN {% parameter Date_Granularity_alert_created_date %} = 'Day' THEN cast(${transaction_date} as string)
+             WHEN {% parameter Date_Granularity_alert_created_date %} = 'Week' THEN cast(${transaction_week} as string)
+             WHEN {% parameter Date_Granularity_alert_created_date %} = 'Month' THEN cast(${transaction_month} as string)
+             WHEN {% parameter Date_Granularity_alert_created_date %} = 'Quarter' THEN cast(${transaction_quarter} as string)
+             WHEN {% parameter Date_Granularity_alert_created_date %} = 'Year' THEN cast(${transaction_year} as string)
+            ELSE null
+            END ;;
+  }
+
+
+
   ### transaction date Granularity
 
 # date granularity - transaction Date #
