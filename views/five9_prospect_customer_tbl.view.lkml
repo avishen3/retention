@@ -341,6 +341,50 @@ view: five9_prospect_customer_tbl {
   }
 
 
+  ### alert_created DATETIME  NULLABLE
+## alert_title  STRING  NULLABLE
+## alert_status STRING  NULLABLE
+##resolveReason STRING  NULLABLE
+## alert_id STRING  NULLABLE
+
+  dimension: alert_title {
+    type: string
+    sql: ${TABLE}.alert_title ;;
+  }
+
+
+  dimension: alert_status {
+    type: string
+    sql: ${TABLE}.alert_status ;;
+  }
+
+
+  dimension: resolveReason {
+    type: string
+    sql: ${TABLE}.resolveReason ;;
+  }
+
+  dimension: alert_id {
+    type: string
+    sql: ${TABLE}.alert_id ;;
+  }
+
+
+  dimension_group: alert_created {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    datatype: datetime
+    sql: ${TABLE}.alert_created ;;
+  }
+
   ### transaction date Granularity
 
 # date granularity - transaction Date #
