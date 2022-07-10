@@ -375,6 +375,7 @@ view: five9_prospect_customer_tbl {
     timeframes: [
       raw,
       time,
+      hour,
       date,
       week,
       month,
