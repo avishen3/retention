@@ -119,6 +119,7 @@ view: cs_upsell_alerts_with_order_line_items_tbl {
     timeframes: [
       raw,
       time,
+      hour,
       date,
       week,
       month,
