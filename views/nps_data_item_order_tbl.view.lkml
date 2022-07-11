@@ -1588,6 +1588,16 @@ view: nps_data_item_order_tbl {
     ]
   }
 
+
+
+  ### dimention -date diff from order to delivey
+
+  dimension: days_from_order_to_delivery {
+    type: number
+    sql: datediff(${order_created_date},${delivered_last_purchase_ts_date});;
+  }
+
+
   ####
 
   measure: total_orders {
