@@ -202,6 +202,43 @@ view: cartlink_overview_data_for_looker_tbl {
     sql: ${TABLE}.status ;;
   }
 
+dimension: email_cartlink_flag  {
+  type: yesno
+  sql: ${TABLE}.email_cartlink ;;
+}
+
+  dimension_group: received_min_event_date {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    datatype: datetime
+    sql: ${TABLE}.received_min_event_date ;;
+  }
+
+
+  dimension_group: opened_min_event_date {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    datatype: datetime
+    sql: ${TABLE}.opened_min_event_date ;;
+  }
+
+
   measure: count {
     type: count
     drill_fields: [id, first_name, last_name]
