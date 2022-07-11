@@ -120,6 +120,7 @@ view: cs_upsell_alerts_with_order_line_items_tbl {
       raw,
       time,
       hour,
+      hour_of_day,
       date,
       week,
       month,
