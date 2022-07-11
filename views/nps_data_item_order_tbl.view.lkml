@@ -1594,7 +1594,7 @@ view: nps_data_item_order_tbl {
 
   dimension: days_from_order_to_delivery {
     type: number
-    sql: datediff(${order_created_date},${delivered_last_purchase_ts_date});;
+    sql: date_diff(${order_created_date},${delivered_last_purchase_ts_date});;
   }
 
 
