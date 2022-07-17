@@ -522,7 +522,7 @@ view: admin_line_item_cogs_with_source_data_tbl {
       year
     ]
     datatype: datetime
-    sql: timestamp(${TABLE}.order_created) ;;
+    sql: CAST(${TABLE}.order_created AS TIMESTAMP) ;;
   }
 
 # date granularity - Order Date #
