@@ -79,6 +79,13 @@ explore: nps_data_item_order_tbl  {
 label: "nps data item order tbl"
 }
 
+
+## items with source - cart mix
+explore: admin_line_item_cogs_with_source_data_tbl {
+  label: "Cart Mix - items level - source  "
+}
+
+
 #   join: orders {
 #     relationship: many_to_one
 #     sql_on: ${orders.id} = ${order_items.order_id} ;;
