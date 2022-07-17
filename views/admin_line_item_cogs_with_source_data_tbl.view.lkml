@@ -182,7 +182,7 @@ view: admin_line_item_cogs_with_source_data_tbl {
       year
     ]
     datatype: datetime
-    sql: TIMESTEMP(${TABLE}.exchange_date) ;;
+    sql: timestamp(${TABLE}.exchange_date) ;;
   }
 
 
@@ -522,7 +522,7 @@ view: admin_line_item_cogs_with_source_data_tbl {
       year
     ]
     datatype: datetime
-    sql: TIMESTEMP(${TABLE}.order_created) ;;
+    sql: timestamp(${TABLE}.order_created) ;;
   }
 
 # date granularity - Order Date #
