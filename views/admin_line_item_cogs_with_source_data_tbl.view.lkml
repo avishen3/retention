@@ -1498,5 +1498,49 @@ view: admin_line_item_cogs_with_source_data_tbl {
   }
 
 
+#### email dimension
+
+  dimension: brand_latters {
+    type: string
+    sql: ${TABLE}.brand_latters ;;
+  }
+
+
+  dimension: flow {
+    type: string
+    sql: ${TABLE}.flow ;;
+  }
+
+  dimension: sub_flow {
+    type: string
+    sql: ${TABLE}.sub_flow ;;
+  }
+
+  dimension: email_num {
+    type: string
+    sql: ${TABLE}.email_num ;;
+  }
+
+  dimension: offer {
+    type: string
+    sql: ${TABLE}.offer ;;
+  }
+
+  dimension: promo {
+    type: string
+    sql: ${TABLE}.promo ;;
+  }
+
+  dimension: customer_type {
+    type: string
+    sql: ${TABLE}.customer_type ;;
+  }
+
+  dimension: campaign_name {
+    type: string
+    sql: ${TABLE}.campaign_name ;;
+  }
+
+
 
 }
