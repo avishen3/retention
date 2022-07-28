@@ -221,13 +221,13 @@ view: topper_refund_data_tbl {
 
   measure: total_refund_mattress_order_with_toppers {
     type: count_distinct
-    sql: case when ${refund_type} = 'Bounced Email' then ${full refund} else null end ;;
+    sql: case when ${refund_type} = 'full refund}' then ${short_id} else null end ;;
     value_format: "#,##0"
     group_label: "Mattress Measures"
   }
 
   measure: topper_order_refuns_rate {
-    label: "recevied out of sent"
+    label: "Topper orders refound rate"
     type: number
     sql: ${ total_refund_mattress_order_with_toppers } / nullif(${total_mattress_orders_that_were_sent_toppers}, 0) ;;
     value_format: "0.00%"
