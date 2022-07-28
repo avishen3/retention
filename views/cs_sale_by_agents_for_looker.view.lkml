@@ -294,7 +294,11 @@ view: cs_sale_by_agents_for_looker {
   }
 
 
+  measure: total_coupun_used {
+    type: count_distinct
+    sql: ${coupon_code} ;;
 
+  }
 
 
 
