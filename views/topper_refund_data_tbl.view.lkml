@@ -221,7 +221,7 @@ view: topper_refund_data_tbl {
 
   measure: total_refund_mattress_order_with_toppers {
     type: count_distinct
-    sql: case when ${refund_type} = 'full refund}' then ${short_id} else null end ;;
+    sql: case when ${refund_type} = 'full refund' then ${short_id} else null end ;;
     value_format: "#,##0"
     group_label: "Mattress Measures"
   }
