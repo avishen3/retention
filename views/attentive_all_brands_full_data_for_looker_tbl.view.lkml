@@ -62,6 +62,37 @@ view: attentive_all_brands_full_data_for_looker_tbl {
   }
 
 
+  dimension: brand_latters {
+    type: string
+    sql: ${TABLE}.brand_latters ;;
+  }
+
+  dimension: flow_promo {
+    type: string
+    sql: ${TABLE}.flow_promo ;;
+  }
+
+  dimension: campaign_name {
+    type: string
+    sql: ${TABLE}.campaign_name ;;
+  }
+
+  dimension: sms_num {
+    type: string
+    sql: ${TABLE}.sms_num ;;
+  }
+
+  dimension: offer_name {
+    type: string
+    sql: ${TABLE}.offer_name ;;
+  }
+
+  dimension: customer_type {
+    type: string
+    sql: ${TABLE}.customer_type ;;
+  }
+
+
 ## date dimensions
 
  ## dimension: not_today {
