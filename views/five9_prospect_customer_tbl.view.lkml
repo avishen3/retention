@@ -128,12 +128,15 @@ view: five9_prospect_customer_tbl {
     sql: ${TABLE}.email ;;
   }
 
-  ##dimension: end_timestamp {
-  ##  type: string
-  ##  sql: ${TABLE}.end_timestamp ;;
-  ##}
+  dimension: end_timestamp {
+    type: string
+    sql: CAST(${TABLE}.e AS DATE) ;;
+  }
 
-  dimension_group: end_timestamp {
+
+
+
+  dimension_group: end_timestamp_datetime {
     type: time
     timeframes: [
       raw,
@@ -145,7 +148,7 @@ view: five9_prospect_customer_tbl {
       year
     ]
     datatype: datetime
-    sql: ${TABLE}.end_timestamp ;;
+    sql: ${TABLE}.end_timestamp_datetime ;;
   }
 
   dimension: ended_at {
