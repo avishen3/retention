@@ -128,8 +128,23 @@ view: five9_prospect_customer_tbl {
     sql: ${TABLE}.email ;;
   }
 
-  dimension: end_timestamp {
-    type: string
+  ##dimension: end_timestamp {
+  ##  type: string
+  ##  sql: ${TABLE}.end_timestamp ;;
+  ##}
+
+  dimension_group: end_timestamp {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    datatype: datetime
     sql: ${TABLE}.end_timestamp ;;
   }
 
