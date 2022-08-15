@@ -336,6 +336,14 @@ view: five9_prospect_customer_tbl {
     sql: ${TABLE}.wrapup_time ;;
   }
 
+
+  dimension: AGENT_GROUP {
+    type: string
+    sql: ${TABLE}.AGENT_GROUP ;;
+  }
+
+
+
   measure: count {
     type: count
     drill_fields: [detail*]
