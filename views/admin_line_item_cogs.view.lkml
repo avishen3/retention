@@ -890,4 +890,20 @@ view: admin_line_item_cogs {
       product_name
     ]
   }
+
+  dimension_group: order_done_first_ts {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    datatype: datetime
+    sql: ${TABLE}.order_done_first_ts ;;
+  }
+
 }
