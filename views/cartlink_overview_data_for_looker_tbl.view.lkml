@@ -1,5 +1,5 @@
 view: cartlink_overview_data_for_looker_tbl {
-  sql_table_name: `omega-post-184817.CS_NEW.CS_NEW.Cartlink_overview_data_for_looker_tbl`
+  sql_table_name: `omega-post-184817.CS_NEW.Cartlink_overview_data_for_looker_tbl`
     ;;
   drill_fields: [id]
 
