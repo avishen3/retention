@@ -1,5 +1,5 @@
 view: cartlink_overview_data_for_looker_tbl {
-  sql_table_name: `omega-post-184817.CS_NEW.Cartlink_overview_data_for_looker_tbl`
+  sql_table_name: `omega-post-184817.CS_NEW.CS_NEW.Cartlink_overview_data_for_looker_tbl`
     ;;
   drill_fields: [id]
 
@@ -201,6 +201,58 @@ view: cartlink_overview_data_for_looker_tbl {
     type: string
     sql: ${TABLE}.status ;;
   }
+
+
+  ## added fileds ##
+
+
+
+
+  dimension: type {
+    type: string
+    sql: ${TABLE}.type ;;
+  }
+
+
+  dimension: customer_email {
+    type: string
+    sql: ${TABLE}.customer_email ;;
+  }
+
+
+  dimension: customer_phone {
+    type: string
+    sql: ${TABLE}.customer_phone ;;
+  }
+
+  dimension: agent_email {
+    type: string
+    sql: ${TABLE}.agent_email ;;
+  }
+
+  dimension: channel {
+    type: string
+    sql: ${TABLE}.channel ;;
+  }
+
+
+  dimension_group: event_ts_pst {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    datatype: datetime
+    sql: ${TABLE}.event_ts_pst ;;
+  }
+
+  ####
+
 
 dimension: email_cartlink_flag  {
   type: yesno
