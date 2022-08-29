@@ -236,20 +236,20 @@ view: cartlink_overview_data_for_looker_tbl {
   }
 
 
-  dimension_group: event_ts_pst {
-    type: time
-    timeframes: [
-      raw,
-      time,
-      date,
-      week,
-      month,
-      quarter,
-      year
-    ]
-    datatype: datetime
-    sql: ${TABLE}.event_ts_pst ;;
-  }
+  ##dimension_group: event_ts_pst {
+    ##type: time
+    ##timeframes: [
+    ##  raw,
+    ##  time,
+    ##  date,
+    ##  week,
+    ##  month,
+    ##  quarter,
+    ##  year
+    ## ]
+    ## datatype: datetime
+    ## sql: ${TABLE}.event_ts_pst ;;
+  ## }
 
   ####
 
