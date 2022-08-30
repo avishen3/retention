@@ -413,6 +413,9 @@ view: five9_prospect_customer_tbl {
   }
 
 
+
+
+
 # date granularity - alert_created Date #
 
   parameter: Date_Granularity_alert_created_date {
@@ -545,6 +548,13 @@ view: five9_prospect_customer_tbl {
     group_label: "five9 Measures - customer"
   }
 
+###
+
+  measure: is_call_answered {
+    description: "Is call answerd"
+    type: yesno
+    sql: ${agent_email} is not null ;;
+  }
 
 
 
