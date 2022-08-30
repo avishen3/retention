@@ -550,7 +550,7 @@ view: five9_prospect_customer_tbl {
 
 ###
 
-  measure: is_call_answered {
+  dimension: is_call_answered {
     description: "Is call answerd"
     type: yesno
     sql: ${agent_email} is not null ;;
