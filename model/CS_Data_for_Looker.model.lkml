@@ -111,6 +111,10 @@ explore: cs_upsell_alerts_with_order_line_items_tbl {
   label: "cs_upsell_alerts"
 }
 
+explore: alerts_outgoing_calls_five9_tbl {
+  label: " Upsell alerts five9 exchange"
+}
+
 
 ## refound and RP
 
