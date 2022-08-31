@@ -402,7 +402,7 @@ view: alerts_outgoing_calls_five9_tbl {
 
 
 
-  measure: total_upsell_exchange_1{
+  measure: total_upsell_exchange_answered_calls{
     type: count_distinct
     sql: case when ( ${exchanged_agent_email} <> "" and   ${is_call_in_five9_answerd} is true)  then  ${five9_short_id} else null end
       ;;
@@ -411,19 +411,12 @@ view: alerts_outgoing_calls_five9_tbl {
   }
 
 
-  measure: total_upsell_exchange_2{
-    type: count_distinct
-    sql: case when ( ${exchanged_agent_email} <> "" or   ${five9_agent_email} is not null )  then  ${five9_short_id} else null end
-      ;;
-    value_format: "#,##0"
-
-  }
 
 
 
   measure: total_session_id_answerd {
     type: count_distinct
-    sql: case when is_call_in_five9_answerd is true than ${five9_provider_session_id}  else null end ;;
+    sql: case when ${is_call_in_five9_answerd} is true than ${five9_provider_session_id}  else null end ;;
     value_format: "#,##0"
     group_label: "five9 Measures - session"
   }
