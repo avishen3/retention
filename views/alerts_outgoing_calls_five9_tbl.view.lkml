@@ -376,18 +376,6 @@ view: alerts_outgoing_calls_five9_tbl {
   }
 
 
-  dimension: is_call_answered {
-    description: "Is call answerd"
-    type: string
-    sql: case
-        when is_call_in_five9 is true and ${five9_agent_email} <> "" THEN "True"
-        when is_call_in_five9 is true and ${five9_agent_email} = "" THEN "False"
-        else null
-        end
-        ;;
-  group_label: "Calls"
-  }
-
 
   measure: total_session_id {
     type: count_distinct
@@ -410,6 +398,13 @@ view: alerts_outgoing_calls_five9_tbl {
      ;;
     value_format: "#,##0"
 
+  }
+
+  measure: total_session_id_answerd {
+    type: count_distinct
+    sql: case when is_call_in_five9_answerd is true than ${five9_provider_session_id} ;;
+    value_format: "#,##0"
+    group_label: "five9 Measures - session"
   }
 
 
