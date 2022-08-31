@@ -368,6 +368,13 @@ view: alerts_outgoing_calls_five9_tbl {
     group_label: "Calls"
   }
 
+  dimension: is_call_in_five9_answerd{
+    description: "Is call answerd"
+    type: yesno
+    sql:  ${five9_provider_session_id} is not null and ${five9_agent_email} <> ""  ;;
+    group_label: "Calls"
+  }
+
 
   dimension: is_call_answered {
     description: "Is call answerd"
