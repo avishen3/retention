@@ -356,7 +356,7 @@ view: alerts_outgoing_calls_five9_tbl {
 
   measure: total_alerts_reached_five9 {
     type: count_distinct
-    sql: ${alert_id} ;;
+    sql: ${five9_alert_id} ;;
     value_format: "#,##0"
     group_label: "Alerts"
   }
@@ -379,8 +379,32 @@ view: alerts_outgoing_calls_five9_tbl {
         end
         ;;
   group_label: "Calls"
+  }
+
+
+  measure: total_session_id {
+    type: count_distinct
+    sql: ${five9_provider_session_id} ;;
+    value_format: "#,##0"
+    group_label: "five9 Measures - session"
+  }
+
+  measure: total_customer_Id {
+    type: count_distinct
+    sql: ${customer_id} ;;
+    value_format: "#,##0"
+    group_label: "five9 Measures - customer"
+  }
+
+
+  measure: total_upsell_exchange{
+    type: count_distinct
+    sql: case when ${five9_alert_id} is not null and ${exchanged_agent_email} is not null than ${short_id} else null end
+     ;;
+    value_format: "#,##0"
 
   }
+
 
 
 }
