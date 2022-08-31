@@ -394,7 +394,7 @@ view: alerts_outgoing_calls_five9_tbl {
 
   measure: total_upsell_exchange{
     type: count_distinct
-    sql: case when ${five9_alert_id} is not null and ${exchanged_agent_email} is not null than ${short_id} else null end
+    sql: ${five9_short_id}
      ;;
     value_format: "#,##0"
 
