@@ -394,7 +394,7 @@ view: alerts_outgoing_calls_five9_tbl {
 
   measure: total_upsell_exchange{
     type: count_distinct
-    sql: ${five9_short_id}
+    sql: case when ${five9_agent_email} <> "" then  ${five9_short_id} else null end
      ;;
     value_format: "#,##0"
 
@@ -402,7 +402,7 @@ view: alerts_outgoing_calls_five9_tbl {
 
   measure: total_session_id_answerd {
     type: count_distinct
-    sql: case when is_call_in_five9_answerd is true than ${five9_provider_session_id} ;;
+    sql: case when is_call_in_five9_answerd is true than ${five9_provider_session_id}  else null end ;;
     value_format: "#,##0"
     group_label: "five9 Measures - session"
   }
