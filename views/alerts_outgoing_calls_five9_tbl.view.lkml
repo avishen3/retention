@@ -42,7 +42,7 @@ view: alerts_outgoing_calls_five9_tbl {
     allowed_value: { value: "Hour of Day" }
   }
 
-  dimension: Order_Date {
+  dimension: alert_created {
     label_from_parameter: Date_Granularity_alert_created
     sql:
             CASE
