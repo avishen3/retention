@@ -17,6 +17,8 @@ view: alerts_outgoing_calls_five9_tbl {
     timeframes: [
       raw,
       time,
+      hour,
+      hour_of_day,
       date,
       week,
       month,
@@ -25,6 +27,37 @@ view: alerts_outgoing_calls_five9_tbl {
     ]
     sql: ${TABLE}.alert_created ;;
   }
+
+
+# date granularity - alert_created #
+
+  parameter: Date_Granularity_alert_created {
+    type: string
+    allowed_value: { value: "Day" }
+    allowed_value: { value: "Week" }
+    allowed_value: { value: "Month" }
+    allowed_value: { value: "Quarter" }
+    allowed_value: { value: "Year" }
+    allowed_value: { value: "Hour" }
+    allowed_value: { value: "Hour of Day" }
+  }
+
+  dimension: Order_Date {
+    label_from_parameter: Date_Granularity_alert_created
+    sql:
+            CASE
+             WHEN {% parameter Date_Granularity_alert_created %} = 'Day' THEN cast(${alert_created_date} as string)
+             WHEN {% parameter Date_Granularity_alert_created %} = 'Week' THEN cast(${alert_created_week} as string)
+             WHEN {% parameter Date_Granularity_alert_created %} = 'Month' THEN cast(${alert_created_month} as string)
+             WHEN {% parameter Date_Granularity_alert_created %} = 'Quarter' THEN cast(${alert_created_quarter} as string)
+             WHEN {% parameter Date_Granularity_alert_created %} = 'Year' THEN cast(${alert_created_hour} as string)
+            WHEN {% parameter Date_Granularity_alert_created %} = 'Hour of Day' THEN cast(${alert_created_hour_of_day} as string)
+            ELSE null
+            END ;;
+  }
+
+
+
 
   dimension: alert_customer_phone {
     type: string
@@ -111,6 +144,8 @@ view: alerts_outgoing_calls_five9_tbl {
     timeframes: [
       raw,
       time,
+      hour,
+      hour_of_day,
       date,
       week,
       month,
@@ -120,6 +155,11 @@ view: alerts_outgoing_calls_five9_tbl {
     datatype: datetime
     sql: ${TABLE}.exchange_date ;;
   }
+
+
+
+
+
 
   dimension: exchange_discount {
     type: number
@@ -176,6 +216,8 @@ view: alerts_outgoing_calls_five9_tbl {
     timeframes: [
       raw,
       time,
+      hour,
+      hour_of_day,
       date,
       week,
       month,
@@ -271,6 +313,8 @@ view: alerts_outgoing_calls_five9_tbl {
     timeframes: [
       raw,
       time,
+      hour,
+      hour_of_day,
       date,
       week,
       month,
@@ -311,6 +355,8 @@ view: alerts_outgoing_calls_five9_tbl {
     timeframes: [
       raw,
       time,
+      hour,
+      hour_of_day,
       date,
       week,
       month,
@@ -320,6 +366,37 @@ view: alerts_outgoing_calls_five9_tbl {
     datatype: datetime
     sql: ${TABLE}.transaction_time ;;
   }
+
+
+# date granularity - transaction #
+
+  parameter: Date_Granularity_transaction {
+    type: string
+    allowed_value: { value: "Day" }
+    allowed_value: { value: "Week" }
+    allowed_value: { value: "Month" }
+    allowed_value: { value: "Quarter" }
+    allowed_value: { value: "Year" }
+    allowed_value: { value: "Hour" }
+    allowed_value: { value: "Hour of Day" }
+  }
+
+  dimension: transaction_Date {
+    label_from_parameter: Date_Granularity_transaction
+    sql:
+            CASE
+             WHEN {% parameter Date_Granularity_transaction %} = 'Day' THEN cast(${transaction_date} as string)
+             WHEN {% parameter Date_Granularity_transaction %} = 'Week' THEN cast(${transaction_week} as string)
+             WHEN {% parameter Date_Granularity_transaction %} = 'Month' THEN cast(${transaction_month} as string)
+             WHEN {% parameter Date_Granularity_transaction %} = 'Quarter' THEN cast(${transaction_quarter} as string)
+             WHEN {% parameter Date_Granularity_transaction %} = 'Year' THEN cast(${transaction_hour} as string)
+            WHEN {% parameter Date_Granularity_transaction %} = 'Hour of Day' THEN cast(${transaction_hour_of_day} as string)
+            ELSE null
+            END ;;
+  }
+
+
+
 
   dimension: was_refunded {
     type: yesno
@@ -397,9 +474,7 @@ view: alerts_outgoing_calls_five9_tbl {
     sql: case when ${exchanged_agent_email} <> "" then  ${five9_short_id} else null end
      ;;
     value_format: "#,##0"
-
   }
-
 
 
   measure: total_upsell_exchange_answered_calls{
@@ -407,9 +482,7 @@ view: alerts_outgoing_calls_five9_tbl {
     sql: case when ( ${exchanged_agent_email} <> "" and   ${is_call_in_five9_answerd} is true)  then  ${five9_short_id} else null end
       ;;
     value_format: "#,##0"
-
   }
-
 
 
   measure: total_session_id_answerd {
@@ -423,7 +496,7 @@ view: alerts_outgoing_calls_five9_tbl {
 
 
   measure: upsell_out_of_alerts {
-    label: "recevied out of sent"
+    label: "% upsell out of alerts"
     type: number
     sql: ${total_upsell_exchange} / nullif(${total_alerts_created}, 0) ;;
     value_format: "0.00%"
@@ -432,7 +505,7 @@ view: alerts_outgoing_calls_five9_tbl {
 
 
   measure: upsell_out_of_alerts_reached_five9_dailer{
-    label: "recevied out of sent"
+    label: "% upsell out of five9 alerts"
     type: number
     sql: ${total_upsell_exchange} / nullif(${total_alerts_reached_five9}, 0) ;;
     value_format: "0.00%"
@@ -440,7 +513,7 @@ view: alerts_outgoing_calls_five9_tbl {
   }
 
   measure: upsell_out_of_answerd_calls{
-    label: "recevied out of sent"
+    label: "% upsell out of answerd calls"
     type: number
     sql: ${total_upsell_exchange} / nullif(${total_session_id_answerd}, 0) ;;
     value_format: "0.00%"
@@ -449,7 +522,7 @@ view: alerts_outgoing_calls_five9_tbl {
 
 
   measure: called_reached_five9_out_of_alerts{
-    label: "recevied out of sent"
+    label: "% five9 alerts out of all alerts "
     type: number
     sql: ${total_alerts_reached_five9} / nullif(${total_alerts_created}, 0) ;;
     value_format: "0.00%"
@@ -457,12 +530,14 @@ view: alerts_outgoing_calls_five9_tbl {
   }
 
   measure: percentage_of_answerd_calls{
-    label: "recevied out of sent"
+    label: "% answered calls out of five9 alerts"
     type: number
     sql: ${total_session_id_answerd} / nullif(${total_alerts_reached_five9}, 0) ;;
     value_format: "0.00%"
     group_label: "conversation"
   }
+
+
 
 
 }
