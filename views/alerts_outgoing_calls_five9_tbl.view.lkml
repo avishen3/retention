@@ -412,8 +412,6 @@ view: alerts_outgoing_calls_five9_tbl {
 
 
 
-
-
   measure: total_session_id_answerd {
     type: count_distinct
     sql: case when ${is_call_in_five9_answerd} is true then ${five9_provider_session_id}  else null end ;;
@@ -421,6 +419,50 @@ view: alerts_outgoing_calls_five9_tbl {
     group_label: "five9 Measures - session"
   }
 
+### conversation
+
+
+  measure: upsell_out_of_alerts {
+    label: "recevied out of sent"
+    type: number
+    sql: ${total_upsell_exchange} / nullif(${total_alerts_created}, 0) ;;
+    value_format: "0.00%"
+    group_label: "conversation"
+  }
+
+
+  measure: upsell_out_of_alerts_reached_five9_dailer{
+    label: "recevied out of sent"
+    type: number
+    sql: ${total_upsell_exchange} / nullif(${total_alerts_reached_five9}, 0) ;;
+    value_format: "0.00%"
+    group_label: "conversation"
+  }
+
+  measure: upsell_out_of_answerd_calls{
+    label: "recevied out of sent"
+    type: number
+    sql: ${total_upsell_exchange} / nullif(${total_session_id_answerd}, 0) ;;
+    value_format: "0.00%"
+    group_label: "conversation"
+  }
+
+
+  measure: called_reached_five9_out_of_alerts{
+    label: "recevied out of sent"
+    type: number
+    sql: ${total_alerts_reached_five9} / nullif(${total_alerts_created}, 0) ;;
+    value_format: "0.00%"
+    group_label: "conversation"
+  }
+
+  measure: percentage_of_answerd_calls{
+    label: "recevied out of sent"
+    type: number
+    sql: ${total_session_id_answerd} / nullif(${total_alerts_reached_five9}, 0) ;;
+    value_format: "0.00%"
+    group_label: "conversation"
+  }
 
 
 }
