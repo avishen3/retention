@@ -345,6 +345,14 @@ view: alerts_outgoing_calls_five9_tbl {
     sql: ${TABLE}.short_id_num ;;
   }
 
+
+
+  dimension: type_name {
+    type: string
+    sql: ${TABLE}.type_name ;;
+  }
+
+
   dimension: trans_after_alert {
     type: yesno
     sql: ${TABLE}.trans_after_alert ;;
