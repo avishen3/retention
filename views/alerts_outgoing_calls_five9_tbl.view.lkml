@@ -325,6 +325,40 @@ view: alerts_outgoing_calls_five9_tbl {
     sql: ${TABLE}.original_order_created_date ;;
   }
 
+
+
+# date granularity - alert_created #
+
+  parameter: Date_Granularity_original_order_created {
+    type: string
+    allowed_value: { value: "Day" }
+    allowed_value: { value: "Week" }
+    allowed_value: { value: "Month" }
+    allowed_value: { value: "Quarter" }
+    allowed_value: { value: "Year" }
+    allowed_value: { value: "Hour" }
+    allowed_value: { value: "Hour of Day" }
+  }
+
+  dimension: original_order_created {
+    label_from_parameter: Date_Granularity_original_order_created
+    sql:
+            CASE
+             WHEN {% parameter Date_Granularity_original_order_created %} = 'Day' THEN cast(${alert_created_date} as string)
+             WHEN {% parameter Date_Granularity_original_order_created %} = 'Week' THEN cast(${alert_created_week} as string)
+             WHEN {% parameter Date_Granularity_original_order_created %} = 'Month' THEN cast(${alert_created_month} as string)
+             WHEN {% parameter Date_Granularity_original_order_created %} = 'Quarter' THEN cast(${alert_created_quarter} as string)
+             WHEN {% parameter Date_Granularity_original_order_created %} = 'Year' THEN cast(${alert_created_hour} as string)
+            WHEN {% parameter Date_Granularity_original_order_created %} = 'Hour of Day' THEN cast(${alert_created_hour_of_day} as string)
+            ELSE null
+            END ;;
+  }
+
+
+
+
+
+
   dimension: original_order_source {
     type: string
     sql: ${TABLE}.original_order_source ;;
