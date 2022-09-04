@@ -541,7 +541,7 @@ view: alerts_outgoing_calls_five9_tbl {
     label: "% upsell out of alerts"
     type: number
     sql: ${total_upsell_exchange} / nullif(${total_alerts_created}, 0) ;;
-    value_format: "0.00%"
+    value_format: "0.0%"
     group_label: "conversation"
   }
 
@@ -550,7 +550,7 @@ view: alerts_outgoing_calls_five9_tbl {
     label: "% upsell out of five9 alerts"
     type: number
     sql: ${total_upsell_exchange} / nullif(${total_alerts_reached_five9}, 0) ;;
-    value_format: "0.00%"
+    value_format: "0.0%"
     group_label: "conversation"
   }
 
@@ -558,7 +558,7 @@ view: alerts_outgoing_calls_five9_tbl {
     label: "% upsell out of answerd calls"
     type: number
     sql: ${total_upsell_exchange} / nullif(${total_session_id_answerd}, 0) ;;
-    value_format: "0.00%"
+    value_format: "0.0%"
     group_label: "conversation"
   }
 
@@ -567,7 +567,7 @@ view: alerts_outgoing_calls_five9_tbl {
     label: "% five9 alerts out of all alerts "
     type: number
     sql: ${total_alerts_reached_five9} / nullif(${total_alerts_created}, 0) ;;
-    value_format: "0.00%"
+    value_format: "0.0%"
     group_label: "conversation"
   }
 
@@ -575,7 +575,7 @@ view: alerts_outgoing_calls_five9_tbl {
     label: "% answered calls out of five9 alerts"
     type: number
     sql: ${total_session_id_answerd} / nullif(${total_alerts_reached_five9}, 0) ;;
-    value_format: "0.00%"
+    value_format: "0.0%"
     group_label: "conversation"
   }
 
