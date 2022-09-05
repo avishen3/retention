@@ -25,7 +25,7 @@ view: alerts_outgoing_calls_five9_tbl {
       quarter,
       year
     ]
-    sql: ${TABLE}.alert_created ;;
+    sql: TIMESTAMP(${TABLE}.alert_created) ;;
   }
 
 
