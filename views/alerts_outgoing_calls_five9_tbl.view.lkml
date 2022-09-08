@@ -201,6 +201,22 @@ view: alerts_outgoing_calls_five9_tbl {
     sql: ${TABLE}.exchanged_original_item_sku ;;
   }
 
+
+  dimension: exchanged_original_item_sku_size {
+    type: string
+    sql: case
+  when ${is_mattress} is true and ${exchanged_original_item_sku} like "calking"  then "calking"
+  when ${is_mattress} is true and ${exchanged_original_item_sku} like "king"  then "king"
+  when ${is_mattress} is true and ${exchanged_original_item_sku} like "queen"  then "queen"
+  when ${is_mattress} is true and ${exchanged_original_item_sku} like "full"  then "full"
+  when ${is_mattress} is true and ${exchanged_original_item_sku} like "twinxl"  then "twinxl"
+  when ${is_mattress} is true and ${exchanged_original_item_sku} like "twin"  then "twin"
+    ;;
+  }
+
+
+
+
   dimension: five9_agent_email {
     type: string
     sql: ${TABLE}.five9_agentEmail ;;
