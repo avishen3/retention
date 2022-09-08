@@ -211,6 +211,7 @@ view: alerts_outgoing_calls_five9_tbl {
   when ${is_mattress} is true and ${exchanged_original_item_sku} like "full"  then "full"
   when ${is_mattress} is true and ${exchanged_original_item_sku} like "twinxl"  then "twinxl"
   when ${is_mattress} is true and ${exchanged_original_item_sku} like "twin"  then "twin"
+  else null end
     ;;
   }
 
