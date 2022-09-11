@@ -608,7 +608,7 @@ view: alerts_outgoing_calls_five9_tbl {
     label: "avg sales per working agent"
     type: number
     sql: ${total_upsell_exchange} / nullif(${total_working_upsell_agents}, 0) ;;
-    value_format: "0.0%"
+    value_format: "0.00"
     group_label: "conversation"
   }
 
