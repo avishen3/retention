@@ -597,6 +597,13 @@ view: alerts_outgoing_calls_five9_tbl {
   }
 
 
+  measure: total_working_upsell_agents {
+    type: count_distinct
+    sql: case when ${exchanged_agent_email} <> "" then  ${exchanged_agent_email} else null end
+      ;;
+    value_format: "#,##0"
+  }
+
 
 
 }
