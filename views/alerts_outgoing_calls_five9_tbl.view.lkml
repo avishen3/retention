@@ -320,6 +320,12 @@ view: alerts_outgoing_calls_five9_tbl {
     sql: ${TABLE}.order_exchange_discount ;;
   }
 
+
+  dimension: product_title {
+    type: string
+    sql: ${TABLE}.product_title ;;
+  }
+
   dimension: order_within_48h {
     type: yesno
     sql: ${TABLE}.order_within_48h ;;
