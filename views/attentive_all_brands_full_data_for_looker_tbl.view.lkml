@@ -92,6 +92,37 @@ view: attentive_all_brands_full_data_for_looker_tbl {
     sql: ${TABLE}.customer_type ;;
   }
 
+###
+
+
+
+  dimension: flow_name {
+    type: string
+    sql: ${TABLE}.flow_name ;;
+  }
+
+  dimension: sub_flow_name {
+    type: string
+    sql: ${TABLE}.sub_flow_name ;;
+  }
+
+  dimension: campaign_name_with_cam {
+    type: string
+    sql: ${TABLE}.campaign_name_with_cam ;;
+  }
+
+  dimension: sms_num_and_letter_all {
+    type: string
+    sql: ${TABLE}.sms_num_and_letter_all ;;
+  }
+
+  dimension: sms_num_and_letter {
+    type: string
+    sql: ${TABLE}.sms_num_and_letter ;;
+  }
+
+
+
 
 ## date dimensions
 
@@ -262,6 +293,10 @@ view: attentive_all_brands_full_data_for_looker_tbl {
     type: count
     drill_fields: [creative_name, massage_name]
   }
+
+
+
+
 
 
   measure: total_unique_phone {
