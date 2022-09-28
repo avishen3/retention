@@ -821,7 +821,10 @@ view: alerts_outgoing_calls_five9_tbl {
     }
 
 
-
+  dimension: product_size {
+    type: string
+    sql: ${TABLE}.product_size ;;
+  }
 
 
 
