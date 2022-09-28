@@ -517,6 +517,13 @@ view: alerts_outgoing_calls_five9_tbl {
     group_label: "Calls"
   }
 
+  dimension: is_call_in_five9_answerd_and_upsell{
+    description: "Is call answerd"
+    type: yesno
+    sql:  ${five9_provider_session_id} is not null and ${five9_agent_email} <> ""  and ${exchanged_agent_id} is not null ;;
+    group_label: "Calls"
+  }
+
 
 
   measure: total_session_id {
