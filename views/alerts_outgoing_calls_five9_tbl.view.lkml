@@ -828,6 +828,14 @@ view: alerts_outgoing_calls_five9_tbl {
 
 
 
+  measure: calls_made_per_alert {
+    label: "calls per alerts"
+    type: number
+    sql: count(distinct ${five9_id}) / nullif(count(distinct ${alert_id}), 0) ;;
+    value_format: "0.00"
+    group_label: "conversation"
+  }
+
 
 
 
