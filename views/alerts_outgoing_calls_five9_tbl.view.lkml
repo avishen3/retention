@@ -846,4 +846,12 @@ view: alerts_outgoing_calls_five9_tbl {
 
 
 
+
+
+  dimension: num_calls {
+    type: number
+    sql: ${TABLE}.num_calls ;;
+  }
+
+
 }
