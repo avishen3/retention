@@ -1653,7 +1653,7 @@ view: nps_data_item_order_tbl {
   filter: survey_type_filter {
     view_label: "Advanced"
     type: string
-    suggest_dimension: survicate_survey_order_level
+    suggest_dimension: survicate_survey
   }
 
   dimension: survey_type_satisfies_filter {
