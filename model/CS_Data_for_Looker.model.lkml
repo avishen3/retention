@@ -123,3 +123,8 @@ explore: alerts_outgoing_calls_five9_tbl {
 explore: topper_refund_data_tbl {
   label: "Topper Refund Data"
 }
+
+
+explore: admin_client_events_agents_check_up_tbl{
+  label: "admin client events agents check up"
+  description: "Malshinon for Neta"}
