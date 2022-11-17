@@ -50,7 +50,7 @@ view: alerts_outgoing_calls_five9_tbl {
              WHEN {% parameter Date_Granularity_alert_created %} = 'Week' THEN cast(${alert_created_week} as string)
              WHEN {% parameter Date_Granularity_alert_created %} = 'Month' THEN cast(${alert_created_month} as string)
              WHEN {% parameter Date_Granularity_alert_created %} = 'Quarter' THEN cast(${alert_created_quarter} as string)
-             WHEN {% parameter Date_Granularity_alert_created %} = 'Year' THEN cast(${alert_created_hour} as string)
+             WHEN {% parameter Date_Granularity_alert_created %} = 'Year' THEN cast(${alert_created_year} as string)
             WHEN {% parameter Date_Granularity_alert_created %} = 'Hour of Day' THEN cast(${alert_created_hour_of_day} as string)
             ELSE null
             END ;;

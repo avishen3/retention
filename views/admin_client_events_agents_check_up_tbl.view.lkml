@@ -53,6 +53,35 @@ view: admin_client_events_agents_check_up_tbl {
     sql: ${TABLE}.event_ts ;;
   }
 
+
+# date granularity - event_date #
+
+  parameter: Date_Granularity_event_date {
+    type: string
+    allowed_value: { value: "Day" }
+    allowed_value: { value: "Week" }
+    allowed_value: { value: "Month" }
+    allowed_value: { value: "Quarter" }
+    allowed_value: { value: "Year" }
+    allowed_value: { value: "Hour" }
+    allowed_value: { value: "Hour of Day" }
+  }
+
+  dimension: event_date {
+    label_from_parameter: Date_Granularity_event_date
+    sql:
+            CASE
+             WHEN {% parameter Date_Granularity_event_date %} = 'Day' THEN cast(${event_ts_date} as string)
+             WHEN {% parameter Date_Granularity_event_date %} = 'Week' THEN cast(${event_ts_week} as string)
+             WHEN {% parameter Date_Granularity_event_date %} = 'Month' THEN cast(${event_ts_month} as string)
+             WHEN {% parameter Date_Granularity_event_date %} = 'Quarter' THEN cast(${event_ts_quarter} as string)
+             WHEN {% parameter Date_Granularity_event_date %} = 'Year' THEN cast(${event_ts_year} as string)
+            ELSE null
+            END ;;
+  }
+
+
+
   dimension: first_name {
     type: string
     sql: ${TABLE}.first_name ;;
@@ -129,5 +158,16 @@ view: admin_client_events_agents_check_up_tbl {
   }
 
 
+  measure: session_count  {
+    type: count_distinct
+    sql: ${session_id}
+      ;;
+    value_format: "#,##0"
+  }
+
+  dimension: short_id {
+    type: string
+    sql: ${TABLE}.short_id ;;
+  }
 
 }
