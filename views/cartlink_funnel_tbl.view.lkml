@@ -57,6 +57,35 @@ view: cartlink_funnel_tbl {
     sql: ${TABLE}.event_time ;;
   }
 
+
+# date granularity - event #
+
+  parameter: Date_Granularity_event_created {
+    type: string
+    allowed_value: { value: "Day" }
+    allowed_value: { value: "Week" }
+    allowed_value: { value: "Month" }
+    allowed_value: { value: "Quarter" }
+    allowed_value: { value: "Year" }
+    allowed_value: { value: "Hour" }
+    allowed_value: { value: "Hour of Day" }
+  }
+
+  dimension: event_created {
+    label_from_parameter: Date_Granularity_event_created
+    sql:
+            CASE
+             WHEN {% parameter Date_Granularity_event_created %} = 'Day' THEN cast(${event_date} as string)
+             WHEN {% parameter Date_Granularity_event_created %} = 'Week' THEN cast(${event_week} as string)
+             WHEN {% parameter Date_Granularity_event_created %} = 'Month' THEN cast(${event_month} as string)
+             WHEN {% parameter Date_Granularity_event_created %} = 'Quarter' THEN cast(${event_quarter} as string)
+             WHEN {% parameter Date_Granularity_event_created %} = 'Year' THEN cast(${event_year} as string)
+            ELSE null
+            END ;;
+  }
+
+
+
   dimension: fullvisitorid {
     type: string
     sql: ${TABLE}.fullvisitorid ;;
@@ -166,4 +195,57 @@ view: cartlink_funnel_tbl {
     type: count
     drill_fields: []
   }
+
+  measure: total_cart_id_created{
+    label: "Total carts created "
+    type: count_distinct
+    sql: ${cart_id};;
+    value_format: "#,##0"
+    group_label: "cartlink funnel"
+  }
+
+
+ ## measure: total_cartlink_id_created{
+##    label: "Total cartlinks created "
+##    type: count_distinct
+##    sql: ${cartlink_id};;
+##    value_format: "#,##0"
+##    group_label: "cartlink funnel"
+##  }
+
+  measure: cartlink_site_visits{
+    label: "Total sites visit from cart_id "
+    type: count_distinct
+    sql: case when ${visitid} is not null then ${cart_id} else null end ;;
+    value_format: "#,##0"
+    group_label: "cartlink funnel"
+  }
+
+  measure: cartlink_orders{
+    label: "order from carlinks"
+    type: count_distinct
+    sql: case when ${visit_transactionid} is not null then ${cart_id} else null end ;;
+    value_format: "#,##0"
+    group_label: "cartlink funnel"
+  }
+
+
+##  measure: cartlink_purchase_session{
+##    label: "purchase session from carlinks"
+##    type: count_distinct
+##    sql: case when ${purchase_session} is true then ${cart_id} else null end ;;
+##    value_format: "#,##0"
+##    group_label: "cartlink funnel"
+##  }
+
+
+
+
+
+
+
+
+
+
+
 }
