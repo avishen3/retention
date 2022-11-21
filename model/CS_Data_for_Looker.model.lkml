@@ -128,3 +128,10 @@ explore: topper_refund_data_tbl {
 explore: admin_client_events_agents_check_up_tbl{
   label: "admin client events agents check up"
   description: "Malshinon for Neta"}
+
+
+## cartlink
+
+explore: cartlink_funnel_tbl{
+  label: "cartlink funnel tbl"
+  description: "cartlink funnel tbl"}
