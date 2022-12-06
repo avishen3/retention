@@ -591,7 +591,7 @@ view: klaviyo_email_events_by_user {
   {
     ##  label: "% of opened email out of received emails"
     type: number
-    sql: ${total_orders_from_email}/ nullif(${Opened_rate}, 0)  ;;
+    sql: ${total_orders_from_email}/ nullif(${total_opened_emails}, 0)  ;;
     value_format: "0.00%"
     group_label: "Orders Measures"
   }
