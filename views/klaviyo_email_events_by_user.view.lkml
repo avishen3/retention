@@ -570,7 +570,7 @@ view: klaviyo_email_events_by_user {
     type: count_distinct
     sql:case when ${email_order_created_raw} is not null then concat(${email},${campaign}) else null end ;;
     value_format: "#,##0"
-    group_label: "Email Measures"
+    group_label: "Orders Measures"
   }
 
 
@@ -584,7 +584,7 @@ view: klaviyo_email_events_by_user {
     type: number
     sql: ${total_orders_from_email}/ nullif(${total_clicked_emails}, 0)  ;;
     value_format: "0.00%"
-    group_label: "Email Measures"
+    group_label: "Orders Measures"
   }
 
   measure: order_from_open_rate
@@ -593,7 +593,7 @@ view: klaviyo_email_events_by_user {
     type: number
     sql: ${total_orders_from_email}/ nullif(${Opened_rate}, 0)  ;;
     value_format: "0.00%"
-    group_label: "Email Measures"
+    group_label: "Orders Measures"
   }
 
   measure: order_from_Received_rate
@@ -602,7 +602,7 @@ view: klaviyo_email_events_by_user {
     type: number
     sql: ${total_orders_from_email}/ nullif(${total_Received_emails}, 0)  ;;
     value_format: "0.00%"
-    group_label: "Email Measures"
+    group_label: "Orders Measures"
   }
 
 
