@@ -494,7 +494,15 @@ view: klaviyo_email_events_by_user {
     group_label: "Email Measures"
   }
 
-  measure: total_opened_emails_1 {
+  measure: total_Received_emails {
+    type: count_distinct
+    sql:case when ${num_received_email} >0 then concat(${email},${campaign}) else null end ;;
+    value_format: "#,##0"
+    group_label: "Email Measures"
+  }
+
+
+  measure: total_opened_emails {
     type: count_distinct
     sql:case when ${num_opened_email}>0 then concat(${email},${campaign}) else null end ;;
     value_format: "#,##0"
@@ -507,6 +515,19 @@ view: klaviyo_email_events_by_user {
     value_format: "#,##0"
     group_label: "Email Measures"
   }
+
+
+## CVR mesurments
+
+  measure: Opened_rate
+  {
+    label: "% of opened email out of received emails"
+    type: number
+    sql: ${total_opened_emails}/ nullif(${total_Received_emails}, 0)  ;;
+    value_format: "0.00%"
+    group_label: "Email Measures"
+  }
+
 
 
 }
