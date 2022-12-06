@@ -573,21 +573,30 @@ view: klaviyo_email_events_by_user {
     group_label: "Orders Measures"
   }
 
-  measure: total_revenue_from_email_sum {
+  measure: total_revenue_from_email {
     type: sum
     sql:case when ${email_order_created_raw} is not null then (${email_order_price}-${email_order_tax}) else null end ;;
-    value_format: "#,##0"
+    value_format: "$#,##0"
+    group_label: "Orders Measures"
+  }
+
+  measure: avo_from_email {
+    type: number
+    sql:case when ${email_order_created_raw} is not null then (${total_revenue_from_email}/${total_orders_from_email}) else null end ;;
+    value_format: "$#,##0"
     group_label: "Orders Measures"
   }
 
 
-  measure: total_revenue_from_email_sum_distinct {
-    type: sum_distinct
-    sql_distinct_key: concat(${email},${campaign})
-    sql:case when ${email_order_created_raw} is not null then (${email_order_price}-${email_order_tax}) else null end ;;
-    value_format: "#,##0"
-    group_label: "Orders Measures"
-  }
+
+
+ ## measure: total_revenue_from_email_sum_distinct {
+  ##  type: sum_distinct
+##    sql_distinct_key: concat(${email},${campaign})
+##    sql:case when ${email_order_created_raw} is not null then (${email_order_price}-${email_order_tax}) else null end ;;
+##    value_format: "#,##0"
+  ##  group_label: "Orders Measures"
+  ##}
 
 
 
