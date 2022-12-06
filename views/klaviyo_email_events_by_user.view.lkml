@@ -513,21 +513,53 @@ view: klaviyo_email_events_by_user {
     type: count_distinct
     sql:case when ${ts_opened_email_date} is not null then concat(${email},${campaign}) else null end ;;
     value_format: "#,##0"
+    group_label: "Email Measures_2"
+  }
+
+  measure: total_clicked_emails {
+    type: count_distinct
+    sql:case when ${num_clicked_email}>0 then concat(${email},${campaign}) else null end ;;
+    value_format: "#,##0"
     group_label: "Email Measures"
   }
+
+  measure: total_clicked_emails_2 {
+    type: count_distinct
+    sql:case when ${ts_clicked_email_date} is not null then concat(${email},${campaign}) else null end ;;
+    value_format: "#,##0"
+    group_label: "Email Measures_2"
+  }
+
 
 
 ## CVR mesurments
 
   measure: Opened_rate
   {
-    label: "% of opened email out of received emails"
+  ##  label: "% of opened email out of received emails"
     type: number
     sql: ${total_opened_emails}/ nullif(${total_Received_emails}, 0)  ;;
     value_format: "0.00%"
     group_label: "Email Measures"
   }
 
+  measure: clicked_rate
+  {
+    ##  label: "% of opened clicked out of opem emails"
+    type: number
+    sql: ${total_clicked_emails}/ nullif(${total_opened_emails}, 0)  ;;
+    value_format: "0.00%"
+    group_label: "Email Measures"
+  }
+
+  measure: clicked_rate_out_of_recived_emails
+  {
+    ##  label: "% of opened clicked out of opem emails"
+    type: number
+    sql: ${total_clicked_emails}/ nullif(${total_Received_emails}, 0)  ;;
+    value_format: "0.00%"
+    group_label: "Email Measures"
+  }
 
 
 }
