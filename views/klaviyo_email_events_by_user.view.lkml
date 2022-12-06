@@ -580,14 +580,21 @@ view: klaviyo_email_events_by_user {
     group_label: "Orders Measures"
   }
 
-  measure: avo_from_email {
+  measure: avo_from_email_CASE {
     type: number
-    sql:case when ${email_order_created_raw} is not null then (${total_revenue_from_email}/${total_orders_from_email}) else null end ;;
+    sql:case when ${email_order_created_raw} is not null then (${total_revenue_from_email}/NULLIF${total_orders_from_email},0) else null end ;;
     value_format: "$#,##0"
     group_label: "Orders Measures"
   }
 
 
+
+  measure: avo_from_email_NO_CASE {
+    type: number
+    sql: (${total_revenue_from_email}/NULLIF${total_orders_from_email},0)  ;;
+    value_format: "$#,##0"
+    group_label: "Orders Measures"
+  }
 
 
  ## measure: total_revenue_from_email_sum_distinct {
