@@ -489,21 +489,21 @@ view: klaviyo_email_events_by_user {
 
   measure: total_unique_emails {
     type: count_distinct
-    sql:concat(${email}+${campaign}) ;;
+    sql:concat(${email},${campaign}) ;;
     value_format: "#,##0"
     group_label: "Email Measures"
   }
 
   measure: total_opened_emails_1 {
     type: count_distinct
-    sql:case when ${num_opened_email}>0 then concat(${email}+${campaign}) else null end) ;;
+    sql:case when ${num_opened_email}>0 then concat(${email},${campaign}) else null end) ;;
     value_format: "#,##0"
     group_label: "Email Measures"
   }
 
   measure: total_opened_emails_2 {
     type: count_distinct
-    sql:case when ${ts_opened_email_date} is not null then concat(${email}+${campaign}) else null end) ;;
+    sql:case when ${ts_opened_email_date} is not null then concat(${email},${campaign}) else null end) ;;
     value_format: "#,##0"
     group_label: "Email Measures"
   }
