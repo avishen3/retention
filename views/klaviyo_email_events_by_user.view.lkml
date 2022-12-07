@@ -474,6 +474,29 @@ view: klaviyo_email_events_by_user {
   }
 
 
+## day of week
+
+  dimension:  dow_num {
+    type:  string
+    sql: EXTRACT(DAYOFWEEK FROM ${ts_received_email_raw}) ;;
+    hidden: yes
+  }
+
+
+  dimension:  day_of_week {
+    label: "Day of Week received"
+    type:  string
+    sql: case
+          when ${dow_num} = 1 then 'Sunday'
+          when ${dow_num} = 2 then 'Monday'
+          when ${dow_num} = 3 then 'Tuesday'
+          when ${dow_num} = 4 then 'Wednesday'
+          when ${dow_num} = 5 then 'Thursday'
+          when ${dow_num} = 6 then 'Friday'
+          when ${dow_num} = 7 then 'Saturday'
+        end ;;
+    order_by_field: dow_num
+  }
 
 
 
