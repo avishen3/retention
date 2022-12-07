@@ -417,6 +417,67 @@ view: klaviyo_email_events_by_user {
   }
 
 
+
+## date dimensions
+
+  dimension: not_today {
+    type: yesno
+    sql: ${ts_received_email_raw} < current_date('America/Los_Angeles') ;;
+    group_label: "Date Filters"
+    description: "Filters any date after today (including today)"
+  }
+
+  parameter: date_granularity_ts_received_email {
+    type: string
+    description: "Use this selector to change the date granularity of 'Date' dimension only"
+    allowed_value: {
+      label: "Day"
+      value: "Day"
+    }
+    allowed_value: {
+      label: "Week"
+      value: "Week"
+    }
+    allowed_value: {
+      label: "Month"
+      value: "Month"
+    }
+    allowed_value: {
+      label: "Quarter"
+      value: "Quarter"
+    }
+    allowed_value: {
+      label: "Year"
+      value: "Year"
+    }
+
+    allowed_value: {
+      label: "None"
+      value: "None"
+    }
+
+  }
+
+
+  dimension: date {
+    label_from_parameter: date_granularity_ts_received_email
+    description: "Use 'Date Granularity' selector to modify the date granularity"
+    sql:
+            CASE
+             WHEN {% parameter date_granularity_ts_received_email %} = 'Day' THEN cast(${ts_received_email_date} as string)
+             WHEN {% parameter date_granularity_ts_received_email %} = 'Week' THEN cast(${ts_received_email_week} as string)
+             WHEN {% parameter date_granularity_ts_received_email %} = 'Month' THEN cast(${ts_received_email_month} as string)
+             WHEN {% parameter date_granularity_ts_received_email %} = 'Quarter' THEN cast(${ts_received_email_quarter} as string)
+             WHEN {% parameter date_granularity_ts_received_email %} = 'Year' THEN cast(${ts_received_email_year} as string)
+            ELSE null
+            END ;;
+  }
+
+
+
+
+
+
   ####
 
   dimension_group: ts_sub {
