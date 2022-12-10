@@ -193,7 +193,8 @@ view: klaviyo_email_events_by_user {
     case when ${flow_name} = "cart_link" then "non sale flow"
     case when ${flow_name} not null then "sale flow"
     case when ${promo_or_flow} = "promo" then "promo"
-    else null end     ;;
+   ELSE null
+            END    ;;
   }
 
 
