@@ -172,6 +172,34 @@ view: klaviyo_email_events_by_user {
     sql: ${TABLE}.flow_name ;;
   }
 
+  ####
+
+  dimension: sale_non_sales_email{
+    type: string
+    sql: case when ${flow_name} = "refer_a_friend" then "non sale flow"
+    case when ${flow_name} = "cloverlane_post_purchase_upsell" then "non sale flow"
+    case when ${flow_name} = "check_order_status" then "non sale flow"
+    case when ${flow_name} = "extend" then "non sale flow"
+    case when ${flow_name} = "nps_on_transit" then "non sale flow"
+    case when ${flow_name} = "abandon_cart" then "non sale flow"
+    case when ${flow_name} = "nps_survey_30_days" then "non sale flow"
+    case when ${flow_name} = "nps_survey_90_days" then "non sale flow"
+    case when ${flow_name} = "nps_survey_placed_order" then "non sale flow"
+    case when ${flow_name} = "nps_full_order-delivered" then "non sale flow"
+    case when ${flow_name} = "account_login" then "non sale flow"
+    case when ${flow_name} = "prep_for_delivery" then "non sale flow"
+    case when ${flow_name} = "manual_order_confirmation" then "non sale flow"
+    case when ${flow_name} = "order_confirmation" then "non sale flow"
+    case when ${flow_name} = "cart_link" then "non sale flow"
+    case when ${flow_name} not null then "sale flow"
+    case when ${promo_or_flow} = "promo" then "promo"
+    else null end     ;;
+  }
+
+
+
+
+
   dimension: flow_rank {
     type: number
     sql: ${TABLE}.flow_rank ;;
@@ -206,6 +234,8 @@ view: klaviyo_email_events_by_user {
     type: string
     sql: ${TABLE}.klaviyo_flow_name ;;
   }
+
+
 
   dimension_group: klaviyo_lead_created {
     type: time
