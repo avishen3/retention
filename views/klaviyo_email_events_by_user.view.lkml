@@ -191,7 +191,7 @@ view: klaviyo_email_events_by_user {
      when ${flow_name} = "manual_order_confirmation" then "non sale flow"
      when ${flow_name} = "order_confirmation" then "non sale flow"
      when ${flow_name} = "cart_link" then "non sale flow"
-     when ${flow_name} not null then "sale flow"
+     when ${flow_name} is not null then "sale flow"
      when ${promo_or_flow} = "promo" then "promo"
    ELSE null
             END    ;;
