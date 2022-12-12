@@ -905,7 +905,7 @@ view: klaviyo_email_events_by_user {
         WHEN {% condition current_date_range %} ${ts_received_email_raw} {% endcondition %}
         THEN TIMESTAMP_DIFF(${ts_received_email_raw},{% date_start current_date_range %},minute)+1
 
-      WHEN${ts_received_email_raw} between ${period_2_start} and ${period_2_end}
+      WHEN ${ts_received_email_raw} between ${period_2_start} and ${period_2_end}
       THEN TIMESTAMP_DIFF(${ts_received_email_raw}, ${period_2_start},minute)+1
       else null
       END
