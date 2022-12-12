@@ -441,10 +441,12 @@ view: klaviyo_email_events_by_user {
       week,
       month,
       quarter,
-      year
+      year,
+      hour2
     ]
-    datatype: datetime
-    sql: ${TABLE}.ts_Received_email ;;
+   ## datatype: datetime
+    sql: timestamp( ${TABLE}.ts_Received_email);;
+  ## ${TABLE}.ts_Received_email
   }
 
 
