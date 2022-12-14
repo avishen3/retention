@@ -211,7 +211,7 @@ view: cartlink_funnel_tbl {
 ##    sql: ${cartlink_id};;
 ##    value_format: "#,##0"
 ##    group_label: "cartlink funnel"
-##  }
+##}
 
   measure: cartlink_site_visits{
     label: "Total sites visit from cart_id "
@@ -220,6 +220,15 @@ view: cartlink_funnel_tbl {
     value_format: "#,##0"
     group_label: "cartlink funnel"
   }
+
+measure: cartlink_id_site_visits{
+  label: "Total sites visit from cartlink_id "
+  type: count_distinct
+  sql: case when ${visitid} is not null then ${cartlink_id} else null end ;;
+  value_format: "#,##0"
+  group_label: "cartlink funnel"
+}
+
 
   measure: cartlink_orders{
     label: "order from carlinks"
