@@ -1,5 +1,5 @@
 view: admin_client_events_agents_check_up_tbl {
-  sql_table_name: `omega-post-184817.Keshet.Admin_client_events_agents_check_up_tbl`
+  sql_table_name: `omega-post-184817.Keshet.admin_client_events_agents_check_up_tbl`
     ;;
   drill_fields: [id]
 
