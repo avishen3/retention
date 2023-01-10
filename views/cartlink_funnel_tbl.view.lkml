@@ -191,6 +191,15 @@ view: cartlink_funnel_tbl {
     sql: ${TABLE}.visitstarttime ;;
   }
 
+
+
+  dimension: email_number {
+    type: number
+    sql: ${TABLE}.email_number ;;
+  }
+
+
+
   measure: count {
     type: count
     drill_fields: []
