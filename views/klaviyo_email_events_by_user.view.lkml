@@ -455,7 +455,7 @@ view: klaviyo_email_events_by_user {
 
   dimension: not_today {
     type: yesno
-    sql: ${ts_received_email_date} < current_date('America/Los_Angeles') ;;
+    sql: ${ts_received_email_date} < current_date('America/Los_Angeles')-1 ;;
     group_label: "Date Filters"
     description: "Filters any date after today (including today)"
     }
