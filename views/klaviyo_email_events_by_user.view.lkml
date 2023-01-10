@@ -455,10 +455,19 @@ view: klaviyo_email_events_by_user {
 
   dimension: not_today {
     type: yesno
-    sql: ${ts_received_email_raw} < current_date('America/Los_Angeles') ;;
+    sql: ${ts_received_email_date} < current_date('America/Los_Angeles') ;;
     group_label: "Date Filters"
     description: "Filters any date after today (including today)"
+    }
+
+
+
+  dimension: missing_ts_Received_email {
+    type: yesno
+    sql: ${TABLE}.missing_ts_Received_email ;;
   }
+
+
 
   parameter: date_granularity_ts_received_email {
     type: string
