@@ -445,7 +445,7 @@ view: klaviyo_email_events_by_user {
       hour2
     ]
    ## datatype: datetime
-    sql: timestemp( ${TABLE}.ts_Received_email);;
+    sql: timestemp(${TABLE}.ts_Received_email);;
   ## ${TABLE}.ts_Received_email
   }
 
