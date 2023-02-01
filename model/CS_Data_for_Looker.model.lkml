@@ -100,7 +100,7 @@ explore: five9_data_check_tbl {
 }
 
 explore: five9_prospect_customer_tbl {
-  label: "PROSPECT CUSTOMER five start build"
+  label: "five9_prospect_customer_tbl"
 }
 
 
