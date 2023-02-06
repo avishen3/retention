@@ -590,4 +590,11 @@ view: klaviyo_email_events_by_user {
     type: count
     drill_fields: [subflow_name, campaign_name, flow_name, klaviyo_flow_name]
   }
+
+  measure: total_email_recived{
+    type: count_distinct
+    sql: ${email} ;;
+  }
+
+
 }
