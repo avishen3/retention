@@ -591,9 +591,14 @@ view: klaviyo_email_events_by_user {
     drill_fields: [subflow_name, campaign_name, flow_name, klaviyo_flow_name]
   }
 
-  measure: total_email_recived{
+  measure: Total_Received_Emails{
     type: count_distinct
     sql: ${email} ;;
+  }
+
+  measure: Total_Opened_Emails{
+    type: count_distinct
+    sql: case when ${ts_opened_email_raw} is not null then ${email} end  ;;
   }
 
 
