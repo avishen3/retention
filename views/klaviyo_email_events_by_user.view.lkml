@@ -601,5 +601,16 @@ view: klaviyo_email_events_by_user {
     sql: case when ${ts_opened_email_raw} is not null then ${email} end  ;;
   }
 
+  measure: Total_Clicked_Emails{
+    type: count_distinct
+    sql: case when ${ts_clicked_email_raw} is not null then ${email} end  ;;
+  }
+
+  measure: Total_Orders_From_Email{
+    type: count_distinct
+    sql: case when ${email_order_created_raw} is not null then ${email} end  ;;
+  }
+
+
 
 }
