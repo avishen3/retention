@@ -620,7 +620,7 @@ view: klaviyo_email_events_by_user {
 
   measure: Opened_Rate{
     type: number
-    sql: ${Total_Opened_Emails}/${Total_Received_Emails} ;;
+    sql: ${Total_Opened_Emails}/ ifnull(${Total_Received_Emails},0) ;;
   }
 
   measure: Clicked_Rate{
