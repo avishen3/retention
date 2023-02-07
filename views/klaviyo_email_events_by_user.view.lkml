@@ -591,6 +591,10 @@ view: klaviyo_email_events_by_user {
     drill_fields: [subflow_name, campaign_name, flow_name, klaviyo_flow_name]
   }
 
+
+  ### email count
+
+
   measure: Total_Received_Emails{
     type: count_distinct
     sql: ${email} ;;
@@ -611,6 +615,28 @@ view: klaviyo_email_events_by_user {
     sql: case when ${email_order_created_raw} is not null then ${email} end  ;;
   }
 
+
+  ### rate
+
+  measure: Opened_Rate{
+    type: number
+    sql: ${Total_Opened_Emails}/${Total_Received_Emails} ;;
+  }
+
+  measure: Clicked_Rate{
+    type: number
+    sql: ${Total_Clicked_Emails}/${Total_Opened_Emails} ;;
+  }
+
+  measure: Clicked_Rate_out_of_received{
+    type: number
+    sql: ${Total_Clicked_Emails}/${Total_Received_Emails} ;;
+  }
+
+  measure: Order_from_clicked_Rate{
+    type: number
+    sql: ${Total_Orders_From_Email}/${Total_Clicked_Emails} ;;
+  }
 
 
 }
