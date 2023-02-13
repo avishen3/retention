@@ -620,23 +620,76 @@ view: klaviyo_email_events_by_user {
 
   measure: Opened_Rate{
     type: number
-    sql: ${Total_Opened_Emails}/ ifnull(${Total_Received_Emails},0) ;;
+    sql: case when ${Total_Received_Emails}>0 then ${Total_Opened_Emails}/${Total_Received_Emails} else 0 end  ;;
+    value_format: "0.00%"
   }
 
   measure: Clicked_Rate{
     type: number
-    sql: ${Total_Clicked_Emails}/${Total_Opened_Emails} ;;
+    sql: case when ${Total_Opened_Emails}>0 then ${Total_Clicked_Emails}/${Total_Opened_Emails} else 0 end    ;;
+    value_format: "0.00%"
   }
 
   measure: Clicked_Rate_out_of_received{
     type: number
-    sql: ${Total_Clicked_Emails}/${Total_Received_Emails} ;;
-  }
+    sql:  case when ${Total_Received_Emails}>0 then ${Total_Clicked_Emails}/${Total_Received_Emails} else 0 end  ;;
+    value_format: "0.00%"
+    }
 
   measure: Order_from_clicked_Rate{
     type: number
-    sql: ${Total_Orders_From_Email}/${Total_Clicked_Emails} ;;
+    sql:  case when ${Total_Clicked_Emails}>0 then ${Total_Orders_From_Email}/${Total_Clicked_Emails} else 0 end ;;
+    value_format: "0.00%"
+
   }
 
+
+  ### revenue and gross profit
+
+  measure: Total_Revenue_From_Email{
+    type: sum
+    sql: case when ${email_order_created_raw} is not null then ${email_order_price}-${email_order_tax} end  ;;
+    value_format: "0.0$"
+  }
+
+  measure: Total_price_From_Email{
+    type: sum
+    sql: case when ${email_order_created_raw} is not null then ${email_order_price} end  ;;
+    value_format: "0.0$"
+  }
+
+
+  measure: Total_tax_From_Email{
+    type: sum
+    sql: case when ${email_order_created_raw} is not null then ${email_order_tax} end  ;;
+    value_format: "0.0$"
+  }
+
+
+  ## AOVs
+
+ measure: AOV{
+    type: number
+    sql:  case when ${Total_Orders_From_Email}>0 then ${Total_Revenue_From_Email} /${Total_Orders_From_Email} else 0 end ;;
+    value_format: "0.0$"
+}
+
+  measure: AOV_revenue_per_received_email{
+    type: number
+    sql:  case when ${Total_Received_Emails}>0 then ${Total_Revenue_From_Email} /${Total_Received_Emails} else 0 end ;;
+    value_format: "0.0$"
+  }
+
+  measure: AOV_revenue_per_open_email{
+    type: number
+    sql:  case when ${Total_Opened_Emails}>0 then ${Total_Revenue_From_Email} /${Total_Opened_Emails} else 0 end ;;
+    value_format: "0.0$"
+  }
+
+  measure: AOV_revenue_per_clicked_email{
+    type: number
+    sql:  case when ${Total_Clicked_Emails}>0 then ${Total_Revenue_From_Email} /${Total_Clicked_Emails} else 0 end ;;
+    value_format: "0.0$"
+  }
 
 }
