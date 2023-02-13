@@ -1,5 +1,5 @@
 view: alerts_outgoing_calls_five9_tbl {
-  sql_table_name: `omega-post-184817.CS_NEW.alerts_outgoing_calls_five9_V2_tbl`
+  sql_table_name: `omega-post-184817.CS_NEW.alerts_outgoing_calls_five9_tbl`
     ;;
 
   dimension: agent_group {
