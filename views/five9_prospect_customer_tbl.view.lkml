@@ -19,6 +19,13 @@ view: five9_prospect_customer_tbl {
     sql: ${TABLE}.AgentId ;;
   }
 
+  dimension: order_agent_id_after {
+    type: string
+    sql: ${TABLE}.order_agent_id_after ;;
+  }
+
+
+
   dimension: ani {
     type: string
     sql: ${TABLE}.ANI ;;
@@ -226,6 +233,41 @@ view: five9_prospect_customer_tbl {
     sql: ${TABLE}.order_created ;;
   }
 
+
+  dimension_group: order_created_before {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    datatype: datetime
+    sql: ${TABLE}.order_created_before ;;
+  }
+
+
+  dimension_group: order_created_after {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    datatype: datetime
+    sql: ${TABLE}.order_created_after ;;
+  }
+
+
+
+
   dimension: order_id {
     type: string
     sql: ${TABLE}.OrderId ;;
@@ -285,6 +327,14 @@ view: five9_prospect_customer_tbl {
     type: string
     sql: ${TABLE}.short_id ;;
   }
+
+
+  dimension: short_id_after {
+    type: string
+    sql: ${TABLE}.short_id ;;
+  }
+
+
 
   dimension: skill_name {
     type: string
@@ -471,6 +521,32 @@ view: five9_prospect_customer_tbl {
             ELSE null
             END ;;
   }
+
+
+### CS CVR
+
+  dimension: is_order_after {
+    type: string
+    sql: CASE WHEN short_id_after IS NOT NULL THEN "Has order after" ELSE NULL END
+  }
+
+    dimension: is_cs_assisted_order {
+    type: string
+    sql: case when (datetime_diff(${order_created_after_raw},${transaction_raw},hour)<48) then "assisted 48h order " else null end
+  }
+
+
+    dimension: is_cs_agent_order {
+    type: string
+    sql: case when ((datetime_diff(${order_created_after_raw},${transaction_raw},hour)<48) and ${order_agent_id_after} is not null) then "agent 48h order " else null end
+  }
+
+
+
+
+####
+
+
 
 
   measure: total_session_id {
