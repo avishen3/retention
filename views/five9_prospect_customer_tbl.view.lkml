@@ -331,6 +331,14 @@ view: five9_prospect_customer_tbl {
     sql: ${TABLE}.revenue ;;
   }
 
+
+
+
+  dimension: order_revenue_after {
+    type: number
+    sql: ${TABLE}.order_revenue_after ;;
+  }
+
   dimension: session_id {
     type: string
     sql: ${TABLE}.session_id ;;
@@ -694,7 +702,36 @@ view: five9_prospect_customer_tbl {
   }
 
 
+  measure: total_order_revenue_after{
+    type: sum
+    sql: ${order_revenue_after};;
+    value_format: "$#,##0"
+    group_label: "revenue"
+  }
 
+
+
+  measure: total_order_revenue_after_short_id_with_cs_agent_orders{
+    type: sum
+    sql:  case when ${is_cs_agent_order_TF} = true then ${order_revenue_after} else null end ;;
+    value_format: "$#,##0"
+    group_label: "revenue"
+  }
+
+  measure: total_order_revenue_after_cs_assisted_orders_48h{
+    type: sum
+    sql:   case when ${is_cs_assisted_order_TF} = true then then ${order_revenue_after} else null end ;;
+    value_format: "$#,##0"
+    group_label: "revenue"
+  }
+
+
+  measure: total_order_revenue_after_short_id_with_cs_agent_orders_within48h{
+    type: sum
+    sql:   case when ${is_cs_assisted_order_TF} = true then then ${order_revenue_after} else null end ;;
+    value_format: "$#,##0"
+    group_label: "revenue"
+  }
 
 
   ##dimension: is_cs_assisted_order {
