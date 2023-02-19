@@ -642,7 +642,7 @@ view: five9_prospect_customer_tbl {
   dimension: is_cs_agent_order_TF {
     description: "Is CS agent order"
     type: yesno
-    sql: datetime_diff(${order_created_after_raw},${transaction_raw},hour)<48) and ${order_agent_id_after} is not null ;;
+    sql: ${order_agent_id_after} is not null ;;
   }
 
 
