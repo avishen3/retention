@@ -51,6 +51,19 @@ view: five9_prospect_customer_tbl {
     sql: ${TABLE}.aop_short_id ;;
   }
 
+
+  dimension: short_id_before {
+    type: string
+    sql: ${TABLE}.short_id_before ;;
+  }
+
+  dimension: short_id_after {
+    type: string
+    sql: ${TABLE}.short_id_after ;;
+  }
+
+
+
   dimension: brand {
     type: string
     sql: ${TABLE}.Brand ;;
@@ -278,15 +291,15 @@ view: five9_prospect_customer_tbl {
     sql: ${TABLE}.orderNumEntered ;;
   }
 
-  dimension: order_within_48h {
-    type: yesno
-    sql: ${TABLE}.order_within_48h ;;
-  }
+##  dimension: order_within_48h {
+##    type: yesno
+##    sql: ${TABLE}.order_within_48h ;;
+##  }
 
-  dimension: order_within_48h_w_agent {
-    type: string
-    sql: ${TABLE}.order_within_48h_w_agent ;;
-  }
+##  dimension: order_within_48h_w_agent {
+##    type: string
+##    sql: ${TABLE}.order_within_48h_w_agent ;;
+##  }
 
   dimension: phone_campaign {
     type: string
@@ -328,11 +341,6 @@ view: five9_prospect_customer_tbl {
     sql: ${TABLE}.short_id ;;
   }
 
-
-  dimension: short_id_after {
-    type: string
-    sql: ${TABLE}.short_id ;;
-  }
 
 
 
@@ -533,17 +541,6 @@ view: five9_prospect_customer_tbl {
 
 
 
-    dimension: is_cs_assisted_order {
-    type: string
-    sql: case when (datetime_diff(${order_created_after_raw},${transaction_raw},hour)<48) then "assisted 48h order " else null end ;;
-  }
-
-
-    dimension: is_cs_agent_order {
-    type: string
-    sql: case when ((datetime_diff(${order_created_after_raw},${transaction_raw},hour)<48) and ${order_agent_id_after} is not null) then "agent 48h order " else null end
-  ;;}
-
 
 
 
@@ -582,19 +579,19 @@ view: five9_prospect_customer_tbl {
   }
 
 
-  measure: total_session_with_order_within_48h{
-    type: count_distinct
-    sql: case when ${order_within_48h} = true then ${provider_session_id} else null end ;;
-    value_format: "#,##0"
-    group_label: "five9 Measures - session"
-  }
+ ## measure: total_session_with_order_within_48h{
+  ##  type: count_distinct
+  ##  sql: case when ${order_within_48h} = true then ${provider_session_id} else null end ;;
+  ##  value_format: "#,##0"
+  ##  group_label: "five9 Measures - session"
+  ##}
 
-  measure: total_session_with_order_within_48h_with_agent{
-    type: count_distinct
-    sql: case when ${order_within_48h_w_agent} is not null then ${provider_session_id} else null end ;;
-    value_format: "#,##0"
-    group_label: "five9 Measures - session"
-  }
+  ## measure: total_session_with_order_within_48h_with_agent{
+  ##  type: count_distinct
+  ##  sql: case when ${order_within_48h_w_agent} is not null then ${provider_session_id} else null end ;;
+  ##  value_format: "#,##0"
+  ##  group_label: "five9 Measures - session"
+  ##}
 
 
 
@@ -613,19 +610,19 @@ view: five9_prospect_customer_tbl {
   }
 
 
-  measure: total_customer_with_order_within_48h{
-    type: count_distinct
-    sql: case when ${order_within_48h} = true then ${customer_id} else null end ;;
-    value_format: "#,##0"
-    group_label: "five9 Measures - customer"
-  }
+ ## measure: total_customer_with_order_within_48h{
+  ##  type: count_distinct
+  ##  sql: case when ${order_within_48h} = true then ${customer_id} else null end ;;
+  ##  value_format: "#,##0"
+  ##  group_label: "five9 Measures - customer"
+  ##}
 
-  measure: total_customer_with_order_within_48h_with_agent{
-    type: count_distinct
-    sql: case when  ${order_within_48h_w_agent} is not null then ${customer_id} else null end ;;
-    value_format: "#,##0"
-    group_label: "five9 Measures - customer"
-  }
+  ##measure: total_customer_with_order_within_48h_with_agent{
+  ##  type: count_distinct
+  ##  sql: case when  ${order_within_48h_w_agent} is not null then ${customer_id} else null end ;;
+  ##  value_format: "#,##0"
+  ##  group_label: "five9 Measures - customer"
+  ##}
 
 ###
 
@@ -635,7 +632,48 @@ view: five9_prospect_customer_tbl {
     sql: ${agent_email} <> "" ;;
   }
 
+  dimension: is_cs_assisted_order_TF {
+    description: "Is CS assisted order"
+    type: yesno
+    sql: datetime_diff(${order_created_after_raw},${transaction_raw},hour)<48 ;;
+  }
 
+
+  dimension: is_cs_agent_order_TF {
+    description: "Is CS agent order"
+    type: yesno
+    sql: datetime_diff(${order_created_after_raw},${transaction_raw},hour)<48) and ${order_agent_id_after} is not null ;;
+  }
+
+
+
+  measure: total_customer_with_cs_assisted_orders{
+    type: count_distinct
+    sql: case when ${is_cs_assisted_order_TF} = true then ${customer_id} else null end ;;
+    value_format: "#,##0"
+    group_label: "five9 Measures - customer"
+  }
+
+  measure: total_customer_with_cs_agent_orders{
+    type: count_distinct
+    sql: case when ${is_cs_agent_order_TF} = true then ${customer_id} else null end ;;
+    value_format: "#,##0"
+    group_label: "five9 Measures - customer"
+  }
+
+
+
+
+  ##dimension: is_cs_assisted_order {
+  ##  type: string
+  ##  sql: case when (datetime_diff(${order_created_after_raw},${transaction_raw},hour)<48) then "assisted 48h order " else null end ;;
+  ##}
+
+
+##  dimension: is_cs_agent_order {
+##    type: string
+##    sql: case when ((datetime_diff(${order_created_after_raw},${transaction_raw},hour)<48) and ${order_agent_id_after} is not null) then "agent 48h order " else null end
+##      ;;}
 
 
 }
