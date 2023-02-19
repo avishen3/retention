@@ -647,7 +647,7 @@ view: five9_prospect_customer_tbl {
 
 
 
-  measure: total_customer_with_cs_assisted_orders{
+  measure: total_customer_with_cs_assisted_orders_48h{
     type: count_distinct
     sql: case when ${is_cs_assisted_order_TF} = true then ${customer_id} else null end ;;
     value_format: "#,##0"
@@ -657,6 +657,13 @@ view: five9_prospect_customer_tbl {
   measure: total_customer_with_cs_agent_orders{
     type: count_distinct
     sql: case when ${is_cs_agent_order_TF} = true then ${customer_id} else null end ;;
+    value_format: "#,##0"
+    group_label: "five9 Measures - customer"
+  }
+
+  measure: total_customer_with_cs_agent_orders_within48h{
+    type: count_distinct
+    sql: case when (${is_cs_agent_order_TF} = true and ${is_cs_assisted_order_TF} = true) then ${customer_id} else null end ;;
     value_format: "#,##0"
     group_label: "five9 Measures - customer"
   }
