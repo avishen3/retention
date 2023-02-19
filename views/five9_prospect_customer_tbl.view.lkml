@@ -530,6 +530,8 @@ view: five9_prospect_customer_tbl {
     sql: CASE WHEN short_id_after IS NOT NULL THEN "Has order after" ELSE NULL END
   }
 
+
+
     dimension: is_cs_assisted_order {
     type: string
     sql: case when (datetime_diff(${order_created_after_raw},${transaction_raw},hour)<48) then "assisted 48h order " else null end
