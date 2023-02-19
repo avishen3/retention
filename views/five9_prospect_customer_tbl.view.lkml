@@ -527,21 +527,22 @@ view: five9_prospect_customer_tbl {
 
   dimension: is_order_after {
     type: string
-    sql: CASE WHEN short_id_after IS NOT NULL THEN "Has order after" ELSE NULL END
-  }
+    sql: CASE WHEN short_id_after IS NOT NULL THEN "Has order after" ELSE NULL END ;;
+}
+
 
 
 
     dimension: is_cs_assisted_order {
     type: string
-    sql: case when (datetime_diff(${order_created_after_raw},${transaction_raw},hour)<48) then "assisted 48h order " else null end
+    sql: case when (datetime_diff(${order_created_after_raw},${transaction_raw},hour)<48) then "assisted 48h order " else null end ;;
   }
 
 
     dimension: is_cs_agent_order {
     type: string
     sql: case when ((datetime_diff(${order_created_after_raw},${transaction_raw},hour)<48) and ${order_agent_id_after} is not null) then "agent 48h order " else null end
-  }
+  ;;}
 
 
 
