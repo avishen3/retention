@@ -642,7 +642,7 @@ view: five9_prospect_customer_tbl {
   dimension: is_cs_agent_order_TF {
     description: "Is CS agent order"
     type: yesno
-    sql: ${order_agent_id_after} is not null ;;
+    sql: ${order_agent_id_after} is not null or ${order_agent_id_after} <> "" ;;
   }
 
 
@@ -683,14 +683,14 @@ view: five9_prospect_customer_tbl {
     type: count_distinct
     sql: case when ${is_cs_agent_order_TF} = true then ${short_id_after} else null end ;;
     value_format: "#,##0"
-    group_label: "five9 Measures - customer"
+    group_label: "five9 Measures - short_id_after"
   }
 
   measure: total_short_id_with_cs_agent_orders_within48h{
     type: count_distinct
     sql: case when (${is_cs_agent_order_TF} = true and ${is_cs_assisted_order_TF} = true) then ${short_id_after} else null end ;;
     value_format: "#,##0"
-    group_label: "five9 Measures - customer"
+    group_label: "five9 Measures - short_id_after"
   }
 
 
