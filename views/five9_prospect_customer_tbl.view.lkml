@@ -733,7 +733,7 @@ view: five9_prospect_customer_tbl {
 
   measure: total_order_revenue_after_short_id_with_cs_agent_orders_within48h{
     type: sum
-    sql:   case when ${is_cs_assisted_order_TF} = true then  ${order_revenue_after} else null end ;;
+    sql:   case when ${is_cs_assisted_order_TF} = true and ${is_cs_agent_order_TF} = true  then  ${order_revenue_after} else null end ;;
     value_format: "$#,##0"
     group_label: "revenue"
   }
