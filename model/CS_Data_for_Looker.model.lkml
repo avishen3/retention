@@ -135,3 +135,11 @@ explore: admin_client_events_agents_check_up_tbl{
 explore: cartlink_funnel_tbl{
   label: "cartlink funnel tbl"
   description: "cartlink funnel tbl"}
+
+
+
+## admin
+
+explore: admin_prospect_customertbl{
+  label: "admin_prospect_customer tbl"
+  description: "admin prospect customer tbl"}
