@@ -24,6 +24,11 @@ view: five9_prospect_customer_tbl {
     sql: ${TABLE}.order_agent_id_after ;;
   }
 
+  dimension: order_agent_email_after {
+    type: string
+    sql: ${TABLE}.order_agent_email_after ;;
+  }
+
 
 
   dimension: ani {
