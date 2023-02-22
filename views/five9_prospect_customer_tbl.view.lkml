@@ -718,22 +718,30 @@ view: five9_prospect_customer_tbl {
   measure: distinct_revenue {
    ## label: “sum_distinct_revenue”
     type: sum_distinct
-    sql_distinct_key: (${short_id_after}||${order_agent_id_after}) ;;
+    sql_distinct_key: (${short_id_after}) ;;
     sql: ${order_revenue_after} ;;
   }
 
   measure: distinct_revenue_cs_agent {
     ## label: “sum_distinct_revenue”
     type: sum_distinct
-    sql_distinct_key: (${short_id_after}||${order_agent_id_after}) ;;
+    sql_distinct_key: (${short_id_after})||${is_cs_agent_order_TF};;
     sql: case when ${is_cs_agent_order_TF} = true then ${order_revenue_after} else null end  ;;
   }
 
   measure: distinct_revenue_cs_assisted_orders_48h {
     ## label: “sum_distinct_revenue”
     type: sum_distinct
-    sql_distinct_key: (${short_id_after}||${order_agent_id_after}) ;;
+    sql_distinct_key: (${short_id_after}||${is_cs_assisted_order_TF}) ;;
     sql: case when ${is_cs_assisted_order_TF} = true then  ${order_revenue_after} else null end ;;
+  }
+
+
+  measure: distinct_revenue_cs_agent_within48h {
+    ## label: “sum_distinct_revenue”
+    type: sum_distinct
+    sql_distinct_key: (${short_id_after}||${is_cs_assisted_order_TF}||${is_cs_agent_order_TF}) ;;
+    sql:  case when ${is_cs_assisted_order_TF} = true and ${is_cs_agent_order_TF} = true  then  ${order_revenue_after} else null end ;;
   }
 
 
