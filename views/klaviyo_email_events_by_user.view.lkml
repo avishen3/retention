@@ -709,6 +709,38 @@ view: klaviyo_email_events_by_user {
       label: "Order_from_clicked_Rate"
       value: "Order_from_clicked_Rate"
     }
+
+    allowed_value: {
+      label: "none"
+      value: "none"
+    }
+    group_label: "Advanced Selectors"
+  }
+
+  measure: ratio_dimension_1 {
+    type: number
+    sql:
+      {% if ratio_selector_1._parameter_value == 'Opened_Rate' %}
+        ${Opened_Rate}
+      {% elsif ratio_selector_1._parameter_value == 'Clicked_Rate' %}
+        ${Clicked_Rate}
+      {% elsif ratio_selector_1._parameter_value == 'Order_from_clicked_Rate' %}
+        ${Order_from_clicked_Rate}
+      {% else %}
+        null
+      {% endif %};;
+    label_from_parameter: ratio_selector_1
+    value_format: "0.00%"
+    group_label: "Advanced Measures"
+  }
+
+
+
+####
+
+  parameter: total_selector_1 {
+    type: unquoted
+
     allowed_value: {
       label: "Total_Received_Emails"
       value: "Total_Received_Emails"
@@ -744,36 +776,31 @@ view: klaviyo_email_events_by_user {
     group_label: "Advanced Selectors"
   }
 
-  measure: ratio_dimension_1 {
+  measure: total_dimension_1 {
     type: number
     sql:
-      {% if ratio_selector_1._parameter_value == 'Opened_Rate' %}
-        ${Opened_Rate}
-      {% elsif ratio_selector_1._parameter_value == 'Clicked_Rate' %}
-        ${Clicked_Rate}
-      {% elsif ratio_selector_1._parameter_value == 'Order_from_clicked_Rate' %}
-        ${Order_from_clicked_Rate}
-      {% elsif ratio_selector_1._parameter_value == 'Total_Received_Emails' %}
+      {% if total_selector_1._parameter_value == 'Total_Received_Emails' %}
         ${Total_Received_Emails}
-      {% elsif ratio_selector_1._parameter_value == 'Total_Opened_Emails' %}
+      {% elsif total_selector_1._parameter_value == 'Total_Opened_Emails' %}
         ${Total_Opened_Emails}
-      {% elsif ratio_selector_1._parameter_value == 'Total_Clicked_Emails' %}
+      {% elsif total_selector_1._parameter_value == 'Total_Clicked_Emails' %}
         ${Total_Clicked_Emails}
-      {% elsif ratio_selector_1._parameter_value == 'Total_Orders_From_Email' %}
+      {% elsif total_selector_1._parameter_value == 'Total_Orders_From_Email' %}
         ${Total_Orders_From_Email}
-      {% elsif ratio_selector_1._parameter_value == 'Total_Revenue_From_Email' %}
+      {% elsif total_selector_1._parameter_value == 'Total_Revenue_From_Email' %}
         ${Total_Revenue_From_Email}
-      {% elsif ratio_selector_1._parameter_value == 'AOV' %}
+      {% elsif total_selector_1._parameter_value == 'AOV' %}
         ${AOV}
-      {% elsif ratio_selector_1._parameter_value == 'AOV_revenue_per_received_email' %}
+      {% elsif total_selector_1._parameter_value == 'AOV_revenue_per_received_email' %}
         ${AOV_revenue_per_received_email}
       {% else %}
         null
       {% endif %};;
     label_from_parameter: ratio_selector_1
-    value_format: "0.00%"
+    value_format: "0.00"
     group_label: "Advanced Measures"
   }
+
 
 
 
