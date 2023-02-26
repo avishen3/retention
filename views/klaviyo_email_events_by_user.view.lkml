@@ -796,7 +796,7 @@ view: klaviyo_email_events_by_user {
       {% else %}
         null
       {% endif %};;
-    label_from_parameter: ratio_selector_1
+    label_from_parameter: total_selector_1
     value_format: "0.00"
     group_label: "Advanced Measures"
   }
