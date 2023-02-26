@@ -342,6 +342,19 @@ view: klaviyo_email_events_by_user {
     sql: ${TABLE}.promo_or_flow ;;
   }
 
+
+  dimension: promo_or_sale_flow {
+    type: string
+    sql: case when ${promo_or_flow} = "promo" then "promo"
+              when ${promo_or_flow} = "flow" and (lower(${flow_name}) like "%abandon%" or lower(${flow_name}) like "%cart_link%"  or lower(${flow_name}) like "%welcome%"or lower(${flow_name}) like "%reactivation%") then "sale_flow"
+              else "non-sale-flow" end
+
+    ;;
+  }
+
+
+
+
   dimension: receive_click_minute_diff {
     type: number
     sql: ${TABLE}.receive_click_minute_diff ;;
@@ -815,6 +828,12 @@ view: klaviyo_email_events_by_user {
       label: "promo_or_flow"
       value: "promo_or_flow"
     }
+
+    allowed_value: {
+      label: "promo_or_sale_flow"
+      value: "promo_or_sale_flow"
+    }
+
     allowed_value: {
       label: "campaign_name"
       value: "campaign_name"
@@ -847,6 +866,8 @@ view: klaviyo_email_events_by_user {
         ${flow_name}
       {% elsif dimension_selector_1._parameter_value == 'email_number' %}
         ${email_number}
+          {% elsif dimension_selector_1._parameter_value == 'promo_or_sale_flow' %}
+        ${promo_or_sale_flow}
       {% else %}
         null
       {% endif %};;
