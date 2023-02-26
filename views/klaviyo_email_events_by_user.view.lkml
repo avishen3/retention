@@ -803,5 +803,58 @@ view: klaviyo_email_events_by_user {
 
 
 
+### dimensions selectors
+
+  parameter: dimension_selector_1 {
+    type: unquoted
+    allowed_value: {
+      label: "Brand"
+      value: "Brand"
+    }
+    allowed_value: {
+      label: "promo_or_flow"
+      value: "promo_or_flow"
+    }
+    allowed_value: {
+      label: "campaign_name"
+      value: "campaign_name"
+    }
+    allowed_value: {
+      label: "flow_name"
+      value: "flow_name"
+    }
+    allowed_value: {
+      label: "email_number"
+      value: "email_number"
+    }
+    allowed_value: {
+      label: "None"
+      value: "None"
+    }
+    group_label: "Advanced Selectors"
+  }
+
+  dimension: dimension_1 {
+    type: string
+    sql:
+      {% if dimension_selector_1._parameter_value == 'Brand' %}
+        ${brand}
+      {% elsif dimension_selector_1._parameter_value == 'promo_or_flow' %}
+        ${promo_or_flow}
+      {% elsif dimension_selector_1._parameter_value == 'campaign_name' %}
+        ${campaign_name}
+      {% elsif dimension_selector_1._parameter_value == 'flow_name' %}
+        ${flow_name}
+      {% elsif dimension_selector_1._parameter_value == 'email_number' %}
+        ${email_number}
+      {% else %}
+        null
+      {% endif %};;
+    label_from_parameter: dimension_selector_1
+    group_label: "Advanced Dimensions"
+  }
+
+
+
 
 }
