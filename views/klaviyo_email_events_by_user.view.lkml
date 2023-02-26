@@ -649,20 +649,20 @@ view: klaviyo_email_events_by_user {
   measure: Total_Revenue_From_Email{
     type: sum
     sql: case when ${email_order_created_raw} is not null then ${email_order_price}-${email_order_tax} end  ;;
-    value_format: "0.0$"
+    value_format: "$0.0"
   }
 
   measure: Total_price_From_Email{
     type: sum
     sql: case when ${email_order_created_raw} is not null then ${email_order_price} end  ;;
-    value_format: "0.0$"
+    value_format: "$0.0"
   }
 
 
   measure: Total_tax_From_Email{
     type: sum
     sql: case when ${email_order_created_raw} is not null then ${email_order_tax} end  ;;
-    value_format: "0.0$"
+    value_format: "$0.0"
   }
 
 
@@ -691,5 +691,90 @@ view: klaviyo_email_events_by_user {
     sql:  case when ${Total_Clicked_Emails}>0 then ${Total_Revenue_From_Email} /${Total_Clicked_Emails} else 0 end ;;
     value_format: "0.0$"
   }
+
+
+ ####
+
+  parameter: ratio_selector_1 {
+    type: unquoted
+    allowed_value: {
+      label: "Opened_Rate"
+      value: "Opened_Rate"
+    }
+    allowed_value: {
+      label: "Clicked_Rate"
+      value: "Clicked_Rate"
+    }
+    allowed_value: {
+      label: "Order_from_clicked_Rate"
+      value: "Order_from_clicked_Rate"
+    }
+    allowed_value: {
+      label: "Total_Received_Emails"
+      value: "Total_Received_Emails"
+    }
+    allowed_value: {
+      label: "Total_Opened_Emails"
+      value: "Total_Opened_Emails"
+    }
+    allowed_value: {
+      label: "Total_Clicked_Emails"
+      value: "Total_Clicked_Emails"
+    }
+    allowed_value: {
+      label: "Total_Orders_From_Email"
+      value: "Total_Orders_From_Email"
+    }
+    allowed_value: {
+      label: "Total_Revenue_From_Email"
+      value: "Total_Revenue_From_Email"
+    }
+    allowed_value: {
+      label: "AOV"
+      value: "AOV"
+    }
+    allowed_value: {
+      label: "AOV_revenue_per_received_email"
+      value: "AOV_revenue_per_received_email"
+    }
+    allowed_value: {
+      label: "none"
+      value: "none"
+    }
+    group_label: "Advanced Selectors"
+  }
+
+  measure: ratio_dimension_1 {
+    type: number
+    sql:
+      {% if ratio_selector_1._parameter_value == 'Opened_Rate' %}
+        ${Opened_Rate}
+      {% elsif ratio_selector_1._parameter_value == 'Clicked_Rate' %}
+        ${Clicked_Rate}
+      {% elsif ratio_selector_1._parameter_value == 'Order_from_clicked_Rate' %}
+        ${Order_from_clicked_Rate}
+      {% elsif ratio_selector_1._parameter_value == 'Total_Received_Emails' %}
+        ${Total_Received_Emails}
+      {% elsif ratio_selector_1._parameter_value == 'Total_Opened_Emails' %}
+        ${Total_Opened_Emails}
+      {% elsif ratio_selector_1._parameter_value == 'Total_Clicked_Emails' %}
+        ${Total_Clicked_Emails}
+      {% elsif ratio_selector_1._parameter_value == 'Total_Orders_From_Email' %}
+        ${Total_Orders_From_Email}
+      {% elsif ratio_selector_1._parameter_value == 'Total_Revenue_From_Email' %}
+        ${Total_Revenue_From_Email}
+      {% elsif ratio_selector_1._parameter_value == 'AOV' %}
+        ${AOV}
+      {% elsif ratio_selector_1._parameter_value == 'AOV_revenue_per_received_email' %}
+        ${AOV_revenue_per_received_email}
+      {% else %}
+        null
+      {% endif %};;
+    label_from_parameter: ratio_selector_1
+    value_format: "0.00%"
+    group_label: "Advanced Measures"
+  }
+
+
 
 }
