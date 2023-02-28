@@ -348,7 +348,13 @@ view: klaviyo_email_events_by_user {
     sql: case when ${promo_or_flow} = "promo" then "promo"
               when ${promo_or_flow} = "flow" and (lower(${flow_name}) like "%abandon%" or lower(${flow_name}) like "%cart_link%"  or lower(${flow_name}) like "%welcome%"or lower(${flow_name}) like "%reactivation%") then "sale_flow"
               else "non-sale-flow" end
+    ;;
+  }
 
+
+  dimension: is_sale_flow{
+    type: yesno
+    sql: ${promo_or_flow} = "flow" and (lower(${flow_name}) like "%abandon%" or lower(${flow_name}) like "%cart_link%"  or lower(${flow_name}) like "%welcome%"or lower(${flow_name}) like "%reactivation%")
     ;;
   }
 
@@ -493,6 +499,67 @@ view: klaviyo_email_events_by_user {
     ]
     sql: ${TABLE}.ts_Received_email ;;
   }
+
+
+ #### date granulraty
+
+
+
+  parameter: date_granularity {
+    type: string
+    description: "Use this selector to change the date granularity of 'Date' dimension only"
+    allowed_value: {
+      label: "Day"
+      value: "Day"
+    }
+    allowed_value: {
+      label: "Week"
+      value: "Week"
+    }
+    allowed_value: {
+      label: "Month"
+      value: "Month"
+    }
+    allowed_value: {
+      label: "Quarter"
+      value: "Quarter"
+    }
+    allowed_value: {
+      label: "Year"
+      value: "Year"
+    }
+
+    allowed_value: {
+      label: "None"
+      value: "None"
+    }
+
+  }
+
+
+  dimension: date_ts_received_email {
+    label_from_parameter: date_granularity
+    description: "Use 'Date Granularity' selector to modify the date granularity"
+    sql:
+            CASE
+             WHEN {% parameter date_granularity %} = 'Day' THEN cast(${ts_received_email_date} as string)
+             WHEN {% parameter date_granularity %} = 'Week' THEN cast(${ts_received_email_week} as string)
+             WHEN {% parameter date_granularity %} = 'Month' THEN cast(${ts_received_email_month} as string)
+             WHEN {% parameter date_granularity %} = 'Quarter' THEN cast(${ts_received_email_quarter} as string)
+             WHEN {% parameter date_granularity %} = 'Year' THEN cast(${ts_received_email_year} as string)
+            ELSE null
+            END ;;
+  }
+
+
+
+
+
+
+
+
+
+####
 
   dimension_group: ts_sub {
     type: time
