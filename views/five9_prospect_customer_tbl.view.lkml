@@ -682,6 +682,14 @@ view: five9_prospect_customer_tbl {
   }
 
 
+
+  measure: total_customer_with_same_cs_agent_orders_within48h{
+    type: count_distinct
+    sql: case when (${agent_email} =  ${order_agent_email_after}  then ${customer_id} else null end ;;
+    value_format: "#,##0"
+    group_label: "five9 Measures - customer"
+  }
+
   ####
 
 
