@@ -553,8 +553,31 @@ view: five9_prospect_customer_tbl {
 
 
 
+###
 
 
+
+  dimension: order_price_before {
+    type: number
+    sql: ${TABLE}.order_price_before ;;
+  }
+
+
+  dimension: order_tax_before {
+    type: number
+    sql: ${TABLE}.order_tax_before ;;
+  }
+
+
+  dimension: order_price_after {
+    type: number
+    sql: ${TABLE}.order_price_after ;;
+  }
+
+  dimension: order_tax_after {
+    type: number
+    sql: ${TABLE}.order_tax_after ;;
+  }
 
 
 ####
@@ -715,6 +738,14 @@ view: five9_prospect_customer_tbl {
   }
 
 
+  measure: total_short_id_with_same_cs_agent_orders{
+    type: count_distinct
+    sql: case when ${agent_email} =${order_agent_email_after}  then ${short_id_after} else null end   ;;
+    value_format: "#,##0"
+    group_label: "five9 Measures - short_id_after"
+  }
+
+
   measure: total_order_revenue_after{
     type: sum
     sql: ${order_revenue_after};;
@@ -750,6 +781,14 @@ view: five9_prospect_customer_tbl {
     type: sum_distinct
     sql_distinct_key: (${short_id_after}||${is_cs_assisted_order_TF}||${is_cs_agent_order_TF}) ;;
     sql:  case when ${is_cs_assisted_order_TF} = true and ${is_cs_agent_order_TF} = true  then  ${order_revenue_after} else null end ;;
+  }
+
+
+  measure: distinct_revenue_cs_same_agent {
+    ## label: “sum_distinct_revenue”
+    type: sum_distinct
+    sql_distinct_key: (${short_id_after}||${is_cs_assisted_order_TF}||${is_cs_agent_order_TF}) ;;
+    sql: case when ${agent_email} =${order_agent_email_after}  then ${order_revenue_after} else null end  ;;
   }
 
 
