@@ -69,6 +69,11 @@ view: alerts_outgoing_calls_five9_tbl {
     sql: ${TABLE}.alert_email ;;
   }
 
+  dimension: model_event_priority {
+    type: string
+    sql: ${TABLE}.model_event_priority ;;
+  }
+
   dimension: alert_id {
     type: string
     sql: ${TABLE}.alert_id ;;
