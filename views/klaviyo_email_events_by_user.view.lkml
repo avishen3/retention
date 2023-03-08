@@ -773,6 +773,34 @@ view: klaviyo_email_events_by_user {
   }
 
 
+
+  ####  spesific email
+
+
+  measure: Total_Received_spesific_Emails{
+    type: count_distinct
+    sql: concat(${email},${campaign} ;;
+  }
+
+  measure: Total_Opened_spesific_Emails{
+    type: count_distinct
+    sql: case when ${ts_opened_email_raw} is not null then (concat(${email},${campaign}) end  ;;
+  }
+
+  measure: Total_Clicked_spesific_Emails{
+    type: count_distinct
+    sql: case when ${ts_clicked_email_raw} is not null then (concat(${email},${campaign}) end  ;;
+  }
+
+  measure: Total_Orders_From_spesific_Email{
+    type: count_distinct
+    sql: case when ${email_order_created_raw} is not null then (concat(${email},${campaign}) end  ;;
+  }
+
+
+
+
+
  ####
 
   parameter: ratio_selector_1 {
