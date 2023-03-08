@@ -941,6 +941,34 @@ view: klaviyo_email_events_by_user {
   }
 
 
+  parameter: total_selector_2 {
+    type: unquoted
+
+    allowed_value: {
+      label: "Total_Received_spesific_Emails"
+      value: "Total_Received_spesific_Emails"
+    }
+    allowed_value: {
+      label: "Total_Opened_spesific_Emails"
+      value: "Total_Opened_spesific_Emails"
+    }
+    allowed_value: {
+      label: "Total_Clicked_spesific_Emails"
+      value: "Total_Clicked_spesific_Emails"
+    }
+    allowed_value: {
+      label: "Total_Orders_From_spesific_Email"
+      value: "Total_Orders_From_spesific_Email"
+    }
+
+    allowed_value: {
+      label: "none"
+      value: "none"
+    }
+    group_label: "Advanced Selectors"
+  }
+
+
   measure: total_dimension_2 {
     type: number
     sql:
@@ -955,7 +983,7 @@ view: klaviyo_email_events_by_user {
       {% else %}
         null
       {% endif %};;
-    label_from_parameter: total_selector_1
+    label_from_parameter: total_selector_2
     value_format: "0.00"
     group_label: "Advanced Measures"
   }
