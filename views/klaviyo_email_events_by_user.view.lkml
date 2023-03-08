@@ -798,6 +798,37 @@ view: klaviyo_email_events_by_user {
   }
 
 
+### rate spesific
+
+  measure: Opened_Rate_spesific{
+    type: number
+    sql: case when ${Total_Received_spesific_Emails}>0 then ${Total_Opened_spesific_Emails}/${Total_Received_spesific_Emails} else 0 end  ;;
+    value_format: "0.00%"
+  }
+
+  measure: Clicked_Rate_spesific{
+    type: number
+    sql: case when ${Total_Opened_spesific_Emails}>0 then ${Total_Clicked_spesific_Emails}/${Total_Opened_spesific_Emails} else 0 end    ;;
+    value_format: "0.00%"
+  }
+
+  measure: Clicked_Rate_out_of_received_spesific{
+    type: number
+    sql:  case when ${Total_Received_spesific_Emails}>0 then ${Total_Clicked_spesific_Emails}/${Total_Received_spesific_Emails} else 0 end  ;;
+    value_format: "0.00%"
+  }
+
+  measure: Order_from_clicked_Rate_spesific{
+    type: number
+    sql:  case when ${Total_Clicked_spesific_Emails}>0 then ${Total_Orders_From_spesific_Email}/${Total_Clicked_spesific_Emails} else 0 end ;;
+    value_format: "0.00%"
+
+  }
+
+
+
+
+
 
 
 
@@ -908,6 +939,28 @@ view: klaviyo_email_events_by_user {
     value_format: "0.00"
     group_label: "Advanced Measures"
   }
+
+
+  measure: total_dimension_2 {
+    type: number
+    sql:
+      {% if total_selector_1._parameter_value == 'Total_Received_spesific_Emails' %}
+        ${Total_Received_spesific_Emails}
+      {% elsif total_selector_1._parameter_value == 'Total_Opened_spesific_Emails' %}
+        ${Total_Opened_spesific_Emails}
+      {% elsif total_selector_1._parameter_value == 'Total_Clicked_spesific_Emails' %}
+        ${Total_Clicked_spesific_Emails}
+      {% elsif total_selector_1._parameter_value == 'Total_Orders_From_spesific_Email' %}
+        ${Total_Orders_From_spesific_Email}
+      {% else %}
+        null
+      {% endif %};;
+    label_from_parameter: total_selector_1
+    value_format: "0.00"
+    group_label: "Advanced Measures"
+  }
+
+
 
 
 
