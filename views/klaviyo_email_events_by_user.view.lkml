@@ -923,7 +923,7 @@ view: klaviyo_email_events_by_user {
       value: "none"
     }
     group_label: "Advanced Selectors"
-    label: "Ratio_Selector_users"
+    label: "Total_Selector_users"
   }
 
   measure: total_dimension_1 {
