@@ -862,6 +862,7 @@ view: klaviyo_email_events_by_user {
       value: "none"
     }
     group_label: "Advanced Selectors"
+    label: "Ratio_selector_users"
   }
 
   measure: ratio_dimension_1 {
@@ -878,6 +879,7 @@ view: klaviyo_email_events_by_user {
       {% endif %};;
     label_from_parameter: ratio_selector_1
     value_format: "0.00%"
+    label: "Ratio_dimention_users"
     group_label: "Advanced Measures"
   }
 
@@ -921,6 +923,7 @@ view: klaviyo_email_events_by_user {
       value: "none"
     }
     group_label: "Advanced Selectors"
+    label: "Ratio_Selector_users"
   }
 
   measure: total_dimension_1 {
@@ -946,6 +949,7 @@ view: klaviyo_email_events_by_user {
     label_from_parameter: total_selector_1
     value_format: "0.00"
     group_label: "Advanced Measures"
+    label: "Total_dimention_users"
   }
 
 
