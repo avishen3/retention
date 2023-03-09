@@ -808,25 +808,25 @@ view: klaviyo_email_events_by_user {
 
 ### rate spesific
 
-  measure: Opened_Rate_spesific{
+  measure: Opened_Rate_spesific_email{
     type: number
     sql: case when ${Total_Received_spesific_Emails}>0 then ${Total_Opened_spesific_Emails}/${Total_Received_spesific_Emails} else 0 end  ;;
     value_format: "0.00%"
   }
 
-  measure: Clicked_Rate_spesific{
+  measure: Clicked_Rate_spesific_email{
     type: number
     sql: case when ${Total_Opened_spesific_Emails}>0 then ${Total_Clicked_spesific_Emails}/${Total_Opened_spesific_Emails} else 0 end    ;;
     value_format: "0.00%"
   }
 
-  measure: Clicked_Rate_out_of_received_spesific{
+  measure: Clicked_Rate_out_of_received_spesific_email{
     type: number
     sql:  case when ${Total_Received_spesific_Emails}>0 then ${Total_Clicked_spesific_Emails}/${Total_Received_spesific_Emails} else 0 end  ;;
     value_format: "0.00%"
   }
 
-  measure: Order_from_clicked_Rate_spesific{
+  measure: Order_from_clicked_Rate_spesific_email{
     type: number
     sql:  case when ${Total_Clicked_spesific_Emails}>0 then ${Total_Orders_From_spesific_Email}/${Total_Clicked_spesific_Emails} else 0 end ;;
     value_format: "0.00%"
@@ -882,6 +882,53 @@ view: klaviyo_email_events_by_user {
     label: "Ratio_dimention_users"
     group_label: "Advanced Measures"
   }
+
+
+####
+
+
+
+  parameter: ratio_selector_2 {
+    type: unquoted
+    allowed_value: {
+      label: "Opened_Rate_spesific_email"
+      value: "Opened_Rate_spesific_email"
+    }
+    allowed_value: {
+      label: "Clicked_Rate_spesific_email"
+      value: "Clicked_Rate_spesific_email"
+    }
+    allowed_value: {
+      label: "Order_from_clicked_Rate_spesific_email"
+      value: "Order_from_clicked_Rate_spesific_email"
+    }
+
+    allowed_value: {
+      label: "none"
+      value: "none"
+    }
+    group_label: "Advanced Selectors"
+    label: "Ratio_selector_spesific_email"
+  }
+
+  measure: ratio_dimension_2 {
+    type: number
+    sql:
+      {% if ratio_selector_2._parameter_value == 'Opened_Rate_spesific_email' %}
+        ${Opened_Rate}
+      {% elsif ratio_selector_2._parameter_value == 'Clicked_Rate_spesific_email' %}
+        ${Clicked_Rate}
+      {% elsif ratio_selector_2._parameter_value == 'Order_from_clicked_Rate_spesific_email' %}
+        ${Order_from_clicked_Rate}
+      {% else %}
+        null
+      {% endif %};;
+    label_from_parameter: ratio_selector_2
+    value_format: "0.00%"
+    label: "Ratio_dimention_spesific_email"
+    group_label: "Advanced Measures"
+  }
+
 
 
 
@@ -978,6 +1025,8 @@ view: klaviyo_email_events_by_user {
       value: "none"
     }
     group_label: "Advanced Selectors"
+    label: "Total_Selector_spesific_Emails"
+
   }
 
 
@@ -998,6 +1047,7 @@ view: klaviyo_email_events_by_user {
     label_from_parameter: total_selector_2
     value_format: "0.00"
     group_label: "Advanced Measures"
+    label: "Total_dimention_spesific_Emails"
   }
 
 
