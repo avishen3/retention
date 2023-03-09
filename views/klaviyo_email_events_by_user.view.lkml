@@ -672,25 +672,29 @@ view: klaviyo_email_events_by_user {
   }
 
 
-  ### email count
+  ### email user count
 
 
   measure: Total_Received_Emails{
     type: count_distinct
+    label: "Total users recived email"
     sql: ${email} ;;
   }
 
   measure: Total_Opened_Emails{
     type: count_distinct
+    label: "Total users opened email"
     sql: case when ${ts_opened_email_raw} is not null then ${email} end  ;;
   }
 
   measure: Total_Clicked_Emails{
     type: count_distinct
+    label: "Total users clicked email"
     sql: case when ${ts_clicked_email_raw} is not null then ${email} end  ;;
   }
 
   measure: Total_Orders_From_Email{
+    label: "Total users ordered email last click"
     type: count_distinct
     sql: case when ${email_order_created_raw} is not null then ${email} end  ;;
   }
@@ -700,24 +704,28 @@ view: klaviyo_email_events_by_user {
 
   measure: Opened_Rate{
     type: number
+    label: "Open rate - users"
     sql: case when ${Total_Received_Emails}>0 then ${Total_Opened_Emails}/${Total_Received_Emails} else 0 end  ;;
     value_format: "0.00%"
   }
 
   measure: Clicked_Rate{
     type: number
+    label: "Click out of open rate - users"
     sql: case when ${Total_Opened_Emails}>0 then ${Total_Clicked_Emails}/${Total_Opened_Emails} else 0 end    ;;
     value_format: "0.00%"
   }
 
   measure: Clicked_Rate_out_of_received{
     type: number
+    label: "Click out of recived rate - users"
     sql:  case when ${Total_Received_Emails}>0 then ${Total_Clicked_Emails}/${Total_Received_Emails} else 0 end  ;;
     value_format: "0.00%"
     }
 
   measure: Order_from_clicked_Rate{
     type: number
+    label: "Ordered from click rate - users"
     sql:  case when ${Total_Clicked_Emails}>0 then ${Total_Orders_From_Email}/${Total_Clicked_Emails} else 0 end ;;
     value_format: "0.00%"
 
