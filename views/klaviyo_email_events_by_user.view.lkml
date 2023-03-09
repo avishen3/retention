@@ -984,13 +984,13 @@ view: klaviyo_email_events_by_user {
   measure: total_dimension_2 {
     type: number
     sql:
-      {% if total_selector_1._parameter_value == 'Total_Received_spesific_Emails' %}
+      {% if total_selector_2._parameter_value == 'Total_Received_spesific_Emails' %}
         ${Total_Received_spesific_Emails}
-      {% elsif total_selector_1._parameter_value == 'Total_Opened_spesific_Emails' %}
+      {% elsif total_selector_2._parameter_value == 'Total_Opened_spesific_Emails' %}
         ${Total_Opened_spesific_Emails}
-      {% elsif total_selector_1._parameter_value == 'Total_Clicked_spesific_Emails' %}
+      {% elsif total_selector_2._parameter_value == 'Total_Clicked_spesific_Emails' %}
         ${Total_Clicked_spesific_Emails}
-      {% elsif total_selector_1._parameter_value == 'Total_Orders_From_spesific_Email' %}
+      {% elsif total_selector_2._parameter_value == 'Total_Orders_From_spesific_Email' %}
         ${Total_Orders_From_spesific_Email}
       {% else %}
         null
