@@ -845,16 +845,16 @@ view: klaviyo_email_events_by_user {
   parameter: ratio_selector_1 {
     type: unquoted
     allowed_value: {
-      label: "Opened_Rate"
-      value: "Opened_Rate"
+      label: "Open rate - users"
+      value: "Open rate - users"
     }
     allowed_value: {
-      label: "Clicked_Rate"
-      value: "Clicked_Rate"
+      label: "Click out of open rate - users"
+      value: "Click out of open rate - users"
     }
     allowed_value: {
-      label: "Order_from_clicked_Rate"
-      value: "Order_from_clicked_Rate"
+      label: "Ordered from click rate - users"
+      value: "Ordered from click rate - users"
     }
 
     allowed_value: {
@@ -867,11 +867,11 @@ view: klaviyo_email_events_by_user {
   measure: ratio_dimension_1 {
     type: number
     sql:
-      {% if ratio_selector_1._parameter_value == 'Opened_Rate' %}
+      {% if ratio_selector_1._parameter_value == 'Open rate - users' %}
         ${Opened_Rate}
-      {% elsif ratio_selector_1._parameter_value == 'Clicked_Rate' %}
+      {% elsif ratio_selector_1._parameter_value == 'Click out of open rate - users' %}
         ${Clicked_Rate}
-      {% elsif ratio_selector_1._parameter_value == 'Order_from_clicked_Rate' %}
+      {% elsif ratio_selector_1._parameter_value == 'Ordered from click rate - users' %}
         ${Order_from_clicked_Rate}
       {% else %}
         null
@@ -889,20 +889,20 @@ view: klaviyo_email_events_by_user {
     type: unquoted
 
     allowed_value: {
-      label: "Total_Received_Emails"
-      value: "Total_Received_Emails"
+      label: "Total users recived email"
+      value: "Total users recived email"
     }
     allowed_value: {
-      label: "Total_Opened_Emails"
-      value: "Total_Opened_Emails"
+      label: "Total users opened email"
+      value: "Total users opened email"
     }
     allowed_value: {
-      label: "Total_Clicked_Emails"
-      value: "Total_Clicked_Emails"
+      label: "Total users clicked email"
+      value: "Total users clicked email"
     }
     allowed_value: {
-      label: "Total_Orders_From_Email"
-      value: "Total_Orders_From_Email"
+      label: "Total users ordered email last click"
+      value: "Total users ordered email last click"
     }
     allowed_value: {
       label: "Total_Revenue_From_Email"
@@ -926,13 +926,13 @@ view: klaviyo_email_events_by_user {
   measure: total_dimension_1 {
     type: number
     sql:
-      {% if total_selector_1._parameter_value == 'Total_Received_Emails' %}
+      {% if total_selector_1._parameter_value == 'Total users recived email' %}
         ${Total_Received_Emails}
-      {% elsif total_selector_1._parameter_value == 'Total_Opened_Emails' %}
+      {% elsif total_selector_1._parameter_value == 'Total users opened email' %}
         ${Total_Opened_Emails}
-      {% elsif total_selector_1._parameter_value == 'Total_Clicked_Emails' %}
+      {% elsif total_selector_1._parameter_value == 'Total users clicked email' %}
         ${Total_Clicked_Emails}
-      {% elsif total_selector_1._parameter_value == 'Total_Orders_From_Email' %}
+      {% elsif total_selector_1._parameter_value == 'Total users ordered email last click' %}
         ${Total_Orders_From_Email}
       {% elsif total_selector_1._parameter_value == 'Total_Revenue_From_Email' %}
         ${Total_Revenue_From_Email}
