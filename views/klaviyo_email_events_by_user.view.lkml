@@ -704,14 +704,14 @@ view: klaviyo_email_events_by_user {
 
   measure: Opened_Rate{
     type: number
-    label: "Open rate - users"
+    label: "Open_rate_users"
     sql: case when ${Total_Received_Emails}>0 then ${Total_Opened_Emails}/${Total_Received_Emails} else 0 end  ;;
     value_format: "0.00%"
   }
 
   measure: Clicked_Rate{
     type: number
-    label: "Open_rate_users"
+    label: "Click_out_of_open_rate_users"
     sql: case when ${Total_Opened_Emails}>0 then ${Total_Clicked_Emails}/${Total_Opened_Emails} else 0 end    ;;
     value_format: "0.00%"
   }
