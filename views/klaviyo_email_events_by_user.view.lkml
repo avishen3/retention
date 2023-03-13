@@ -1045,7 +1045,7 @@ view: klaviyo_email_events_by_user {
         null
       {% endif %};;
     label_from_parameter: total_selector_2
-    value_format: "0.00"
+    value_format: "#,##0"
     group_label: "Advanced Measures"
     label: "Total_dimention_spesific_Emails"
   }
