@@ -1048,9 +1048,9 @@ view: klaviyo_email_events_by_user {
         ${Total_Clicked_spesific_Emails}
       {% elsif total_selector_2._parameter_value == 'Total_Orders_From_spesific_Email' %}
         ${Total_Orders_From_spesific_Email}
-      {% elsif total_selector_1._parameter_value == 'Total_Revenue_From_Email' %}
+      {% elsif total_selector_2._parameter_value == 'Total_Revenue_From_Email' %}
         ${Total_Revenue_From_Email}
-      {% elsif total_selector_1._parameter_value == 'AOV' %}
+      {% elsif total_selector_2._parameter_value == 'AOV' %}
         ${AOV}
       {% else %}
         null
