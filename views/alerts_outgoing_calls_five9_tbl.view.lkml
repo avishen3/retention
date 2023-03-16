@@ -858,5 +858,20 @@ view: alerts_outgoing_calls_five9_tbl {
     sql: ${TABLE}.num_calls ;;
   }
 
+  dimension: diff_minutes_from_order_to_alert {
+    type: number
+    sql: ${TABLE}.diff_minutes_from_order_to_alert ;;
+  }
+
+  dimension: diff_minutes_from_alert_to_exchange_date {
+    type: number
+    sql: ${TABLE}.diff_minutes_from_alert_to_exchange_date ;;
+  }
+
+  dimension: diff_minutes_from_order_to_exchange_date {
+    type: number
+    sql: ${TABLE}.diff_minutes_from_order_to_exchange_date ;;
+  }
+
 
 }
