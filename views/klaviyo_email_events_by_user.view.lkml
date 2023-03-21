@@ -830,13 +830,37 @@ view: klaviyo_email_events_by_user {
     type: number
     sql:  case when ${Total_Clicked_spesific_Emails}>0 then ${Total_Orders_From_spesific_Email}/${Total_Clicked_spesific_Emails} else 0 end ;;
     value_format: "0.00%"
+  }
 
+### order and revenue out of email/order recived
+
+
+  measure: Order_from_recived_email_spesific_email{
+    type: number
+    sql:  case when ${Total_Received_spesific_Emails}>0 then ${Total_Orders_From_spesific_Email}/${Total_Received_spesific_Emails} else 0 end ;;
+    value_format:  "0.00%"
   }
 
 
+  measure: Revenue_from_recived_email_spesific_email{
+    type: number
+    sql:  case when ${Total_Received_spesific_Emails}>0 then ${Total_Revenue_From_Email}/${Total_Received_spesific_Emails} else 0 end ;;
+    value_format: "$#,##0.00"
+  }
 
 
+  measure: Order_from_recived_email_user{
+    type: number
+    sql:  case when ${Total_Received_spesific_Emails}>0 then ${Total_Orders_From_spesific_Email}/${Total_Received_Emails} else 0 end ;;
+    value_format:  "0.00%"
+  }
 
+
+  measure: Revenue_from_recived_email_user{
+    type: number
+    sql:  case when ${Total_Received_Emails}>0 then ${Total_Revenue_From_Email}/${Total_Received_Emails} else 0 end ;;
+     value_format: "$#,##0.00"
+  }
 
 
 
