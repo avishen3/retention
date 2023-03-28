@@ -806,6 +806,12 @@ view: klaviyo_email_events_by_user {
   }
 
 
+  measure: revenue_per_recived_email{
+    type: number
+    sql:  case when ${Total_Received_spesific_Emails}>0 then ${Total_Revenue_From_Email} /${Total_Received_spesific_Emails} else 0 end ;;
+    value_format: "0.0$"
+  }
+
 ### rate spesific
 
   measure: Opened_Rate_spesific_email{
@@ -862,6 +868,8 @@ view: klaviyo_email_events_by_user {
      value_format: "$#,##0.00"
   }
 
+
+ ###
 
 
  ####
@@ -928,6 +936,12 @@ view: klaviyo_email_events_by_user {
     }
 
     allowed_value: {
+      label: "revenue_per_recived_email"
+      value: "revenue_per_recived_email"
+    }
+
+
+    allowed_value: {
       label: "none"
       value: "none"
     }
@@ -944,6 +958,8 @@ view: klaviyo_email_events_by_user {
         ${Clicked_Rate}
       {% elsif ratio_selector_2._parameter_value == 'Order_from_clicked_Rate_spesific_email' %}
         ${Order_from_clicked_Rate}
+        {% elsif ratio_selector_2._parameter_value == 'revenue_per_recived_email' %}
+        ${revenue_per_recived_email}
       {% else %}
         null
       {% endif %};;
