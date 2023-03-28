@@ -808,9 +808,17 @@ view: klaviyo_email_events_by_user {
 
   measure: revenue_per_recived_email{
     type: number
-    sql:  case when ${Total_Received_spesific_Emails}>0 then ${Total_Revenue_From_Email} /${Total_Received_spesific_Emails} else 0 end ;;
+    sql:  case when ${Total_Received_spesific_Emails}>0 then ${Total_Revenue_From_Email}/${Total_Received_spesific_Emails} else 0 end ;;
     value_format: "0.0$"
   }
+
+
+  measure: revenue_per_1000_received_email{
+    type: number
+    sql:  case when ${Total_Received_spesific_Emails}>0 then ${Total_Revenue_From_Email}/${Total_Received_spesific_Emails}*1000 else 0 end ;;
+    value_format: "0.0$"
+  }
+
 
 ### rate spesific
 
@@ -1061,8 +1069,8 @@ view: klaviyo_email_events_by_user {
     }
 
     allowed_value: {
-      label: "revenue_per_recived_email"
-      value: "revenue_per_recived_email"
+      label: "revenue_per_1000_received_email"
+      value: "revenue_per_1000_received_email"
     }
 
     allowed_value: {
@@ -1094,8 +1102,8 @@ view: klaviyo_email_events_by_user {
         ${Total_Revenue_From_Email}
       {% elsif total_selector_2._parameter_value == 'AOV' %}
         ${AOV}
-         {% elsif total_selector_2._parameter_value == 'revenue_per_recived_email' %}
-        ${revenue_per_recived_email}
+         {% elsif total_selector_2._parameter_value == 'revenue_per_1000_received_email' %}
+        ${revenue_per_1000_received_email}
       {% else %}
         null
       {% endif %};;
