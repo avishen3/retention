@@ -782,25 +782,25 @@ view: klaviyo_email_events_by_user {
 
 
 
-  ####  spesific email
+  ####  specific email
 
 
-  measure: Total_Received_spesific_Emails{
+  measure: Total_Received_specific_Emails{
     type: count_distinct
     sql: concat(${email},${campaign}) ;;
   }
 
-  measure: Total_Opened_spesific_Emails{
+  measure: Total_Opened_specific_Emails{
     type: count_distinct
     sql: case when ${ts_opened_email_raw} is not null then (concat(${email},${campaign})) end  ;;
   }
 
-  measure: Total_Clicked_spesific_Emails{
+  measure: Total_Clicked_specific_Emails{
     type: count_distinct
     sql: case when ${ts_clicked_email_raw} is not null then (concat(${email},${campaign})) end  ;;
   }
 
-  measure: Total_Orders_From_spesific_Email{
+  measure: Total_Orders_From_specific_Email{
     type: count_distinct
     sql: case when ${email_order_created_raw} is not null then (concat(${email},${campaign})) end  ;;
   }
@@ -808,64 +808,64 @@ view: klaviyo_email_events_by_user {
 
   measure: revenue_per_recived_email{
     type: number
-    sql:  case when ${Total_Received_spesific_Emails}>0 then ${Total_Revenue_From_Email}/${Total_Received_spesific_Emails} else 0 end ;;
+    sql:  case when ${Total_Received_specific_Emails}>0 then ${Total_Revenue_From_Email}/${Total_Received_specific_Emails} else 0 end ;;
     value_format: "0.0$"
   }
 
 
   measure: revenue_per_1000_received_email{
     type: number
-    sql:  case when ${Total_Received_spesific_Emails}>0 then ${Total_Revenue_From_Email}/${Total_Received_spesific_Emails}*1000 else 0 end ;;
+    sql:  case when ${Total_Received_specific_Emails}>0 then ${Total_Revenue_From_Email}/${Total_Received_specific_Emails}*1000 else 0 end ;;
     value_format: "0.0$"
   }
 
 
-### rate spesific
+### rate specific
 
-  measure: Opened_Rate_spesific_email{
+  measure: Opened_Rate_specific_email{
     type: number
-    sql: case when ${Total_Received_spesific_Emails}>0 then ${Total_Opened_spesific_Emails}/${Total_Received_spesific_Emails} else 0 end  ;;
+    sql: case when ${Total_Received_specific_Emails}>0 then ${Total_Opened_specific_Emails}/${Total_Received_specific_Emails} else 0 end  ;;
     value_format: "0.00%"
   }
 
-  measure: Clicked_Rate_spesific_email{
+  measure: Clicked_Rate_specific_email{
     type: number
-    sql: case when ${Total_Opened_spesific_Emails}>0 then ${Total_Clicked_spesific_Emails}/${Total_Opened_spesific_Emails} else 0 end    ;;
+    sql: case when ${Total_Opened_specific_Emails}>0 then ${Total_Clicked_specific_Emails}/${Total_Opened_specific_Emails} else 0 end    ;;
     value_format: "0.00%"
   }
 
-  measure: Clicked_Rate_out_of_received_spesific_email{
+  measure: Clicked_Rate_out_of_received_specific_email{
     type: number
-    sql:  case when ${Total_Received_spesific_Emails}>0 then ${Total_Clicked_spesific_Emails}/${Total_Received_spesific_Emails} else 0 end  ;;
+    sql:  case when ${Total_Received_specific_Emails}>0 then ${Total_Clicked_specific_Emails}/${Total_Received_specific_Emails} else 0 end  ;;
     value_format: "0.00%"
   }
 
-  measure: Order_from_clicked_Rate_spesific_email{
+  measure: Order_from_clicked_Rate_specific_email{
     type: number
-    sql:  case when ${Total_Clicked_spesific_Emails}>0 then ${Total_Orders_From_spesific_Email}/${Total_Clicked_spesific_Emails} else 0 end ;;
+    sql:  case when ${Total_Clicked_specific_Emails}>0 then ${Total_Orders_From_specific_Email}/${Total_Clicked_specific_Emails} else 0 end ;;
     value_format: "0.00%"
   }
 
 ### order and revenue out of email/order recived
 
 
-  measure: Order_from_recived_email_spesific_email{
+  measure: Order_from_recived_email_specific_email{
     type: number
-    sql:  case when ${Total_Received_spesific_Emails}>0 then ${Total_Orders_From_spesific_Email}/${Total_Received_spesific_Emails} else 0 end ;;
+    sql:  case when ${Total_Received_specific_Emails}>0 then ${Total_Orders_From_specific_Email}/${Total_Received_specific_Emails} else 0 end ;;
     value_format:  "0.00%"
   }
 
 
-  measure: Revenue_from_recived_email_spesific_email{
+  measure: Revenue_from_recived_email_specific_email{
     type: number
-    sql:  case when ${Total_Received_spesific_Emails}>0 then ${Total_Revenue_From_Email}/${Total_Received_spesific_Emails} else 0 end ;;
+    sql:  case when ${Total_Received_specific_Emails}>0 then ${Total_Revenue_From_Email}/${Total_Received_specific_Emails} else 0 end ;;
     value_format: "$#,##0.00"
   }
 
 
   measure: Order_from_recived_email_user{
     type: number
-    sql:  case when ${Total_Received_spesific_Emails}>0 then ${Total_Orders_From_spesific_Email}/${Total_Received_Emails} else 0 end ;;
+    sql:  case when ${Total_Received_specific_Emails}>0 then ${Total_Orders_From_specific_Email}/${Total_Received_Emails} else 0 end ;;
     value_format:  "0.00%"
   }
 
@@ -931,16 +931,16 @@ view: klaviyo_email_events_by_user {
   parameter: ratio_selector_2 {
     type: unquoted
     allowed_value: {
-      label: "Opened_Rate_spesific_email"
-      value: "Opened_Rate_spesific_email"
+      label: "Opened_Rate_specific_email"
+      value: "Opened_Rate_specific_email"
     }
     allowed_value: {
-      label: "Clicked_Rate_spesific_email"
-      value: "Clicked_Rate_spesific_email"
+      label: "Clicked_Rate_specific_email"
+      value: "Clicked_Rate_specific_email"
     }
     allowed_value: {
-      label: "Order_from_clicked_Rate_spesific_email"
-      value: "Order_from_clicked_Rate_spesific_email"
+      label: "Order_from_clicked_Rate_specific_email"
+      value: "Order_from_clicked_Rate_specific_email"
     }
 
 
@@ -951,24 +951,24 @@ view: klaviyo_email_events_by_user {
       value: "none"
     }
     group_label: "Advanced Selectors"
-    label: "Ratio_selector_spesific_email"
+    label: "Ratio_selector_specific_email"
   }
 
   measure: ratio_dimension_2 {
     type: number
     sql:
-      {% if ratio_selector_2._parameter_value == 'Opened_Rate_spesific_email' %}
+      {% if ratio_selector_2._parameter_value == 'Opened_Rate_specific_email' %}
         ${Opened_Rate}
-      {% elsif ratio_selector_2._parameter_value == 'Clicked_Rate_spesific_email' %}
+      {% elsif ratio_selector_2._parameter_value == 'Clicked_Rate_specific_email' %}
         ${Clicked_Rate}
-      {% elsif ratio_selector_2._parameter_value == 'Order_from_clicked_Rate_spesific_email' %}
+      {% elsif ratio_selector_2._parameter_value == 'Order_from_clicked_Rate_specific_email' %}
         ${Order_from_clicked_Rate}
       {% else %}
         null
       {% endif %};;
     label_from_parameter: ratio_selector_2
     value_format: "0.00%"
-    label: "Ratio_dimention_spesific_email"
+    label: "Ratio_dimention_specific_email"
     group_label: "Advanced Measures"
   }
 
@@ -1047,20 +1047,20 @@ view: klaviyo_email_events_by_user {
     type: unquoted
 
     allowed_value: {
-      label: "Total_Received_spesific_Emails"
-      value: "Total_Received_spesific_Emails"
+      label: "Total_Received_specific_Emails"
+      value: "Total_Received_specific_Emails"
     }
     allowed_value: {
-      label: "Total_Opened_spesific_Emails"
-      value: "Total_Opened_spesific_Emails"
+      label: "Total_Opened_specific_Emails"
+      value: "Total_Opened_specific_Emails"
     }
     allowed_value: {
-      label: "Total_Clicked_spesific_Emails"
-      value: "Total_Clicked_spesific_Emails"
+      label: "Total_Clicked_specific_Emails"
+      value: "Total_Clicked_specific_Emails"
     }
     allowed_value: {
-      label: "Total_Orders_From_spesific_Email"
-      value: "Total_Orders_From_spesific_Email"
+      label: "Total_Orders_From_specific_Email"
+      value: "Total_Orders_From_specific_Email"
     }
     allowed_value: {
       label: "Total_Revenue_From_Email"
@@ -1082,7 +1082,7 @@ view: klaviyo_email_events_by_user {
       value: "none"
     }
     group_label: "Advanced Selectors"
-    label: "Total_Selector_spesific_Emails"
+    label: "Total_Selector_specific_Emails"
 
   }
 
@@ -1090,14 +1090,14 @@ view: klaviyo_email_events_by_user {
   measure: total_dimension_2 {
     type: number
     sql:
-      {% if total_selector_2._parameter_value == 'Total_Received_spesific_Emails' %}
-        ${Total_Received_spesific_Emails}
-      {% elsif total_selector_2._parameter_value == 'Total_Opened_spesific_Emails' %}
-        ${Total_Opened_spesific_Emails}
-      {% elsif total_selector_2._parameter_value == 'Total_Clicked_spesific_Emails' %}
-        ${Total_Clicked_spesific_Emails}
-      {% elsif total_selector_2._parameter_value == 'Total_Orders_From_spesific_Email' %}
-        ${Total_Orders_From_spesific_Email}
+      {% if total_selector_2._parameter_value == 'Total_Received_specific_Emails' %}
+        ${Total_Received_specific_Emails}
+      {% elsif total_selector_2._parameter_value == 'Total_Opened_specific_Emails' %}
+        ${Total_Opened_specific_Emails}
+      {% elsif total_selector_2._parameter_value == 'Total_Clicked_specific_Emails' %}
+        ${Total_Clicked_specific_Emails}
+      {% elsif total_selector_2._parameter_value == 'Total_Orders_From_specific_Email' %}
+        ${Total_Orders_From_specific_Email}
       {% elsif total_selector_2._parameter_value == 'Total_Revenue_From_Email' %}
         ${Total_Revenue_From_Email}
       {% elsif total_selector_2._parameter_value == 'AOV' %}
@@ -1110,7 +1110,7 @@ view: klaviyo_email_events_by_user {
     label_from_parameter: total_selector_2
     value_format: "#,##0"
     group_label: "Advanced Measures"
-    label: "Total_dimention_spesific_Emails"
+    label: "Total_dimention_specific_Emails"
   }
 
 
