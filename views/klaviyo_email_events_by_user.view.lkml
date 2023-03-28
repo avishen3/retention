@@ -935,10 +935,7 @@ view: klaviyo_email_events_by_user {
       value: "Order_from_clicked_Rate_spesific_email"
     }
 
-    allowed_value: {
-      label: "revenue_per_recived_email"
-      value: "revenue_per_recived_email"
-    }
+
 
 
     allowed_value: {
@@ -958,8 +955,6 @@ view: klaviyo_email_events_by_user {
         ${Clicked_Rate}
       {% elsif ratio_selector_2._parameter_value == 'Order_from_clicked_Rate_spesific_email' %}
         ${Order_from_clicked_Rate}
-        {% elsif ratio_selector_2._parameter_value == 'revenue_per_recived_email' %}
-        ${revenue_per_recived_email}
       {% else %}
         null
       {% endif %};;
@@ -1062,7 +1057,14 @@ view: klaviyo_email_events_by_user {
     allowed_value: {
       label: "Total_Revenue_From_Email"
       value: "Total_Revenue_From_Email"
+
     }
+
+    allowed_value: {
+      label: "revenue_per_recived_email"
+      value: "revenue_per_recived_email"
+    }
+
     allowed_value: {
       label: "AOV"
       value: "AOV"
@@ -1092,6 +1094,8 @@ view: klaviyo_email_events_by_user {
         ${Total_Revenue_From_Email}
       {% elsif total_selector_2._parameter_value == 'AOV' %}
         ${AOV}
+         {% elsif total_selector_2._parameter_value == 'revenue_per_recived_email' %}
+        ${revenue_per_recived_email}
       {% else %}
         null
       {% endif %};;
