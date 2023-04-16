@@ -2,6 +2,13 @@ view: klaviyo_email_events_by_user {
   sql_table_name: `omega-post-184817.customer.klaviyo_email_events_by_user`
     ;;
 
+
+
+  dimension: domain_name {
+    type: string
+    sql: ${TABLE}.domain_name ;;
+  }
+
   dimension: billing_provider_first {
     type: string
     sql: ${TABLE}.billing_provider_first ;;
