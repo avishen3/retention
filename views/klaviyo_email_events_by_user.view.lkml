@@ -706,6 +706,23 @@ view: klaviyo_email_events_by_user {
     sql: case when ${email_order_created_raw} is not null then ${email} end  ;;
   }
 
+  measure: Total_bounced_Email{
+    label: "Total_users_bounced_email"
+    type: count_distinct
+    sql: case when ${ts_bounced_email_raw} is not null then ${email} end  ;;
+  }
+
+  measure: Total_dropped_Email{
+    label: "Total_users_dropped_email"
+    type: count_distinct
+    sql: case when ${ts_dropped_email_raw} is not null then ${email} end  ;;
+  }
+
+  measure: Total_marked_spam_Email{
+    label: "Total_users_marked_spam_email"
+    type: count_distinct
+    sql: case when ${ts_marked_spam_raw} is not null then ${email} end  ;;
+  }
 
   ### rate
 
@@ -810,6 +827,22 @@ view: klaviyo_email_events_by_user {
   measure: Total_Orders_From_specific_Email{
     type: count_distinct
     sql: case when ${email_order_created_raw} is not null then (concat(${email},${campaign})) end  ;;
+  }
+
+
+  measure: Total_bounced_specific_Emails{
+    type: count_distinct
+    sql: case when ${ts_bounced_email_raw} is not null then (concat(${email},${campaign})) end  ;;
+  }
+
+  measure: Total_dropped_specific_Emails{
+    type: count_distinct
+    sql: case when ${ts_dropped_email_raw} is not null then (concat(${email},${campaign})) end  ;;
+  }
+
+  measure: Total_marked_spam_specific_Emails{
+    type: count_distinct
+    sql: case when ${ts_marked_spam_raw} is not null then (concat(${email},${campaign})) end  ;;
   }
 
 
