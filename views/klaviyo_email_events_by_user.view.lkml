@@ -1406,7 +1406,7 @@ view: klaviyo_email_events_by_user {
   }
 
 
-  measure: receive_eorder_Cohort{
+  dimension: receive_eorder_Cohort{
     label: "Cohort"
     type: string
     sql:  case when (receive_eorder_minute_diff/60)<=24 then "d1"
