@@ -1406,5 +1406,15 @@ view: klaviyo_email_events_by_user {
   }
 
 
+  measure: receive_eorder_Cohort{
+    label: "Cohort"
+    type: string
+    sql:  case when (receive_eorder_minute_diff/60)<=24 then "d1"
+            when (receive_eorder_minute_diff/60)<=189 then "d7"
+            when (receive_eorder_minute_diff/60)<=672 then "d28"
+            else "Non cohort" end ;;
+  }
+
+
 
 }
