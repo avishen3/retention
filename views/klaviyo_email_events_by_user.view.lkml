@@ -1416,5 +1416,22 @@ view: klaviyo_email_events_by_user {
   }
 
 
+##  measure: total_true_orders_D1_emails {
+##    label: "Total True Orders D1 emails"
+##    type: number
+##    sql: sum(case when date_diff(current_date('America/Los_Angeles'), ${reporting_date}, day) < 1 then null else ${d1_true_orders} end);;
+##    value_format: "#,##0.0"
+##    group_label: "True Order Metrics"
+##  }
+
+  measure: total_true_orders_D1_emails {
+  label: "Total True Orders D1 emails"
+  type: count_distinct
+  sql: case when (receive_eorder_minute_diff/60)<=24 then ${email_short_id} else null  end);;
+  value_format: "#,##0.0"
+  group_label: "True Order Metrics"
+  }
+
+
 
 }
