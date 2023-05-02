@@ -1409,9 +1409,9 @@ view: klaviyo_email_events_by_user {
   dimension: receive_eorder_Cohort{
     label: "Cohort"
     type: string
-    sql:  case when (receive_eorder_minute_diff/60)<=24 then "d1"
-            when (receive_eorder_minute_diff/60)<=189 then "d7"
-            when (receive_eorder_minute_diff/60)<=672 then "d28"
+    sql:  case when (receive_eorder_minute_diff/60)<=24 then "up till d1"
+            when (receive_eorder_minute_diff/60)<=189 then "d2-d7"
+            when (receive_eorder_minute_diff/60)<=672 then "d8-d28"
             else "Non cohort" end ;;
   }
 
