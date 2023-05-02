@@ -1117,6 +1117,30 @@ view: klaviyo_email_events_by_user {
       label: "AOV"
       value: "AOV"
     }
+
+    allowed_value: {
+      label: "Cohort_email_orders_D1"
+      value: "Cohort_email_orders_D1"
+    }
+
+    allowed_value: {
+      label: "Cohort_email_orders_D7"
+      value: "Cohort_email_orders_D17"
+    }
+
+
+
+    allowed_value: {
+      label: "Cohort_email_revenue_D1"
+      value: "Cohort_email_revenue_D1"
+    }
+
+    allowed_value: {
+      label: "Cohort_email_revenue_D7"
+      value: "Cohort_email_revenue_D7"
+    }
+
+
     allowed_value: {
       label: "none"
       value: "none"
@@ -1144,6 +1168,15 @@ view: klaviyo_email_events_by_user {
         ${AOV}
          {% elsif total_selector_2._parameter_value == 'revenue_per_1000_received_email' %}
         ${revenue_per_1000_received_email}
+      {% elsif total_selector_2._parameter_value == 'Cohort_email_orders_D1' %}
+        ${Cohort_email_orders_D1}
+      {% elsif total_selector_2._parameter_value == 'Cohort_email_orders_D7' %}
+        ${Cohort_email_orders_D7}
+        {% elsif total_selector_2._parameter_value == 'Cohort_email_revenue_D1' %}
+        ${Cohort_email_orders_D1}
+      {% elsif total_selector_2._parameter_value == 'Cohort_email_revenue_D7' %}
+        ${Cohort_email_orders_D7}
+
       {% else %}
         null
       {% endif %};;
