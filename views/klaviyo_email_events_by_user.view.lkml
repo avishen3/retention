@@ -1454,7 +1454,7 @@ view: klaviyo_email_events_by_user {
     label: "Total Cohort email revenue D1"
     type: sum
     sql: case when (receive_eorder_minute_diff/60)<=24 then ${email_order_price}-${email_order_tax} else null end;;
-    value_format: "#,##0.0"
+    value_format: "$#,##0"
     group_label: "Cohort email revenue"
   }
 
@@ -1462,7 +1462,7 @@ view: klaviyo_email_events_by_user {
     label: "Total Cohort email revenue D7"
     type: sum
     sql: case when (receive_eorder_minute_diff/60)<=189 then ${email_order_price}-${email_order_tax} else null end;;
-    value_format: "#,##0.0"
+    value_format: "$#,##0"
     group_label: "Cohort email revenue"
   }
 
@@ -1470,7 +1470,7 @@ view: klaviyo_email_events_by_user {
     label: "Total Cohort email revenue D28"
     type: sum
     sql: case when (receive_eorder_minute_diff/60)<=672 then ${email_order_price}-${email_order_tax} else null end;;
-    value_format: "#,##0.0"
+    value_format: "$#,##0"
     group_label: "Cohort email revenue"
   }
 
