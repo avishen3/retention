@@ -1507,4 +1507,29 @@ view: klaviyo_email_events_by_user {
     group_label: "Cohort email revenue"
   }
 
+
+# date comparison received_email_raw
+
+  filter: date_filter {
+    type: date
+    group_label: "Date Filters"
+  }
+
+  filter: date_filter_2 {
+    type: date
+    group_label: "Date Filters"
+    description: "Second date filter for 'Date Comparison' dashboard"
+  }
+
+  dimension: compared_period {
+    type: string
+    sql:
+            case
+              when {% condition date_filter %} timestamp(${ts_received_email_raw}) {% endcondition %} then 'First period'
+              when {% condition date_filter_2 %} timestamp(${ts_received_email_raw}) {% endcondition %} then 'Second period'
+            end ;;
+  }
+
+
+
 }
