@@ -1173,9 +1173,9 @@ view: klaviyo_email_events_by_user {
       {% elsif total_selector_2._parameter_value == 'Cohort_email_orders_D7' %}
         ${Cohort_email_orders_D7}
         {% elsif total_selector_2._parameter_value == 'Cohort_email_revenue_D1' %}
-        ${Cohort_email_orders_D1}
+        ${Cohort_email_revenue_D1}
       {% elsif total_selector_2._parameter_value == 'Cohort_email_revenue_D7' %}
-        ${Cohort_email_orders_D7}
+        ${Cohort_email_revenue_D7}
 
       {% else %}
         null
