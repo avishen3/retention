@@ -752,7 +752,13 @@ view: klaviyo_email_events_by_user {
     label: "Ordered_from_click_rate_users"
     sql:  case when ${Total_Clicked_Emails}>0 then ${Total_Orders_From_Email}/${Total_Clicked_Emails} else 0 end ;;
     value_format: "0.00%"
+  }
 
+  measure: Conversion_Rate{
+    type: number
+    label: "Conversion Rate - order from sent emails"
+    sql:  case when ${Total_Received_Emails}>0 then ${Total_Orders_From_Email}/${Total_Received_Emails} else 0 end ;;
+    value_format: "0.00%"
   }
 
 
