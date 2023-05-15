@@ -892,6 +892,12 @@ view: klaviyo_email_events_by_user {
     value_format: "0.00%"
   }
 
+  measure: Click_to_open_rate_specific_email{
+    type: number
+    sql:  case when ${Total_Opened_specific_Emails}>0 then ${Total_Clicked_specific_Emails}/${Total_Opened_specific_Emails} else 0 end  ;;
+    value_format: "0.00%"
+  }
+
   measure: Order_from_clicked_Rate_specific_email{
     type: number
     sql:  case when ${Total_Clicked_specific_Emails}>0 then ${Total_Orders_From_specific_Email}/${Total_Clicked_specific_Emails} else 0 end ;;
