@@ -502,6 +502,8 @@ view: klaviyo_email_events_by_user {
       week,
       month,
       quarter,
+      day_of_week,
+    day_of_week_index,
       year
     ]
     sql: ${TABLE}.ts_Received_email ;;
