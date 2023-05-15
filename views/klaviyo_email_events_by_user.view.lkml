@@ -777,6 +777,12 @@ view: klaviyo_email_events_by_user {
     value_format: "$0.0"
   }
 
+  measure: Total_Order_From_Email{
+    type: count_distinct
+    sql: case when ${email_order_created_raw} is not null then ${email_short_id} end  ;;
+    value_format: "0.0"
+  }
+
 
   ## AOVs
 
