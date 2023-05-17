@@ -548,7 +548,7 @@ view: alerts_outgoing_calls_five9_tbl {
 
   measure: total_upsell_exchange{
     type: count_distinct
-    sql: case when ${exchanged_agent_email} <> "" then  ${five9_short_id} else null end
+    sql: case when (${exchanged_agent_email} <> "" and ${exchange_type} = "upsell") then  ${five9_short_id} else null end
      ;;
     value_format: "#,##0"
   }
@@ -556,7 +556,7 @@ view: alerts_outgoing_calls_five9_tbl {
 
   measure: total_upsell_exchange_answered_calls{
     type: count_distinct
-    sql: case when ( ${exchanged_agent_email} <> "" and   ${is_call_in_five9_answerd} is true)  then  ${five9_short_id} else null end
+    sql: case when ( ${exchanged_agent_email} <> "" and   ${is_call_in_five9_answerd} is true and ${exchange_type} = "upsell")  then  ${five9_short_id} else null end
       ;;
     value_format: "#,##0"
   }
