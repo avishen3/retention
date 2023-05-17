@@ -553,6 +553,13 @@ view: alerts_outgoing_calls_five9_tbl {
     value_format: "#,##0"
   }
 
+  measure: total_upsell_exchange_not_Five9{
+    type: count_distinct
+    sql: case when (${exchanged_agent_email} <> "" and lower(${exchange_type}) = "upsell") then  ${short_id} else null end
+      ;;
+    value_format: "#,##0"
+  }
+
 
   measure: total_upsell_exchange_answered_calls{
     type: count_distinct
