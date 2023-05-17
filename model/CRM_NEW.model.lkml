@@ -62,9 +62,13 @@ label: "Email visit and order acquisition source "
 
 ## basic dashboarde re build
 
-explore: klaviyo_events_n_dc_tbl {
-label: "Klaviyo Events - New"
-}
+
+###!!!
+##explore: klaviyo_events_n_dc_tbl {
+##label: "Klaviyo Events - New"
+##}
+
+###!!!!
 
 ## attantive data
 
