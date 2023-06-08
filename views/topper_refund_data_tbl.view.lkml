@@ -152,6 +152,17 @@ view: topper_refund_data_tbl {
     sql: ${TABLE}.product_name_topper ;;
   }
 
+  dimension: topper_type {
+    type: string
+    sql: case when ${agent_name_topper} like "%soft%" then "Soft"
+              when ${agent_name_topper} like "%firm%" then "firm" end
+
+    ;;
+  }
+
+
+
+
   dimension: product_size {
     type: string
     sql: ${TABLE}.product_size ;;
