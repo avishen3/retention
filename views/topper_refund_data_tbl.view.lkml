@@ -154,10 +154,10 @@ view: topper_refund_data_tbl {
 
   dimension: topper_type {
     type: string
-    sql: case when ${agent_name_topper} like "%soft%" then "Soft"
-              when ${agent_name_topper} like "%firm%" then "firm" end
-
-    ;;
+    sql:  Case when regexp_contains(lower(${product_name_topper}),"soft") then "Soft"
+              when regexp_contains(lower(${product_name_topper}),"firm") then "Firm"
+              Else ${product_name_topper}
+              End ;;
   }
 
 
