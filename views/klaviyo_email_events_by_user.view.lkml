@@ -1005,6 +1005,11 @@ view: klaviyo_email_events_by_user {
 
 
 
+    allowed_value: {
+      label: "Order_from_recived_email_specific_email"
+      value: "Order_from_recived_email_specific_email"
+    }
+
 
     allowed_value: {
       label: "none"
@@ -1023,6 +1028,8 @@ view: klaviyo_email_events_by_user {
         ${Clicked_Rate}
       {% elsif ratio_selector_2._parameter_value == 'Order_from_clicked_Rate_specific_email' %}
         ${Order_from_clicked_Rate}
+          {% elsif ratio_selector_2._parameter_value == 'Order_from_recived_email_specific_email' %}
+        ${Order_from_recived_email_specific_email}
       {% else %}
         null
       {% endif %};;
