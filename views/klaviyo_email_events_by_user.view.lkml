@@ -769,7 +769,7 @@ view: klaviyo_email_events_by_user {
   measure: Total_Revenue_From_Email{
     type: sum
     sql: case when ${email_order_created_raw} is not null then ${email_order_price}-${email_order_tax} end  ;;
-    value_format: "$0.0"
+    value_format: "$0"
   }
 
   measure: Total_price_From_Email{
