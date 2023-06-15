@@ -353,8 +353,8 @@ view: klaviyo_email_events_by_user {
   dimension: promo_or_sale_flow {
     type: string
     sql: case when ${promo_or_flow} = "promo" then "promo"
-              when ${promo_or_flow} = "flow" and (lower(${flow_name}) like "%abandon%" or lower(${flow_name}) like "%cart_link%"  or lower(${flow_name}) like "%welcome%"or lower(${flow_name}) like "%reactivation%") then "sale_flow"
-              else "non-sale-flow" end
+              when ${promo_or_flow} = "flow" and (lower(${flow_name}) like "%abandon%"  or lower(${flow_name}) like "%welcome%"or lower(${flow_name}) like "%reactivation%") then "Marketing Flow"
+              else "Transactional Flow" end
     ;;
   }
 
@@ -858,6 +858,8 @@ view: klaviyo_email_events_by_user {
     type: count_distinct
     sql: case when ${ts_marked_spam_raw} is not null then (concat(${email},${campaign})) end  ;;
   }
+
+
 
 
   measure: revenue_per_recived_email{
