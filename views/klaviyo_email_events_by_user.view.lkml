@@ -344,6 +344,20 @@ view: klaviyo_email_events_by_user {
     sql: ${TABLE}.order_marketing_platform ;;
   }
 
+  dimension: first_lc_marketing_platform {
+    type: string
+    sql: ${TABLE}.first_lc_marketing_platform ;;
+  }
+
+  dimension: last_lc_marketing_platform {
+    type: string
+    sql: ${TABLE}.last_lc_marketing_platform ;;
+  }
+
+
+
+
+
   dimension: promo_or_flow {
     type: string
     sql: ${TABLE}.promo_or_flow ;;
