@@ -136,4 +136,60 @@ view: cs_agent_sales_vw {
     type: count
     drill_fields: [agent_first_name, agent_last_name]
   }
+
+  #### Total data
+
+  measure: Total_Order{
+    type: count_distinct
+    sql:  ${short_id} ;;
+    value_format: "#,##0"
+  }
+
+  measure: Total_Price{
+    type: count_distinct
+    sql:  ${price} ;;
+    value_format: "$#,##0.0"
+  }
+
+  measure: Total_Revenue{
+    type: count_distinct
+    sql:  ${price}-${tax} ;;
+    value_format: "$#,##0.0"
+  }
+
+
+  measure: Total_AOV{
+    type: number
+    sql:  ${Total_Revenue}/${Total_Order} ;;
+    value_format: "$#,##0.0"
+  }
+
+
+
+  #### agent_data
+
+  measure: Total_Agent_Order{
+    type: count_distinct
+    sql:  case when ${agent_id} in not null then ${short_id} else 0 end ;;
+    value_format: "#,##0"
+  }
+
+  measure: Total_Agent_Price{
+    type: sum
+    sql:  case when ${agent_id} in not null then ${price} else 0 end ;;
+    value_format: "$#,##0.0"
+  }
+
+  measure: Total_Agent_Revenue{
+    type: sum
+    sql:  case when ${agent_id} in not null then ${price}-${tax} else 0 end ;;
+    value_format: "$#,##0.0"
+  }
+
+  measure: Total_Agent_AOV{
+    type: number
+    sql:  case when ${agent_id} in not null then  ${Total_Revenue}/${Total_Order} else 0 end ;;
+    value_format: "$#,##0.0"
+  }
+
 }
