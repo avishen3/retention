@@ -170,25 +170,25 @@ view: cs_agent_sales_vw {
 
   measure: Total_Agent_Order{
     type: count_distinct
-    sql:  case when ${agent_id} is not null then ${short_id} else 0 end ;;
+    sql:  case when ${agent_id}  is not null then ${short_id} else 0 end ;;
     value_format: "#,##0"
   }
 
   measure: Total_Agent_Price{
     type: sum
-    sql:  case when ${agent_id} is not null then ${price} else 0 end ;;
+    sql:  case when ${agent_id}  is not null then ${price} else 0 end ;;
     value_format: "$#,##0.0"
   }
 
   measure: Total_Agent_Revenue{
     type: sum
-    sql:  case when ${agent_id} is not null then ${price}-${tax} else 0 end ;;
+    sql:  case when ${agent_id}  is not null then ${price}-${tax} else 0 end ;;
     value_format: "$#,##0.0"
   }
 
   measure: Total_Agent_AOV{
     type: number
-    sql:  case when ${agent_id} is not null then  ${Total_Revenue}/${Total_Order} else 0 end ;;
+    sql:  case when ${agent_id}  is not null then  ${Total_Revenue}/${Total_Order} else 0 end ;;
     value_format: "$#,##0.0"
   }
 
