@@ -152,13 +152,13 @@ view: cs_agent_sales_vw {
   }
 
   measure: Total_Price{
-    type: count_distinct
+    type: sum
     sql:  ${price} ;;
     value_format: "$#,##0.0"
   }
 
   measure: Total_Revenue{
-    type: count_distinct
+    type: sum
     sql:  ${price}-${tax} ;;
     value_format: "$#,##0.0"
   }
