@@ -76,7 +76,9 @@ view: cs_agent_sales_vw {
       week,
       month,
       quarter,
-      year
+      year,
+      hour,
+      hour2
     ]
     datatype: datetime
     sql: ${TABLE}.order_created ;;
@@ -101,7 +103,9 @@ view: cs_agent_sales_vw {
       week,
       month,
       quarter,
-      year
+      year,
+      hour,
+      hour2
     ]
     datatype: datetime
     sql: ${TABLE}.order_updated ;;
