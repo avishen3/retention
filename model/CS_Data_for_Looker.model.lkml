@@ -63,13 +63,13 @@ explore: cs_calls_data_for_looker_nano_niv_tbl{
   description: "manually updated"
 }
 
-
 ### CS Real Time agent order
 
-## explore: cs_agent_sales {
-##  label: "CS inbound calls data with nano and nav"
-##  description: "manually updated"
-##}
+
+explore: cs_agent_sales_vw{
+  label: "RealTime CS Agent Sale View"
+  description: "View, Updated about every half hours"
+}
 
 ###
 
