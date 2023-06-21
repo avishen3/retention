@@ -64,6 +64,13 @@ explore: cs_calls_data_for_looker_nano_niv_tbl{
 }
 
 
+### CS Real Time agent order
+
+## explore: cs_agent_sales {
+##  label: "CS inbound calls data with nano and nav"
+##  description: "manually updated"
+##}
+
 ###
 
 explore: cartlink_source_data_tbl {

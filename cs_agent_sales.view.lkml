@@ -3,6 +3,147 @@ view: cs_agent_sales {
       sql: select distinct * FROM `omega-post-184817.CS_NEW.cs_agent_sales_vw`   ;;
     }
 
+  dimension: order_id {
+    type: string
+    sql: ${TABLE}.order_id ;;
+     }
+
+
+  dimension: short_id {
+    type: string
+    sql: ${TABLE}.short_id ;;
+  }
+
+
+  dimension: email {
+    type: string
+    sql: ${TABLE}.email ;;
+  }
+
+  dimension: status {
+    type: string
+    sql: ${TABLE}.status ;;
+  }
+
+  dimension: channel {
+    type: string
+    sql: ${TABLE}.channel ;;
+  }
+
+  dimension: brand {
+    type: string
+    sql: ${TABLE}.brand ;;
+  }
+
+  dimension: geo {
+    type: string
+    sql: ${TABLE}.geo ;;
+  }
+
+
+  dimension_group: order_created {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      minute30,
+      hour,
+      date,
+      week,
+      month,
+      quarter,
+      year,
+      hour2
+    ]
+    sql: timestamp( ${TABLE}.order_created) ;;
+  }
+
+
+  dimension_group: order_updated {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      minute30,
+      hour,
+      date,
+      week,
+      month,
+      quarter,
+      year,
+      hour2
+    ]
+    sql: timestamp( ${TABLE}.order_created) ;;
+  }
+
+
+  dimension: price {
+    type: number
+    sql: cast(${TABLE}.price as float64) ;;
+  }
+
+  dimension: tax {
+    type: number
+    sql: cast(${TABLE}.tax as float64) ;;
+  }
+
+  dimension:  discount {
+    type: number
+    sql: cast(${TABLE}. discount as float64) ;;
+  }
+
+
+  dimension: cart_id {
+    type: string
+    sql: ${TABLE}.cart_id ;;
+  }
+
+  dimension: billing_provider {
+    type: string
+    sql: ${TABLE}.billing_provider ;;
+  }
+
+  dimension: cs_order_channel {
+    type: string
+    sql: ${TABLE}.cs_order_channel ;;
+  }
+
+  dimension: agent_email {
+    type: string
+    sql: ${TABLE}.agent_email ;;
+  }
+
+  dimension: agent_first_name {
+    type: string
+    sql: ${TABLE}.agent_first_name ;;
+  }
+
+  dimension: agent_last_name {
+    type: string
+    sql: ${TABLE}.agent_last_name ;;
+  }
+
+  dimension: agent_id {
+    type: string
+    sql: ${TABLE}.agent_id ;;
+  }
+
+  dimension: order_source {
+    type: string
+    sql: ${TABLE}.order_source ;;
+  }
+
+  dimension: cart_remote_token {
+    type: string
+    sql: ${TABLE}.cart_remote_token ;;
+  }
+
+  dimension: type {
+    type: string
+    sql: ${TABLE}.type ;;
+  }
+
+
 
 
   # # You can specify the table name if it's different from the view name:
