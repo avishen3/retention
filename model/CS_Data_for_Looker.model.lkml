@@ -136,6 +136,10 @@ explore: admin_client_events_agents_check_up_tbl{
   label: "admin client events agents check up"
   description: "Malshinon for Neta"}
 
+explore: retention_platform{
+  label: "Retention Platform"}
+
+
 
 ## cartlink
 
