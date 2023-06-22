@@ -242,7 +242,12 @@ view: retention_platform {
     type: count_distinct
     sql: case when ${accepted_save_attempt} ='finalSale' then ${item_id} else null end ;;
     value_format: "#,##0"
+  }
 
+  measure: Total_FinalSale_Items_mattress{
+    type: count_distinct
+    sql: case when ${accepted_save_attempt} ='finalSale' and  ${category} "mattress" then ${item_id} else null end ;;
+    value_format: "#,##0"
   }
 
 
