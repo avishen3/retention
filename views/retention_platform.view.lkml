@@ -240,7 +240,7 @@ view: retention_platform {
 
   measure: Total_FinalSale_Items {
     type: count_distinct
-    sql: case when ${accepted_save_attempt} = 'finalSale"' then ${item_id} else null end ;;
+    sql: case when ${accepted_save_attempt} ='finalSale' then ${item_id} else null end ;;
     value_format: "#,##0"
 
   }
