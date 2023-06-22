@@ -252,7 +252,7 @@ view: retention_platform {
 
   measure: Total_FinalSale_Items_frames{
     type: count_distinct
-    sql: case when ${accepted_save_attempt} ='finalSale' and  ${category} in ("mattress","foundation","headboard","adjustable","frame other","metal frame") then ${item_id} else null end ;;
+    sql: case when ${accepted_save_attempt} ='finalSale' and  ${category} in ("foundation","headboard","adjustable","frame other","metal frame") then ${item_id} else null end ;;
     value_format: "#,##0"
   }
 
