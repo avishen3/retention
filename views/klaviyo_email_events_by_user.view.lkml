@@ -1504,7 +1504,7 @@ view: klaviyo_email_events_by_user {
   label: "Total Cohort email orders D1"
   type: count_distinct
   sql: case when (receive_eorder_minute_diff/60)<=24 then ${email_short_id} else null  end;;
-  value_format: "#,##0.0"
+  value_format: "#,##0"
   group_label: "Cohort email orders"
   }
 
@@ -1512,7 +1512,7 @@ view: klaviyo_email_events_by_user {
     label: "Total Cohort email orders D7"
     type: count_distinct
     sql: case when (receive_eorder_minute_diff/60)<=189 then ${email_short_id} else null  end;;
-    value_format: "#,##0.0"
+    value_format: "#,##0"
     group_label: "Cohort email orders"
   }
 
@@ -1520,7 +1520,7 @@ view: klaviyo_email_events_by_user {
     label: "Total Cohort email orders D28"
     type: count_distinct
     sql: case when (receive_eorder_minute_diff/60)<=672 then ${email_short_id} else null  end;;
-    value_format: "#,##0.0"
+    value_format: "#,##0"
     group_label: "Cohort email orders"
   }
 
