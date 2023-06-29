@@ -557,5 +557,13 @@ view: attentive_by_user {
   }
 
 
+#####  user metric
+
+  measure: Total_User_Received_SMS{
+    type: count_distinct
+    sql: ${phone} ;;
+  }
+
+
 
 }
