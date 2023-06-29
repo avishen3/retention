@@ -435,14 +435,14 @@ view: attentive_by_user {
   measure: revenue_per_recived_SMS{
     type: number
     sql:  case when ${Total_Received_specific_SMS}>0 then ${Total_Revenue_From_SMS}/${Total_Received_specific_SMS} else 0 end ;;
-    value_format: "0.000$"
+    value_format: "$0.000"
   }
 
 
   measure: revenue_per_1000_received_SMS{
     type: number
     sql:  case when ${Total_Received_specific_SMS}>0 then ${Total_Revenue_From_SMS}/${Total_Received_specific_SMS}*1000 else 0 end ;;
-    value_format: "0.000$"
+    value_format: "$0"
   }
 
 
