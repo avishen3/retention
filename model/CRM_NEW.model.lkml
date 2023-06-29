@@ -100,6 +100,13 @@ explore: klaviyo_email_events_by_user {
 }
 
 
+## attentive_by_user
+
+explore: attentive_by_user {
+  label: "SMS events by user"
+}
+
+
 #   join: orders {
 #     relationship: many_to_one
 #     sql_on: ${orders.id} = ${order_items.order_id} ;;
