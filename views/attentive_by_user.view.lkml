@@ -550,7 +550,7 @@ view: attentive_by_user {
   dimension: message_type_filter{
     label: "Flow/Promo/Legal"
     type: string
-    sql:  case when ${message_type}  = "AUTOMATED" and ${message_subtype} = "OTHER" then "Flow"
+    sql:  case when ${message_type}  = "AUTOMATED" and (${message_subtype} = "OTHER" or ${message_subtype} ="WELCOME") then "Flow"
             when ${message_type}  = "AUTOMATED" and ${message_subtype} = "LEGAL" then "Legal"
             when ${message_type}  = "ONE_TIME" then "Promo"
             else null end ;;
