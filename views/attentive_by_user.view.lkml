@@ -266,6 +266,58 @@ view: attentive_by_user {
     datatype: datetime
     sql: ${TABLE}.ts_first_received ;;
   }
+
+  #### date granulraty
+
+
+
+  parameter: date_granularity {
+    type: string
+    description: "Use this selector to change the date granularity of 'Date' dimension only"
+    allowed_value: {
+      label: "Day"
+      value: "Day"
+    }
+    allowed_value: {
+      label: "Week"
+      value: "Week"
+    }
+    allowed_value: {
+      label: "Month"
+      value: "Month"
+    }
+    allowed_value: {
+      label: "Quarter"
+      value: "Quarter"
+    }
+    allowed_value: {
+      label: "Year"
+      value: "Year"
+    }
+
+    allowed_value: {
+      label: "None"
+      value: "None"
+    }
+
+  }
+
+
+  dimension: date_ts_first_received_SMS {
+    label_from_parameter: date_granularity
+    description: "Use 'Date Granularity' selector to modify the date granularity"
+    sql:
+            CASE
+             WHEN {% parameter date_granularity %} = 'Day' THEN cast(${ts_first_received_date} as string)
+             WHEN {% parameter date_granularity %} = 'Week' THEN cast(${ts_first_received_week} as string)
+             WHEN {% parameter date_granularity %} = 'Month' THEN cast(${ts_first_received_month} as string)
+             WHEN {% parameter date_granularity %} = 'Quarter' THEN cast(${ts_first_received_quarter} as string)
+             WHEN {% parameter date_granularity %} = 'Year' THEN cast(${ts_first_received_year} as string)
+            ELSE null
+            END ;;
+  }
+
+
   dimension: variant {
     type: string
     sql: ${TABLE}.variant ;;
@@ -317,4 +369,50 @@ view: attentive_by_user {
     type: count
     drill_fields: [creative_name, message_name, campaign_name, flow_name]
   }
+
+#####  Specific SMS Matrics
+
+  measure: Total_Received_specific_SMS{
+    type: count_distinct
+    sql: concat(${phone},${message_name}) ;;
+  }
+
+  measure: Total_Clicked_specific_SMS{
+    type: count_distinct
+    sql: case when ${ts_first_clicked_raw} is not null then (concat(${phone},${message_name})) end  ;;
+  }
+
+  measure: Total_Orders_From_specific_SMS{
+    type: count_distinct
+    sql: case when ${sms_order_created_raw} is not null then (concat(${phone},${message_name})) end  ;;
+  }
+
+  ### revenue and gross profit
+
+  measure: Total_Revenue_From_SMS{
+    type: sum
+    sql: case when ${sms_order_created_raw} is not null then ${sms_order_price}-${sms_order_tax} end  ;;
+    value_format: "$#,##0"
+  }
+
+  measure: Total_price_From_SMS{
+    type: sum
+    sql: case when ${sms_order_created_raw} is not null then ${sms_order_price} end  ;;
+    value_format: "$0.0"
+  }
+
+
+  measure: Total_tax_From_SMS{
+    type: sum
+    sql: case when ${sms_order_created_raw} is not null then ${sms_order_tax} end  ;;
+    value_format: "$0.0"
+  }
+
+  measure: Total_Order_From_SMS{
+    type: count_distinct
+    sql: case when ${sms_order_created_raw} is not null then ${sms_short_id} end  ;;
+    value_format: "0.0"
+  }
+
+
 }
