@@ -467,7 +467,7 @@ view: attentive_by_user {
   measure: Order_from_recived_specific_SMS{
     type: number
     sql:  case when ${Total_Received_specific_SMS}>0 then ${Total_Order_From_SMS}/${Total_Received_specific_SMS} else 0 end ;;
-    value_format:  "0.00%"
+    value_format:  "0.0000%"
   }
 
 
