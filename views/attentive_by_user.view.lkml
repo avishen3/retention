@@ -574,7 +574,10 @@ view: attentive_by_user {
 
   measure: Total_User_OPT_OUT_client_id {
     type: count_distinct
-    sql: case when ${message_type} = "OPT_OUT" then ${client_id} else null end;;
+    sql: case when message_type = "OPT_OUT" then ${client_id} else null end;;
   }
+
+
+
 
 }
