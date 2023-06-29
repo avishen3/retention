@@ -419,7 +419,7 @@ view: attentive_by_user {
   measure: AOV{
     type: number
     sql:  case when ${Total_Orders_From_specific_SMS}>0 then ${Total_Revenue_From_SMS} /${Total_Order_From_SMS} else 0 end ;;
-    value_format: "$#,##0.0"
+    value_format: "$#,##0"
   }
 
 
