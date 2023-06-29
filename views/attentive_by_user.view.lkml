@@ -262,7 +262,8 @@ view: attentive_by_user {
   }
   dimension_group: ts_first_received {
     type: time
-    timeframes: [raw, time, date, week, month, quarter, year]
+    timeframes: [raw, time, date, week, month, quarter, year, day_of_week,
+    day_of_week_index]
     datatype: datetime
     sql: ${TABLE}.ts_first_received ;;
   }
