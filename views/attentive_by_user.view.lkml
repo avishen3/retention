@@ -432,14 +432,14 @@ view: attentive_by_user {
   }
 
 
-  measure: revenue_per_recived_email{
+  measure: revenue_per_recived_SMS{
     type: number
     sql:  case when ${Total_Received_specific_SMS}>0 then ${Total_Revenue_From_SMS}/${Total_Received_specific_SMS} else 0 end ;;
     value_format: "0.0$"
   }
 
 
-  measure: revenue_per_1000_received_email{
+  measure: revenue_per_1000_received_SMS{
     type: number
     sql:  case when ${Total_Received_specific_SMS}>0 then ${Total_Revenue_From_SMS}/${Total_Received_specific_SMS}*1000 else 0 end ;;
     value_format: "0.0$"
@@ -447,6 +447,104 @@ view: attentive_by_user {
 
 
 
+  measure: Clicked_Rate_specific_SMS{
+    type: number
+    sql: case when ${Total_Received_specific_SMS}>0 then ${Total_Clicked_specific_SMS}/${Total_Received_specific_SMS} else 0 end    ;;
+    value_format: "0.00%"
+  }
+
+  measure: Order_from_clicked_Rate_specific_SMS{
+    type: number
+    sql:  case when ${Total_Clicked_specific_SMS}>0 then ${Total_Orders_From_specific_SMS}/${Total_Clicked_specific_SMS} else 0 end ;;
+    value_format: "0.00%"
+  }
+
+
+
+  ## Order Rate
+
+
+  measure: Order_from_recived_email_specific_email{
+    type: number
+    sql:  case when ${Total_Received_specific_SMS}>0 then ${Total_Order_From_SMS}/${Total_Received_specific_SMS} else 0 end ;;
+    value_format:  "0.00%"
+  }
+
+
+### COHORT
+
+  measure: Cohort_SMS_orders_D1{
+    label: "Total Cohort SMS orders D1"
+    type: count_distinct
+    sql: case when (receive_order_minute_diff/60)<=24 then ${sms_short_id} else null  end;;
+    value_format: "#,##0"
+    group_label: "Cohort email orders"
+  }
+
+  measure: Cohort_SMS_orders_D7{
+    label: "Total Cohort email orders D7"
+    type: count_distinct
+    sql: case when (receive_order_minute_diff/60)<=189 then ${sms_short_id} else null  end;;
+    value_format: "#,##0"
+    group_label: "Cohort email orders"
+  }
+
+  measure: Cohort_SMS_orders_D28{
+    label: "Total Cohort email orders D28"
+    type: count_distinct
+    sql: case when (receive_order_minute_diff/60)<=672 then ${sms_short_id} else null  end;;
+    value_format: "#,##0"
+    group_label: "Cohort email orders"
+  }
+
+###
+
+  measure: Cohort_SMS_revenue_D1{
+    label: "Total Cohort email revenue D1"
+    type: sum
+    sql: case when (receive_order_minute_diff/60)<=24 then ${sms_order_price}-${sms_order_tax} else null end;;
+    value_format: "$#,##0"
+    group_label: "Cohort email revenue"
+  }
+
+  measure: Cohort_SMS_revenue_D7{
+    label: "Total Cohort email revenue D7"
+    type: sum
+    sql: case when (receive_order_minute_diff/60)<=189 then ${sms_order_price}-${sms_order_tax} else null end;;
+    value_format: "$#,##0"
+    group_label: "Cohort email revenue"
+  }
+
+  measure: Cohort_SMS_revenue_D28{
+    label: "Total Cohort email revenue D28"
+    type: sum
+    sql: case when (receive_order_minute_diff/60)<=672 then ${sms_order_price}-${sms_order_tax} else null end;;
+    value_format: "$#,##0"
+    group_label: "Cohort email revenue"
+  }
+
+
+# date comparison received_email_raw
+
+  filter: date_filter {
+    type: date
+    group_label: "Date Filters"
+  }
+
+  filter: date_filter_2 {
+    type: date
+    group_label: "Date Filters"
+    description: "Second date filter for 'Date Comparison' dashboard"
+  }
+
+  dimension: compared_period {
+    type: string
+    sql:
+            case
+              when {% condition date_filter %} timestamp(${ts_first_received_raw}) {% endcondition %} then 'First period'
+              when {% condition date_filter_2 %} timestamp(${ts_first_received_raw}) {% endcondition %} then 'Second period'
+            end ;;
+  }
 
 
 
