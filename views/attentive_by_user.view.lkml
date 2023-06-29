@@ -566,4 +566,10 @@ view: attentive_by_user {
 
 
 
+
+  measure: Total_User_OPT_OUT{
+    type: count_distinct
+    sql: case when ${message_type} = "OPT_OUT" then ${phone} else null;;
+  }
+
 }
