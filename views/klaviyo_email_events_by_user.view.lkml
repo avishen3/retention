@@ -1575,4 +1575,10 @@ view: klaviyo_email_events_by_user {
 
 
 
+  dimension: segment {
+    type: string
+    sql: ${TABLE}.segment ;;
+  }
+
+
 }
