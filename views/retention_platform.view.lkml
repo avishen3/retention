@@ -256,4 +256,10 @@ view: retention_platform {
     value_format: "#,##0"
   }
 
+  measure: Total_FinalSale_Items_frames_and_matt{
+    type: count_distinct
+    sql: case when ${accepted_save_attempt} ='finalSale' and  ${category} in ("foundation","headboard","adjustable","frame other","metal frame","mattress") then ${item_id} else null end ;;
+    value_format: "#,##0"
+  }
+
 }
