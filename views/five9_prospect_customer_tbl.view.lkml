@@ -815,6 +815,21 @@ view: five9_prospect_customer_tbl {
     group_label: "revenue"
   }
 
+  dimension: highest_type_after {
+    type: string
+    sql: ${TABLE}.highest_type_after ;;
+  }
+
+  dimension: highest_model_after {
+    type: string
+    sql: ${TABLE}.highest_model_after ;;
+  }
+
+  dimension: total_bases_after {
+    type: string
+    sql: ${TABLE}.total_bases_after ;;
+  }
+
 
   ##dimension: is_cs_assisted_order {
   ##  type: string
