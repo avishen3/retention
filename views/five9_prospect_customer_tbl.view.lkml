@@ -74,6 +74,19 @@ view: five9_prospect_customer_tbl {
     sql: ${TABLE}.Brand ;;
   }
 
+  dimension: brand_clean{
+    type: string
+    sql: Case when regexp_contains(lower(${brand}),"awara") then "Awara"
+     when regexp_contains(lower(${brand}),"cloverlane") then "Cloverlane"
+     when regexp_contains(lower(${brand}),"dream") then "DreamCloud"
+     when regexp_contains(lower(${brand}),"nectar") then "Nectar"
+     when regexp_contains(lower(${brand}),"siena") then "Siena"
+     when regexp_contains(lower(${brand}),"level") then "LevelSleep"
+            Else ${brand} End ;;
+  }
+
+
+
   dimension: brand_campaign {
     type: string
     sql: ${TABLE}.brand_campaign ;;
