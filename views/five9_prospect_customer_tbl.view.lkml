@@ -82,6 +82,7 @@ view: five9_prospect_customer_tbl {
      when regexp_contains(lower(${brand}),"nectar") then "Nectar"
      when regexp_contains(lower(${brand}),"siena") then "Siena"
      when regexp_contains(lower(${brand}),"level") then "LevelSleep"
+    when regexp_contains(lower(${brand}),"resident") then "Resident"
             Else ${brand} End ;;
   }
 
