@@ -80,7 +80,7 @@ view: five9_prospect_customer_tbl {
      when regexp_contains(lower(${brand}),"cloverlane") then "Cloverlane"
      when lower(${brand}) = "dreamcloud-uk" then "DreamCloud-UK"
      when lower(${brand}) = "dreamcloud-ca" then "DreamCloud-CA"
-     when lower(${brand}) in ("dreamcloud","dream cloud" then "DreamCloud"
+     when lower(${brand}) in ("dreamcloud","dream cloud") then "DreamCloud"
       when lower(${brand}) = "nectar-uk" then "Nectar-UK"
       when lower(${brand}) = "nectar-ca" then "Nectar-CA"
      when lower(${brand}) =  "nectar" then "Nectar"
