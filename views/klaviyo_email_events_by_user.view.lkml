@@ -696,11 +696,11 @@ view: klaviyo_email_events_by_user {
 
 
   ### email user count
-
+##Unique Users.
 
   measure: Total_Received_Emails{
     type: count_distinct
-    label:"Total Delivered Emails"
+    label:"Total Delivered Emails - Unique Users."
     ##"Total_users_recived_email"
     sql: ${email} ;;
   }
@@ -846,6 +846,7 @@ view: klaviyo_email_events_by_user {
 
   measure: Total_Received_specific_Emails{
     type: count_distinct
+    label: "Total Delivered Emails"
     sql: concat(${email},${campaign}) ;;
   }
 
