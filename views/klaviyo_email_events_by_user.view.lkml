@@ -700,49 +700,55 @@ view: klaviyo_email_events_by_user {
 
   measure: Total_Received_Emails{
     type: count_distinct
-    label:"Total Delivered Emails - Unique Users."
+    label:"Delivered Emails - Unique Users"
     ##"Total_users_recived_email"
     sql: ${email} ;;
   }
 
   measure: Total_Opened_Emails{
     type: count_distinct
-    label: "Total_users_opened_email"
+    label:"Open Emails - Unique Users"
+    ##"Total_users_opened_email"
     sql: case when ${ts_opened_email_raw} is not null then ${email} end  ;;
   }
 
   measure: Total_Clicked_Emails{
     type: count_distinct
-    label: "Total_users_clicked_email"
+    label: "Clicked Emails - Unique Users"
+    ##"Total_users_clicked_email"
     sql: case when ${ts_clicked_email_raw} is not null then ${email} end  ;;
   }
 
   measure: Total_Orders_From_Email{
-    label: "Total_users_ordered_email_last_click"
+    label: "Last Clicked Email Order - Unique Users"
+    ##"Total_users_ordered_email_last_click"
     type: count_distinct
     sql: case when ${email_order_created_raw} is not null then ${email} end  ;;
   }
 
   measure: Total_bounced_Email{
-    label: "Total_users_bounced_email"
+    label: "Bounced Emails - Unique Users"
+    ##"Total_users_bounced_email"
     type: count_distinct
     sql: case when ${ts_bounced_email_raw} is not null then ${email} end  ;;
   }
 
   measure: Total_dropped_Email{
-    label: "Total_users_dropped_email"
+    label: "Dropped Emails - Unique Users"
+    ##"Total_users_dropped_email"
     type: count_distinct
     sql: case when ${ts_dropped_email_raw} is not null then ${email} end  ;;
   }
 
   measure: Total_marked_spam_Email{
-    label: "Total_users_marked_spam_email"
+    label: "Spam Emails - Unique Users"
+    ##"Total_users_marked_spam_email"
     type: count_distinct
     sql: case when ${ts_marked_spam_raw} is not null then ${email} end  ;;
   }
 
   measure: Total_unsub_Email{
-    label: "Total_users_marked_spam_email"
+    label: "UnSub Emails - Unique Users"
     type: count_distinct
     sql: case when ${ts_unsub_list_raw} is not null then ${email} end  ;;
   }
