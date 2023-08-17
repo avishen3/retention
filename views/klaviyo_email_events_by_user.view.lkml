@@ -740,6 +740,12 @@ view: klaviyo_email_events_by_user {
     sql: case when ${ts_marked_spam_raw} is not null then ${email} end  ;;
   }
 
+  measure: Total_unsub_Email{
+    label: "Total_users_marked_spam_email"
+    type: count_distinct
+    sql: case when ${ts_unsub_list_raw} is not null then ${email} end  ;;
+  }
+
   ### rate
 
   measure: Opened_Rate{
@@ -873,6 +879,10 @@ view: klaviyo_email_events_by_user {
     sql: case when ${ts_marked_spam_raw} is not null then (concat(${email},${campaign})) end  ;;
   }
 
+  measure: Total_unsub_specific_Emails{
+    type: count_distinct
+    sql: case when ${ts_unsub_list_raw} is not null then (concat(${email},${campaign})) end  ;;
+  }
 
 
 
