@@ -700,7 +700,8 @@ view: klaviyo_email_events_by_user {
 
   measure: Total_Received_Emails{
     type: count_distinct
-    label: "Total_users_recived_email"
+    label:"Total Delivered Emails"
+    ##"Total_users_recived_email"
     sql: ${email} ;;
   }
 
