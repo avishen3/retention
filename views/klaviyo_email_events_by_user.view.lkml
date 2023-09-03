@@ -137,7 +137,7 @@ view: klaviyo_email_events_by_user {
               when ${first_lc_order_day_diff} between 15 and 30 then "C:15-30"
               when ${first_lc_order_day_diff} between 31 and 60 then "D:31-60"
               when ${first_lc_order_day_diff} between 61 and 90 then "E:61-90"
-              When ${first_lc_order_day_diff} between 91 and 14 then "F:91-180"
+              When ${first_lc_order_day_diff} between 91 and 180 then "F:91-180"
               when ${first_lc_order_day_diff} > 180 then "G:180+"
               ELSE null end
     ;;
