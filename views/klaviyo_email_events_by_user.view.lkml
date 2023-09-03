@@ -1634,8 +1634,8 @@ view: klaviyo_email_events_by_user {
     type: string
     sql:
             case
-              when {% condition date_filter %} timestamp(${email_order_created_raw}) {% endcondition %} then 'First period'
-              when {% condition date_filter_2 %} timestamp(${email_order_created_raw}) {% endcondition %} then 'Second period'
+              when {% condition date_filter_email_order_created %} timestamp(${email_order_created_raw}) {% endcondition %} then 'First period'
+              when {% condition date_filter_email_order_created_2 %} timestamp(${email_order_created_raw}) {% endcondition %} then 'Second period'
             end ;;
   }
 
