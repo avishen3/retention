@@ -1617,4 +1617,28 @@ view: klaviyo_email_events_by_user {
   }
 
 
+# date comparison email order created
+
+  filter: date_filter_email_order_created {
+    type: date
+    group_label: "Date Filters - email order created"
+  }
+
+  filter: date_filter_email_order_created_2 {
+    type: date
+    group_label: "Date Filters - email order created"
+    description: "Second date filter for 'Date Comparison - email order created' dashboard"
+  }
+
+  dimension: compared_period_email_order_created {
+    type: string
+    sql:
+            case
+              when {% condition date_filter %} timestamp(${email_order_created_raw}) {% endcondition %} then 'First period'
+              when {% condition date_filter_2 %} timestamp(${email_order_created_raw}) {% endcondition %} then 'Second period'
+            end ;;
+  }
+
+
+
 }
