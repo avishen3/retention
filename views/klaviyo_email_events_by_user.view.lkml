@@ -1587,6 +1587,44 @@ view: klaviyo_email_events_by_user {
   }
 
 
+#### lookback cohort
+
+
+  ## lookback window selector
+
+  parameter: lookback_window_selector {
+    type: unquoted
+    allowed_value: {
+      label: "D1"
+      value: "D1"
+    }
+    allowed_value: {
+      label: "D7"
+      value: "D7"
+    }
+    allowed_value: {
+      label: "D28"
+      value: "D28"
+    }
+  }
+
+
+  measure: total_lookback_true_orders {
+    sql:
+      {% if lookback_window_selector._parameter_value == 'D1' %}
+         sum(case when date_diff(current_date('America/Los_Angeles'), ${ts_received_email_raw}, day) < 1 then null else ${Cohort_email_orders_D1} end)
+      {% elsif lookback_window_selector._parameter_value == 'D7' %}
+         sum(case when date_diff(current_date('America/Los_Angeles'), ${ts_received_email_raw}, day) < 7 then null else ${Cohort_email_orders_D7} end)
+      {% elsif lookback_window_selector._parameter_value == 'D28' %}
+         sum(case when date_diff(current_date('America/Los_Angeles'), ${ts_received_email_raw}, day) < 28 then null else ${Cohort_email_orders_D28} end)
+      {% endif %} ;;
+    type: number
+    value_format: "#,##0.0"
+    group_label: "Lookback Measures"
+  }
+
+
+
 # date comparison received_email_raw
 
   filter: date_filter {
