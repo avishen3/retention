@@ -872,6 +872,23 @@ view: five9_prospect_customer_tbl {
     sql: ${TABLE}.total_bases_after ;;
   }
 
+  dimension: order_channel_after {
+    type: string
+    sql: ${TABLE}.order_channel_after ;;
+  }
+
+  dimension: order_source_after {
+    type: string
+    sql: ${TABLE}.order_source_after ;;
+  }
+
+  dimension: customer_source_after {
+    type: string
+    sql: ${TABLE}.customer_source_after ;;
+  }
+
+
+
 
   ##dimension: is_cs_assisted_order {
   ##  type: string
