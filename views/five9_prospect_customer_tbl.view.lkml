@@ -700,6 +700,30 @@ view: five9_prospect_customer_tbl {
   }
 
 
+  dimension: is_order_same_day_as_cs_interaction{
+    description: "Is order same day as CS interaction"
+    type: yesno
+    sql: ${transaction_date} = ${order_created_after_date}  ;;
+  }
+
+  dimension: is_order_one_day_after_cs_interaction{
+    description: "Is order one day after CS interaction"
+    type: yesno
+    sql:  datetime_diff(${order_created_after_raw},${transaction_raw},day) = 1  ;;
+  }
+
+  dimension: is_order_two_day_after_cs_interaction{
+    description: "Is order two day after CS interaction"
+    type: yesno
+    sql:  datetime_diff(${order_created_after_raw},${transaction_raw},day) = 2  ;;
+  }
+
+  dimension: is_order_three_day_after_cs_interaction{
+    description: "Is order three day after CS interaction"
+    type: yesno
+    sql:  datetime_diff(${order_created_after_raw},${transaction_raw},day) = 3  ;;
+  }
+
 
   measure: total_customer_with_cs_assisted_orders_48h{
     type: count_distinct
