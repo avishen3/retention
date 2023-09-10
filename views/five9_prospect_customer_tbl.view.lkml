@@ -755,6 +755,16 @@ view: five9_prospect_customer_tbl {
     group_label: "five9 Measures - customer"
   }
 
+
+  ####
+
+  measure: total_customer_with_cs_agent_orders_source_is_admin{
+    type: count_distinct
+    sql: case when (${is_cs_agent_order_TF} = true and ${is_cs_assisted_order_TF} = true and ${order_source_after}="admin") then ${customer_id} else null end ;;
+    value_format: "#,##0"
+    group_label: "five9 Measures - customer"
+  }
+
   ####
 
 
