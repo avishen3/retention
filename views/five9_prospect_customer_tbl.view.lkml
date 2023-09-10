@@ -765,6 +765,28 @@ view: five9_prospect_customer_tbl {
     group_label: "five9 Measures - customer"
   }
 
+  measure: total_customer_with_cs_agent_orders_source_is_cartlink{
+    type: count_distinct
+    sql: case when (${is_cs_agent_order_TF} = true and ${is_cs_assisted_order_TF} = true and ${order_source_after}="cartlink") then ${customer_id} else null end ;;
+    value_format: "#,##0"
+    group_label: "five9 Measures - customer"
+  }
+
+  measure: total_customer_with_cs_agent_orders_source_is_remote_cart{
+    type: count_distinct
+    sql: case when (${is_cs_agent_order_TF} = true and ${is_cs_assisted_order_TF} = true and ${order_source_after}="remote cart") then ${customer_id} else null end ;;
+    value_format: "#,##0"
+    group_label: "five9 Measures - customer"
+  }
+
+  measure: total_customer_with_cs_agent_orders_source_is_cartlink_OR_remote_cart{
+    type: count_distinct
+    sql: case when (${is_cs_agent_order_TF} = true and ${is_cs_assisted_order_TF} = true and ( ${order_source_after}="cartlink" OR ${order_source_after}="remote cart" ) then ${customer_id} else null end ;;
+    value_format: "#,##0"
+    group_label: "five9 Measures - customer"
+  }
+
+
   ####
 
 
