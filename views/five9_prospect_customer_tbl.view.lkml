@@ -751,7 +751,7 @@ view: five9_prospect_customer_tbl {
 
   measure: total_customer_sale_attached_to_interaction_but_no_CS_tied_to_cart{
     type: count_distinct
-    sql: case when (${is_cs_agent_order_TF} = false and ${is_cs_assisted_order_TF} = true and ${order_source_after}="admin") then ${customer_id} else null end ;;
+    sql: case when (${is_cs_agent_order_TF} = false and ${is_cs_assisted_order_TF} = true and ${order_source_after}="web") then ${customer_id} else null end ;;
     value_format: "#,##0"
     group_label: "five9 Measures - customer"
   }
