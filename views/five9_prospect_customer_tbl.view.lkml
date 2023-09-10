@@ -756,7 +756,7 @@ view: five9_prospect_customer_tbl {
   }
 
 
-  ####
+  ####  source
 
   measure: total_customer_with_cs_agent_orders_source_is_admin{
     type: count_distinct
@@ -782,6 +782,129 @@ view: five9_prospect_customer_tbl {
   measure: total_customer_with_cs_agent_orders_source_is_cartlink_OR_remote_cart{
     type: count_distinct
     sql: case when (${is_cs_agent_order_TF} = true and ${is_cs_assisted_order_TF} = true and ( ${order_source_after}="cartlink" OR ${order_source_after}="remote cart" )) then ${customer_id} else null end ;;
+    value_format: "#,##0"
+    group_label: "five9 Measures - customer"
+  }
+
+
+####  source + same day
+
+  measure: total_customer_with_cs_agent_orders_source_is_admin_same_day {
+    type: count_distinct
+    sql: case when (${is_cs_agent_order_TF} = true and ${is_cs_assisted_order_TF} = true and ${order_source_after}="admin" and ${is_order_same_day_as_cs_interaction}= true) then ${customer_id} else null end ;;
+    value_format: "#,##0"
+    group_label: "five9 Measures - customer"
+  }
+
+  measure: total_customer_with_cs_agent_orders_source_is_cartlink_same_day{
+    type: count_distinct
+    sql: case when (${is_cs_agent_order_TF} = true and ${is_cs_assisted_order_TF} = true and ${order_source_after}="cartlink" and ${is_order_same_day_as_cs_interaction}= true) then ${customer_id} else null end ;;
+    value_format: "#,##0"
+    group_label: "five9 Measures - customer"
+  }
+
+  measure: total_customer_with_cs_agent_orders_source_is_remote_cart_same_day{
+    type: count_distinct
+    sql: case when (${is_cs_agent_order_TF} = true and ${is_cs_assisted_order_TF} = true and ${order_source_after}="remote cart" and ${is_order_same_day_as_cs_interaction}= true) then ${customer_id} else null end ;;
+    value_format: "#,##0"
+    group_label: "five9 Measures - customer"
+  }
+
+  measure: total_customer_with_cs_agent_orders_source_is_cartlink_OR_remote_cart_same_day{
+    type: count_distinct
+    sql: case when (${is_cs_agent_order_TF} = true and ${is_cs_assisted_order_TF} = true and ( ${order_source_after}="cartlink" OR ${order_source_after}="remote cart" )and ${is_order_same_day_as_cs_interaction}= true) then ${customer_id} else null end ;;
+    value_format: "#,##0"
+    group_label: "five9 Measures - customer"
+  }
+
+####  source + one day after
+
+  measure: total_customer_with_cs_agent_orders_source_is_admin_one_day_afer {
+    type: count_distinct
+    sql: case when (${is_cs_agent_order_TF} = true and ${is_cs_assisted_order_TF} = true and ${order_source_after}="admin" and ${is_order_one_day_after_cs_interaction}= true) then ${customer_id} else null end ;;
+    value_format: "#,##0"
+    group_label: "five9 Measures - customer"
+  }
+
+  measure: total_customer_with_cs_agent_orders_source_is_cartlink_one_day_afer{
+    type: count_distinct
+    sql: case when (${is_cs_agent_order_TF} = true and ${is_cs_assisted_order_TF} = true and ${order_source_after}="cartlink" and ${is_order_one_day_after_cs_interaction}= true) then ${customer_id} else null end ;;
+    value_format: "#,##0"
+    group_label: "five9 Measures - customer"
+  }
+
+  measure: total_customer_with_cs_agent_orders_source_is_remote_cart_one_day_afer{
+    type: count_distinct
+    sql: case when (${is_cs_agent_order_TF} = true and ${is_cs_assisted_order_TF} = true and ${order_source_after}="remote cart" and ${is_order_one_day_after_cs_interaction}= true) then ${customer_id} else null end ;;
+    value_format: "#,##0"
+    group_label: "five9 Measures - customer"
+  }
+
+  measure: total_customer_with_cs_agent_orders_source_is_cartlink_OR_remote_cart_one_day_afer{
+    type: count_distinct
+    sql: case when (${is_cs_agent_order_TF} = true and ${is_cs_assisted_order_TF} = true and ( ${order_source_after}="cartlink" OR ${order_source_after}="remote cart" )and ${is_order_one_day_after_cs_interaction}= true) then ${customer_id} else null end ;;
+    value_format: "#,##0"
+    group_label: "five9 Measures - customer"
+  }
+
+
+####  source + two day after
+
+  measure: total_customer_with_cs_agent_orders_source_is_admin_two_days_afer {
+    type: count_distinct
+    sql: case when (${is_cs_agent_order_TF} = true and ${is_cs_assisted_order_TF} = true and ${order_source_after}="admin" and  ${is_order_two_day_after_cs_interaction}= true) then ${customer_id} else null end ;;
+    value_format: "#,##0"
+    group_label: "five9 Measures - customer"
+  }
+
+  measure: total_customer_with_cs_agent_orders_source_is_cartlink_two_days_afer{
+    type: count_distinct
+    sql: case when (${is_cs_agent_order_TF} = true and ${is_cs_assisted_order_TF} = true and ${order_source_after}="cartlink" and ${is_order_two_day_after_cs_interaction}= true) then ${customer_id} else null end ;;
+    value_format: "#,##0"
+    group_label: "five9 Measures - customer"
+  }
+
+  measure: total_customer_with_cs_agent_orders_source_is_remote_cart_two_days_afer{
+    type: count_distinct
+    sql: case when (${is_cs_agent_order_TF} = true and ${is_cs_assisted_order_TF} = true and ${order_source_after}="remote cart" and ${is_order_two_day_after_cs_interaction}= true) then ${customer_id} else null end ;;
+    value_format: "#,##0"
+    group_label: "five9 Measures - customer"
+  }
+
+  measure: total_customer_with_cs_agent_orders_source_is_cartlink_OR_remote_cart_two_days_afer{
+    type: count_distinct
+    sql: case when (${is_cs_agent_order_TF} = true and ${is_cs_assisted_order_TF} = true and ( ${order_source_after}="cartlink" OR ${order_source_after}="remote cart" )and ${is_order_two_day_after_cs_interaction}= true) then ${customer_id} else null end ;;
+    value_format: "#,##0"
+    group_label: "five9 Measures - customer"
+  }
+
+
+####  source + three day after
+
+  measure: total_customer_with_cs_agent_orders_source_is_admin_three_days_afer {
+    type: count_distinct
+    sql: case when (${is_cs_agent_order_TF} = true and ${is_cs_assisted_order_TF} = true and ${order_source_after}="admin" and  ${is_order_three_day_after_cs_interaction}= true) then ${customer_id} else null end ;;
+    value_format: "#,##0"
+    group_label: "five9 Measures - customer"
+  }
+
+  measure: total_customer_with_cs_agent_orders_source_is_cartlink_three_days_afer{
+    type: count_distinct
+    sql: case when (${is_cs_agent_order_TF} = true and ${is_cs_assisted_order_TF} = true and ${order_source_after}="cartlink" and ${is_order_three_day_after_cs_interaction}= true) then ${customer_id} else null end ;;
+    value_format: "#,##0"
+    group_label: "five9 Measures - customer"
+  }
+
+  measure: total_customer_with_cs_agent_orders_source_is_remote_cart_three_days_afer{
+    type: count_distinct
+    sql: case when (${is_cs_agent_order_TF} = true and ${is_cs_assisted_order_TF} = true and ${order_source_after}="remote cart" and ${is_order_three_day_after_cs_interaction}= true) then ${customer_id} else null end ;;
+    value_format: "#,##0"
+    group_label: "five9 Measures - customer"
+  }
+
+  measure: total_customer_with_cs_agent_orders_source_is_cartlink_OR_remote_cart_three_days_afer{
+    type: count_distinct
+    sql: case when (${is_cs_agent_order_TF} = true and ${is_cs_assisted_order_TF} = true and ( ${order_source_after}="cartlink" OR ${order_source_after}="remote cart" )and ${is_order_three_day_after_cs_interaction}= true) then ${customer_id} else null end ;;
     value_format: "#,##0"
     group_label: "five9 Measures - customer"
   }
