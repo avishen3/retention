@@ -618,6 +618,15 @@ view: five9_prospect_customer_tbl {
   }
 
 
+  measure: total_prospect_customer_Id {
+    type: count_distinct
+    sql: case when ${customer_type} = "prospect" then ${customer_id} else null end ;;
+    value_format: "#,##0"
+    group_label: "five9 Measures - customer"
+  }
+
+
+
   measure: total_session_with_orders{
     type: count_distinct
     sql: case when ${has_order} = true then ${provider_session_id} else null end ;;
