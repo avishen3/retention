@@ -399,14 +399,16 @@ view: attentive_by_user {
   }
 
   measure: Total_price_From_SMS{
-    type: sum
+    type: sum_distinct
+    sql_distinct_key:  ${sms_short_id} ;;
     sql: case when ${sms_order_created_raw} is not null then ${sms_order_price} end  ;;
     value_format: "$0.0"
   }
 
 
   measure: Total_tax_From_SMS{
-    type: sum
+    type: sum_distinct
+    sql_distinct_key:  ${sms_short_id} ;;
     sql: case when ${sms_order_created_raw} is not null then ${sms_order_tax} end  ;;
     value_format: "$0.0"
   }
