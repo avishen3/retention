@@ -391,8 +391,10 @@ view: attentive_by_user {
   ### revenue and gross profit
 
   measure: Total_Revenue_From_SMS{
-    type: sum
+    type: sum_distinct
+    sql_distinct_key:  ${sms_short_id} ;;
     sql: case when ${sms_order_created_raw} is not null then ${sms_order_price}-${sms_order_tax} end  ;;
+
     value_format: "$#,##0"
   }
 
