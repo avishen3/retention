@@ -22,6 +22,11 @@ view: retention_platform {
     sql: ${TABLE}.agent_last_name ;;
   }
 
+  dimension: agent_full_name {
+    type: string
+    sql: (concat ${agent_first_name}," ",${agent_last_name} ;;
+  }
+
   dimension_group: approved {
     type: time
     timeframes: [
