@@ -771,6 +771,26 @@ view: klaviyo_email_events_by_user {
     sql: case when ${ts_unsub_list_raw} is not null then ${email} end  ;;
   }
 
+  measure: Unique_users_cvr{
+    label: "CVR - Unique Users"
+    type: number
+    sql: case when ${Total_Received_Emails} is not null then ${Total_Orders_From_Email}/${Total_Received_Emails} end  ;;
+  }
+
+
+  measure: Unique_users_open_rate{
+    label: "open rate - Unique Users"
+    type: number
+    sql: case when ${Total_Received_Emails} is not null then ${Total_Opened_Emails}/${Total_Received_Emails} end  ;;
+  }
+
+
+  measure: Unique_users_click_to_open_rate{
+    label: "click to open rate - Unique Users"
+    type: number
+    sql: case when ${Total_Opened_Emails} is not null then ${Total_Clicked_Emails}/${Total_Opened_Emails} end  ;;
+  }
+
   ### rate
 
   measure: Opened_Rate{
