@@ -141,4 +141,11 @@ view: zingtree_raw_tl {
     type: count
     drill_fields: [tree_name]
   }
+
+  measure: total_seesions {
+    type: count_distinct
+    sql: ${session_id} ;;
+  }
+
+
 }
