@@ -154,3 +154,10 @@ explore: cartlink_funnel_tbl{
 explore: admin_prospect_customertbl{
   label: "admin_prospect_customer tbl"
   description: "admin prospect customer tbl"}
+
+## zingtree
+
+
+explore: zingtree_raw_tl{
+  label: "Zingtree Raw Data"
+  description: "Zingtree Raw Data"}
