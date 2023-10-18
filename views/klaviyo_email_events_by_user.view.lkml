@@ -997,6 +997,19 @@ view: klaviyo_email_events_by_user {
     value_format: "0.00%"
   }
 
+  measure: Clicked_Rate_out_of_received_specific_email_D1{
+    type: number
+    sql:  case when ${Total_Received_specific_Emails}>0 then ${Cohort_email_clicked_D1}/${Total_Received_specific_Emails} else 0 end  ;;
+    value_format: "0.00%"
+  }
+
+  measure: Click_to_open_rate_specific_email_D1{
+    type: number
+    sql:  case when ${Cohort_email_opened_D1}>0 then ${Cohort_email_clicked_D1}/${Cohort_email_opened_D1} else 0 end  ;;
+    value_format: "0.00%"
+  }
+
+
 ### order and revenue out of email/order recived
 
 
