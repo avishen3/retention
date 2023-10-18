@@ -1704,7 +1704,7 @@ view: klaviyo_email_events_by_user {
 ##
 
   measure: Cohort_email_clicked_D1{
-    label: "Total Cohort Opened orders D1"
+    label: "Total Cohort clicked orders D1"
     type: count_distinct
     sql: case when ((receive_click_minute_diff/60)<=24 and ${ts_clicked_email_raw} is not null) then (concat(${email},${campaign})) else null end;;
     value_format: "#,##0"
@@ -1712,7 +1712,7 @@ view: klaviyo_email_events_by_user {
   }
 
   measure: Cohort_email_clicked_D7{
-    label: "Total Cohort Opened orders D7"
+    label: "Total Cohort clicked orders D7"
     type: count_distinct
     sql: case when ((receive_click_minute_diff/60)<=189 and ${ts_clicked_email_raw} is not null )then (concat(${email},${campaign}))  else null end;;
     value_format: "#,##0"
@@ -1720,7 +1720,7 @@ view: klaviyo_email_events_by_user {
   }
 
   measure: Cohort_email_clicked_D28{
-    label: "Total Cohort Opened orders D28"
+    label: "Total Cohort clicked orders D28"
     type: count_distinct
     sql: case when ((receive_click_minute_diff/60)<=672 and ${ts_clicked_email_raw} is not null) then  (concat(${email},${campaign}))  else null end;;
     value_format: "#,##0"
