@@ -1680,7 +1680,7 @@ view: klaviyo_email_events_by_user {
   measure: Cohort_email_opened_D1{
     label: "Total Cohort Opened orders D1"
     type: count_distinct
-    sql: case when (receive_open_minute_diff/60)<=24 and ${ts_opened_email_raw} is not null  then (concat(${email},${campaign})) end else null  end;;
+    sql: case when ((receive_open_minute_diff/60)<=24 and ${ts_opened_email_raw} is not null) then (concat(${email},${campaign})) else null end;;
     value_format: "#,##0"
     group_label: "Cohort email Opend"
   }
@@ -1688,7 +1688,7 @@ view: klaviyo_email_events_by_user {
   measure: Cohort_email_opened_D7{
     label: "Total Cohort Opened orders D7"
     type: count_distinct
-    sql: case when (receive_open_minute_diff/60)<=189 and ${ts_opened_email_raw} is not null  then (concat(${email},${campaign})) end else null  end;;
+    sql: case when ((receive_open_minute_diff/60)<=189 and ${ts_opened_email_raw} is not null )then (concat(${email},${campaign}))  else null end;;
     value_format: "#,##0"
     group_label: "Cohort email Opend"
   }
@@ -1696,7 +1696,7 @@ view: klaviyo_email_events_by_user {
   measure: Cohort_email_opened_D28{
     label: "Total Cohort Opened orders D28"
     type: count_distinct
-    sql: case when (receive_open_minute_diff/60)<=672 and ${ts_opened_email_raw} is not null  then (concat(${email},${campaign})) end else null  end;;
+    sql: case when ((receive_open_minute_diff/60)<=672 and ${ts_opened_email_raw} is not null) then (concat(${email},${campaign}))  else null end;;
     value_format: "#,##0"
     group_label: "Cohort email Opend"
   }
