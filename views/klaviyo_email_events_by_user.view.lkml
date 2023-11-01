@@ -824,7 +824,7 @@ view: klaviyo_email_events_by_user {
   measure: Conversion_Rate{
     type: number
     label: "Conversion Rate - order from sent emails"
-    sql:  case when ${Total_Received_Emails}>0 then ${Total_Orders_From_Email}/${Total_Received_Emails} else 0 end ;;
+    sql:  case when ${Total_Received_specific_Emails}>0 then ${Total_Orders_From_Email}/${Total_Received_specific_Emails} else 0 end ;;
     value_format: "0.000%"
   }
 
@@ -832,7 +832,7 @@ view: klaviyo_email_events_by_user {
   measure: Conversion_Rate_D1{
     type: number
     label: "Conversion Rate - order from sent emails - D1"
-    sql:  case when ${Total_Received_Emails}>0 then ${Cohort_email_orders_D1}/${Total_Received_Emails} else 0 end ;;
+    sql:  case when ${Total_Received_specific_Emails}>0 then ${Cohort_email_orders_D1}/${Total_Received_specific_Emails} else 0 end ;;
     value_format: "0.000%"
   }
 
