@@ -483,7 +483,7 @@ view: attentive_by_user {
     type: number
     ##label: "Conversion Rate - order from sent emails - D1"
     sql:  case when ${Total_Received_specific_SMS}>0 then ${Cohort_SMS_orders_D1}/${Total_Received_specific_SMS} else 0 end ;;
-    value_format: "0.000%"
+    value_format: "0.0000%"
   }
 
 
