@@ -394,7 +394,7 @@ view: attentive_by_user {
     measure: Cohort_SMS_Click_D1{
       label: "Total Cohort SMS Clicked D1"
       type: count_distinct
-      sql: case when (receive_click_minute_diff/60)<=24 and ${ts_first_clicked_raw} then (concat(${phone},${message_name})) else null  end;;
+      sql: case when (receive_click_minute_diff/60)<=24 and ${ts_first_clicked_raw} is not null then (concat(${phone},${message_name})) else null  end;;
       value_format: "#,##0"
 
     }
