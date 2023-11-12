@@ -455,6 +455,18 @@ view: attentive_by_user {
   }
 
 
+  measure: revenue_per_recived_SMS_D1{
+    type: number
+    sql:  case when ${Total_Received_specific_SMS}>0 then ${Cohort_SMS_revenue_D1}/${Total_Received_specific_SMS} else 0 end ;;
+    value_format: "$0.000"
+  }
+
+
+  measure: revenue_per_1000_received_SMS_D1{
+    type: number
+    sql:  case when ${Total_Received_specific_SMS}>0 then ${Cohort_SMS_revenue_D1}/${Total_Received_specific_SMS}*1000 else 0 end ;;
+    value_format: "$0"
+  }
 
   measure: Clicked_Rate_specific_SMS{
     type: number
