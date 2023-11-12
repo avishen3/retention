@@ -505,7 +505,11 @@ view: attentive_by_user {
     value_format: "0.00%"
   }
 
-
+  measure: Order_from_clicked_Rate_specific_SMS_D1{
+    type: number
+    sql:  case when ${Cohort_SMS_Click_D1}>0 then ${Cohort_SMS_orders_D1}/${Cohort_SMS_Click_D1} else 0 end ;;
+    value_format: "0.00%"
+  }
 
   ## Order Rate
 
