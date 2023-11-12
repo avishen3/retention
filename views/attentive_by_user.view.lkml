@@ -389,6 +389,17 @@ view: attentive_by_user {
     sql: case when ${ts_first_clicked_raw} is not null then (concat(${phone},${message_name})) end  ;;
   }
 
+
+
+    measure: Cohort_SMS_Click_D1{
+      label: "Total Cohort SMS Clicked D1"
+      type: count_distinct
+      sql: case when (receive_click_minute_diff/60)<=24 and ${ts_first_clicked_raw} then (concat(${phone},${message_name})) else null  end;;
+      value_format: "#,##0"
+
+    }
+
+
   measure: Total_Orders_From_specific_SMS{
     type: count_distinct
     sql: case when ${sms_order_created_raw} is not null then (concat(${phone},${message_name})) end  ;;
@@ -477,6 +488,14 @@ view: attentive_by_user {
   measure: Clicked_Rate_specific_SMS{
     type: number
     sql: case when ${Total_Received_specific_SMS}>0 then ${Total_Clicked_specific_SMS}/${Total_Received_specific_SMS} else 0 end    ;;
+    value_format: "0.00%"
+  }
+
+
+
+  measure: Clicked_Rate_specific_SMS_d1{
+    type: number
+    sql: case when ${Total_Received_specific_SMS}>0 then ${Cohort_SMS_Click_D1}/${Total_Received_specific_SMS} else 0 end    ;;
     value_format: "0.00%"
   }
 
