@@ -378,6 +378,12 @@ view: attentive_by_user {
     sql: concat(${phone},${message_name}) ;;
   }
 
+  measure: Total_uniqe_users{
+    type: count_distinct
+    sql: ${phone} ;;
+  }
+
+
   measure: Total_Clicked_specific_SMS{
     type: count_distinct
     sql: case when ${ts_first_clicked_raw} is not null then (concat(${phone},${message_name})) end  ;;
