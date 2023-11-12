@@ -427,7 +427,11 @@ view: attentive_by_user {
     value_format: "$#,##0"
   }
 
-
+  measure: AOV_D1{
+    type: number
+    sql:  case when ${Cohort_SMS_orders_D1}>0 then ${Cohort_SMS_revenue_D1} /${Cohort_SMS_orders_D1} else 0 end ;;
+    value_format: "$#,##0.0"
+  }
 
 
   measure: AOV_revenue_per_clicked_SMS{
