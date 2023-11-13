@@ -170,4 +170,11 @@ view: admin_client_events_agents_check_up_tbl {
     sql: ${TABLE}.short_id ;;
   }
 
+  measure: short_id_count  {
+    type: count_distinct
+    sql: ${session_id}
+      ;;
+    value_format: "#,##0"
+  }
+
 }
