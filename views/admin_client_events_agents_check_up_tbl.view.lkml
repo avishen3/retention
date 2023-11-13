@@ -177,4 +177,11 @@ view: admin_client_events_agents_check_up_tbl {
     value_format: "#,##0"
   }
 
+  measure: item_id_count  {
+    type: count_distinct
+    sql: ${item_id}
+      ;;
+    value_format: "#,##0"
+  }
+
 }
