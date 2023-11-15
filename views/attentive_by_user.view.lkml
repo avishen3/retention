@@ -389,6 +389,11 @@ view: attentive_by_user {
     sql: case when ${ts_first_clicked_raw} is not null then (concat(${phone},${message_name})) end  ;;
   }
 
+  measure: Total_Clicked_uniqe_users{
+    type: count_distinct
+    sql: case when ${ts_first_clicked_raw} is not null then ${phone} end  ;;
+  }
+
 
 
     measure: Cohort_SMS_Click_D1{
