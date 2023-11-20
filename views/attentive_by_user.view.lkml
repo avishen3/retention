@@ -565,7 +565,7 @@ view: attentive_by_user {
     label: "Total Cohort sms revenue D1"
     type: sum_distinct
     sql_distinct_key:  ${sms_short_id} ;;
-    sql: case when  (${sms_order_created_raw} is not null AND  (receive_order_minute_diff/-60)<=24) then ${sms_order_price}-${sms_order_tax} else null end;;
+    sql: case when  (${sms_order_created_raw} is not null AND  (receive_order_minute_diff/60)<=24) then ${sms_order_price}-${sms_order_tax} else null end;;
     value_format: "$#,##0"
     group_label: "Cohort email revenue"
   }
@@ -574,7 +574,7 @@ view: attentive_by_user {
     label: "Total Cohort sms revenue D7"
     type: sum_distinct
     sql_distinct_key:  ${sms_short_id} ;;
-    sql: case when  ${sms_order_created_raw} is not null AND  (receive_order_minute_diff/-60)<=189 then ${sms_order_price}-${sms_order_tax} else null end;;
+    sql: case when  ${sms_order_created_raw} is not null AND  (receive_order_minute_diff/60)<=189 then ${sms_order_price}-${sms_order_tax} else null end;;
     value_format: "$#,##0"
     group_label: "Cohort email revenue"
   }
@@ -583,7 +583,7 @@ view: attentive_by_user {
     label: "Total Cohort sms revenue D28"
     type: sum_distinct
     sql_distinct_key:  ${sms_short_id} ;;
-    sql: case when  ${sms_order_created_raw} is not null AND  (receive_order_minute_diff/-60)<=672 then ${sms_order_price}-${sms_order_tax} else null end;;
+    sql: case when  ${sms_order_created_raw} is not null AND  (receive_order_minute_diff/60)<=672 then ${sms_order_price}-${sms_order_tax} else null end;;
     value_format: "$#,##0"
     group_label: "Cohort email revenue"
   }
