@@ -665,7 +665,9 @@ view: attentive_by_user {
 
   dimension: first_lc_order_day_diff_AGG {
     type: string
-    sql: case when ${first_lc_order_minute_diff} < 60*24 then "A:0"
+    sql: case
+              when ${first_lc_order_minute_diff} < 0 then null
+              when ${first_lc_order_minute_diff} < 60*24 then "A:0"
               when ${first_lc_order_minute_diff} between 1*60*24 and 14*60*24 then "B:1-14"
               when ${first_lc_order_minute_diff} between 14*60*24 and 30*60*24 then "C:15-30"
               when ${first_lc_order_minute_diff} between 30*60*24 and 60*60*24 then "D:31-60"
@@ -678,7 +680,9 @@ view: attentive_by_user {
 
   dimension: first_lc_sms_order_day_diff_AGG {
     type: string
-    sql: case when ${first_lc_sms_order_minute_diff} < 60*24 then "A:0"
+    sql: case
+              when ${first_lc_sms_order_minute_diff} < 0 then null
+              when ${first_lc_sms_order_minute_diff} < 60*24 then "A:0"
               when ${first_lc_sms_order_minute_diff} between 1*60*24 and 14*60*24 then "B:1-14"
               when ${first_lc_sms_order_minute_diff} between 14*60*24 and 30*60*24 then "C:15-30"
               when ${first_lc_sms_order_minute_diff} between 30*60*24 and 60*60*24 then "D:31-60"
