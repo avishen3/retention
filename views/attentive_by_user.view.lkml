@@ -663,7 +663,7 @@ view: attentive_by_user {
     sql: ${TABLE}.first_lc_order_minute_diff ;;
   }
 
-  dimension: irst_lc_order_day_diff_AGG {
+  dimension: first_lc_order_day_diff_AGG {
     type: string
     sql: case when ${first_lc_order_minute_diff} < 60*24 then "A:0"
               when ${first_lc_order_minute_diff} between 1*60*24 and 14*60*24 then "B:1-14"
