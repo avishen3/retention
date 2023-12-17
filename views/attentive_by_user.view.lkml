@@ -649,5 +649,44 @@ view: attentive_by_user {
     sql:  ${phone} ;;
   }
 
+## LC Date diff
+
+
+
+  dimension: first_lc_sms_order_minute_diff {
+    type: number
+    sql: ${TABLE}.first_lc_sms_order_minute_diff ;;
+  }
+
+  dimension: first_lc_order_minute_diff {
+    type: number
+    sql: ${TABLE}.first_lc_order_minute_diff ;;
+  }
+
+  dimension: irst_lc_order_day_diff_AGG {
+    type: string
+    sql: case when ${first_lc_order_minute_diff} < 60*24 then "A:0"
+              when ${first_lc_order_minute_diff} between 1*60*24 and 14*60*24 then "B:1-14"
+              when ${first_lc_order_minute_diff} between 14*60*24 and 30*60*24 then "C:15-30"
+              when ${first_lc_order_minute_diff} between 30*60*24 and 60*60*24 then "D:31-60"
+              when ${first_lc_order_minute_diff} between 60*60*24 and 90*60*24 then "E:61-90"
+              When ${first_lc_order_minute_diff} between 90*60*24 and 180*60*24 then "F:91-180"
+              when ${first_lc_order_minute_diff} > 180*60*24 then "G:180+"
+              ELSE null end
+    ;;
+  }
+
+  dimension: first_lc_sms_order_day_diff_AGG {
+    type: string
+    sql: case when ${first_lc_sms_order_minute_diff} < 60*24 then "A:0"
+              when ${first_lc_sms_order_minute_diff} between 1*60*24 and 14*60*24 then "B:1-14"
+              when ${first_lc_sms_order_minute_diff} between 14*60*24 and 30*60*24 then "C:15-30"
+              when ${first_lc_sms_order_minute_diff} between 30*60*24 and 60*60*24 then "D:31-60"
+              when ${first_lc_sms_order_minute_diff} between 60*60*24 and 90*60*24 then "E:61-90"
+              When ${first_lc_sms_order_minute_diff} between 90*60*24 and 180*60*24 then "F:91-180"
+              when ${first_lc_sms_order_minute_diff} > 180*60*24 then "G:180+"
+              ELSE null end
+    ;;
+  }
 
 }
