@@ -693,4 +693,37 @@ view: attentive_by_user {
     ;;
   }
 
+  dimension: first_lc_sms_order_day_diff_up_to_22 {
+    type: string
+    sql: case
+              when ${first_lc_sms_order_minute_diff} < 0 then null
+              when ${first_lc_sms_order_minute_diff} < 60*24*1 then "1"
+              when ${first_lc_sms_order_minute_diff} < 60*24*2 then "2"
+              when ${first_lc_sms_order_minute_diff} < 60*24*3 then "3"
+              when ${first_lc_sms_order_minute_diff} < 60*24*4 then "4"
+              when ${first_lc_sms_order_minute_diff} < 60*24*5 then "5"
+              when ${first_lc_sms_order_minute_diff} < 60*24*6 then "6"
+              when ${first_lc_sms_order_minute_diff} < 60*24*7 then "7"
+              when ${first_lc_sms_order_minute_diff} < 60*24*8 then "8"
+              when ${first_lc_sms_order_minute_diff} < 60*24*9 then "9"
+              when ${first_lc_sms_order_minute_diff} < 60*24*10 then "10"
+              when ${first_lc_sms_order_minute_diff} < 60*24*11 then "11"
+              when ${first_lc_sms_order_minute_diff} < 60*24*12 then "12"
+              when ${first_lc_sms_order_minute_diff} < 60*24*13 then "13"
+              when ${first_lc_sms_order_minute_diff} < 60*24*14 then "14"
+              when ${first_lc_sms_order_minute_diff} < 60*24*15 then "15"
+              when ${first_lc_sms_order_minute_diff} < 60*24*16 then "16"
+              when ${first_lc_sms_order_minute_diff} < 60*24*17 then "17"
+              when ${first_lc_sms_order_minute_diff} < 60*24*18 then "18"
+              when ${first_lc_sms_order_minute_diff} < 60*24*19 then "19"
+              when ${first_lc_sms_order_minute_diff} < 60*24*20 then "20"
+              when ${first_lc_sms_order_minute_diff} < 60*24*21 then "21"
+              when ${first_lc_sms_order_minute_diff} < 60*24*22 then "22"
+
+              ELSE null end
+    ;;
+  }
+
+
+
 }
