@@ -612,6 +612,28 @@ view: attentive_by_user {
   }
 
 
+# date comparison received_email_raw
+
+  filter: date_filter_attentive_LC{
+    type: date
+    group_label: "Date Filters Attentive LC"
+  }
+
+  filter: date_filter_attentive_LC_2 {
+    type: date
+    group_label: "Date Filters"
+    description: "Second date filter for 'Date Comparison Attentive LC' dashboard"
+  }
+
+  dimension: compared_period_attentive_LC{
+    type: string
+    sql:
+            case
+              when {% condition date_filter_attentive_LC %} timestamp(${first_lead_created_raw}) {% endcondition %} then 'First period'
+              when {% condition date_filter_attentive_LC_2 %} timestamp(${first_lead_created_raw}) {% endcondition %} then 'Second period'
+            end ;;
+  }
+
   dimension: message_type_filter{
     label: "Flow/Promo/Legal"
     type: string
