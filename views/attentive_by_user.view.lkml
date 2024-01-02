@@ -621,7 +621,7 @@ view: attentive_by_user {
 
   filter: date_filter_attentive_LC_2 {
     type: date
-    group_label: "Date Filters"
+    group_label: "Date Filters Attentive LC"
     description: "Second date filter for 'Date Comparison Attentive LC' dashboard"
   }
 

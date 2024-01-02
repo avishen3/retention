@@ -562,6 +562,8 @@ view: klaviyo_email_events_by_user {
   }
 
 
+
+
  #### date granulraty
 
 
@@ -615,8 +617,12 @@ view: klaviyo_email_events_by_user {
 
 
 
+###
 
-
+  dimension: ts_recived_same_as_ts_open {
+    type: yesno
+    sql: ${ts_received_email_raw}=${ts_opened_email_raw} ;;
+  }
 
 
 
