@@ -746,6 +746,9 @@ view: attentive_by_user {
     ;;
   }
 
-
+  dimension: geo {
+    type: string
+    sql: ${TABLE}.geo ;;
+  }
 
 }
