@@ -76,17 +76,17 @@ view: five9_prospect_customer_tbl {
 
   dimension: brand_clean{
     type: string
-    sql: Case when regexp_contains(lower(${brand}),"awara") then "Awara"
-     when regexp_contains(lower(${brand}),"cloverlane") then "Cloverlane"
-     when lower(${brand}) = "dreamcloud-uk" then "DreamCloud-UK"
-     when lower(${brand}) = "dreamcloud-ca" then "DreamCloud-CA"
-     when lower(${brand}) in ("dreamcloud","dream cloud") then "DreamCloud"
-      when lower(${brand}) = "nectar-uk" then "Nectar-UK"
-      when lower(${brand}) = "nectar-ca" then "Nectar-CA"
-     when lower(${brand}) =  "nectar" then "Nectar"
-     when regexp_contains(lower(${brand}),"siena") then "Siena"
-     when regexp_contains(lower(${brand}),"level") then "LevelSleep"
-    when regexp_contains(lower(${brand}),"resident") then "Resident"
+    sql: Case when regexp_contains(lower(${brand}),"awara") then "awara"
+     when regexp_contains(lower(${brand}),"cloverlane") then "cloverlane"
+     when lower(${brand}) = "dreamcloud-uk" then "dreamcloud-UK"
+     when lower(${brand}) = "dreamcloud-ca" then "dreamcloud-CA"
+     when lower(${brand}) in ("dreamcloud","dream cloud") then "dreamcloud"
+      when lower(${brand}) = "nectar-uk" then "nectar-uk"
+      when lower(${brand}) = "nectar-ca" then "nectar-ca"
+     when lower(${brand}) =  "nectar" then "nectar"
+     when regexp_contains(lower(${brand}),"siena") then "siena"
+     when regexp_contains(lower(${brand}),"level") then "levelsleep"
+    when regexp_contains(lower(${brand}),"resident") then "resident"
             Else ${brand} End ;;
   }
 
