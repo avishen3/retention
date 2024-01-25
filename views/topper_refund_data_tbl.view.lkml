@@ -240,7 +240,7 @@ view: topper_refund_data_tbl {
   measure: topper_order_refuns_rate {
     label: "Topper orders refound rate"
     type: number
-    sql: ${total_refund_mattress_order_with_toppers } / nullif(${total_mattress_orders_that_were_sent_toppers}, 0) ;;
+    sql: ${total_refund_mattress_order_with_toppers } / ${total_mattress_orders_that_were_sent_toppers} ;;
     value_format: "0.00%"
     group_label: "Mattress Measures"
   }
