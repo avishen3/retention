@@ -242,7 +242,7 @@ view: topper_refund_data_tbl {
   measure: total_refund_mattress_rate {
     type: number
     sql:  ${total_refund_mattress_order_with_toppers}/${total_mattress_orders_that_were_sent_toppers}  ;;
-    value_format: "#,##0"
+    value_format: "####.##"
     group_label: "Mattress Measures"
   }
 
