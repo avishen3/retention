@@ -246,6 +246,15 @@ view: topper_refund_data_tbl {
     group_label: "Mattress Measures"
   }
 
+  dimension: whs_name_last_purchase {
+    type: string
+    sql: ${TABLE}.whs_name_last_purchase ;;
+  }
+
+  dimension: whs_title_last_purchase {
+    type: string
+    sql: ${TABLE}.whs_title_last_purchase ;;
+  }
 
 
 
