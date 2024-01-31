@@ -55,8 +55,10 @@ view: topper_refund_data_tbl {
     type: number
     sql: case when ${days_from_topper_order_to_refound} = 0 then "0"
               when ${days_from_topper_order_to_refound} <= 1 then "1"
-              when ${days_from_topper_order_to_refound} < 5 then "less then 5"
-              when ${days_from_topper_order_to_refound} <10 then "6-10"
+              when ${days_from_topper_order_to_refound} between 1 and 5 then "less then 5"
+              when ${days_from_topper_order_to_refound} between 6 and 10 then "6-10"
+              when ${days_from_topper_order_to_refound} between 11 and 20 then "11-20"
+
               when ${days_from_topper_order_to_refound} <20 then "11-20"
               when ${days_from_topper_order_to_refound} <35 then "20-35"
               when ${days_from_topper_order_to_refound} <50 then "36-50"
