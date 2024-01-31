@@ -52,7 +52,7 @@ view: topper_refund_data_tbl {
  ####
 
   dimension: days_from_topper_order_to_refound_cohort {
-    type: number
+    type: string
     sql: case when ${days_from_topper_order_to_refound} between 1 and 5 then "less then 5"
               when ${days_from_topper_order_to_refound} between 6 and 10 then "6-10"
               when ${days_from_topper_order_to_refound} between 11 and 20 then "11-20"
