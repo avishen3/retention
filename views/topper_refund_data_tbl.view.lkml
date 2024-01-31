@@ -53,9 +53,18 @@ view: topper_refund_data_tbl {
 
   dimension: days_from_topper_order_to_refound_cohort {
     type: string
-    sql: case when ${days_from_topper_order_to_refound} between 1 and 5 then "less then 5"
+    sql: case
+              when ${days_from_topper_order_to_refound} <=0  then "less then 0"
+              when ${days_from_topper_order_to_refound} =1  then "1"
+              when ${days_from_topper_order_to_refound} between 2 and 5 then "2-5"
               when ${days_from_topper_order_to_refound} between 6 and 10 then "6-10"
               when ${days_from_topper_order_to_refound} between 11 and 20 then "11-20"
+              when ${days_from_topper_order_to_refound} between 21 and 35 then "21-35"
+              when ${days_from_topper_order_to_refound} between 36 and 50 then "36-50"
+              when ${days_from_topper_order_to_refound} between 51 and 100 then "51-100"
+              when ${days_from_topper_order_to_refound} between 101 and 200 then "101-200"
+              when ${days_from_topper_order_to_refound} > 201 then "more then 200"
+
               else "bob" end
     ;;
   }
