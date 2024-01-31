@@ -47,6 +47,31 @@ view: topper_refund_data_tbl {
     sql: ${TABLE}.days_from_topper_order_to_refound ;;
   }
 
+
+
+ ####
+
+  dimension: days_from_topper_order_to_refound_cohort {
+    type: number
+    sql: case when ${days_from_topper_order_to_refound} = 0 then 0
+              when ${days_from_topper_order_to_refound} <= 1 then 1
+              when ${days_from_topper_order_to_refound} < 5 then "less then 5"
+              when ${days_from_topper_order_to_refound} <10 then "6-10"
+              when ${days_from_topper_order_to_refound} <20 then "11-20"
+              when ${days_from_topper_order_to_refound} <35 then "20-35"
+              when ${days_from_topper_order_to_refound} <50 then "36-50"
+              when ${days_from_topper_order_to_refound} <100 then "51-100"
+              when ${days_from_topper_order_to_refound} <200 then "100-200"
+              when ${days_from_topper_order_to_refound} >201 then "more then 201"
+              else null end
+
+
+
+    ;;
+  }
+
+
+
   dimension: email {
     type: string
     sql: ${TABLE}.email ;;
