@@ -704,9 +704,10 @@ view: five9_prospect_customer_tbl {
   dimension: is_cs_assisted_order_NOT_agent_TF {
     description: "Is CS assisted order"
     type: yesno
-    sql: datetime_diff(${order_created_after_raw},${transaction_raw},hour)<48 and ( ${order_agent_id_after} is  null or ${order_agent_id_after} = "") ;;
+    sql: datetime_diff(${order_created_after_raw},${transaction_raw},hour)<48 and  ${order_agent_id_after} is  null  ;;
   }
 
+##or ${order_agent_id_after} = "")
 
   dimension: is_cs_agent_order_TF {
     description: "Is CS agent order"
