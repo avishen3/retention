@@ -702,12 +702,11 @@ view: five9_prospect_customer_tbl {
   }
 
   dimension: is_cs_assisted_order_NOT_agent_TF {
-    description: "Is CS assisted order"
+    description: "Is CS assisted order only (not Agent Order)"
     type: yesno
     sql: datetime_diff(${order_created_after_raw},${transaction_raw},hour)<48 and (${order_agent_id_after} is  null or ${order_agent_id_after} = "") ;;
   }
 
-##or ${order_agent_id_after} = "")
 
   dimension: is_cs_agent_order_TF {
     description: "Is CS agent order"
@@ -758,6 +757,13 @@ view: five9_prospect_customer_tbl {
   measure: total_customer_with_cs_agent_orders_within48h{
     type: count_distinct
     sql: case when (${is_cs_agent_order_TF} = true and ${is_cs_assisted_order_TF} = true) then ${customer_id} else null end ;;
+    value_format: "#,##0"
+    group_label: "five9 Measures - customer"
+  }
+
+  measure: total_customer_with_cs_assisted_orders_only_no_agent_48h{
+    type: count_distinct
+    sql: case when (${is_cs_assisted_order_NOT_agent_TF} = true ) then ${customer_id} else null end ;;
     value_format: "#,##0"
     group_label: "five9 Measures - customer"
   }
@@ -971,6 +977,16 @@ view: five9_prospect_customer_tbl {
     group_label: "five9 Measures - short_id_after"
   }
 
+  measure: total_short_id_with_cs_assisted_orders_only_no_agent{
+    type: count_distinct
+    sql: case when ${is_cs_assisted_order_NOT_agent_TF} = true then ${short_id_after} else null end ;;
+    value_format: "#,##0"
+    group_label: "five9 Measures - short_id_after"
+  }
+
+
+
+
 
   measure: total_order_revenue_after{
     type: sum
@@ -1010,6 +1026,14 @@ view: five9_prospect_customer_tbl {
   }
 
 
+
+  measure: distinct_revenue_cs_assisted_orders_only_no_agent {
+    ## label: “sum_distinct_revenue”
+    type: sum_distinct
+    sql_distinct_key: (${short_id_after}||${is_cs_assisted_order_NOT_agent_TF}) ;;
+    sql: case when ${is_cs_assisted_order_NOT_agent_TF} = true then  ${order_revenue_after} else null end ;;
+  }
+
   measure: distinct_revenue_cs_same_agent {
     ## label: “sum_distinct_revenue”
     type: sum_distinct
@@ -1040,6 +1064,15 @@ view: five9_prospect_customer_tbl {
     value_format: "$#,##0"
     group_label: "revenue"
   }
+
+  measure: total_order_revenue_after_cs_assisted_orders_only_no_agent{
+    type: sum
+    sql:   case when ${is_cs_assisted_order_NOT_agent_TF} = true a then  ${order_revenue_after} else null end ;;
+    value_format: "$#,##0"
+    group_label: "revenue"
+  }
+
+
 
   dimension: highest_type_after {
     type: string
