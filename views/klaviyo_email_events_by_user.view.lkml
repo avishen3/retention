@@ -393,8 +393,120 @@ view: klaviyo_email_events_by_user {
   }
 
 
+## 2602 - new fields
+
+  dimension: type {
+    type: string
+    sql: ${TABLE}.type ;;
+  }
 
 
+  dimension: subtype {
+    type: string
+    sql: ${TABLE}.subtype ;;
+  }
+
+
+  dimension: Theme {
+    type: string
+    sql: ${TABLE}.Theme ;;
+  }
+
+
+
+  dimension: name {
+    type: string
+    sql: ${TABLE}.name ;;
+  }
+
+
+
+
+  dimension: customer_type {
+    type: string
+    sql: ${TABLE}.customer_type ;;
+  }
+
+
+
+  dimension: number {
+    type: string
+    sql: ${TABLE}.number ;;
+  }
+
+
+  dimension: launch_date {
+    type: string
+    sql: ${TABLE}.launch_date ;;
+  }
+
+  dimension: ad_type {
+    type: string
+    sql: ${TABLE}.ad_type ;;
+  }
+
+
+  dimension: wildCard {
+    type: string
+    sql: ${TABLE}.wildCard ;;
+  }
+
+  dimension: week {
+    type: string
+    sql: ${TABLE}.week ;;
+  }
+
+  dimension: landing_page {
+    type: string
+    sql: ${TABLE}.landing_page ;;
+  }
+
+
+  dimension: length {
+    type: string
+    sql: ${TABLE}.length ;;
+  }
+
+  dimension: cta {
+    type: string
+    sql: ${TABLE}.cta ;;
+  }
+
+
+  dimension: sender {
+    type: string
+    sql: ${TABLE}.sender ;;
+  }
+
+
+  dimension: from_email {
+    type: string
+    sql: ${TABLE}.from_email ;;
+  }
+
+  dimension: from_name {
+    type: string
+    sql: ${TABLE}.from_name ;;
+  }
+
+  dimension_group: sent_at_flow_first_sent_time {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    datatype: datetime
+    sql: ${TABLE}.sent_at ;;
+  }
+
+
+
+####
 
   dimension: promo_or_flow {
     type: string
@@ -409,6 +521,8 @@ view: klaviyo_email_events_by_user {
               else "Transactional Flow" end
     ;;
   }
+
+
 
 
   dimension: is_not_sale_flow{
