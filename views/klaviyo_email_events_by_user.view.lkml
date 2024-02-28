@@ -928,7 +928,9 @@ view: klaviyo_email_events_by_user {
   measure: Unique_users_click_to_open_rate{
     label: "click to open rate - Unique Users"
     type: number
-    sql: case when ${Total_Opened_Emails} is not null then ${Total_Clicked_Emails}/${Total_Opened_Emails} end  ;;
+    sql: case when ${Total_Opened_Emails}>0 then ${Total_Clicked_Emails}/${Total_Opened_Emails} end  ;;
+    ##sql: case when ${Total_Opened_Emails} is not null then ${Total_Clicked_Emails}/${Total_Opened_Emails} end  ;;
+
   }
 
   ### rate
