@@ -532,6 +532,26 @@ view: klaviyo_email_events_by_user {
   }
 
 
+###
+
+
+  dimension: type_promo_or_sale_flow {
+    type: string
+    sql: case when ${type} = "promo" then "promo"
+              when ${type} = "flow" and (lower(${name}) like "%abandon%"  or lower(${name}) like "%welcome%"or lower(${name}) like "%reactivation%") then "Marketing Flow"
+              else "Transactional Flow" end
+    ;;
+  }
+
+
+
+
+  dimension: is_type_not_sale_flow{
+    type: yesno
+    sql: ${type} = "flow" and (lower(${name}) like "%abandon%" or lower(${name}) like "%cart_link%"  or lower(${name}) like "%welcome%"or lower(${name}) like "%reactivation%")
+      ;;
+  }
+
 
 
   dimension: receive_click_minute_diff {
