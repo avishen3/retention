@@ -167,6 +167,24 @@ view: klaviyo_email_events_by_user {
   }
 
 
+  dimension: first_lc_eorder_day_diff_AGG_for_special_weekends{
+    type: string
+    sql: case when ${first_lc_eorder_day_diff} = 0 then "A:0"
+              when ${first_lc_eorder_day_diff} = 1 then "B:1"
+              when ${first_lc_eorder_day_diff} = 2 then "C:2"
+              when ${first_lc_eorder_day_diff} = 3 then "D:3"
+              when ${first_lc_eorder_day_diff} = 4 then "E:4"
+              when ${first_lc_eorder_day_diff} = 5 then "F:5"
+              when ${first_lc_eorder_day_diff} = 6 then "G:6"
+              when ${first_lc_eorder_day_diff} between 7 and 14 then "H:7-14"
+              when ${first_lc_eorder_day_diff} between 15 and 30 then "I:15-30"
+              when ${first_lc_eorder_day_diff} between 31 and 60 then "J:31-60"
+              when ${first_lc_eorder_day_diff} > 61 then "K:61+"
+              ELSE null end
+    ;;
+  }
+
+
   dimension_group: first_lc_ts {
     type: time
     timeframes: [
