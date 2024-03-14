@@ -1929,5 +1929,175 @@ view: klaviyo_email_events_by_user {
   }
 
 
+#### MTA Like dash build 03/2024
+
+
+### dimensions selectors
+
+  parameter: dimension_selector_CRM_1 {
+    type: unquoted
+    allowed_value: {
+      label: "Brand"
+      value: "Brand"
+    }
+
+    allowed_value: {
+      label: "Theme"
+      value: "Theme"
+    }
+
+    allowed_value: {
+      label: "Type"
+      value: "Type"
+    }
+
+    allowed_value: {
+      label: "SubType"
+      value: "SubType"
+    }
+
+    allowed_value: {
+      label: "Name"
+      value: "Name"
+    }
+
+    allowed_value: {
+      label: "SubFlow Name"
+      value: "SubFlow Name"
+    }
+
+    allowed_value: {
+      label: "Customer Type"
+      value: "Customer Type"
+    }
+
+    allowed_value: {
+      label: "Name"
+      value: "Name"
+    }
+
+    allowed_value: {
+      label: "Offer"
+      value: "Offer"
+    }
+
+    allowed_value: {
+    label: "Creative"
+    value: "Creative"
+  }
+
+    allowed_value: {
+  label: "Test"
+  value: "Test"
+}
+
+
+    allowed_value: {
+label: "Variant"
+value: "Variant"
+}
+
+    allowed_value: {
+      label: "Launch Date"
+      value: "Launch Date"
+    }
+
+    allowed_value: {
+      label: "Ad Type"
+      value: "Ad Type"
+    }
+
+
+    allowed_value: {
+      label: "wildCard"
+      value: "wildCard"
+    }
+
+    allowed_value: {
+      label: "Week"
+      value: "Week"
+    }
+
+    allowed_value: {
+      label: "Landing Page"
+      value: "Landing Page"
+    }
+
+    allowed_value: {
+      label: "Length"
+      value: "Length"
+    }
+
+    allowed_value: {
+      label: "CTA"
+      value: "CTA"
+    }
+
+    allowed_value: {
+      label: "Sender"
+      value: "Sender"
+    }
+
+    allowed_value: {
+      label: "None"
+      value: "None"
+    }
+    group_label: "Advanced Selectors"
+  }
+
+
+
+  dimension: dimension_CRM_1 {
+    type: string
+    sql:
+  {% if dimension_selector_CRM_1._parameter_value == 'Brand' %}
+        ${brand}
+  {% elsif dimension_selector_CRM_1._parameter_value == 'Theme' %}
+        ${Theme}
+  {% elsif dimension_selector_CRM_1._parameter_value == 'Type' %}
+        ${type}
+  {% elsif dimension_selector_CRM_1._parameter_value == 'SubType' %}
+        ${subtype}
+  {% elsif dimension_selector_CRM_1._parameter_value == 'Name' %}
+        ${name}
+  {% elsif dimension_selector_CRM_1._parameter_value == 'SubFlow Name' %}
+        ${subflow_name}
+  {% elsif dimension_selector_CRM_1._parameter_value == 'Customer Type' %}
+        ${customer_type}
+  {% elsif dimension_selector_CRM_1._parameter_value == 'Name' %}
+        ${name}
+  {% elsif dimension_selector_CRM_1._parameter_value == 'Offer' %}
+        ${offer}
+  {% elsif dimension_selector_CRM_1._parameter_value == 'Creative' %}
+        ${creative}
+  {% elsif dimension_selector_CRM_1._parameter_value == 'Test' %}
+        ${test}
+  {% elsif dimension_selector_CRM_1._parameter_value == 'Variant' %}
+        ${variant}
+  {% elsif dimension_selector_CRM_1._parameter_value == 'Launch Date' %}
+        ${launch_date}
+  {% elsif dimension_selector_CRM_1._parameter_value == 'Ad Type' %}
+        ${ad_type}
+  {% elsif dimension_selector_CRM_1._parameter_value == 'wildCard' %}
+        ${wildCard}
+  {% elsif dimension_selector_CRM_1._parameter_value == 'Week' %}
+        ${week}
+  {% elsif dimension_selector_CRM_1._parameter_value == 'Landing Page' %}
+        ${landing_page}
+  {% elsif dimension_selector_CRM_1._parameter_value == 'Length' %}
+        ${length}
+  {% elsif dimension_selector_CRM_1._parameter_value == 'CTA' %}
+        ${cta}
+  {% elsif dimension_selector_CRM_1._parameter_value == 'Sender' %}
+        ${sender}
+      {% else %}
+        null
+      {% endif %};;
+    label_from_parameter: dimension_selector_1
+    group_label: "Advanced Dimensions"
+  }
+
+
+
 
 }
