@@ -2365,5 +2365,59 @@ value: "Variant"
     group_label: "Advanced Dimensions"
   }
 
+  #### index metric - 18/03
+
+
+
+  parameter: Index_selector_1 {
+    label: "Index Selector 1"
+    type: unquoted
+    allowed_value: {
+      label: "Opened_Rate_specific_email"
+      value: "Opened_Rate_specific_email"
+    }
+    allowed_value: {
+      label: "Clicked_Rate_out_of_received"
+      value: "Clicked_Rate_out_of_received"
+    }
+    allowed_value: {
+      label: "Order_from_recived_email_specific_email"
+      value: "Order_from_recived_email_specific_email"
+    }
+    allowed_value: {
+      label: "revenue_per_1000_received_email"
+      value: "revenue_per_1000_received_email"
+    }
+
+    allowed_value: {
+      label: "none"
+      value: "none"
+    }
+    group_label: "Advanced Selectors"
+  }
+
+  measure: Index_1 {
+    label: "Index - 1"
+    type: number
+    sql:
+      {% if Index_selector_1._parameter_value == 'Opened_Rate_specific_email' %}
+        ${Opened_Rate_specific_email}
+      {% elsif Index_selector_1._parameter_value == 'Clicked_Rate_out_of_received' %}
+        ${Clicked_Rate_out_of_received}
+       {% elsif Index_selector_1._parameter_value == 'Order_from_recived_email_specific_email' %}
+        ${Order_from_recived_email_specific_email}
+       {% elsif Index_selector_1._parameter_value == 'revenue_per_1000_received_email' %}
+        ${revenue_per_1000_received_email}
+      {% else %}
+        null
+      {% endif %};;
+    label_from_parameter: Index_selector_1
+    value_format: "0.00"
+    group_label: "Advanced Measures"
+  }
+
+
+
+
 
 }
