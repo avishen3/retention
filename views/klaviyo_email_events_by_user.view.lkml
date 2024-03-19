@@ -1967,8 +1967,8 @@ view: klaviyo_email_events_by_user {
       value: "Customer Type"
     }
     allowed_value: {
-      label: "Name"
-      value: "Name"
+      label: "Segment"
+      value: "Segment"
     }
     allowed_value: {
       label: "Offer"
@@ -2044,8 +2044,8 @@ value: "Variant"
         ${subflow_name}
   {% elsif dimension_selector_CRM_1._parameter_value == 'Customer Type' %}
         ${customer_type}
-  {% elsif dimension_selector_CRM_1._parameter_value == 'Name' %}
-        ${name}
+  {% elsif dimension_selector_CRM_1._parameter_value == 'Segment' %}
+        ${segment}
   {% elsif dimension_selector_CRM_1._parameter_value == 'Offer' %}
         ${offer}
   {% elsif dimension_selector_CRM_1._parameter_value == 'Creative' %}
@@ -2111,8 +2111,8 @@ value: "Variant"
       value: "Customer Type"
     }
     allowed_value: {
-      label: "Name"
-      value: "Name"
+      label: "Segment"
+      value: "Segment"
     }
     allowed_value: {
       label: "Offer"
@@ -2188,8 +2188,8 @@ value: "Variant"
             ${subflow_name}
       {% elsif dimension_selector_CRM_2._parameter_value == 'Customer Type' %}
             ${customer_type}
-      {% elsif dimension_selector_CRM_2._parameter_value == 'Name' %}
-            ${name}
+      {% elsif dimension_selector_CRM_2._parameter_value == 'Segment' %}
+            ${segment}
       {% elsif dimension_selector_CRM_2._parameter_value == 'Offer' %}
             ${offer}
       {% elsif dimension_selector_CRM_2._parameter_value == 'Creative' %}
@@ -2255,8 +2255,8 @@ value: "Variant"
       value: "Customer Type"
     }
     allowed_value: {
-      label: "Name"
-      value: "Name"
+      label: "Segment"
+      value: "Segment"
     }
     allowed_value: {
       label: "Offer"
@@ -2332,8 +2332,8 @@ value: "Variant"
             ${subflow_name}
       {% elsif dimension_selector_CRM_3._parameter_value == 'Customer Type' %}
             ${customer_type}
-      {% elsif dimension_selector_CRM_3._parameter_value == 'Name' %}
-            ${name}
+      {% elsif dimension_selector_CRM_3._parameter_value == 'Segment' %}
+            ${segment}
       {% elsif dimension_selector_CRM_3._parameter_value == 'Offer' %}
             ${offer}
       {% elsif dimension_selector_CRM_3._parameter_value == 'Creative' %}
