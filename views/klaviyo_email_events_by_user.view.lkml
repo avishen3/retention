@@ -714,6 +714,18 @@ view: klaviyo_email_events_by_user {
   }
 
 
+#### 26/03/2024
+
+
+  dimension: recived_is_open {
+    type: yesno
+    sql: ${ts_received_email_raw}=${ts_opened_email_raw} ;;
+  }
+
+  dimension: recived_is_clicek {
+    type: yesno
+    sql: ${ts_received_email_raw}=${ts_clicked_email_raw} ;;
+  }
 
 
  #### date granulraty
