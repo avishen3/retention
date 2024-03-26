@@ -722,9 +722,9 @@ view: klaviyo_email_events_by_user {
     sql: ${ts_received_email_raw}=${ts_opened_email_raw} ;;
   }
 
-  dimension: recived_is_clicek {
+  dimension: recived_is_cliced {
     type: yesno
-    sql: ${ts_received_email_raw}=${ts_clicked_email_raw} ;;
+    sql: timestemp(${ts_received_email_raw})=timestemp(${ts_clicked_email_raw}) ;;
   }
 
 
