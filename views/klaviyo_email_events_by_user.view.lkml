@@ -903,6 +903,16 @@ view: klaviyo_email_events_by_user {
   }
 
 
+####
+
+  measure: message_count{
+    type: count_distinct
+    label:"Message Count"
+    ##"Total_users_recived_email"
+    sql: ${campaign} ;;
+  }
+
+
   ### email user count
 ##Unique Users.
 
