@@ -2412,6 +2412,11 @@ value: "Variant"
     }
 
     allowed_value: {
+      label: "AOV"
+      value: "AOV"
+    }
+
+    allowed_value: {
       label: "none"
       value: "none"
     }
@@ -2430,6 +2435,8 @@ value: "Variant"
         ${Order_from_recived_email_specific_email}
        {% elsif Index_selector_1._parameter_value == 'revenue_per_1000_received_email' %}
         ${revenue_per_1000_received_email}
+       {% elsif Index_selector_1._parameter_value == 'AOV' %}
+        ${AOV}
       {% else %}
         null
       {% endif %};;
