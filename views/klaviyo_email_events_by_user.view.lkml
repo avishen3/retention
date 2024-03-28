@@ -1981,12 +1981,12 @@ view: klaviyo_email_events_by_user {
       value: "Name"
     }
     allowed_value: {
-      label: "SubFlow Name"
-      value: "SubFlow Name"
+      label: "SubFlow_Name"
+      value: "SubFlow_Name"
     }
     allowed_value: {
-      label: "Customer Type"
-      value: "Customer Type"
+      label: "Customer_Type"
+      value: "Customer_Type"
     }
     allowed_value: {
       label: "Segment"
@@ -2009,12 +2009,12 @@ label: "Variant"
 value: "Variant"
 }
     allowed_value: {
-      label: "Launch Date"
-      value: "Launch Date"
+      label: "Launch_Date"
+      value: "Launch_Date"
     }
     allowed_value: {
-      label: "Ad Type"
-      value: "Ad Type"
+      label: "Ad_Type"
+      value: "Ad_Type"
     }
     allowed_value: {
       label: "wildCard"
@@ -2025,8 +2025,8 @@ value: "Variant"
       value: "Week"
     }
     allowed_value: {
-      label: "Landing Page"
-      value: "Landing Page"
+      label: "Landing_Page"
+      value: "Landing_Page"
     }
     allowed_value: {
       label: "Length"
@@ -2062,9 +2062,9 @@ value: "Variant"
         ${subtype}
   {% elsif dimension_selector_CRM_1._parameter_value == 'Name' %}
         ${name}
-  {% elsif dimension_selector_CRM_1._parameter_value == 'SubFlow Name' %}
+  {% elsif dimension_selector_CRM_1._parameter_value == 'SubFlow_Name' %}
         ${subflow_name}
-  {% elsif dimension_selector_CRM_1._parameter_value == 'Customer Type' %}
+  {% elsif dimension_selector_CRM_1._parameter_value == 'Customer_Type' %}
         ${customer_type}
   {% elsif dimension_selector_CRM_1._parameter_value == 'Segment' %}
         ${segment}
@@ -2076,15 +2076,15 @@ value: "Variant"
         ${test}
   {% elsif dimension_selector_CRM_1._parameter_value == 'Variant' %}
         ${variant}
-  {% elsif dimension_selector_CRM_1._parameter_value == 'Launch Date' %}
+  {% elsif dimension_selector_CRM_1._parameter_value == 'Launch_Date' %}
         ${launch_date}
-  {% elsif dimension_selector_CRM_1._parameter_value == 'Ad Type' %}
+  {% elsif dimension_selector_CRM_1._parameter_value == 'Ad_Type' %}
         ${ad_type}
   {% elsif dimension_selector_CRM_1._parameter_value == 'wildCard' %}
         ${wildCard}
   {% elsif dimension_selector_CRM_1._parameter_value == 'Week' %}
         ${week}
-  {% elsif dimension_selector_CRM_1._parameter_value == 'Landing Page' %}
+  {% elsif dimension_selector_CRM_1._parameter_value == 'Landing_Page' %}
         ${landing_page}
   {% elsif dimension_selector_CRM_1._parameter_value == 'Length' %}
         ${length}
@@ -2125,12 +2125,12 @@ value: "Variant"
       value: "Name"
     }
     allowed_value: {
-      label: "SubFlow Name"
-      value: "SubFlow Name"
+      label: "SubFlow_Name"
+      value: "SubFlow_Name"
     }
     allowed_value: {
-      label: "Customer Type"
-      value: "Customer Type"
+      label: "Customer_Type"
+      value: "Customer_Type"
     }
     allowed_value: {
       label: "Segment"
@@ -2153,12 +2153,12 @@ value: "Variant"
       value: "Variant"
     }
     allowed_value: {
-      label: "Launch Date"
-      value: "Launch Date"
+      label: "Launch_Date"
+      value: "Launch_Date"
     }
     allowed_value: {
-      label: "Ad Type"
-      value: "Ad Type"
+      label: "Ad_Type"
+      value: "Ad_Type"
     }
     allowed_value: {
       label: "wildCard"
@@ -2169,8 +2169,8 @@ value: "Variant"
       value: "Week"
     }
     allowed_value: {
-      label: "Landing Page"
-      value: "Landing Page"
+      label: "Landing_Page"
+      value: "Landing_Page"
     }
     allowed_value: {
       label: "Length"
@@ -2206,9 +2206,9 @@ value: "Variant"
             ${subtype}
       {% elsif dimension_selector_CRM_2._parameter_value == 'Name' %}
             ${name}
-      {% elsif dimension_selector_CRM_2._parameter_value == 'SubFlow Name' %}
+      {% elsif dimension_selector_CRM_2._parameter_value == 'SubFlow_Name' %}
             ${subflow_name}
-      {% elsif dimension_selector_CRM_2._parameter_value == 'Customer Type' %}
+      {% elsif dimension_selector_CRM_2._parameter_value == 'Customer_Type' %}
             ${customer_type}
       {% elsif dimension_selector_CRM_2._parameter_value == 'Segment' %}
             ${segment}
@@ -2220,15 +2220,15 @@ value: "Variant"
             ${test}
       {% elsif dimension_selector_CRM_2._parameter_value == 'Variant' %}
             ${variant}
-      {% elsif dimension_selector_CRM_2._parameter_value == 'Launch Date' %}
+      {% elsif dimension_selector_CRM_2._parameter_value == 'Launch_Date' %}
             ${launch_date}
-      {% elsif dimension_selector_CRM_2._parameter_value == 'Ad Type' %}
+      {% elsif dimension_selector_CRM_2._parameter_value == 'Ad_Type' %}
             ${ad_type}
       {% elsif dimension_selector_CRM_2._parameter_value == 'wildCard' %}
             ${wildCard}
       {% elsif dimension_selector_CRM_2._parameter_value == 'Week' %}
             ${week}
-      {% elsif dimension_selector_CRM_2._parameter_value == 'Landing Page' %}
+      {% elsif dimension_selector_CRM_2._parameter_value == 'Landing_Page' %}
             ${landing_page}
       {% elsif dimension_selector_CRM_2._parameter_value == 'Length' %}
             ${length}
@@ -2269,12 +2269,12 @@ value: "Variant"
       value: "Name"
     }
     allowed_value: {
-      label: "SubFlow Name"
-      value: "SubFlow Name"
+      label: "SubFlow_Name"
+      value: "SubFlow_Name"
     }
     allowed_value: {
-      label: "Customer Type"
-      value: "Customer Type"
+      label: "Customer_Type"
+      value: "Customer_Type"
     }
     allowed_value: {
       label: "Segment"
@@ -2297,12 +2297,12 @@ value: "Variant"
       value: "Variant"
     }
     allowed_value: {
-      label: "Launch Date"
-      value: "Launch Date"
+      label: "Launch_Date"
+      value: "Launch_Date"
     }
     allowed_value: {
-      label: "Ad Type"
-      value: "Ad Type"
+      label: "Ad_Type"
+      value: "Ad_Type"
     }
     allowed_value: {
       label: "wildCard"
@@ -2313,8 +2313,8 @@ value: "Variant"
       value: "Week"
     }
     allowed_value: {
-      label: "Landing Page"
-      value: "Landing Page"
+      label: "Landing_Page"
+      value: "Landing_Page"
     }
     allowed_value: {
       label: "Length"
@@ -2350,9 +2350,9 @@ value: "Variant"
             ${subtype}
       {% elsif dimension_selector_CRM_3._parameter_value == 'Name' %}
             ${name}
-      {% elsif dimension_selector_CRM_3._parameter_value == 'SubFlow Name' %}
+      {% elsif dimension_selector_CRM_3._parameter_value == 'SubFlow_Name' %}
             ${subflow_name}
-      {% elsif dimension_selector_CRM_3._parameter_value == 'Customer Type' %}
+      {% elsif dimension_selector_CRM_3._parameter_value == 'Customer_Type' %}
             ${customer_type}
       {% elsif dimension_selector_CRM_3._parameter_value == 'Segment' %}
             ${segment}
@@ -2364,15 +2364,15 @@ value: "Variant"
             ${test}
       {% elsif dimension_selector_CRM_3._parameter_value == 'Variant' %}
             ${variant}
-      {% elsif dimension_selector_CRM_3._parameter_value == 'Launch Date' %}
+      {% elsif dimension_selector_CRM_3._parameter_value == 'Launch_Date' %}
             ${launch_date}
-      {% elsif dimension_selector_CRM_3._parameter_value == 'Ad Type' %}
+      {% elsif dimension_selector_CRM_3._parameter_value == 'Ad_Type' %}
             ${ad_type}
       {% elsif dimension_selector_CRM_3._parameter_value == 'wildCard' %}
             ${wildCard}
       {% elsif dimension_selector_CRM_3._parameter_value == 'Week' %}
             ${week}
-      {% elsif dimension_selector_CRM_3._parameter_value == 'Landing Page' %}
+      {% elsif dimension_selector_CRM_3._parameter_value == 'Landing_Page' %}
             ${landing_page}
       {% elsif dimension_selector_CRM_3._parameter_value == 'Length' %}
             ${length}
