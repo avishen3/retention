@@ -253,4 +253,17 @@ view: klaviyo_unified_events {
     type: count
     drill_fields: [event_name, campaign_name, productname, source_name, customer_name]
   }
+
+  measure: Total_events{
+    type: count
+    sql: ${event_id} ;;
+  }
+
+  measure: Unique_Users_profile_id{
+    type: count_distinct
+    sql: ${profile_id} ;;
+  }
+
+
+
 }
