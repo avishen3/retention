@@ -1,6 +1,7 @@
 view: klaviyo_unified_events {
   sql_table_name: `omega-post-184817.customer.klaviyo_unified_events` ;;
 
+
   dimension: brand {
     type: string
     sql: ${TABLE}.brand ;;
