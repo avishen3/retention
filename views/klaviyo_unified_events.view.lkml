@@ -255,7 +255,7 @@ view: klaviyo_unified_events {
   }
 
   measure: Total_events{
-    type: count
+    type: count_distinct
     sql: ${event_id} ;;
   }
 
