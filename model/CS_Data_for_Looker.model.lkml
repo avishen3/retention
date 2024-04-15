@@ -161,3 +161,10 @@ explore: admin_prospect_customertbl{
 explore: zingtree_raw_tl{
   label: "Zingtree Raw Data"
   description: "Zingtree Raw Data"}
+
+
+### five9_all_interactions 15042024
+
+explore: five9_all_interactions{
+  label: "Five9 All Interactions"
+  description: "Five9 All Interactions"}
