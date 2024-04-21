@@ -1,5 +1,5 @@
 view: klaviyo_email_events_by_user {
-  sql_table_name: 'omega-post-184817.customer.klaviyo_email_events_by_user'
+  sql_table_name: `omega-post-184817.customer.klaviyo_email_events_by_user`
     ;;
 
 ##  sql_table_name:  `omega-post-184817.nathan_auto_delete_after_40days.test_klaviyo_by_user`
