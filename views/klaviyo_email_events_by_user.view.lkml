@@ -2433,7 +2433,7 @@ value: "Variant"
       {% if Index_selector_1._parameter_value == 'Opened_Rate_specific_email' %}
         ${Opened_Rate_specific_email}
       {% elsif Index_selector_1._parameter_value == 'Clicked_Rate_out_of_received' %}
-        ${Clicked_Rate_out_of_received}
+        ${Clicked_Rate_out_of_received_specific_email}
        {% elsif Index_selector_1._parameter_value == 'Order_from_recived_email_specific_email' %}
         ${Order_from_recived_email_specific_email}
        {% elsif Index_selector_1._parameter_value == 'revenue_per_1000_received_email' %}
@@ -2493,7 +2493,7 @@ value: "Variant"
       {% if Index_selector_2._parameter_value == 'Opened_Rate_specific_email' %}
         ${Opened_Rate_specific_email}
       {% elsif Index_selector_2._parameter_value == 'Clicked_Rate_out_of_received' %}
-        ${Clicked_Rate_out_of_received}
+        ${Clicked_Rate_out_of_received_specific_email}
        {% elsif Index_selector_2._parameter_value == 'Order_from_recived_email_specific_email' %}
         ${Order_from_recived_email_specific_email}
        {% elsif Index_selector_2._parameter_value == 'revenue_per_1000_received_email' %}
@@ -2550,7 +2550,7 @@ value: "Variant"
       {% if Index_selector_3._parameter_value == 'Opened_Rate_specific_email' %}
         ${Opened_Rate_specific_email}
       {% elsif Index_selector_3._parameter_value == 'Clicked_Rate_out_of_received' %}
-        ${Clicked_Rate_out_of_received}
+        ${Clicked_Rate_out_of_received_specific_email}
        {% elsif Index_selector_3._parameter_value == 'Order_from_recived_email_specific_email' %}
         ${Order_from_recived_email_specific_email}
        {% elsif Index_selector_3._parameter_value == 'revenue_per_1000_received_email' %}
