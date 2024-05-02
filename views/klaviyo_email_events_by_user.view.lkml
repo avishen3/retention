@@ -1179,7 +1179,7 @@ view: klaviyo_email_events_by_user {
   measure: Clicked_Rate_out_of_received_specific_email{
     type: number
     sql:  case when ${Total_Received_specific_Emails}>0 then ${Total_Clicked_specific_Emails}/${Total_Received_specific_Emails} else 0 end  ;;
-    value_format: "0.00%"
+    value_format: "0.000%"
   }
 
   measure: Click_to_open_rate_specific_email{
