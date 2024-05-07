@@ -782,7 +782,52 @@ view: klaviyo_email_events_by_user {
             END ;;
   }
 
+####
 
+  dimension:  dow_num {
+    type:  string
+    sql: EXTRACT(DAYOFWEEK FROM ${ts_received_email_date}) ;;
+    hidden: yes
+  }
+
+
+  dimension:  day_of_week {
+    label: "Day of Week"
+    type:  string
+    sql: case
+          when ${dow_num} = 1 then 'Sunday'
+          when ${dow_num} = 2 then 'Monday'
+          when ${dow_num} = 3 then 'Tuesday'
+          when ${dow_num} = 4 then 'Wednesday'
+          when ${dow_num} = 5 then 'Thursday'
+          when ${dow_num} = 6 then 'Friday'
+          when ${dow_num} = 7 then 'Saturday'
+        end ;;
+    order_by_field: dow_num
+  }
+
+  parameter: dow_or_not {
+    label: "DOW?"
+    type: string
+    allowed_value: {
+      label: "Yes"
+      value: "Yes"
+    }
+    allowed_value: {
+      label: "No"
+      value: "No"
+    }
+
+  }
+
+  dimension: DOW {
+    label: "DOW"
+    description: "Select 'No' in 'DOW?' selector to deactivate the DOW display"
+    sql:
+          CASE WHEN {% parameter dow_or_not %} = 'Yes' THEN ${day_of_week}
+          ELSE null
+          END ;;
+  }
 
 
 ###
