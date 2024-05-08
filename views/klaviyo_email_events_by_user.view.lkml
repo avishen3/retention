@@ -791,6 +791,12 @@ view: klaviyo_email_events_by_user {
   }
 
 
+  dimension: not_today {
+    type: yesno
+    sql: ${ts_received_email_date} < current_date('America/Los_Angeles') ;;
+    group_label: "Date Filters"
+  }
+
   dimension:  day_of_week {
     label: "Day of Week"
     type:  string
