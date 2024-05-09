@@ -2622,17 +2622,17 @@ value: "Variant"
 
   dimension: Journey {
     type: string
-    sql: case when CONATINS_TEXT(${name},"abandon_cart") then "Abandoned Cart"
-              when CONATINS_TEXT(${name},"abandoncart") then "Abandoned Cart"
-              when CONATINS_TEXT(${name},"abandoned_cart") then "Abandoned Cart"
+    sql: case when contains(${name},"abandon_cart") then "Abandoned Cart"
+              when contains(${name},"abandoncart") then "Abandoned Cart"
+              when contains(${name},"abandoned_cart") then "Abandoned Cart"
 
-              when CONATINS_TEXT(${name},"billing") then "Abandoned Billing"
+              when contains(${name},"billing") then "Abandoned Billing"
 
-              when CONATINS_TEXT(${name},"review") then "Abandoned Review"
+              when contains(${name},"review") then "Abandoned Review"
 
-              when CONATINS_TEXT(${name},"welcome") then "Welcome"
+              when contains(${name},"welcome") then "Welcome"
 
-              when CONATINS_TEXT(${name},"browse") then "Abandoned Browse"
+              when contains(${name},"browse") then "Abandoned Browse"
               when ${TABLE}.type = "promo" then "Promo"
               ELSE "Other Flow" end
     ;;
