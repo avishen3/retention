@@ -2622,17 +2622,18 @@ value: "Variant"
 
   dimension: Journey {
     type: string
-    sql: case when contains(${name},"abandon_cart") then "Abandoned Cart"
-              when contains(${name},"abandoncart") then "Abandoned Cart"
-              when contains(${name},"abandoned_cart") then "Abandoned Cart"
+    sql: case
+              when regexp_contains(lower(${name}),'abandon_cart') then "Abandoned Cart"
+              when regexp_contains(lower(${name}),'abandoncart') then "Abandoned Cart"
+              when regexp_contains(lower(${name}),'abandoned_cart') then "Abandoned Cart"
 
-              when contains(${name},"billing") then "Abandoned Billing"
+              when regexp_contains(lower(${name}),'billing') then "Abandoned Billing"
 
-              when contains(${name},"review") then "Abandoned Review"
+              when regexp_contains(lower(${name}),'review') then "Abandoned Review"
 
-              when contains(${name},"welcome") then "Welcome"
+              when regexp_contains(lower(${name}),'welcome') then "Welcome"
 
-              when contains(${name},"browse") then "Abandoned Browse"
+              when regexp_contains(lower(${name}),'browse') then "Abandoned Browse"
               when ${TABLE}.type = "promo" then "Promo"
               ELSE "Other Flow" end
     ;;
