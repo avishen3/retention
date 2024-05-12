@@ -139,6 +139,9 @@ explore: admin_client_events_agents_check_up_tbl{
 explore: retention_platform{
   label: "Retention Platform"}
 
+explore: pillow_refund_data_tbl {
+  label: "Pillow Refund Data"
+}
 
 
 ## cartlink
