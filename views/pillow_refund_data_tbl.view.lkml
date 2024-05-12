@@ -177,14 +177,14 @@ view: pillow_refund_data_tbl {
   }
 
 
-  measure: total_mattress_orders_that_were_sent_toppers{
+  measure: total_mattress_orders_that_were_sent_pillow{
     type: count_distinct
     sql:short_id ;;
     value_format: "#,##0"
     group_label: "Mattress Measures"
   }
 
-  measure: total_refund_mattress_order_with_toppers {
+  measure: total_refund_mattress_order_with_pillow {
     type: count_distinct
     sql: case when ${refund_type} = 'full refund' then ${short_id} else null end ;;
     value_format: "#,##0"
@@ -193,14 +193,23 @@ view: pillow_refund_data_tbl {
 
 
 
-  measure: total_refund_mattress_rate {
+  measure: total_pillow_refund_mattress_rate {
     type: number
-    sql:  ${total_refund_mattress_order_with_toppers}/${total_mattress_orders_that_were_sent_toppers}  ;;
+    sql:  ${total_refund_mattress_order_with_pillow}/${total_mattress_orders_that_were_sent_pillow}  ;;
     value_format: "####.##%"
     group_label: "Mattress Measures"
   }
 
 
+  dimension: reason {
+    type: string
+    sql: ${TABLE}.reason ;;
+  }
+
+  dimension: subreason {
+    type: string
+    sql: ${TABLE}.subreason ;;
+  }
 
 
 
