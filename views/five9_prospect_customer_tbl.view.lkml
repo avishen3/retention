@@ -415,6 +415,14 @@ view: five9_prospect_customer_tbl {
     sql: ${TABLE}.type_name ;;
   }
 
+
+  dimension: customerSegment {
+    type: string
+    sql: ${TABLE}.customerSegment ;;
+  }
+
+
+
   dimension: user_name {
     type: string
     sql: ${TABLE}.user_name ;;
