@@ -813,57 +813,57 @@ view: attentive_by_user {
 
 
   dimension: first_lc_widget {
-    type: number
+    type: string
     sql: ${TABLE}.first_lc_widget ;;
   }
 
   dimension: first_lc_marketing_platform {
-    type: number
+    type: string
     sql: ${TABLE}.first_lc_marketing_platform ;;
   }
 
   dimension: first_lc_device {
-    type: number
+    type: string
     sql: ${TABLE}.first_lc_device ;;
   }
 
   dimension: first_lc_source {
-    type: number
+    type: string
     sql: ${TABLE}.first_lc_source ;;
   }
 
   dimension: first_lc_medium {
-    type: number
+    type: string
     sql: ${TABLE}.first_lc_medium ;;
   }
 
   dimension: first_lc_campaign {
-    type: number
+    type: string
     sql: ${TABLE}.first_lc_campaign ;;
   }
 
   dimension: first_lc_campaign_id {
-    type: number
+    type: string
     sql: ${TABLE}.first_lc_campaign_id ;;
   }
 
   dimension: first_lc_adset_id {
-    type: number
+    type: string
     sql: ${TABLE}.first_lc_adset_id ;;
   }
 
   dimension: first_lc_ad_id {
-    type: number
+    type: string
     sql: ${TABLE}.first_lc_ad_id ;;
   }
 
   dimension: first_lc_gclid {
-    type: number
+    type: string
     sql: ${TABLE}.first_lc_gclid ;;
   }
 
   dimension: first_lc_account_name {
-    type: number
+    type: string
     sql: ${TABLE}.first_lc_account_name ;;
   }
 
