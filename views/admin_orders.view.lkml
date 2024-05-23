@@ -826,7 +826,7 @@ measure: total_price {
   }
   measure: cancelled_revenue_ratio {
     type: number
-    sql: ${total_revenue_cancelled}/${total_revenue} ;;
+    sql: case when ${total_revenue}>0 then ${total_revenue_cancelled}/${total_revenue} else null end ;;
     value_format: "00.00"
 
   }
