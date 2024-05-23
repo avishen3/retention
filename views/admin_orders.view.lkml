@@ -820,7 +820,7 @@ measure: total_price {
 
   measure: total_revenue_cancelled {
     type: sum
-    sql: case when ${status} = "cancelled"  then ${price}-${tax} else null ;;
+    sql: case when ${status} = "cancelled"  then ${price}-${tax} else null end  ;;
     value_format: "$#,##0"
 
   }
