@@ -824,7 +824,12 @@ measure: total_price {
     value_format: "$#,##0"
 
   }
+  measure: cancelled_revenue_ratio {
+    type: number
+    sql: ${total_revenue_cancelled}/${total_revenue} ;;
+    value_format: "00.00"
 
+  }
 
 
 }
