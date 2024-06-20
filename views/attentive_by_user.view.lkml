@@ -868,4 +868,67 @@ view: attentive_by_user {
   }
 
 
+### SMS ai
+
+  dimension: Character_Count {
+    type: string
+    sql: ${TABLE}.Character_Count ;;
+  }
+
+  dimension: Category {
+    type: string
+    sql: ${TABLE}.Category ;;
+  }
+
+  dimension: Label {
+    type: string
+    sql: ${TABLE}.Label ;;
+  }
+
+  dimension: Discount {
+    type: string
+    sql: ${TABLE}.Discount ;;
+  }
+
+  dimension: Emotion {
+    type: string
+    sql: ${TABLE}.Emotion ;;
+  }
+
+  dimension: Emoji {
+    type: string
+    sql: ${TABLE}.Emoji ;;
+  }
+
+  dimension: Code {
+    type: string
+    sql: ${TABLE}.Code ;;
+  }
+
+  dimension: Adjustable {
+    type: string
+    sql: ${TABLE}.Adjustable ;;
+  }
+
+  dimension: Warranty {
+    type: string
+    sql: ${TABLE}.Warranty ;;
+  }
+
+  dimension: _365 {
+    type: string
+    sql: ${TABLE}._365 ;;
+  }
+
+  dimension: Trial {
+    type: string
+    sql: ${TABLE}.Trial ;;
+  }
+
+  dimension: Percent {
+    type: string
+    sql: ${TABLE}.Percent ;;
+  }
+
+
 }
