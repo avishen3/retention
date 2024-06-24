@@ -1122,9 +1122,11 @@ view: five9_prospect_customer_tbl {
               when ${agent_email} in ('vonm@residenthome.com', 'joseq@residenthome.com', 'pearlt@residenthome.com', 'maxine@residenthome.com') then "group c" else null end
 
 
-
-
-
+    dimension: goal_aov_sales_agent_scorecart{
+    type: number
+    sql: case when sales_agents_scorecard_grouping = "group a" then 1750
+    when sales_agents_scorecard_grouping = "group b" then 1650
+    when sales_agents_scorecard_grouping = "group c" then 1550 else null end
 
 
     ;;
