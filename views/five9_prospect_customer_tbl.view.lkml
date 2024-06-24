@@ -1137,7 +1137,7 @@ view: five9_prospect_customer_tbl {
     value_format: "0.00\%"
     sql: case when ${sales_agents_scorecard_grouping}  = "group a" then 0.25
           when ${sales_agents_scorecard_grouping} = "group b" then 0.20
-          when ${sales_agents_scorecard_grouping} = "group c" then 0.515 else null end
+          when ${sales_agents_scorecard_grouping} = "group c" then 0.15 else null end
           ;;
   }
 
