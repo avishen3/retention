@@ -1007,10 +1007,7 @@ view: attentive_by_user {
       label: "Emotion"
       value: "Emotion"
     }
-    allowed_value: {
-      label: "Emoji"
-      value: "Emoji"
-    }
+
     allowed_value: {
       label: "Code"
       value: "Code"
@@ -1086,8 +1083,6 @@ view: attentive_by_user {
             ${Discount}
       {% elsif dimension_selector_CRM_1._parameter_value == 'Emotion' %}
             ${Emotion}
-      {% elsif dimension_selector_CRM_1._parameter_value == 'Emoji' %}
-            ${Emoji}
       {% elsif dimension_selector_CRM_1._parameter_value == 'Code' %}
             ${Code}
       {% elsif dimension_selector_CRM_1._parameter_value == 'Adjustable' %}
@@ -1108,8 +1103,61 @@ view: attentive_by_user {
   }
 
 
-#### index metric - 18/03
+  #### index metric - 24/06
 
+
+
+  parameter: Index_selector_1 {
+    label: "Index Selector 1"
+    type: unquoted
+
+    allowed_value: {
+      label: "Click Rate"
+      value: "Clicked_Rate_specific_SMS"
+    }
+    allowed_value: {
+      label: "Conversion (Orders/Del)"
+      value: "Order_from_recived_specific_SMS"
+    }
+    allowed_value: {
+      label: "Rev/1k Delivered"
+      value: "revenue_per_1000_received_SMS"
+    }
+
+    allowed_value: {
+      label: "AOV"
+      value: "AOV"
+    }
+
+    allowed_value: {
+      label: "none"
+      value: "none"
+    }
+    group_label: "Advanced Selectors"
+  }
+
+
+
+  measure: Index_1 {
+    label: "Index - 1"
+    type: number
+    sql:
+
+      {% if Index_selector_1._parameter_value == 'Clicked_Rate_specific_SMS' %}
+        ${Clicked_Rate_specific_SMS}
+       {% elsif Index_selector_1._parameter_value == 'Order_from_recived_specific_SMS' %}
+        ${Order_from_recived_specific_SMS}
+       {% elsif Index_selector_1._parameter_value == 'revenue_per_1000_received_SMS' %}
+        ${revenue_per_1000_received_SMS}
+       {% elsif Index_selector_1._parameter_value == 'AOV' %}
+        ${AOV}
+      {% else %}
+        null
+      {% endif %};;
+    label_from_parameter: Index_selector_1
+    value_format: "0.00"
+    group_label: "Advanced Measures"
+  }
 
 
 
