@@ -1120,7 +1120,8 @@ view: five9_prospect_customer_tbl {
     sql: case when ${agent_email} in ('djamaiccaa@residenthome.com', 'sannyd@residenthome.com', 'lourdinol@residenthome.com', 'camerons@residenthome.com') then "group a"
               when ${agent_email} in ('chaunceym@residenthome.com', 'christian.daye@residenthome.com', 'eliot.bennie@residenthome.com', 'keladas@residenthome.com') then "group b"
               when ${agent_email} in ('vonm@residenthome.com', 'joseq@residenthome.com', 'pearlt@residenthome.com', 'maxine@residenthome.com') then "group c" else null end
-
+  ;;
+  }
 
     dimension: goal_aov_sales_agent_scorecart{
     type: number
