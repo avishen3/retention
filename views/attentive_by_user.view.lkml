@@ -1103,6 +1103,344 @@ view: attentive_by_user {
   }
 
 
+  ##### 2
+
+  parameter: dimension_selector_CRM_2 {
+    type: unquoted
+    allowed_value: {
+      label: "campaign_type"
+      value: "campaign_type"
+    }
+    allowed_value: {
+      label: "flow_name"
+      value: "flow_name"
+    }
+    allowed_value: {
+      label: "subflow"
+      value: "subflow"
+    }
+    allowed_value: {
+      label: "sms_number"
+      value: "sms_number"
+    }
+    allowed_value: {
+      label: "customer_type"
+      value: "customer_type"
+    }
+    allowed_value: {
+      label: "campaign_name"
+      value: "campaign_name"
+    }
+    allowed_value: {
+      label: "offer"
+      value: "offer"
+    }
+    allowed_value: {
+      label: "test"
+      value: "test"
+    }
+    allowed_value: {
+      label: "variant"
+      value: "variant"
+    }
+    allowed_value: {
+      label: "brand"
+      value: "brand"
+    }
+    allowed_value: {
+      label: "join_source"
+      value: "join_source"
+    }
+    allowed_value: {
+      label: "subscription_type"
+      value: "subscription_type"
+    }
+    allowed_value: {
+      label: "Character_Count"
+      value: "Character_Count"
+    }
+    allowed_value: {
+      label: "Category"
+      value: "Category"
+    }
+    allowed_value: {
+      label: "Label"
+      value: "Label"
+    }
+    allowed_value: {
+      label: "Discount"
+      value: "Discount"
+    }
+    allowed_value: {
+      label: "Emotion"
+      value: "Emotion"
+    }
+
+    allowed_value: {
+      label: "Code"
+      value: "Code"
+    }
+    allowed_value: {
+      label: "Adjustable"
+      value: "Adjustable"
+    }
+
+    allowed_value: {
+      label: "Trial"
+      value: "Trial"
+    }
+
+    allowed_value: {
+      label: "Warranty"
+      value: "Warranty"
+    }
+
+    allowed_value: {
+      label: "_365"
+      value: "_365"
+    }
+
+    allowed_value: {
+      label: "Percent"
+      value: "Percent"
+    }
+
+    allowed_value: {
+      label: "None"
+      value: "None"
+    }
+    group_label: "Advanced Selectors"
+  }
+
+
+
+  dimension: dimension_CRM_2 {
+    type: string
+    sql:
+      {% if dimension_selector_CRM_2._parameter_value == 'campaign_type' %}
+            ${campaign_type}
+      {% elsif dimension_selector_CRM_2._parameter_value == 'flow_name' %}
+            ${flow_name}
+      {% elsif dimension_selector_CRM_2._parameter_value == 'subflow' %}
+            ${subflow}
+      {% elsif dimension_selector_CRM_2._parameter_value == 'sms_number' %}
+            ${sms_number}
+      {% elsif dimension_selector_CRM_2._parameter_value == 'customer_type' %}
+            ${customer_type}
+      {% elsif dimension_selector_CRM_2._parameter_value == 'campaign_name' %}
+            ${campaign_name}
+      {% elsif dimension_selector_CRM_2._parameter_value == 'offer' %}
+            ${offer}
+      {% elsif dimension_selector_CRM_2._parameter_value == 'test' %}
+            ${test}
+      {% elsif dimension_selector_CRM_1._parameter_value == 'variant' %}
+            ${variant}
+      {% elsif dimension_selector_CRM_2._parameter_value == 'brand' %}
+            ${brand}
+      {% elsif dimension_selector_CRM_2._parameter_value == 'join_source' %}
+            ${join_source}
+      {% elsif dimension_selector_CRM_2._parameter_value == 'subscription_type' %}
+            ${subscription_type}
+      {% elsif dimension_selector_CRM_2._parameter_value == 'Character_Count' %}
+            ${Character_Count}
+      {% elsif dimension_selector_CRM_2._parameter_value == 'Category' %}
+            ${Category}
+      {% elsif dimension_selector_CRM_2._parameter_value == 'Label' %}
+            ${Label}
+      {% elsif dimension_selector_CRM_2._parameter_value == 'Discount' %}
+            ${Discount}
+      {% elsif dimension_selector_CRM_2._parameter_value == 'Emotion' %}
+            ${Emotion}
+      {% elsif dimension_selector_CRM_2._parameter_value == 'Code' %}
+            ${Code}
+      {% elsif dimension_selector_CRM_2._parameter_value == 'Adjustable' %}
+            ${Adjustable}
+      {% elsif dimension_selector_CRM_2._parameter_value == 'Warranty' %}
+            ${Warranty}
+      {% elsif dimension_selector_CRM_2._parameter_value == '_365' %}
+            ${_365}
+      {% elsif dimension_selector_CRM_2._parameter_value == 'Trial' %}
+            ${Trial}
+      {% elsif dimension_selector_CRM_2._parameter_value == 'Percent' %}
+            ${Percent}
+          {% else %}
+            null
+          {% endif %};;
+    label_from_parameter: dimension_selector_CRM_2
+    group_label: "Advanced Dimensions"
+  }
+
+
+
+  #### 3
+
+
+  parameter: dimension_selector_CRM_3 {
+    type: unquoted
+    allowed_value: {
+      label: "campaign_type"
+      value: "campaign_type"
+    }
+    allowed_value: {
+      label: "flow_name"
+      value: "flow_name"
+    }
+    allowed_value: {
+      label: "subflow"
+      value: "subflow"
+    }
+    allowed_value: {
+      label: "sms_number"
+      value: "sms_number"
+    }
+    allowed_value: {
+      label: "customer_type"
+      value: "customer_type"
+    }
+    allowed_value: {
+      label: "campaign_name"
+      value: "campaign_name"
+    }
+    allowed_value: {
+      label: "offer"
+      value: "offer"
+    }
+    allowed_value: {
+      label: "test"
+      value: "test"
+    }
+    allowed_value: {
+      label: "variant"
+      value: "variant"
+    }
+    allowed_value: {
+      label: "brand"
+      value: "brand"
+    }
+    allowed_value: {
+      label: "join_source"
+      value: "join_source"
+    }
+    allowed_value: {
+      label: "subscription_type"
+      value: "subscription_type"
+    }
+    allowed_value: {
+      label: "Character_Count"
+      value: "Character_Count"
+    }
+    allowed_value: {
+      label: "Category"
+      value: "Category"
+    }
+    allowed_value: {
+      label: "Label"
+      value: "Label"
+    }
+    allowed_value: {
+      label: "Discount"
+      value: "Discount"
+    }
+    allowed_value: {
+      label: "Emotion"
+      value: "Emotion"
+    }
+
+    allowed_value: {
+      label: "Code"
+      value: "Code"
+    }
+    allowed_value: {
+      label: "Adjustable"
+      value: "Adjustable"
+    }
+
+    allowed_value: {
+      label: "Trial"
+      value: "Trial"
+    }
+
+    allowed_value: {
+      label: "Warranty"
+      value: "Warranty"
+    }
+
+    allowed_value: {
+      label: "_365"
+      value: "_365"
+    }
+
+    allowed_value: {
+      label: "Percent"
+      value: "Percent"
+    }
+
+    allowed_value: {
+      label: "None"
+      value: "None"
+    }
+    group_label: "Advanced Selectors"
+  }
+
+
+
+  dimension: dimension_CRM_3 {
+    type: string
+    sql:
+      {% if dimension_selector_CRM_3._parameter_value == 'campaign_type' %}
+            ${campaign_type}
+      {% elsif dimension_selector_CRM_3._parameter_value == 'flow_name' %}
+            ${flow_name}
+      {% elsif dimension_selector_CRM_3._parameter_value == 'subflow' %}
+            ${subflow}
+      {% elsif dimension_selector_CRM_3._parameter_value == 'sms_number' %}
+            ${sms_number}
+      {% elsif dimension_selector_CRM_3._parameter_value == 'customer_type' %}
+            ${customer_type}
+      {% elsif dimension_selector_CRM_3._parameter_value == 'campaign_name' %}
+            ${campaign_name}
+      {% elsif dimension_selector_CRM_3._parameter_value == 'offer' %}
+            ${offer}
+      {% elsif dimension_selector_CRM_3._parameter_value == 'test' %}
+            ${test}
+      {% elsif dimension_selector_CRM_3._parameter_value == 'variant' %}
+            ${variant}
+      {% elsif dimension_selector_CRM_3._parameter_value == 'brand' %}
+            ${brand}
+      {% elsif dimension_selector_CRM_3._parameter_value == 'join_source' %}
+            ${join_source}
+      {% elsif dimension_selector_CRM_3._parameter_value == 'subscription_type' %}
+            ${subscription_type}
+      {% elsif dimension_selector_CRM_3._parameter_value == 'Character_Count' %}
+            ${Character_Count}
+      {% elsif dimension_selector_CRM_3._parameter_value == 'Category' %}
+            ${Category}
+      {% elsif dimension_selector_CRM_3._parameter_value == 'Label' %}
+            ${Label}
+      {% elsif dimension_selector_CRM_3._parameter_value == 'Discount' %}
+            ${Discount}
+      {% elsif dimension_selector_CRM_3._parameter_value == 'Emotion' %}
+            ${Emotion}
+      {% elsif dimension_selector_CRM_3._parameter_value == 'Code' %}
+            ${Code}
+      {% elsif dimension_selector_CRM_3._parameter_value == 'Adjustable' %}
+            ${Adjustable}
+      {% elsif dimension_selector_CRM_3._parameter_value == 'Warranty' %}
+            ${Warranty}
+      {% elsif dimension_selector_CRM_3._parameter_value == '_365' %}
+            ${_365}
+      {% elsif dimension_selector_CRM_3._parameter_value == 'Trial' %}
+            ${Trial}
+      {% elsif dimension_selector_CRM_3._parameter_value == 'Percent' %}
+            ${Percent}
+          {% else %}
+            null
+          {% endif %};;
+    label_from_parameter: dimension_selector_CRM_3
+    group_label: "Advanced Dimensions"
+  }
+
+
   #### index metric - 24/06
 
 
@@ -1159,7 +1497,113 @@ view: attentive_by_user {
     group_label: "Advanced Measures"
   }
 
+#### 2
+
+  parameter: Index_selector_2 {
+    label: "Index Selector 2"
+    type: unquoted
+
+    allowed_value: {
+      label: "Click Rate"
+      value: "Clicked_Rate_specific_SMS"
+    }
+    allowed_value: {
+      label: "Conversion (Orders/Del)"
+      value: "Order_from_recived_specific_SMS"
+    }
+    allowed_value: {
+      label: "Rev/1k Delivered"
+      value: "revenue_per_1000_received_SMS"
+    }
+
+    allowed_value: {
+      label: "AOV"
+      value: "AOV"
+    }
+
+    allowed_value: {
+      label: "none"
+      value: "none"
+    }
+    group_label: "Advanced Selectors"
+  }
 
 
+
+  measure: Index_2 {
+    label: "Index - 2"
+    type: number
+    sql:
+
+      {% if Index_selector_1._parameter_value == 'Clicked_Rate_specific_SMS' %}
+        ${Clicked_Rate_specific_SMS}
+       {% elsif Index_selector_1._parameter_value == 'Order_from_recived_specific_SMS' %}
+        ${Order_from_recived_specific_SMS}
+       {% elsif Index_selector_1._parameter_value == 'revenue_per_1000_received_SMS' %}
+        ${revenue_per_1000_received_SMS}
+       {% elsif Index_selector_1._parameter_value == 'AOV' %}
+        ${AOV}
+      {% else %}
+        null
+      {% endif %};;
+    label_from_parameter: Index_selector_2
+    value_format: "0.00"
+    group_label: "Advanced Measures"
+  }
+
+
+#### 3
+
+  parameter: Index_selector_3 {
+    label: "Index Selector 3"
+    type: unquoted
+
+    allowed_value: {
+      label: "Click Rate"
+      value: "Clicked_Rate_specific_SMS"
+    }
+    allowed_value: {
+      label: "Conversion (Orders/Del)"
+      value: "Order_from_recived_specific_SMS"
+    }
+    allowed_value: {
+      label: "Rev/1k Delivered"
+      value: "revenue_per_1000_received_SMS"
+    }
+
+    allowed_value: {
+      label: "AOV"
+      value: "AOV"
+    }
+
+    allowed_value: {
+      label: "none"
+      value: "none"
+    }
+    group_label: "Advanced Selectors"
+  }
+
+
+
+  measure: Index_3 {
+    label: "Index - 3"
+    type: number
+    sql:
+
+      {% if Index_selector_1._parameter_value == 'Clicked_Rate_specific_SMS' %}
+        ${Clicked_Rate_specific_SMS}
+       {% elsif Index_selector_1._parameter_value == 'Order_from_recived_specific_SMS' %}
+        ${Order_from_recived_specific_SMS}
+       {% elsif Index_selector_1._parameter_value == 'revenue_per_1000_received_SMS' %}
+        ${revenue_per_1000_received_SMS}
+       {% elsif Index_selector_1._parameter_value == 'AOV' %}
+        ${AOV}
+      {% else %}
+        null
+      {% endif %};;
+    label_from_parameter: Index_selector_3
+    value_format: "0.00"
+    group_label: "Advanced Measures"
+  }
 
 }
