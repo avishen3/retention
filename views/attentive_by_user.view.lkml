@@ -1535,13 +1535,13 @@ view: attentive_by_user {
     type: number
     sql:
 
-      {% if Index_selector_1._parameter_value == 'Clicked_Rate_specific_SMS' %}
+      {% if Index_selector_2._parameter_value == 'Clicked_Rate_specific_SMS' %}
         ${Clicked_Rate_specific_SMS}
-       {% elsif Index_selector_1._parameter_value == 'Order_from_recived_specific_SMS' %}
+       {% elsif Index_selector_2._parameter_value == 'Order_from_recived_specific_SMS' %}
         ${Order_from_recived_specific_SMS}
-       {% elsif Index_selector_1._parameter_value == 'revenue_per_1000_received_SMS' %}
+       {% elsif Index_selector_2._parameter_value == 'revenue_per_1000_received_SMS' %}
         ${revenue_per_1000_received_SMS}
-       {% elsif Index_selector_1._parameter_value == 'AOV' %}
+       {% elsif Index_selector_2._parameter_value == 'AOV' %}
         ${AOV}
       {% else %}
         null
@@ -1590,13 +1590,13 @@ view: attentive_by_user {
     type: number
     sql:
 
-      {% if Index_selector_1._parameter_value == 'Clicked_Rate_specific_SMS' %}
+      {% if Index_selector_3._parameter_value == 'Clicked_Rate_specific_SMS' %}
         ${Clicked_Rate_specific_SMS}
-       {% elsif Index_selector_1._parameter_value == 'Order_from_recived_specific_SMS' %}
+       {% elsif Index_selector_3._parameter_value == 'Order_from_recived_specific_SMS' %}
         ${Order_from_recived_specific_SMS}
-       {% elsif Index_selector_1._parameter_value == 'revenue_per_1000_received_SMS' %}
+       {% elsif Index_selector_3._parameter_value == 'revenue_per_1000_received_SMS' %}
         ${revenue_per_1000_received_SMS}
-       {% elsif Index_selector_1._parameter_value == 'AOV' %}
+       {% elsif Index_selector_3._parameter_value == 'AOV' %}
         ${AOV}
       {% else %}
         null
