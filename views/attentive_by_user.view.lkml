@@ -1606,4 +1606,10 @@ view: attentive_by_user {
     group_label: "Advanced Measures"
   }
 
+  measure: message_count{
+    type: count_distinct
+    label:"Message Count"
+    sql: ${campaign} ;;
+  }
+
 }
