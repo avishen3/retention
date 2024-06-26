@@ -831,7 +831,7 @@ measure: total_price {
 
   }
 
-  measure: Agents_ece {
+  dimension: Agents_ece {
     type: string
     sql: case when ${agent_email} in (
     'john.romano@residenthome.com',
