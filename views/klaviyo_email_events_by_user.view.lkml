@@ -1,9 +1,13 @@
 view: klaviyo_email_events_by_user {
-  sql_table_name: `omega-post-184817.customer.klaviyo_email_events_by_user`
-    ;;
+  sql_table_name: `omega-post-184817.customer.klaviyo_events_by_user`;;
 
+###  `omega-post-184817.customer.klaviyo_email_events_by_user` -- Original database
 
+##  sql_table_name:  `omega-post-184817.nathan_auto_delete_after_40days.test_klaviyo_by_user`
+##   sql_table_name: `omega-post-184817.customer.klaviyo_email_events_by_user`
+  ##  sql_table_name: `omega-post-184817.nathan_auto_delete_after_40days.test_klaviyo_by_user`
 
+##  sql_table_name: `omega-post-184817.customer.klaviyo_email_events_by_user`
   dimension: domain_name {
     type: string
     sql: ${TABLE}.domain_name ;;
@@ -144,7 +148,45 @@ view: klaviyo_email_events_by_user {
   }
 
 
+###
 
+
+  dimension: first_lc_eorder_day_diff {
+    type: number
+    sql: ${TABLE}.first_lc_eorder_day_diff ;;
+  }
+
+
+  dimension: first_lc_eorder_day_diff_AGG {
+    type: string
+    sql: case when ${first_lc_eorder_day_diff} = 0 then "A:0"
+              when ${first_lc_eorder_day_diff} between 1 and 14 then "B:1-14"
+              when ${first_lc_eorder_day_diff} between 15 and 30 then "C:15-30"
+              when ${first_lc_eorder_day_diff} between 31 and 60 then "D:31-60"
+              when ${first_lc_eorder_day_diff} between 61 and 90 then "E:61-90"
+              When ${first_lc_eorder_day_diff} between 91 and 180 then "F:91-180"
+              when ${first_lc_eorder_day_diff} > 180 then "G:180+"
+              ELSE null end
+    ;;
+  }
+
+
+  dimension: first_lc_eorder_day_diff_AGG_for_special_weekends{
+    type: string
+    sql: case when ${first_lc_eorder_day_diff} = 0 then "A:0"
+              when ${first_lc_eorder_day_diff} = 1 then "B:1"
+              when ${first_lc_eorder_day_diff} = 2 then "C:2"
+              when ${first_lc_eorder_day_diff} = 3 then "D:3"
+              when ${first_lc_eorder_day_diff} = 4 then "E:4"
+              when ${first_lc_eorder_day_diff} = 5 then "F:5"
+              when ${first_lc_eorder_day_diff} = 6 then "G:6"
+              when ${first_lc_eorder_day_diff} between 7 and 14 then "H:7-14"
+              when ${first_lc_eorder_day_diff} between 15 and 30 then "I:15-30"
+              when ${first_lc_eorder_day_diff} between 31 and 60 then "J:31-60"
+              when ${first_lc_eorder_day_diff} > 61 then "K:61+"
+              ELSE null end
+    ;;
+  }
 
 
   dimension_group: first_lc_ts {
@@ -373,8 +415,120 @@ view: klaviyo_email_events_by_user {
   }
 
 
+## 2602 - new fields
+
+  dimension: type {
+    type: string
+    sql: ${TABLE}.type ;;
+  }
 
 
+  dimension: subtype {
+    type: string
+    sql: ${TABLE}.subtype ;;
+  }
+
+
+  dimension: Theme {
+    type: string
+    sql: ${TABLE}.Theme ;;
+  }
+
+
+
+  dimension: name {
+    type: string
+    sql: ${TABLE}.name ;;
+  }
+
+
+
+
+  dimension: customer_type {
+    type: string
+    sql: ${TABLE}.customer_type ;;
+  }
+
+
+
+  dimension: number {
+    type: string
+    sql: ${TABLE}.number ;;
+  }
+
+
+  dimension: launch_date {
+    type: string
+    sql: ${TABLE}.launch_date ;;
+  }
+
+  dimension: ad_type {
+    type: string
+    sql: ${TABLE}.ad_type ;;
+  }
+
+
+  dimension: wildCard {
+    type: string
+    sql: ${TABLE}.wildCard ;;
+  }
+
+  dimension: week {
+    type: string
+    sql: ${TABLE}.week ;;
+  }
+
+  dimension: landing_page {
+    type: string
+    sql: ${TABLE}.landing_page ;;
+  }
+
+
+  dimension: length {
+    type: string
+    sql: ${TABLE}.length ;;
+  }
+
+  dimension: cta {
+    type: string
+    sql: ${TABLE}.cta ;;
+  }
+
+
+  dimension: sender {
+    type: string
+    sql: ${TABLE}.sender ;;
+  }
+
+
+  dimension: from_email {
+    type: string
+    sql: ${TABLE}.from_email ;;
+  }
+
+  dimension: from_name {
+    type: string
+    sql: ${TABLE}.from_name ;;
+  }
+
+  dimension_group: sent_at_flow_first_sent_time {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    datatype: datetime
+    sql: ${TABLE}.sent_at ;;
+  }
+
+
+
+####
 
   dimension: promo_or_flow {
     type: string
@@ -391,12 +545,34 @@ view: klaviyo_email_events_by_user {
   }
 
 
+
+
   dimension: is_not_sale_flow{
     type: yesno
     sql: ${promo_or_flow} = "flow" and (lower(${flow_name}) like "%abandon%" or lower(${flow_name}) like "%cart_link%"  or lower(${flow_name}) like "%welcome%"or lower(${flow_name}) like "%reactivation%")
     ;;
   }
 
+
+###
+
+
+  dimension: type_promo_or_sale_flow {
+    type: string
+    sql: case when ${type} = "promo" then "promo"
+              when ${type} = "flow" and (lower(${name}) like "%abandon%"  or lower(${name}) like "%welcome%"or lower(${name}) like "%reactivation%") then "Marketing Flow"
+              else "Transactional Flow" end
+    ;;
+  }
+
+
+
+
+  dimension: is_type_not_sale_flow{
+    type: yesno
+    sql: ${type} = "flow" and (lower(${name}) like "%abandon%" or lower(${name}) like "%cart_link%"  or lower(${name}) like "%welcome%"or lower(${name}) like "%reactivation%")
+      ;;
+  }
 
 
 
@@ -542,6 +718,20 @@ view: klaviyo_email_events_by_user {
   }
 
 
+#### 26/03/2024
+
+
+  dimension: recived_is_open {
+    type: yesno
+    sql: timestamp(${ts_received_email_raw})=timestamp(${ts_opened_email_raw}) ;;
+  }
+
+  dimension: recived_is_clicked {
+    type: yesno
+    sql: timestamp(${ts_received_email_raw})=timestamp(${ts_clicked_email_raw}) ;;
+  }
+
+
  #### date granulraty
 
 
@@ -592,11 +782,66 @@ view: klaviyo_email_events_by_user {
             END ;;
   }
 
+####
+
+  dimension:  dow_num {
+    type:  string
+    sql: EXTRACT(DAYOFWEEK FROM ${ts_received_email_date}) ;;
+    hidden: yes
+  }
 
 
+  dimension: not_today {
+    type: yesno
+    sql: ${ts_received_email_date} < current_date('America/Los_Angeles') ;;
+    group_label: "Date Filters"
+  }
+
+  dimension:  day_of_week {
+    label: "Day of Week"
+    type:  string
+    sql: case
+          when ${dow_num} = 1 then 'Sunday'
+          when ${dow_num} = 2 then 'Monday'
+          when ${dow_num} = 3 then 'Tuesday'
+          when ${dow_num} = 4 then 'Wednesday'
+          when ${dow_num} = 5 then 'Thursday'
+          when ${dow_num} = 6 then 'Friday'
+          when ${dow_num} = 7 then 'Saturday'
+        end ;;
+    order_by_field: dow_num
+  }
+
+  parameter: dow_or_not {
+    label: "DOW?"
+    type: string
+    allowed_value: {
+      label: "Yes"
+      value: "Yes"
+    }
+    allowed_value: {
+      label: "No"
+      value: "No"
+    }
+
+  }
+
+  dimension: DOW {
+    label: "DOW"
+    description: "Select 'No' in 'DOW?' selector to deactivate the DOW display"
+    sql:
+          CASE WHEN {% parameter dow_or_not %} = 'Yes' THEN ${day_of_week}
+          ELSE null
+          END ;;
+  }
 
 
+###
 
+  dimension: ts_recived_same_as_ts_open {
+    type: yesno
+    sql: ${ts_received_email_raw}=${ts_opened_email_raw} ;;
+  }
 
 
 
@@ -713,6 +958,16 @@ view: klaviyo_email_events_by_user {
   }
 
 
+####
+
+  measure: message_count{
+    type: count_distinct
+    label:"Message Count"
+    ##"Total_users_recived_email"
+    sql: ${campaign} ;;
+  }
+
+
   ### email user count
 ##Unique Users.
 
@@ -771,6 +1026,28 @@ view: klaviyo_email_events_by_user {
     sql: case when ${ts_unsub_list_raw} is not null then ${email} end  ;;
   }
 
+  measure: Unique_users_cvr{
+    label: "CVR - Unique Users"
+    type: number
+    sql: case when ${Total_Received_Emails} is not null then ${Total_Orders_From_Email}/${Total_Received_Emails} end  ;;
+  }
+
+
+  measure: Unique_users_open_rate{
+    label: "open rate - Unique Users"
+    type: number
+    sql: case when ${Total_Received_Emails} is not null then ${Total_Opened_Emails}/${Total_Received_Emails} end  ;;
+  }
+
+
+  measure: Unique_users_click_to_open_rate{
+    label: "click to open rate - Unique Users"
+    type: number
+    sql: case when ${Total_Opened_Emails}>0 then ${Total_Clicked_Emails}/${Total_Opened_Emails} end  ;;
+    ##sql: case when ${Total_Opened_Emails} is not null then ${Total_Clicked_Emails}/${Total_Opened_Emails} end  ;;
+
+  }
+
   ### rate
 
   measure: Opened_Rate{
@@ -804,10 +1081,17 @@ view: klaviyo_email_events_by_user {
   measure: Conversion_Rate{
     type: number
     label: "Conversion Rate - order from sent emails"
-    sql:  case when ${Total_Received_Emails}>0 then ${Total_Orders_From_Email}/${Total_Received_Emails} else 0 end ;;
+    sql:  case when ${Total_Received_specific_Emails}>0 then ${Total_Orders_From_Email}/${Total_Received_specific_Emails} else 0 end ;;
     value_format: "0.000%"
   }
 
+
+  measure: Conversion_Rate_D1{
+    type: number
+    label: "Conversion Rate - order from sent emails - D1"
+    sql:  case when ${Total_Received_specific_Emails}>0 then ${Cohort_email_orders_D1}/${Total_Received_specific_Emails} else 0 end ;;
+    value_format: "0.000%"
+  }
 
   ### revenue and gross profit
 
@@ -863,7 +1147,11 @@ view: klaviyo_email_events_by_user {
     value_format: "$#,##0.0"
   }
 
-
+  measure: AOV_D1{
+    type: number
+    sql:  case when ${Cohort_email_orders_D1}>0 then ${Cohort_email_revenue_D1} /${Cohort_email_orders_D1} else 0 end ;;
+    value_format: "$#,##0.0"
+  }
 
   ####  specific email
 
@@ -943,7 +1231,7 @@ view: klaviyo_email_events_by_user {
   measure: Clicked_Rate_out_of_received_specific_email{
     type: number
     sql:  case when ${Total_Received_specific_Emails}>0 then ${Total_Clicked_specific_Emails}/${Total_Received_specific_Emails} else 0 end  ;;
-    value_format: "0.00%"
+    value_format: "0.000%"
   }
 
   measure: Click_to_open_rate_specific_email{
@@ -957,6 +1245,27 @@ view: klaviyo_email_events_by_user {
     sql:  case when ${Total_Clicked_specific_Emails}>0 then ${Total_Orders_From_specific_Email}/${Total_Clicked_specific_Emails} else 0 end ;;
     value_format: "0.00%"
   }
+
+### METRIC D1
+
+  measure: Opened_Rate_specific_email_D1{
+    type: number
+    sql: case when ${Total_Received_specific_Emails}>0 then ${Cohort_email_opened_D1}/${Total_Received_specific_Emails} else 0 end  ;;
+    value_format: "0.00%"
+  }
+
+  measure: Clicked_Rate_out_of_received_specific_email_D1{
+    type: number
+    sql:  case when ${Total_Received_specific_Emails}>0 then ${Cohort_email_clicked_D1}/${Total_Received_specific_Emails} else 0 end  ;;
+    value_format: "0.00%"
+  }
+
+  measure: Click_to_open_rate_specific_email_D1{
+    type: number
+    sql:  case when ${Cohort_email_opened_D1}>0 then ${Cohort_email_clicked_D1}/${Cohort_email_opened_D1} else 0 end  ;;
+    value_format: "0.00%"
+  }
+
 
 ### order and revenue out of email/order recived
 
@@ -1641,6 +1950,696 @@ view: klaviyo_email_events_by_user {
               when {% condition date_filter_email_order_created_2 %} timestamp(${email_order_created_raw}) {% endcondition %} then 'Second period'
             end ;;
   }
+
+
+
+### d1 metric delivered martics  check
+
+  measure: Cohort_email_opened_D1{
+    label: "Total Cohort Opened D1"
+    type: count_distinct
+    sql: case when ((receive_open_minute_diff/60)<=24 and ${ts_opened_email_raw} is not null) then (concat(${email},${campaign})) else null end;;
+    value_format: "#,##0"
+    group_label: "Cohort email Opend"
+  }
+
+  measure: Cohort_email_opened_D7{
+    label: "Total Cohort Opened D7"
+    type: count_distinct
+    sql: case when ((receive_open_minute_diff/60)<=189 and ${ts_opened_email_raw} is not null )then (concat(${email},${campaign}))  else null end;;
+    value_format: "#,##0"
+    group_label: "Cohort email Opend"
+  }
+
+  measure: Cohort_email_opened_D28{
+    label: "Total Cohort Opened  D28"
+    type: count_distinct
+    sql: case when ((receive_open_minute_diff/60)<=672 and ${ts_opened_email_raw} is not null) then (concat(${email},${campaign}))  else null end;;
+    value_format: "#,##0"
+    group_label: "Cohort email Opend"
+  }
+
+##
+
+  measure: Cohort_email_clicked_D1{
+    label: "Total Cohort clicked  D1"
+    type: count_distinct
+    sql: case when ((receive_click_minute_diff/60)<=24 and ${ts_clicked_email_raw} is not null) then (concat(${email},${campaign})) else null end;;
+    value_format: "#,##0"
+    group_label: "Cohort email clicked"
+  }
+
+  measure: Cohort_email_clicked_D7{
+    label: "Total Cohort clicked  D7"
+    type: count_distinct
+    sql: case when ((receive_click_minute_diff/60)<=189 and ${ts_clicked_email_raw} is not null )then (concat(${email},${campaign}))  else null end;;
+    value_format: "#,##0"
+    group_label: "Cohort email clicked"
+  }
+
+  measure: Cohort_email_clicked_D28{
+    label: "Total Cohort clicked D28"
+    type: count_distinct
+    sql: case when ((receive_click_minute_diff/60)<=672 and ${ts_clicked_email_raw} is not null) then  (concat(${email},${campaign}))  else null end;;
+    value_format: "#,##0"
+    group_label: "Cohort email clicked"
+  }
+
+
+#### MTA Like dash build 03/2024
+
+
+### dimensions selectors
+
+## DIMENTION 1
+
+  parameter: dimension_selector_CRM_1 {
+    type: unquoted
+    allowed_value: {
+      label: "Brand"
+      value: "Brand"
+    }
+    allowed_value: {
+      label: "Theme"
+      value: "Theme"
+    }
+    allowed_value: {
+      label: "Type"
+      value: "Type"
+    }
+    allowed_value: {
+      label: "SubType"
+      value: "SubType"
+    }
+    allowed_value: {
+      label: "Name"
+      value: "Name"
+    }
+    allowed_value: {
+      label: "SubFlow_Name"
+      value: "SubFlow_Name"
+    }
+    allowed_value: {
+      label: "Customer_Type"
+      value: "Customer_Type"
+    }
+    allowed_value: {
+      label: "Segment"
+      value: "Segment"
+    }
+    allowed_value: {
+      label: "Offer"
+      value: "Offer"
+    }
+    allowed_value: {
+    label: "Creative"
+    value: "Creative"
+  }
+    allowed_value: {
+  label: "Test"
+  value: "Test"
+}
+    allowed_value: {
+label: "Variant"
+value: "Variant"
+}
+    allowed_value: {
+      label: "Launch_Date"
+      value: "Launch_Date"
+    }
+    allowed_value: {
+      label: "Ad_Type"
+      value: "Ad_Type"
+    }
+    allowed_value: {
+      label: "wildCard"
+      value: "wildCard"
+    }
+    allowed_value: {
+      label: "Week"
+      value: "Week"
+    }
+    allowed_value: {
+      label: "Landing_Page"
+      value: "Landing_Page"
+    }
+    allowed_value: {
+      label: "Length"
+      value: "Length"
+    }
+    allowed_value: {
+      label: "CTA"
+      value: "CTA"
+    }
+    allowed_value: {
+      label: "Sender"
+      value: "Sender"
+    }
+    allowed_value: {
+      label: "None"
+      value: "None"
+    }
+    group_label: "Advanced Selectors"
+  }
+
+
+
+  dimension: dimension_CRM_1 {
+    type: string
+    sql:
+  {% if dimension_selector_CRM_1._parameter_value == 'Brand' %}
+        ${brand}
+  {% elsif dimension_selector_CRM_1._parameter_value == 'Theme' %}
+        ${Theme}
+  {% elsif dimension_selector_CRM_1._parameter_value == 'Type' %}
+        ${type}
+  {% elsif dimension_selector_CRM_1._parameter_value == 'SubType' %}
+        ${subtype}
+  {% elsif dimension_selector_CRM_1._parameter_value == 'Name' %}
+        ${name}
+  {% elsif dimension_selector_CRM_1._parameter_value == 'SubFlow_Name' %}
+        ${subflow_name}
+  {% elsif dimension_selector_CRM_1._parameter_value == 'Customer_Type' %}
+        ${customer_type}
+  {% elsif dimension_selector_CRM_1._parameter_value == 'Segment' %}
+        ${segment}
+  {% elsif dimension_selector_CRM_1._parameter_value == 'Offer' %}
+        ${offer}
+  {% elsif dimension_selector_CRM_1._parameter_value == 'Creative' %}
+        ${creative}
+  {% elsif dimension_selector_CRM_1._parameter_value == 'Test' %}
+        ${test}
+  {% elsif dimension_selector_CRM_1._parameter_value == 'Variant' %}
+        ${variant}
+  {% elsif dimension_selector_CRM_1._parameter_value == 'Launch_Date' %}
+        ${launch_date}
+  {% elsif dimension_selector_CRM_1._parameter_value == 'Ad_Type' %}
+        ${ad_type}
+  {% elsif dimension_selector_CRM_1._parameter_value == 'wildCard' %}
+        ${wildCard}
+  {% elsif dimension_selector_CRM_1._parameter_value == 'Week' %}
+        ${week}
+  {% elsif dimension_selector_CRM_1._parameter_value == 'Landing_Page' %}
+        ${landing_page}
+  {% elsif dimension_selector_CRM_1._parameter_value == 'Length' %}
+        ${length}
+  {% elsif dimension_selector_CRM_1._parameter_value == 'CTA' %}
+        ${cta}
+  {% elsif dimension_selector_CRM_1._parameter_value == 'Sender' %}
+        ${sender}
+      {% else %}
+        null
+      {% endif %};;
+    label_from_parameter: dimension_selector_CRM_1
+    group_label: "Advanced Dimensions"
+  }
+
+
+## DIMENTION 2
+
+  parameter: dimension_selector_CRM_2 {
+    type: unquoted
+    allowed_value: {
+      label: "Brand"
+      value: "Brand"
+    }
+    allowed_value: {
+      label: "Theme"
+      value: "Theme"
+    }
+    allowed_value: {
+      label: "Type"
+      value: "Type"
+    }
+    allowed_value: {
+      label: "SubType"
+      value: "SubType"
+    }
+    allowed_value: {
+      label: "Name"
+      value: "Name"
+    }
+    allowed_value: {
+      label: "SubFlow_Name"
+      value: "SubFlow_Name"
+    }
+    allowed_value: {
+      label: "Customer_Type"
+      value: "Customer_Type"
+    }
+    allowed_value: {
+      label: "Segment"
+      value: "Segment"
+    }
+    allowed_value: {
+      label: "Offer"
+      value: "Offer"
+    }
+    allowed_value: {
+      label: "Creative"
+      value: "Creative"
+    }
+    allowed_value: {
+      label: "Test"
+      value: "Test"
+    }
+    allowed_value: {
+      label: "Variant"
+      value: "Variant"
+    }
+    allowed_value: {
+      label: "Launch_Date"
+      value: "Launch_Date"
+    }
+    allowed_value: {
+      label: "Ad_Type"
+      value: "Ad_Type"
+    }
+    allowed_value: {
+      label: "wildCard"
+      value: "wildCard"
+    }
+    allowed_value: {
+      label: "Week"
+      value: "Week"
+    }
+    allowed_value: {
+      label: "Landing_Page"
+      value: "Landing_Page"
+    }
+    allowed_value: {
+      label: "Length"
+      value: "Length"
+    }
+    allowed_value: {
+      label: "CTA"
+      value: "CTA"
+    }
+    allowed_value: {
+      label: "Sender"
+      value: "Sender"
+    }
+    allowed_value: {
+      label: "None"
+      value: "None"
+    }
+    group_label: "Advanced Selectors"
+  }
+
+
+
+  dimension: dimension_CRM_2 {
+    type: string
+    sql:
+      {% if dimension_selector_CRM_2._parameter_value == 'Brand' %}
+            ${brand}
+      {% elsif dimension_selector_CRM_2._parameter_value == 'Theme' %}
+            ${Theme}
+      {% elsif dimension_selector_CRM_2._parameter_value == 'Type' %}
+            ${type}
+      {% elsif dimension_selector_CRM_2._parameter_value == 'SubType' %}
+            ${subtype}
+      {% elsif dimension_selector_CRM_2._parameter_value == 'Name' %}
+            ${name}
+      {% elsif dimension_selector_CRM_2._parameter_value == 'SubFlow_Name' %}
+            ${subflow_name}
+      {% elsif dimension_selector_CRM_2._parameter_value == 'Customer_Type' %}
+            ${customer_type}
+      {% elsif dimension_selector_CRM_2._parameter_value == 'Segment' %}
+            ${segment}
+      {% elsif dimension_selector_CRM_2._parameter_value == 'Offer' %}
+            ${offer}
+      {% elsif dimension_selector_CRM_2._parameter_value == 'Creative' %}
+            ${creative}
+      {% elsif dimension_selector_CRM_2._parameter_value == 'Test' %}
+            ${test}
+      {% elsif dimension_selector_CRM_2._parameter_value == 'Variant' %}
+            ${variant}
+      {% elsif dimension_selector_CRM_2._parameter_value == 'Launch_Date' %}
+            ${launch_date}
+      {% elsif dimension_selector_CRM_2._parameter_value == 'Ad_Type' %}
+            ${ad_type}
+      {% elsif dimension_selector_CRM_2._parameter_value == 'wildCard' %}
+            ${wildCard}
+      {% elsif dimension_selector_CRM_2._parameter_value == 'Week' %}
+            ${week}
+      {% elsif dimension_selector_CRM_2._parameter_value == 'Landing_Page' %}
+            ${landing_page}
+      {% elsif dimension_selector_CRM_2._parameter_value == 'Length' %}
+            ${length}
+      {% elsif dimension_selector_CRM_2._parameter_value == 'CTA' %}
+            ${cta}
+      {% elsif dimension_selector_CRM_2._parameter_value == 'Sender' %}
+            ${sender}
+          {% else %}
+            null
+          {% endif %};;
+    label_from_parameter: dimension_selector_CRM_2
+    group_label: "Advanced Dimensions"
+  }
+
+
+## DIMENTION 3
+
+  parameter: dimension_selector_CRM_3 {
+    type: unquoted
+    allowed_value: {
+      label: "Brand"
+      value: "Brand"
+    }
+    allowed_value: {
+      label: "Theme"
+      value: "Theme"
+    }
+    allowed_value: {
+      label: "Type"
+      value: "Type"
+    }
+    allowed_value: {
+      label: "SubType"
+      value: "SubType"
+    }
+    allowed_value: {
+      label: "Name"
+      value: "Name"
+    }
+    allowed_value: {
+      label: "SubFlow_Name"
+      value: "SubFlow_Name"
+    }
+    allowed_value: {
+      label: "Customer_Type"
+      value: "Customer_Type"
+    }
+    allowed_value: {
+      label: "Segment"
+      value: "Segment"
+    }
+    allowed_value: {
+      label: "Offer"
+      value: "Offer"
+    }
+    allowed_value: {
+      label: "Creative"
+      value: "Creative"
+    }
+    allowed_value: {
+      label: "Test"
+      value: "Test"
+    }
+    allowed_value: {
+      label: "Variant"
+      value: "Variant"
+    }
+    allowed_value: {
+      label: "Launch_Date"
+      value: "Launch_Date"
+    }
+    allowed_value: {
+      label: "Ad_Type"
+      value: "Ad_Type"
+    }
+    allowed_value: {
+      label: "wildCard"
+      value: "wildCard"
+    }
+    allowed_value: {
+      label: "Week"
+      value: "Week"
+    }
+    allowed_value: {
+      label: "Landing_Page"
+      value: "Landing_Page"
+    }
+    allowed_value: {
+      label: "Length"
+      value: "Length"
+    }
+    allowed_value: {
+      label: "CTA"
+      value: "CTA"
+    }
+    allowed_value: {
+      label: "Sender"
+      value: "Sender"
+    }
+    allowed_value: {
+      label: "None"
+      value: "None"
+    }
+    group_label: "Advanced Selectors"
+  }
+
+
+
+  dimension: dimension_CRM_3 {
+    type: string
+    sql:
+      {% if dimension_selector_CRM_3._parameter_value == 'Brand' %}
+            ${brand}
+      {% elsif dimension_selector_CRM_3._parameter_value == 'Theme' %}
+            ${Theme}
+      {% elsif dimension_selector_CRM_3._parameter_value == 'Type' %}
+            ${type}
+      {% elsif dimension_selector_CRM_3._parameter_value == 'SubType' %}
+            ${subtype}
+      {% elsif dimension_selector_CRM_3._parameter_value == 'Name' %}
+            ${name}
+      {% elsif dimension_selector_CRM_3._parameter_value == 'SubFlow_Name' %}
+            ${subflow_name}
+      {% elsif dimension_selector_CRM_3._parameter_value == 'Customer_Type' %}
+            ${customer_type}
+      {% elsif dimension_selector_CRM_3._parameter_value == 'Segment' %}
+            ${segment}
+      {% elsif dimension_selector_CRM_3._parameter_value == 'Offer' %}
+            ${offer}
+      {% elsif dimension_selector_CRM_3._parameter_value == 'Creative' %}
+            ${creative}
+      {% elsif dimension_selector_CRM_3._parameter_value == 'Test' %}
+            ${test}
+      {% elsif dimension_selector_CRM_3._parameter_value == 'Variant' %}
+            ${variant}
+      {% elsif dimension_selector_CRM_3._parameter_value == 'Launch_Date' %}
+            ${launch_date}
+      {% elsif dimension_selector_CRM_3._parameter_value == 'Ad_Type' %}
+            ${ad_type}
+      {% elsif dimension_selector_CRM_3._parameter_value == 'wildCard' %}
+            ${wildCard}
+      {% elsif dimension_selector_CRM_3._parameter_value == 'Week' %}
+            ${week}
+      {% elsif dimension_selector_CRM_3._parameter_value == 'Landing_Page' %}
+            ${landing_page}
+      {% elsif dimension_selector_CRM_3._parameter_value == 'Length' %}
+            ${length}
+      {% elsif dimension_selector_CRM_3._parameter_value == 'CTA' %}
+            ${cta}
+      {% elsif dimension_selector_CRM_3._parameter_value == 'Sender' %}
+            ${sender}
+          {% else %}
+            null
+          {% endif %};;
+    label_from_parameter: dimension_selector_CRM_3
+    group_label: "Advanced Dimensions"
+  }
+
+  #### index metric - 18/03
+
+
+
+  parameter: Index_selector_1 {
+    label: "Index Selector 1"
+    type: unquoted
+    allowed_value: {
+      label: "Open Rate"
+      value: "Opened_Rate_specific_email"
+    }
+    allowed_value: {
+      label: "Click Rate"
+      value: "Clicked_Rate_out_of_received"
+    }
+    allowed_value: {
+      label: "Conversion (Orders/Del)"
+      value: "Order_from_recived_email_specific_email"
+    }
+    allowed_value: {
+      label: "Rev/1k Delivered"
+      value: "revenue_per_1000_received_email"
+    }
+
+    allowed_value: {
+      label: "AOV"
+      value: "AOV"
+    }
+
+    allowed_value: {
+      label: "none"
+      value: "none"
+    }
+    group_label: "Advanced Selectors"
+  }
+
+  measure: Index_1 {
+    label: "Index - 1"
+    type: number
+    sql:
+      {% if Index_selector_1._parameter_value == 'Opened_Rate_specific_email' %}
+        ${Opened_Rate_specific_email}
+      {% elsif Index_selector_1._parameter_value == 'Clicked_Rate_out_of_received' %}
+        ${Clicked_Rate_out_of_received_specific_email}
+       {% elsif Index_selector_1._parameter_value == 'Order_from_recived_email_specific_email' %}
+        ${Order_from_recived_email_specific_email}
+       {% elsif Index_selector_1._parameter_value == 'revenue_per_1000_received_email' %}
+        ${revenue_per_1000_received_email}
+       {% elsif Index_selector_1._parameter_value == 'AOV' %}
+        ${AOV}
+      {% else %}
+        null
+      {% endif %};;
+    label_from_parameter: Index_selector_1
+    value_format: "0.00"
+    group_label: "Advanced Measures"
+  }
+
+
+
+
+  ## 2
+
+
+  parameter: Index_selector_2 {
+    label: "Index Selector 2"
+    type: unquoted
+    allowed_value: {
+      label: "Open Rate"
+      value: "Opened_Rate_specific_email"
+    }
+    allowed_value: {
+      label: "Click Rate"
+      value: "Clicked_Rate_out_of_received"
+    }
+    allowed_value: {
+      label: "Conversion (Orders/Del)"
+      value: "Order_from_recived_email_specific_email"
+    }
+    allowed_value: {
+      label: "Rev/1k Delivered"
+      value: "revenue_per_1000_received_email"
+    }
+
+    allowed_value: {
+      label: "AOV"
+      value: "AOV"
+    }
+
+    allowed_value: {
+      label: "none"
+      value: "none"
+    }
+    group_label: "Advanced Selectors"
+  }
+
+  measure: Index_2 {
+    label: "Index - 2"
+    type: number
+    sql:
+      {% if Index_selector_2._parameter_value == 'Opened_Rate_specific_email' %}
+        ${Opened_Rate_specific_email}
+      {% elsif Index_selector_2._parameter_value == 'Clicked_Rate_out_of_received' %}
+        ${Clicked_Rate_out_of_received_specific_email}
+       {% elsif Index_selector_2._parameter_value == 'Order_from_recived_email_specific_email' %}
+        ${Order_from_recived_email_specific_email}
+       {% elsif Index_selector_2._parameter_value == 'revenue_per_1000_received_email' %}
+        ${revenue_per_1000_received_email}
+       {% elsif Index_selector_2._parameter_value == 'AOV' %}
+        ${AOV}
+      {% else %}
+        null
+      {% endif %};;
+    label_from_parameter: Index_selector_2
+    value_format: "0.00"
+    group_label: "Advanced Measures"
+  }
+
+## 3
+
+
+  parameter: Index_selector_3 {
+    label: "Index Selector 3"
+    type: unquoted
+    allowed_value: {
+      label: "Open Rate"
+      value: "Opened_Rate_specific_email"
+    }
+    allowed_value: {
+      label: "Click Rate"
+      value: "Clicked_Rate_out_of_received"
+    }
+    allowed_value: {
+      label: "Conversion (Orders/Del)"
+      value: "Order_from_recived_email_specific_email"
+    }
+    allowed_value: {
+      label: "Rev/1k Delivered"
+      value: "revenue_per_1000_received_email"
+    }
+
+    allowed_value: {
+      label: "AOV"
+      value: "AOV"
+    }
+
+    allowed_value: {
+      label: "none"
+      value: "none"
+    }
+    group_label: "Advanced Selectors"
+  }
+
+  measure: Index_3 {
+    label: "Index - 3"
+    type: number
+    sql:
+      {% if Index_selector_3._parameter_value == 'Opened_Rate_specific_email' %}
+        ${Opened_Rate_specific_email}
+      {% elsif Index_selector_3._parameter_value == 'Clicked_Rate_out_of_received' %}
+        ${Clicked_Rate_out_of_received_specific_email}
+       {% elsif Index_selector_3._parameter_value == 'Order_from_recived_email_specific_email' %}
+        ${Order_from_recived_email_specific_email}
+       {% elsif Index_selector_3._parameter_value == 'revenue_per_1000_received_email' %}
+        ${revenue_per_1000_received_email}
+       {% elsif Index_selector_3._parameter_value == 'AOV' %}
+        ${AOV}
+      {% else %}
+        null
+      {% endif %};;
+    label_from_parameter: Index_selector_3
+    value_format: "0.00"
+    group_label: "Advanced Measures"
+  }
+
+
+#### Hether's Journey
+
+  dimension: Journey {
+    type: string
+    sql: case
+              when regexp_contains(lower(${name}),'abandon_cart') then "Abandoned Cart"
+              when regexp_contains(lower(${name}),'abandoncart') then "Abandoned Cart"
+              when regexp_contains(lower(${name}),'abandoned_cart') then "Abandoned Cart"
+
+              when regexp_contains(lower(${name}),'billing') then "Abandoned Billing"
+
+              when regexp_contains(lower(${name}),'review') then "Abandoned Review"
+
+              when regexp_contains(lower(${name}),'welcome') then "Welcome"
+
+              when regexp_contains(lower(${name}),'browse') then "Abandoned Browse"
+              when ${TABLE}.type = "promo" then "Promo"
+              ELSE "Other Flow" end
+    ;;
+  }
+
+
 
 
 

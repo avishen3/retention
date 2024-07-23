@@ -107,6 +107,15 @@ explore: attentive_by_user {
 }
 
 
+## attentive_by_user
+
+explore: klaviyo_unified_events {
+  label: "Klaviyo Unified Events"
+}
+
+
+
+
 #   join: orders {
 #     relationship: many_to_one
 #     sql_on: ${orders.id} = ${order_items.order_id} ;;

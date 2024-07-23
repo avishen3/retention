@@ -76,17 +76,17 @@ view: five9_prospect_customer_tbl {
 
   dimension: brand_clean{
     type: string
-    sql: Case when regexp_contains(lower(${brand}),"awara") then "Awara"
-     when regexp_contains(lower(${brand}),"cloverlane") then "Cloverlane"
-     when lower(${brand}) = "dreamcloud-uk" then "DreamCloud-UK"
-     when lower(${brand}) = "dreamcloud-ca" then "DreamCloud-CA"
-     when lower(${brand}) in ("dreamcloud","dream cloud") then "DreamCloud"
-      when lower(${brand}) = "nectar-uk" then "Nectar-UK"
-      when lower(${brand}) = "nectar-ca" then "Nectar-CA"
-     when lower(${brand}) =  "nectar" then "Nectar"
-     when regexp_contains(lower(${brand}),"siena") then "Siena"
-     when regexp_contains(lower(${brand}),"level") then "LevelSleep"
-    when regexp_contains(lower(${brand}),"resident") then "Resident"
+    sql: Case when regexp_contains(lower(${brand}),"awara") then "awara"
+     when regexp_contains(lower(${brand}),"cloverlane") then "cloverlane"
+     when lower(${brand}) = "dreamcloud-uk" then "dreamcloud-UK"
+     when lower(${brand}) = "dreamcloud-ca" then "dreamcloud-CA"
+     when lower(${brand}) in ("dreamcloud","dream cloud") then "dreamcloud"
+      when lower(${brand}) = "nectar-uk" then "nectar-uk"
+      when lower(${brand}) = "nectar-ca" then "nectar-ca"
+     when lower(${brand}) =  "nectar" then "nectar"
+     when regexp_contains(lower(${brand}),"siena") then "siena"
+     when regexp_contains(lower(${brand}),"level") then "levelsleep"
+    when regexp_contains(lower(${brand}),"resident") then "resident"
             Else ${brand} End ;;
   }
 
@@ -415,6 +415,14 @@ view: five9_prospect_customer_tbl {
     sql: ${TABLE}.type_name ;;
   }
 
+
+  dimension: customerSegment {
+    type: string
+    sql: ${TABLE}.customerSegment ;;
+  }
+
+
+
   dimension: user_name {
     type: string
     sql: ${TABLE}.user_name ;;
@@ -701,6 +709,12 @@ view: five9_prospect_customer_tbl {
     sql: datetime_diff(${order_created_after_raw},${transaction_raw},hour)<48 ;;
   }
 
+  dimension: is_cs_assisted_order_NOT_agent_TF {
+    description: "Is CS assisted order only (not Agent Order)"
+    type: yesno
+    sql: datetime_diff(${order_created_after_raw},${transaction_raw},hour)<48 and (${order_agent_id_after} is  null or ${order_agent_id_after} = "") ;;
+  }
+
 
   dimension: is_cs_agent_order_TF {
     description: "Is CS agent order"
@@ -751,6 +765,13 @@ view: five9_prospect_customer_tbl {
   measure: total_customer_with_cs_agent_orders_within48h{
     type: count_distinct
     sql: case when (${is_cs_agent_order_TF} = true and ${is_cs_assisted_order_TF} = true) then ${customer_id} else null end ;;
+    value_format: "#,##0"
+    group_label: "five9 Measures - customer"
+  }
+
+  measure: total_customer_with_cs_assisted_orders_only_no_agent_48h{
+    type: count_distinct
+    sql: case when (${is_cs_assisted_order_NOT_agent_TF} = true ) then ${customer_id} else null end ;;
     value_format: "#,##0"
     group_label: "five9 Measures - customer"
   }
@@ -964,6 +985,16 @@ view: five9_prospect_customer_tbl {
     group_label: "five9 Measures - short_id_after"
   }
 
+  measure: total_short_id_with_cs_assisted_orders_only_no_agent{
+    type: count_distinct
+    sql: case when ${is_cs_assisted_order_NOT_agent_TF} = true then ${short_id_after} else null end ;;
+    value_format: "#,##0"
+    group_label: "five9 Measures - short_id_after"
+  }
+
+
+
+
 
   measure: total_order_revenue_after{
     type: sum
@@ -1003,6 +1034,14 @@ view: five9_prospect_customer_tbl {
   }
 
 
+
+  measure: distinct_revenue_cs_assisted_orders_only_no_agent {
+    ## label: “sum_distinct_revenue”
+    type: sum_distinct
+    sql_distinct_key: (${short_id_after}||${is_cs_assisted_order_NOT_agent_TF}) ;;
+    sql: case when ${is_cs_assisted_order_NOT_agent_TF} = true then  ${order_revenue_after} else null end ;;
+  }
+
   measure: distinct_revenue_cs_same_agent {
     ## label: “sum_distinct_revenue”
     type: sum_distinct
@@ -1034,6 +1073,15 @@ view: five9_prospect_customer_tbl {
     group_label: "revenue"
   }
 
+  measure: total_order_revenue_after_cs_assisted_orders_only_no_agent{
+    type: sum
+    sql:   case when ${is_cs_assisted_order_NOT_agent_TF} = true a then  ${order_revenue_after} else null end ;;
+    value_format: "$#,##0"
+    group_label: "revenue"
+  }
+
+
+
   dimension: highest_type_after {
     type: string
     sql: ${TABLE}.highest_type_after ;;
@@ -1064,7 +1112,34 @@ view: five9_prospect_customer_tbl {
     sql: ${TABLE}.customer_source_after ;;
   }
 
+####24062024 - agent score grouping, try
 
+
+  dimension: sales_agents_scorecard_grouping{
+    type: string
+    sql: case when ${agent_email} in ('djamaiccaa@residenthome.com', 'sannyd@residenthome.com', 'lourdinol@residenthome.com', 'camerons@residenthome.com') then "group a"
+              when ${agent_email} in ('chaunceym@residenthome.com', 'christian.daye@residenthome.com', 'eliot.bennie@residenthome.com', 'keladas@residenthome.com') then "group b"
+              when ${agent_email} in ('vonm@residenthome.com', 'joseq@residenthome.com', 'pearlt@residenthome.com', 'maxine@residenthome.com') then "group c" else null end
+  ;;
+  }
+
+    dimension: goal_aov_sales_agent_scorecart{
+    type: number
+    sql: case when ${sales_agents_scorecard_grouping}  = "group a" then 1750
+    when ${sales_agents_scorecard_grouping} = "group b" then 1650
+    when ${sales_agents_scorecard_grouping} = "group c" then 1550 else null end
+    ;;
+  }
+
+
+  dimension: goal_CVR_sales_agent_scorecart{
+    type: number
+    value_format: "0.00\%"
+    sql: case when ${sales_agents_scorecard_grouping}  = "group a" then 0.25
+          when ${sales_agents_scorecard_grouping} = "group b" then 0.20
+          when ${sales_agents_scorecard_grouping} = "group c" then 0.15 else null end
+          ;;
+  }
 
 
   ##dimension: is_cs_assisted_order {

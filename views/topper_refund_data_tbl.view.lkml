@@ -47,6 +47,30 @@ view: topper_refund_data_tbl {
     sql: ${TABLE}.days_from_topper_order_to_refound ;;
   }
 
+
+
+ ####
+
+  dimension: days_from_topper_order_to_refound_cohort {
+    type: string
+    sql: case
+              when ${days_from_topper_order_to_refound} <=0  then "0: less then 0"
+              when ${days_from_topper_order_to_refound} =1  then "1: 1"
+              when ${days_from_topper_order_to_refound} between 2 and 5 then "2: 2-5"
+              when ${days_from_topper_order_to_refound} between 6 and 10 then "3: 6-10"
+              when ${days_from_topper_order_to_refound} between 11 and 20 then "4: 11-20"
+              when ${days_from_topper_order_to_refound} between 21 and 35 then "5: 21-35"
+              when ${days_from_topper_order_to_refound} between 36 and 50 then "6: 36-50"
+              when ${days_from_topper_order_to_refound} between 51 and 100 then "7: 51-100"
+              when ${days_from_topper_order_to_refound} between 101 and 200 then "8: 101-200"
+              when ${days_from_topper_order_to_refound} > 201 then "9: more then 200"
+
+              else null end
+    ;;
+  }
+
+
+
   dimension: email {
     type: string
     sql: ${TABLE}.email ;;
@@ -237,13 +261,27 @@ view: topper_refund_data_tbl {
     group_label: "Mattress Measures"
   }
 
-  measure: topper_order_refuns_rate {
-    label: "Topper orders refound rate"
+
+
+  measure: total_refund_mattress_rate {
     type: number
-    sql: ${ total_refund_mattress_order_with_toppers } / nullif(${total_mattress_orders_that_were_sent_toppers}, 0) ;;
-    value_format: "0.00%"
+    sql:  ${total_refund_mattress_order_with_toppers}/${total_mattress_orders_that_were_sent_toppers}  ;;
+    value_format: "####.##%"
     group_label: "Mattress Measures"
   }
+
+  dimension: whs_name_last_purchase {
+    type: string
+    sql: ${TABLE}.whs_name_last_purchase ;;
+  }
+
+  dimension: whs_title_last_purchase {
+    type: string
+    sql: ${TABLE}.whs_title_last_purchase ;;
+  }
+
+
+
 
 
 }

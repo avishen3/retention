@@ -139,6 +139,9 @@ explore: admin_client_events_agents_check_up_tbl{
 explore: retention_platform{
   label: "Retention Platform"}
 
+explore: pillow_refund_data_tbl {
+  label: "Pillow Refund Data"
+}
 
 
 ## cartlink
@@ -154,3 +157,17 @@ explore: cartlink_funnel_tbl{
 explore: admin_prospect_customertbl{
   label: "admin_prospect_customer tbl"
   description: "admin prospect customer tbl"}
+
+## zingtree
+
+
+explore: zingtree_raw_tl{
+  label: "Zingtree Raw Data"
+  description: "Zingtree Raw Data"}
+
+
+### five9_all_interactions 15042024
+
+explore: five9_all_interactions{
+  label: "Five9 All Interactions"
+  description: "Five9 All Interactions"}
