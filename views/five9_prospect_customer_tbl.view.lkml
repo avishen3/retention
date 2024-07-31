@@ -1,5 +1,6 @@
 view: five9_prospect_customer_tbl {
-  sql_table_name: `omega-post-184817.CS_NEW.five9_prospect_customer_tbl`
+ ## sql_table_name: `omega-post-184817.CS_NEW.five9_prospect_customer_tbl`
+  sql_table_name: 'omega-post-184817.CS_NEW.five9_all_interactions'
     ;;
   drill_fields: [id]
 
