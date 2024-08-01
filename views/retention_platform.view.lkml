@@ -267,4 +267,104 @@ view: retention_platform {
     value_format: "#,##0"
   }
 
+  ### added dimension 01/07/2024
+
+
+  dimension_group: last_step_reached {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    sql: ${TABLE}.last_step_reached_at ;;
+  }
+
+  dimension_group: first_refund {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    sql: ${TABLE}.first_refund_ts ;;
+  }
+
+  dimension: refund_amount {
+    type: number
+    sql: ${TABLE}.refund_amount ;;
+  }
+
+  dimension: pre_delivery_partial_refund_amount {
+    type: number
+    sql: ${TABLE}.pre_delivery_partial_refund_amount ;;
+  }
+
+  dimension: post_delivery_partial_refund_amount {
+    type: number
+    sql: ${TABLE}.post_delivery_partial_refund_amount ;;
+  }
+
+  dimension: pre_delivery_full_refund_amount {
+    type: number
+    sql: ${TABLE}.pre_delivery_full_refund_amount ;;
+  }
+
+  dimension: post_delivery_full_refund_amount {
+    type: number
+    sql: ${TABLE}.post_delivery_full_refund_amount ;;
+  }
+
+
+#### ??
+
+# -- forms saved reship ------
+
+  measure: rp_forms_saved_reship {
+    type: count_distinct
+    sql: ${form_id} ;;
+    drill_fields: [brand,short_id,form_id]
+    filters: {
+      field: rp_forms_saved_reship_condition
+      value: "Yes"
+    }
+  }
+  dimension: rp_forms_saved_reship_condition {
+    hidden: yes
+    type: yesno
+    sql: ${type} = "retentionPlatform"
+      AND ${rp_step_reached} in ("completed","summary")
+      AND ${is_sale_saved} = "true"
+      AND ${accepted_save_attempt} = "reship" ;;
+  }
+
+  # -- save method ------
+
+  measure: rp_forms_saved_by_method {
+    type: count_distinct
+    sql: ${form_id} ;;
+    drill_fields: [brand,short_id,form_id]
+    filters: {
+      field: rp_forms_saved_by_method_condition
+      value: "Yes"
+    }
+  }
+  dimension: rp_forms_saved_by_method_condition {
+    hidden: yes
+    type: yesno
+    sql: ${type} = "retentionplatform"
+         AND ${rp_step_reached} in string("completed","summary")
+         AND ${is_sale_saved} = "true"
+         AND ${accepted_save_attempt} is not null;;
+  }
+
+
 }
