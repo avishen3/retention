@@ -505,4 +505,77 @@ view: retention_platform {
 
   }
 
+### Measure total accepted
+
+  measure: Total_accepted_save_appeasement {
+    type: count_distinct
+    sql:  case when ${accepted_save_attempt} = 'appeasement' then item_id else null end ;;
+    group_label: "Total Accepted Save"
+
+  }
+
+  measure: Total_accepted_save_giftFirmTopper {
+    type: count_distinct
+    sql:  case when ${accepted_save_attempt} = 'giftFirmTopper' then item_id else null end ;;
+    group_label: "Total Accepted Save"
+
+  }
+
+  measure: Total_accepted_save_appeasementAndReship {
+    type: count_distinct
+    sql:  case when ${accepted_save_attempt} = 'appeasementAndReship' then item_id else null end ;;
+    group_label: "Total Accepted Save"
+
+  }
+
+
+  measure: Total_accepted_save_reship {
+    type: count_distinct
+    sql:  case when ${accepted_save_attempt} = 'reship' then item_id else null end ;;
+    group_label: "Total Accepted Save"
+
+  }
+
+  measure: Total_accepted_save_finalSale {
+    type: count_distinct
+    sql:  case when ${accepted_save_attempt} = 'finalSale' then item_id else null end ;;
+    group_label: "Total Accepted Save"
+
+  }
+
+  measure: Total_accepted_save_crossSell {
+    type: count_distinct
+    sql:  case when ${accepted_save_attempt} = 'crossSell' then item_id else null end ;;
+    group_label: "Total Accepted Save"
+
+  }
+
+  measure: Total_accepted_save_replaceItem {
+    type: count_distinct
+    sql:  case when ${accepted_save_attempt} = 'replaceItem' then item_id else null end ;;
+    group_label: "Total Accepted Save"
+
+  }
+
+  measure: Total_accepted_save_finalSalePreset {
+    type: count_distinct
+    sql:  case when ${accepted_save_attempt} = 'finalSalePreset' then item_id else null end ;;
+    group_label: "Total Accepted Save"
+
+  }
+
+  measure: Total_accepted_save_giftSoftTopper {
+    type: count_distinct
+    sql:  case when ${accepted_save_attempt} = 'giftSoftTopper' then item_id else null end ;;
+    group_label: "Total Accepted Save"
+
+  }
+
+  measure: Total_accepted_save_giftAccessories {
+    type: count_distinct
+    sql:  case when ${accepted_save_attempt} = 'giftAccessories}' then item_id else null end ;;
+    group_label: "Total Accepted Save"
+
+  }
+
 }
