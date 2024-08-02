@@ -578,4 +578,15 @@ view: retention_platform {
 
   }
 
+### Accepted Rate
+
+  measure: Accepted_Save_Rate_giftAccessories {
+    type: number
+    sql: ${Total_accepted_save_giftAccessories}/${Total_Offerd_giftAccessories};;
+    group_label: "Total Accepted Save"
+
+  }
+
+
+
 }
