@@ -368,6 +368,61 @@ view: retention_platform {
 
 ### 02/08/2024
 
+# date granularity - Order Date #
+
+  parameter: Date_Granularity_order_date {
+    type: string
+    allowed_value: { value: "Day" }
+    allowed_value: { value: "Week" }
+    allowed_value: { value: "Month" }
+    allowed_value: { value: "Quarter" }
+    allowed_value: { value: "Year" }
+  }
+
+  dimension: Order_Date {
+    label_from_parameter: Date_Granularity_order_date
+    sql:
+            CASE
+             WHEN {% parameter Date_Granularity_order_date %} = 'Day' THEN cast(${order_created_date} as string)
+             WHEN {% parameter Date_Granularity_order_date %} = 'Week' THEN cast(${order_created_week} as string)
+             WHEN {% parameter Date_Granularity_order_date %} = 'Month' THEN cast(${order_created_month} as string)
+             WHEN {% parameter Date_Granularity_order_date %} = 'Quarter' THEN cast(${order_created_quarter} as string)
+             WHEN {% parameter Date_Granularity_order_date %} = 'Year' THEN cast(${order_created_year} as string)
+            ELSE null
+            END ;;
+  }
+
+
+
+
+
+# date granularity - form_created_date #
+
+  parameter: Date_Granularity_form_created_date {
+    type: string
+    allowed_value: { value: "Day" }
+    allowed_value: { value: "Week" }
+    allowed_value: { value: "Month" }
+    allowed_value: { value: "Quarter" }
+    allowed_value: { value: "Year" }
+  }
+
+  dimension: date_form_created {
+    label_from_parameter: Date_Granularity_order_date
+    sql:
+            CASE
+             WHEN {% parameter Date_Granularity_order_date %} = 'Day' THEN cast(${form_created_date} as string)
+             WHEN {% parameter Date_Granularity_order_date %} = 'Week' THEN cast(${form_created_week} as string)
+             WHEN {% parameter Date_Granularity_order_date %} = 'Month' THEN cast(${form_created_month} as string)
+             WHEN {% parameter Date_Granularity_order_date %} = 'Quarter' THEN cast(${form_created_quarter} as string)
+             WHEN {% parameter Date_Granularity_order_date %} = 'Year' THEN cast(${form_created_year} as string)
+            ELSE null
+            END ;;
+  }
+
+
+###
+
   dimension: Offered_Save_Attempts_appeasement {
     type: string
     sql: case when ${list_of_save_attempts} is not null then REGEXP_EXTRACT(${list_of_save_attempts}, r'appeasement')  else null end  ;;
