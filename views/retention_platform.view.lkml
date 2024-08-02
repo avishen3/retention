@@ -582,7 +582,7 @@ view: retention_platform {
 
   measure: Accepted_Save_Rate_giftAccessories {
     type: number
-    sql: case when Total_Offerd_giftAccessories>0 then ${Total_accepted_save_giftAccessories}/${Total_Offerd_giftAccessories} else null end;;
+    sql: case when ${Total_Offerd_giftAccessories}>0 then ${Total_accepted_save_giftAccessories}/${Total_Offerd_giftAccessories} else null end;;
     group_label: "Total Accepted Save"
 
   }
