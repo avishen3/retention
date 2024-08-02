@@ -607,5 +607,55 @@ view: retention_platform {
 
   }
 
+  measure: Accepted_Save_Rate_replaceItem {
+    type: number
+    sql: case when ${Total_Offerd_replaceItem}>0 then ${Total_accepted_save_replaceItem}/${Total_Offerd_replaceItem} else null end;;
+    group_label: "Save Rate"
+    value_format: "0.00%"
+  }
+
+  measure: Accepted_Save_Rate_crossSell {
+    type: number
+    sql: case when ${Total_Offerd_crossSell}>0 then ${Total_accepted_save_crossSell}/${Total_Offerd_crossSell} else null end;;
+    group_label: "Save Rate"
+    value_format: "0.00%"
+  }
+
+
+  measure: Accepted_Save_Rate_finalSale {
+    type: number
+    sql: case when ${Total_Offerd_finalSale}>0 then ${Total_accepted_save_finalSale}/${Total_Offerd_finalSale} else null end;;
+    group_label: "Save Rate"
+    value_format: "0.00%"
+  }
+
+  measure: Accepted_Save_Rate_reship {
+    type: number
+    sql: case when ${Total_Offerd_reship}>0 then ${Total_accepted_save_reship}/${Total_Offerd_reship} else null end;;
+    group_label: "Save Rate"
+    value_format: "0.00%"
+  }
+
+  measure: Accepted_Save_Rate_appeasementAndReship {
+    type: number
+    sql: case when ${Total_Offerd_appeasementAndReship}>0 then ${Total_accepted_save_appeasementAndReship}/${Total_Offerd_appeasementAndReship} else null end;;
+    group_label: "Save Rate"
+    value_format: "0.00%"
+  }
+
+  measure: Accepted_Save_Rate_giftFirmTopper {
+    type: number
+    sql: case when ${Total_Offerd_giftFirmTopper}>0 then ${Total_accepted_save_giftFirmTopper}/${Total_Offerd_giftFirmTopper} else null end;;
+    group_label: "Save Rate"
+    value_format: "0.00%"
+  }
+
+  measure: Accepted_Save_Rate_appeasement {
+    type: number
+    sql: case when ${Total_Offerd_appeasement}>0 then ${Total_accepted_save_appeasement}/${Total_Offerd_appeasement} else null end;;
+    group_label: "Save Rate"
+    value_format: "0.00%"
+  }
+
 
 }
