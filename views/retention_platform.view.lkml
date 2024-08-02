@@ -411,11 +411,11 @@ view: retention_platform {
     label_from_parameter: Date_Granularity_order_date
     sql:
             CASE
-             WHEN {% parameter Date_Granularity_order_date %} = 'Day' THEN cast(${form_created_date} as string)
-             WHEN {% parameter Date_Granularity_order_date %} = 'Week' THEN cast(${form_created_week} as string)
-             WHEN {% parameter Date_Granularity_order_date %} = 'Month' THEN cast(${form_created_month} as string)
-             WHEN {% parameter Date_Granularity_order_date %} = 'Quarter' THEN cast(${form_created_quarter} as string)
-             WHEN {% parameter Date_Granularity_order_date %} = 'Year' THEN cast(${form_created_year} as string)
+             WHEN {% parameter Date_Granularity_form_created_date %} = 'Day' THEN cast(${form_created_date} as string)
+             WHEN {% parameter Date_Granularity_form_created_date %} = 'Week' THEN cast(${form_created_week} as string)
+             WHEN {% parameter Date_Granularity_form_created_date %} = 'Month' THEN cast(${form_created_month} as string)
+             WHEN {% parameter Date_Granularity_form_created_date %} = 'Quarter' THEN cast(${form_created_quarter} as string)
+             WHEN {% parameter Date_Granularity_form_created_date %} = 'Year' THEN cast(${form_created_year} as string)
             ELSE null
             END ;;
   }
