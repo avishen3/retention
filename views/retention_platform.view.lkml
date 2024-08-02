@@ -366,5 +366,71 @@ view: retention_platform {
          AND ${accepted_save_attempt} is not null;;
   }
 
+### 02/08/2024
+
+  dimension: Offered_Save_Attemptsr_appeasement {
+    type: string
+    sql: case when ${list_of_save_attempts} is not null then REGEXP_EXTRACT(${list_of_save_attempts}, r'appeasement')  else null end  ;;
+    group_label: "Offered Save Attempts"
+  }
+
+  dimension: Offered_Save_Attemptsr_giftFirmTopper {
+    type: string
+    sql: case when ${list_of_save_attempts} is not null then REGEXP_EXTRACT(${list_of_save_attempts}, r'giftFirmTopper')  else null end  ;;
+    group_label: "Offered Save Attempts"
+  }
+
+  dimension: Offered_Save_Attemptsr_appeasementAndReship {
+    type: string
+    sql: case when ${list_of_save_attempts} is not null then REGEXP_EXTRACT(${list_of_save_attempts}, r'appeasementAndReship')  else null end  ;;
+    group_label: "Offered Save Attempts"
+  }
+
+  dimension: Offered_Save_Attemptsr_reship {
+    type: string
+    sql: case when ${list_of_save_attempts} is not null then REGEXP_EXTRACT(${list_of_save_attempts}, r'reship')  else null end  ;;
+    group_label: "Offered Save Attempts"
+  }
+
+
+  dimension: Offered_Save_Attemptsr_finalSale {
+    type: string
+    sql: case when ${list_of_save_attempts} is not null then REGEXP_EXTRACT(${list_of_save_attempts}, r'finalSale')  else null end  ;;
+    group_label: "Offered Save Attempts"
+  }
+
+
+  dimension: Offered_Save_Attemptsr_crossSell {
+    type: string
+    sql: case when ${list_of_save_attempts} is not null then REGEXP_EXTRACT(${list_of_save_attempts}, r'crossSell')  else null end  ;;
+    group_label: "Offered Save Attempts"
+  }
+
+
+  dimension: Offered_Save_Attemptsr_replaceItem {
+    type: string
+    sql: case when ${list_of_save_attempts} is not null then REGEXP_EXTRACT(${list_of_save_attempts}, r'replaceItem')  else null end  ;;
+    group_label: "Offered Save Attempts"
+  }
+
+  dimension: Offered_Save_Attemptsr_finalSalePreset {
+    type: string
+    sql: case when ${list_of_save_attempts} is not null then REGEXP_EXTRACT(${list_of_save_attempts}, r'finalSalePreset')  else null end  ;;
+    group_label: "Offered Save Attempts"
+  }
+
+  dimension: Offered_Save_Attemptsr_giftSoftTopper {
+    type: string
+    sql: case when ${list_of_save_attempts} is not null then REGEXP_EXTRACT(${list_of_save_attempts}, r'giftSoftTopper')  else null end  ;;
+    group_label: "Offered Save Attempts"
+  }
+
+  dimension: Offered_Save_Attemptsr_giftAccessories {
+    type: string
+    sql: case when ${list_of_save_attempts} is not null then REGEXP_EXTRACT(${list_of_save_attempts}, r'giftAccessories')  else null end  ;;
+    group_label: "Offered Save Attempts"
+  }
+
+
 
 }
