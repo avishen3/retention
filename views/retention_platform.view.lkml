@@ -583,21 +583,27 @@ view: retention_platform {
   measure: Accepted_Save_Rate_giftAccessories {
     type: number
     sql: case when ${Total_Offerd_giftAccessories}>0 then ${Total_accepted_save_giftAccessories}/${Total_Offerd_giftAccessories} else null end;;
-    group_label: "Total Accepted Save"
+    group_label: "Save Rate"
+    value_format: "0.00%"
+
 
   }
 
   measure: Accepted_Save_Rate_giftSoftTopper {
     type: number
     sql: case when ${Total_Offerd_giftSoftTopper}>0 then ${Total_accepted_save_giftSoftTopper}/${Total_Offerd_giftSoftTopper} else null end;;
-    group_label: "Total Accepted Save"
+    group_label: "Save Rate"
+    value_format: "0.00%"
+
 
   }
 
   measure: Accepted_Save_Rate_finalSalePreset {
     type: number
     sql: case when ${Total_Offerd_finalSalePreset}>0 then ${Total_accepted_save_finalSalePreset}/${Total_Offerd_finalSalePreset} else null end;;
-    group_label: "Total Accepted Save"
+    group_label: "Save Rate"
+    value_format: "0.00%"
+
 
   }
 
