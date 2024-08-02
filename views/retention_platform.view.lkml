@@ -368,69 +368,141 @@ view: retention_platform {
 
 ### 02/08/2024
 
-  dimension: Offered_Save_Attemptsr_appeasement {
+  dimension: Offered_Save_Attempts_appeasement {
     type: string
     sql: case when ${list_of_save_attempts} is not null then REGEXP_EXTRACT(${list_of_save_attempts}, r'appeasement')  else null end  ;;
     group_label: "Offered Save Attempts"
   }
 
-  dimension: Offered_Save_Attemptsr_giftFirmTopper {
+  dimension: Offered_Save_Attempts_giftFirmTopper {
     type: string
     sql: case when ${list_of_save_attempts} is not null then REGEXP_EXTRACT(${list_of_save_attempts}, r'giftFirmTopper')  else null end  ;;
     group_label: "Offered Save Attempts"
   }
 
-  dimension: Offered_Save_Attemptsr_appeasementAndReship {
+  dimension: Offered_Save_Attempts_appeasementAndReship {
     type: string
     sql: case when ${list_of_save_attempts} is not null then REGEXP_EXTRACT(${list_of_save_attempts}, r'appeasementAndReship')  else null end  ;;
     group_label: "Offered Save Attempts"
   }
 
-  dimension: Offered_Save_Attemptsr_reship {
+  dimension: Offered_Save_Attempts_reship {
     type: string
     sql: case when ${list_of_save_attempts} is not null then REGEXP_EXTRACT(${list_of_save_attempts}, r'reship')  else null end  ;;
     group_label: "Offered Save Attempts"
   }
 
 
-  dimension: Offered_Save_Attemptsr_finalSale {
+  dimension: Offered_Save_Attempts_finalSale {
     type: string
     sql: case when ${list_of_save_attempts} is not null then REGEXP_EXTRACT(${list_of_save_attempts}, r'finalSale')  else null end  ;;
     group_label: "Offered Save Attempts"
   }
 
 
-  dimension: Offered_Save_Attemptsr_crossSell {
+  dimension: Offered_Save_Attempts_crossSell {
     type: string
     sql: case when ${list_of_save_attempts} is not null then REGEXP_EXTRACT(${list_of_save_attempts}, r'crossSell')  else null end  ;;
     group_label: "Offered Save Attempts"
   }
 
 
-  dimension: Offered_Save_Attemptsr_replaceItem {
+  dimension: Offered_Save_Attempts_replaceItem {
     type: string
     sql: case when ${list_of_save_attempts} is not null then REGEXP_EXTRACT(${list_of_save_attempts}, r'replaceItem')  else null end  ;;
     group_label: "Offered Save Attempts"
   }
 
-  dimension: Offered_Save_Attemptsr_finalSalePreset {
+  dimension: Offered_Save_Attempts_finalSalePreset {
     type: string
     sql: case when ${list_of_save_attempts} is not null then REGEXP_EXTRACT(${list_of_save_attempts}, r'finalSalePreset')  else null end  ;;
     group_label: "Offered Save Attempts"
   }
 
-  dimension: Offered_Save_Attemptsr_giftSoftTopper {
+  dimension: Offered_Save_Attempts_giftSoftTopper {
     type: string
     sql: case when ${list_of_save_attempts} is not null then REGEXP_EXTRACT(${list_of_save_attempts}, r'giftSoftTopper')  else null end  ;;
     group_label: "Offered Save Attempts"
   }
 
-  dimension: Offered_Save_Attemptsr_giftAccessories {
+  dimension: Offered_Save_Attempts_giftAccessories {
     type: string
     sql: case when ${list_of_save_attempts} is not null then REGEXP_EXTRACT(${list_of_save_attempts}, r'giftAccessories')  else null end  ;;
     group_label: "Offered Save Attempts"
   }
 
 
+### Measure total offered
+
+  measure: Total_Offerd_appeasement {
+    type: count_distinct
+    sql:  case when ${Offered_Save_Attempts_appeasement} = 'appeasement' then item_id else null end ;;
+    group_label: "Total Offered Save Attempts"
+
+  }
+
+  measure: Total_Offerd_giftFirmTopper {
+    type: count_distinct
+    sql:  case when ${Offered_Save_Attempts_giftFirmTopper} = 'giftFirmTopper' then item_id else null end ;;
+    group_label: "Total Offered Save Attempts"
+
+  }
+
+  measure: Total_Offerd_appeasementAndReship {
+    type: count_distinct
+    sql:  case when ${Offered_Save_Attempts_appeasementAndReship} = 'appeasementAndReship' then item_id else null end ;;
+    group_label: "Total Offered Save Attempts"
+
+  }
+
+
+  measure: Total_Offerd_reship {
+    type: count_distinct
+    sql:  case when ${Offered_Save_Attempts_reship} = 'reship' then item_id else null end ;;
+    group_label: "Total Offered Save Attempts"
+
+  }
+
+  measure: Total_Offerd_finalSale {
+    type: count_distinct
+    sql:  case when ${Offered_Save_Attempts_finalSale} = 'finalSale' then item_id else null end ;;
+    group_label: "Total Offered Save Attempts"
+
+  }
+
+  measure: Total_Offerd_crossSell {
+    type: count_distinct
+    sql:  case when ${Offered_Save_Attempts_crossSell} = 'crossSell' then item_id else null end ;;
+    group_label: "Total Offered Save Attempts"
+
+  }
+
+  measure: Total_Offerd_replaceItem {
+    type: count_distinct
+    sql:  case when ${Offered_Save_Attempts_replaceItem} = 'replaceItem' then item_id else null end ;;
+    group_label: "Total Offered Save Attempts"
+
+  }
+
+  measure: Total_Offerd_finalSalePreset {
+    type: count_distinct
+    sql:  case when ${Offered_Save_Attempts_finalSalePreset} = 'finalSalePreset' then item_id else null end ;;
+    group_label: "Total Offered Save Attempts"
+
+  }
+
+  measure: Total_Offerd_giftSoftTopper {
+    type: count_distinct
+    sql:  case when ${Offered_Save_Attempts_giftSoftTopper} = 'giftSoftTopper' then item_id else null end ;;
+    group_label: "Total Offered Save Attempts"
+
+  }
+
+  measure: Total_Offerd_giftAccessories {
+    type: count_distinct
+    sql:  case when ${Offered_Save_Attempts_giftAccessories} = 'giftAccessories}' then item_id else null end ;;
+  group_label: "Total Offered Save Attempts"
+
+  }
 
 }
