@@ -527,7 +527,12 @@ view: five9_all_interactions {
   ### deleted - total_session_with_orders | total_session_with_orders_before_interaction | total_customer_with_orders. | total_customer_with_orders_before_interaction fron FIVE9 prospect castomer
 
 
-
+  measure: total_customer_key {
+    type: count_distinct
+    sql: ${customer_key} ;;
+    value_format: "#,##0"
+    group_label: "five9 Measures - customer"
+  }
 
 
   dimension: is_call_answered {
