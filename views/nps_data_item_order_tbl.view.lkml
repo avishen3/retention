@@ -2,6 +2,15 @@ view: nps_data_item_order_tbl {
   sql_table_name: `omega-post-184817.Keshet.NPS_DATA_item_order_tbl`
     ;;
 
+
+
+  dimension: is_adjustable_in_cart {
+    type: yesno
+    sql: ${TABLE}.is_adjustable_in_cart ;;
+  }
+
+
+
   dimension: actual_price {
     type: number
     sql: ${TABLE}.actual_price ;;
