@@ -419,6 +419,31 @@ view: five9_all_interactions {
     drill_fields: [detail*]
   }
 
+
+
+  dimension: is_system_disposition {
+    type: yesno
+    sql: ${TABLE}.is_system_disposition ;;
+  }
+
+
+  dimension: Interactions_type {
+    type: string
+    sql: ${TABLE}.Interactions_type ;;
+  }
+
+
+  dimension: customer_key {
+    type: string
+    sql: ${TABLE}.customer_key ;;
+  }
+
+
+  dimension: user_interaction_email {
+    type: string
+    sql: ${TABLE}.user_interaction_email ;;
+  }
+
   # ----- Sets of fields for drilling ------
   set: detail {
     fields: [
