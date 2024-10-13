@@ -129,7 +129,7 @@ view: five9_all_interactions {
     sql: ${TABLE}.ECE ;;
   }
   dimension: end_timestamp {
-    type: string
+    type: date_time
     sql: ${TABLE}.end_timestamp ;;
   }
 
