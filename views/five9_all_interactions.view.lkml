@@ -138,7 +138,7 @@ view: five9_all_interactions {
 
   dimension: end_timestamp_my_parsed_date_time {
     type: date_time
-    sql: PARSE_TIMESTAMP('%Y%m%d%H%i%S%f', ${end_timestamp}) ;;
+    sql: PARSE_TIMESTAMP( '%d-%m-%Y %H:%M:%S' , ${end_timestamp}) ;;
   }
 
   ##sql: PARSE_TIMESTAMP('%Y%m%d%H%i%S%f', ${your_string_field})
