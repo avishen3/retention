@@ -132,6 +132,11 @@ view: five9_all_interactions {
     type: string
     sql: ${TABLE}.end_timestamp ;;
   }
+
+###13/10/2024
+
+
+
   dimension: ended_at {
     type: string
     sql: ${TABLE}.endedAt ;;
