@@ -129,12 +129,17 @@ view: five9_all_interactions {
     sql: ${TABLE}.ECE ;;
   }
   dimension: end_timestamp {
-    type: date_time
+    type: string
     sql: ${TABLE}.end_timestamp ;;
   }
 
 ###13/10/2024
 
+
+  dimension: end_timestamp_my_parsed_date_time {
+    type: date_time
+    sql: PARSE_TIMESTAMP('%d-%m-%Y %H:%M:%S', ${end_timestamp}) ;;
+  }
 
 
   dimension: ended_at {
