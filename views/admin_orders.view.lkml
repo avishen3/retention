@@ -769,6 +769,14 @@ measure: total_price {
 
 }
 
+  measure: total_order {
+    type: count_distinct
+    sql: ${short_id} ;;
+    value_format: "#,##0"
+
+  }
+
+
   measure: total_tax{
     type: sum
     sql: ${tax};;
