@@ -128,8 +128,19 @@ view: five9_all_interactions {
     type: string
     sql: ${TABLE}.ECE ;;
   }
-  dimension: end_timestamp {
-    type: string
+
+  ###28/10/2024
+
+#3  dimension: end_timestamp {
+##    type: string
+##    sql: ${TABLE}.end_timestamp ;;
+##  }
+
+
+  dimension_group: end_timestamp {
+    type: time
+    timeframes: [raw, time, date, week, month, quarter, year]
+    datatype: datetime
     sql: ${TABLE}.end_timestamp ;;
   }
 
@@ -358,10 +369,22 @@ view: five9_all_interactions {
     type: string
     sql: ${TABLE}.skill_name ;;
   }
-  dimension: start_time {
-    type: string
+
+## 28/10/2024
+
+##  dimension: start_time {
+##    type: string
+##    sql: ${TABLE}.start_time ;;
+##  }
+
+  dimension_group: start_time {
+    type: time
+    timeframes: [raw, time, date, week, month, quarter, year]
+    datatype: datetime
     sql: ${TABLE}.start_time ;;
   }
+
+
   dimension: subject {
     type: string
     sql: ${TABLE}.subject ;;
