@@ -2641,6 +2641,77 @@ value: "Variant"
 
 
 
+  dimension: key {
+    type: string
+    sql: ${TABLE}.key ;;
+  }
+
+  dimension: key_type {
+    type: string
+    sql: ${TABLE}.key_type ;;
+  }
+
+
+  dimension: Category {
+    type: string
+    sql: ${TABLE}.Category ;;
+  }
+
+
+  dimension: Discount {
+    type: string
+    sql: ${TABLE}.Discount ;;
+  }
+
+
+  dimension: Emotion {
+    type: string
+    sql: ${TABLE}.Emotion ;;
+  }
+
+
+  dimension: Label {
+    type: string
+    sql: ${TABLE}.Label ;;
+  }
+
+
+  dimension: Emoji {
+    type: string
+    sql: ${TABLE}.key ;;
+  }
+
+
+  dimension: Adjustable {
+    type: string
+    sql: ${TABLE}.Adjustable ;;
+  }
+
+
+  dimension: Queen {
+    type: string
+    sql: ${TABLE}.Queen ;;
+  }
+
+  dimension: percentage {
+    type: string
+    sql: ${TABLE}.percentage ;;
+  }
+
+  dimension: Starting_at {
+    type: string
+    sql: ${TABLE}.Starting_at ;;
+  }
+
+  dimension: Characters {
+    type: string
+    sql: ${TABLE}.Characters ;;
+  }
+
+  dimension: Trial {
+    type: string
+    sql: ${TABLE}.Trial ;;
+  }
 
 
 }
