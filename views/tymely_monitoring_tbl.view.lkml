@@ -54,12 +54,14 @@ view: tymely_monitoring_tbl {
   measure: sum_of_median_interaction_in_min {
     type: sum
     sql: ${median_interaction_in_min} ;;
+    value_format: "#,##0.00"
   }
 
 
   measure: Average_of_Medians_interaction_in_min {
     type: number
     sql: ${sum_of_median_interaction_in_min}/${count_disposition_name} ;;
+    value_format: "#,##0.00"
   }
 
 }
