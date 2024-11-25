@@ -171,3 +171,6 @@ explore: zingtree_raw_tl{
 explore: five9_all_interactions{
   label: "Five9 All Interactions"
   description: "Five9 All Interactions"}
+
+### tymely monitoring
+explore: tymely_monitoring_tbl{}
