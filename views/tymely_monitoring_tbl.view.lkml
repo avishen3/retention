@@ -44,5 +44,22 @@ view: tymely_monitoring_tbl {
   }
 
 
+  measure: count_disposition_name {
+    type: count_distinct
+    sql:   sql: CONCAT(${TABLE}.week_number_monday_start, '_', ${TABLE}.tymely_week, '_', ${TABLE}.valide_interaction , '_', ${TABLE}.mindee_segmentation, '_', ${TABLE}.correspondencetype );;
+  }
+
+
+
+  measure: sum_of_median_interaction_in_min {
+    type: sum
+    sql: ${median_interaction_in_min} ;;
+  }
+
+
+  measure: Average_of_Medians_interaction_in_min {
+    type: number
+    sql: ${sum_of_median_interaction_in_min}/${count_disposition_name} ;;
+  }
 
 }
