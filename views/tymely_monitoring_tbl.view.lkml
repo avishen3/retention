@@ -37,4 +37,10 @@ view: tymely_monitoring_tbl {
     type: count
     drill_fields: [disposition_name]
   }
+
+  measure: sum_total_interaction {
+    type: sum
+  }
+
+
 }
