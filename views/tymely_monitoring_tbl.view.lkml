@@ -40,6 +40,7 @@ view: tymely_monitoring_tbl {
 
   measure: sum_total_interaction {
     type: sum
+    sql: ${total_interaction} ;;
   }
 
 
