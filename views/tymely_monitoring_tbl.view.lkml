@@ -46,7 +46,7 @@ view: tymely_monitoring_tbl {
 
   measure: count_disposition_name {
     type: count_distinct
-    sql:   sql: CONCAT(${TABLE}.week_number_monday_start, '_', ${TABLE}.tymely_week, '_', ${TABLE}.valide_interaction , '_', ${TABLE}.mindee_segmentation, '_', ${TABLE}.correspondencetype );;
+    sql:CONCAT(${TABLE}.week_number_monday_start, '_', ${TABLE}.tymely_week, '_', ${TABLE}.valide_interaction , '_', ${TABLE}.mindee_segmentation, '_', ${TABLE}.correspondencetype );;
   }
 
 
