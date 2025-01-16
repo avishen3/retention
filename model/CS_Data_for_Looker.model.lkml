@@ -174,3 +174,10 @@ explore: five9_all_interactions{
 
 ### tymely monitoring
 explore: tymely_monitoring_tbl{}
+
+
+### klaviyo_attentive_combined_data
+
+explore: klaviyo_attentive_combined_data{
+  label: "Klaviyo Attentive Combined data"
+  description: "Klaviyo Attentive by User Combined data"}
