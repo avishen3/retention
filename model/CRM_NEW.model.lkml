@@ -113,6 +113,11 @@ explore: klaviyo_unified_events {
   label: "Klaviyo Unified Events"
 }
 
+### klaviyo_attentive_combined_data
+
+explore: klaviyo_attentive_combined_data{
+  label: "Klaviyo Attentive Combined data"
+  description: "Klaviyo Attentive by User Combined data"}
 
 
 
