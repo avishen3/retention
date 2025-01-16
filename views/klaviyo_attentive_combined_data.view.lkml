@@ -143,4 +143,121 @@ view: klaviyo_attentive_combined_data {
   measure: count {
     type: count
   }
+
+
+
+# date granularity#
+
+  parameter: Date_Granularity {
+    type: string
+    allowed_value: { value: "Day" }
+    allowed_value: { value: "Week" }
+    allowed_value: { value: "Month" }
+    allowed_value: { value: "Quarter" }
+    allowed_value: { value: "Year" }
+  }
+
+
+  dimension: Date_Granularity_date {
+    label_from_parameter: Date_Granularity
+    sql:
+            CASE
+             WHEN {% parameter Date_Granularity %} = 'Day' THEN cast(${date_date} as string)
+             WHEN {% parameter Date_Granularity %} = 'Week' THEN cast(${date_week} as string)
+             WHEN {% parameter Date_Granularity %} = 'Month' THEN cast(${date_month} as string)
+             WHEN {% parameter Date_Granularity %} = 'Quarter' THEN cast(${date_quarter} as string)
+             WHEN {% parameter Date_Granularity %} = 'Year' THEN cast(${date_year} as string)
+            ELSE null
+            END ;;
+  }
+
+
+
+##
+
+  measure: Users_key_dis_count{
+    type: count_distinct
+    label:"Users Count"
+    sql: ${key} ;;
+  }
+
+### recived data
+
+  measure: Total_number_of_email_recived{
+    type: sum
+    label:"Total Email message Recived"
+    sql: ${total_email_recived} ;;
+  }
+
+  measure: Total_number_of_sms_recived{
+    type: sum
+    label:"Total SMS message Recived"
+    sql: ${total_sms_recived} ;;
+  }
+
+  measure: total_number_email_and_sms_recived{
+    type: sum
+    label:"Total CRM message Recived"
+    sql: ${total_email_and_sms_recived} ;;
+  }
+
+### order data
+
+  measure: Total_sum_email_orders{
+    type: sum
+    label:"Total Email order"
+    sql: ${total_email_orders} ;;
+  }
+
+  measure: Total_sum_sms_order{
+    type: sum
+    label:"Total SMS order"
+    sql: ${total_sms_orders} ;;
+  }
+
+  measure: total_sum_crm_order{
+    type: sum
+    label:"Total CRM Orders"
+    sql: ${total_orders_from_email_and_sms} ;;
+  }
+
+  measure: total_sum_order{
+    type: sum
+    label:"Total CRM Orders"
+    sql: ${total_orders} ;;
+  }
+
+
+### spesific users
+
+  measure: total_attentive_only {
+    type: count_distinct
+    sql: case when ${customer_from_platform} = "attentive only" then ${key} else null end ;;
+    value_format: "#,##0"
+  }
+
+  measure: total_klaviyo_only {
+    type: count_distinct
+    sql: case when ${customer_from_platform} = "klaviyo only" then ${key} else null end ;;
+    value_format: "#,##0"
+  }
+
+  measure: total_both_klaviyo_attentive {
+    type: count_distinct
+    sql: case when ${customer_from_platform} = "both" then ${key} else null end ;;
+    value_format: "#,##0"
+  }
+
+  measure: total_attentive {
+    type: count_distinct
+    sql: case when (${customer_from_platform} = "attentive only" or ${customer_from_platform} = "both") then ${key} else null end ;;
+    value_format: "#,##0"
+  }
+
+  measure: total_klaviyo {
+    type: count_distinct
+    sql: case when (${customer_from_platform} = "klaviyo only" or ${customer_from_platform} = "both") then ${key} else null end ;;
+    value_format: "#,##0"
+  }
+
 }
