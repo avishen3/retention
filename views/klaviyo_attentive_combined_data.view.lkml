@@ -202,6 +202,12 @@ view: klaviyo_attentive_combined_data {
   }
 
 
+  measure: Total_number_of_email_and_sms_from_users_who_recived_both{
+    type: sum
+    label:"Total CMR when both email and sms not null"
+    sql: ${total_email_and_sms_recived} ;;
+  }
+
 ### order data
 
   measure: Total_sum_email_orders{
