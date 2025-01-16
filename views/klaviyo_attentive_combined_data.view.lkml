@@ -230,31 +230,31 @@ view: klaviyo_attentive_combined_data {
 
 ### spesific users
 
-  measure: total_attentive_only {
+  measure: total_attentive_only_users {
     type: count_distinct
     sql: case when ${customer_from_platform} = "attentive only" then ${key} else null end ;;
     value_format: "#,##0"
   }
 
-  measure: total_klaviyo_only {
+  measure: total_klaviyo_only_users {
     type: count_distinct
     sql: case when ${customer_from_platform} = "klaviyo only" then ${key} else null end ;;
     value_format: "#,##0"
   }
 
-  measure: total_both_klaviyo_attentive {
+  measure: total_both_klaviyo_attentive_users {
     type: count_distinct
     sql: case when ${customer_from_platform} = "both" then ${key} else null end ;;
     value_format: "#,##0"
   }
 
-  measure: total_attentive {
+  measure: total_attentive_users {
     type: count_distinct
     sql: case when (${customer_from_platform} = "attentive only" or ${customer_from_platform} = "both") then ${key} else null end ;;
     value_format: "#,##0"
   }
 
-  measure: total_klaviyo {
+  measure: total_klaviyo_users {
     type: count_distinct
     sql: case when (${customer_from_platform} = "klaviyo only" or ${customer_from_platform} = "both") then ${key} else null end ;;
     value_format: "#,##0"
