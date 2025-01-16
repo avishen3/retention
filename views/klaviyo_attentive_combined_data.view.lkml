@@ -195,11 +195,6 @@ view: klaviyo_attentive_combined_data {
     sql: ${total_sms_recived} ;;
   }
 
-  measure: total_number_email_and_sms_recived{
-    type: sum
-    label:"Total CRM message Recived"
-    sql: ${total_email_and_sms_recived} ;;
-  }
 
 ### order data
 
@@ -215,7 +210,9 @@ view: klaviyo_attentive_combined_data {
     sql: ${total_sms_orders} ;;
   }
 
-  measure: total_sum_crm_order{
+
+
+  measure: total_sum_same_day_crm_order{
     type: sum
     label:"Total CRM Orders"
     sql: ${total_orders_from_email_and_sms} ;;
