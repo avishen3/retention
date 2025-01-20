@@ -214,26 +214,49 @@ view: klaviyo_attentive_combined_data {
     type: sum
     label:"Total Email order"
     sql: ${total_email_orders} ;;
+    group_label: "Orders"
+
   }
 
   measure: Total_sum_sms_order{
     type: sum
     label:"Total SMS order"
     sql: ${total_sms_orders} ;;
-  }
+    group_label: "Orders"
 
+  }
 
 
   measure: total_sum_same_day_crm_order{
     type: sum
-    label:"Total CRM Orders"
+    label:"CRM Oders from users who recived both attentive and klaviyo that day"
     sql: ${total_orders_from_email_and_sms} ;;
+    group_label: "Orders"
+
   }
 
   measure: total_sum_order{
     type: sum
     label:"Total CRM Orders"
     sql: ${total_orders} ;;
+    group_label: "Orders"
+
+  }
+
+  measure: total_email_order_same_day {
+    type: sum
+    label:"Total Same Day Email Orders"
+    sql: ${order_same_day_as_recived_email} ;;
+    group_label: "Orders"
+
+  }
+
+  measure: total_sms_order_same_day {
+    type: sum
+    label:"Total Same Day SMS Orders"
+    sql: ${order_same_day_as_recived_sms} ;;
+    group_label: "Orders"
+
   }
 
 
