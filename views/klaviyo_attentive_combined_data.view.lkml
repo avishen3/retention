@@ -253,7 +253,7 @@ view: klaviyo_attentive_combined_data {
 
   measure: total_sms_order_same_day {
     type: sum
-    label:"Total Same Day SMS Orders"
+    label:"Total Orders same day as recived sms from all sources"
     sql: ${order_same_day_as_recived_sms} ;;
     group_label: "Orders"
 
