@@ -237,7 +237,7 @@ view: klaviyo_attentive_combined_data {
 
   measure: total_sum_order{
     type: sum
-    label:"Total CRM Orders"
+    label:"Total orders made by users who received a correspondent that day"
     sql: ${total_orders} ;;
     group_label: "Orders"
 
