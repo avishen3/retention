@@ -263,7 +263,7 @@ view: klaviyo_attentive_combined_data {
   measure: Total_sum_email_AND_sms_orders{
     type: sum
     label:"Total Email and SMS order"
-    sql: ${total_email_orders}+${total_sms_orders}  ;;
+    sql:  COALESCE(${total_email_orders}, 0) + COALESCE(${total_sms_orders}, 0)   ;;
     group_label: "Orders"
 
   }
