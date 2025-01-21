@@ -245,7 +245,7 @@ view: klaviyo_attentive_combined_data {
 
   measure: total_email_order_same_day {
     type: sum
-    label:"Total Same Day Email Orders"
+    label:"Total Orders same day as recived email from all sources"
     sql: ${order_same_day_as_recived_email} ;;
     group_label: "Orders"
 
