@@ -260,6 +260,17 @@ view: klaviyo_attentive_combined_data {
   }
 
 
+  measure: Total_sum_email_AND_sms_orders{
+    type: sum
+    label:"Total Email and SMS order"
+    sql: ${total_email_orders}+${total_sms_orders}  ;;
+    group_label: "Orders"
+
+  }
+
+
+
+
 ### spesific users
 
   measure: total_attentive_only_users {
@@ -296,5 +307,8 @@ view: klaviyo_attentive_combined_data {
     group_label: "Users"
     value_format: "#,##0"
   }
+
+
+
 
 }
