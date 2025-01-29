@@ -174,3 +174,6 @@ explore: five9_all_interactions{
 
 ### tymely monitoring
 explore: tymely_monitoring_tbl{}
+
+
+explore: refund_items_24h_repeat_order_tbl {}
