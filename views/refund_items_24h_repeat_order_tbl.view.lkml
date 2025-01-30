@@ -117,4 +117,31 @@ view: refund_items_24h_repeat_order_tbl {
     sql: ${short_id_2_order} ;;
   }
 
+# date granularity#
+
+  parameter: Date_Granularity {
+    type: string
+    allowed_value: { value: "Day" }
+    allowed_value: { value: "Week" }
+    allowed_value: { value: "Month" }
+    allowed_value: { value: "Quarter" }
+    allowed_value: { value: "Year" }
+  }
+
+
+  dimension: Date_Granularity_date {
+    label_from_parameter: Date_Granularity
+    sql:
+            CASE
+             WHEN {% parameter Date_Granularity %} = 'Day' THEN cast(${order_created_date} as string)
+             WHEN {% parameter Date_Granularity %} = 'Week' THEN cast(${order_created_week} as string)
+             WHEN {% parameter Date_Granularity %} = 'Month' THEN cast(${order_created_month} as string)
+             WHEN {% parameter Date_Granularity %} = 'Quarter' THEN cast(${order_created_quarter} as string)
+             WHEN {% parameter Date_Granularity %} = 'Year' THEN cast(${order_created_year} as string)
+            ELSE null
+            END ;;
+  }
+
+
+
 }
