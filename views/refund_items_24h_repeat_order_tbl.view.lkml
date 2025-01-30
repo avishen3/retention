@@ -104,4 +104,17 @@ view: refund_items_24h_repeat_order_tbl {
   measure: count {
     type: count
   }
+
+
+  measure: Total_Original_Orders {
+    type: count_distinct
+    sql: ${short_id} ;;
+  }
+
+
+  measure: Total_Seconed_Orders {
+    type: count_distinct
+    sql: ${short_id_2_order} ;;
+  }
+
 }
