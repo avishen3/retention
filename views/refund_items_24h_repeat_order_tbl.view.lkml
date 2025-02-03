@@ -106,6 +106,12 @@ view: refund_items_24h_repeat_order_tbl {
   }
 
 
+  dimension: rp_agent_email {
+    type: string
+    sql: ${TABLE}.rp_agent_email ;;
+  }
+
+
   measure: Total_Original_Orders {
     type: count_distinct
     sql: ${short_id} ;;
