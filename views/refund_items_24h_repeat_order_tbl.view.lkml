@@ -79,7 +79,7 @@ view: refund_items_24h_repeat_order_tbl {
   }
   dimension: short_id {
     type: string
-    sql: ${TABLE}.short_id ;;
+    sql: ${TABLE}.short_id_a ;;
   }
   dimension: short_id_2_order {
     type: string
