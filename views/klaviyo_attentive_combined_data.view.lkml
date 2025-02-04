@@ -120,6 +120,12 @@ view: klaviyo_attentive_combined_data {
     type: number
     sql: ${TABLE}.total_email_recived ;;
   }
+
+  dimension: other_email_count {
+    type: number
+    sql: ${TABLE}.other_email_count ;;
+  }
+
   dimension: total_orders {
     type: number
     sql: ${TABLE}.total_orders ;;
@@ -188,6 +194,13 @@ view: klaviyo_attentive_combined_data {
     label:"Total Email message Recived"
     sql: ${total_email_recived} ;;
   }
+
+  measure: Total_number_of_email_other_recived{
+    type: sum
+    label:"Total Email message Recived"
+    sql: ${other_email_count} ;;
+  }
+
 
   measure: Total_number_of_sms_recived{
     type: sum
