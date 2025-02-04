@@ -23,7 +23,7 @@ view: attentive_by_user {
   }
   dimension: campaign_name {
     type: string
-    sql: ${TABLE}.campaign_name ;;
+    sql: ${TABLE}.name ;;
   }
   dimension: campaign_type {
     type: string
