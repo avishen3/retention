@@ -197,7 +197,7 @@ view: klaviyo_attentive_combined_data {
 
   measure: Total_number_of_email_other_recived{
     type: sum
-    label:"Total Email message Recived"
+    label:"Total Email OTHER message Recived"
     sql: ${other_email_count} ;;
   }
 
