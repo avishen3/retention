@@ -21,7 +21,7 @@ view: attentive_by_user {
     type: string
     sql: ${TABLE}.campaign ;;
   }
-  dimension: campaign_name {
+  dimension: name {
     type: string
     sql: ${TABLE}.name ;;
   }
@@ -425,7 +425,7 @@ view: attentive_by_user {
   }
   measure: count {
     type: count
-    drill_fields: [creative_name, message_name, campaign_name, flow_name]
+    drill_fields: [creative_name, message_name, name, flow_name]
   }
 
 #####  Specific SMS Matrics
@@ -1060,7 +1060,7 @@ view: attentive_by_user {
       {% elsif dimension_selector_CRM_1._parameter_value == 'customer_type' %}
             ${customer_type}
       {% elsif dimension_selector_CRM_1._parameter_value == 'campaign_name' %}
-            ${campaign_name}
+            ${name}
       {% elsif dimension_selector_CRM_1._parameter_value == 'offer' %}
             ${offer}
       {% elsif dimension_selector_CRM_1._parameter_value == 'test' %}
@@ -1228,7 +1228,7 @@ view: attentive_by_user {
       {% elsif dimension_selector_CRM_2._parameter_value == 'customer_type' %}
             ${customer_type}
       {% elsif dimension_selector_CRM_2._parameter_value == 'campaign_name' %}
-            ${campaign_name}
+            ${name}
       {% elsif dimension_selector_CRM_2._parameter_value == 'offer' %}
             ${offer}
       {% elsif dimension_selector_CRM_2._parameter_value == 'test' %}
@@ -1387,7 +1387,7 @@ view: attentive_by_user {
   dimension: dimension_CRM_3 {
     type: string
     sql:
-      {% if dimension_selector_CRM_3._parameter_value == 'campaign_type' %}
+     {% if dimension_selector_CRM_3._parameter_value == 'campaign_type' %}
             ${campaign_type}
       {% elsif dimension_selector_CRM_3._parameter_value == 'flow_name' %}
             ${flow_name}
@@ -1398,7 +1398,7 @@ view: attentive_by_user {
       {% elsif dimension_selector_CRM_3._parameter_value == 'customer_type' %}
             ${customer_type}
       {% elsif dimension_selector_CRM_3._parameter_value == 'campaign_name' %}
-            ${campaign_name}
+            ${name}
       {% elsif dimension_selector_CRM_3._parameter_value == 'offer' %}
             ${offer}
       {% elsif dimension_selector_CRM_3._parameter_value == 'test' %}
@@ -1612,4 +1612,61 @@ view: attentive_by_user {
     sql: ${campaign} ;;
   }
 
+
+  dimension: launch_date {
+    type: string
+    sql: ${TABLE}.launch_date ;;
+  }
+
+
+  dimension: ad_type {
+    type: string
+    sql: ${TABLE}.ad_type ;;
+  }
+
+  dimension: wildCard {
+    type: string
+    sql: ${TABLE}.wildCard ;;
+  }
+
+  dimension: week {
+    type: string
+    sql: ${TABLE}.week ;;
+  }
+
+  dimension: landing_page {
+    type: string
+    sql: ${TABLE}.landing_page ;;
+  }
+
+  dimension: length {
+    type: string
+    sql: ${TABLE}.length ;;
+  }
+
+  dimension: cta {
+    type: string
+    sql: ${TABLE}.cta ;;
+  }
+  dimension: sender {
+    type: string
+    sql: ${TABLE}.sender ;;
+  }
+  dimension: sms_brand {
+    type: string
+    sql: ${TABLE}.sms_brand ;;
+  }
+  dimension: theme {
+    type: string
+    sql: ${TABLE}.theme ;;
+  }
+
+ dimension: subtype {
+    type: string
+    sql: ${TABLE}.subtype ;;
+  }
+  dimension: segment {
+    type: string
+    sql: ${TABLE}.segment ;;
+  }
 }
