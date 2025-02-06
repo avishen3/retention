@@ -25,9 +25,9 @@ view: attentive_by_user {
     type: string
     sql: ${TABLE}.name ;;
   }
-  dimension: campaign_type {
+  dimension: type {
     type: string
-    sql: ${TABLE}.campaign_type ;;
+    sql: ${TABLE}.type ;;
   }
   dimension: cart_cookie_id {
     type: string
@@ -940,8 +940,8 @@ view: attentive_by_user {
   parameter: dimension_selector_CRM_1 {
     type: unquoted
     allowed_value: {
-      label: "campaign_type"
-      value: "campaign_type"
+      label: "type"
+      value: "type"
     }
     allowed_value: {
       label: "flow_name"
@@ -1049,8 +1049,8 @@ view: attentive_by_user {
   dimension: dimension_CRM_1 {
     type: string
     sql:
-      {% if dimension_selector_CRM_1._parameter_value == 'campaign_type' %}
-            ${campaign_type}
+      {% if dimension_selector_CRM_1._parameter_value == 'type' %}
+            ${type}
       {% elsif dimension_selector_CRM_1._parameter_value == 'flow_name' %}
             ${flow_name}
       {% elsif dimension_selector_CRM_1._parameter_value == 'subflow' %}
@@ -1108,8 +1108,8 @@ view: attentive_by_user {
   parameter: dimension_selector_CRM_2 {
     type: unquoted
     allowed_value: {
-      label: "campaign_type"
-      value: "campaign_type"
+      label: "type"
+      value: "type"
     }
     allowed_value: {
       label: "flow_name"
@@ -1217,8 +1217,8 @@ view: attentive_by_user {
   dimension: dimension_CRM_2 {
     type: string
     sql:
-      {% if dimension_selector_CRM_2._parameter_value == 'campaign_type' %}
-            ${campaign_type}
+      {% if dimension_selector_CRM_2._parameter_value == 'type' %}
+            ${type}
       {% elsif dimension_selector_CRM_2._parameter_value == 'flow_name' %}
             ${flow_name}
       {% elsif dimension_selector_CRM_2._parameter_value == 'subflow' %}
@@ -1278,8 +1278,8 @@ view: attentive_by_user {
   parameter: dimension_selector_CRM_3 {
     type: unquoted
     allowed_value: {
-      label: "campaign_type"
-      value: "campaign_type"
+      label: "type"
+      value: "type"
     }
     allowed_value: {
       label: "flow_name"
@@ -1387,8 +1387,8 @@ view: attentive_by_user {
   dimension: dimension_CRM_3 {
     type: string
     sql:
-     {% if dimension_selector_CRM_3._parameter_value == 'campaign_type' %}
-            ${campaign_type}
+     {% if dimension_selector_CRM_3._parameter_value == 'type' %}
+            ${type}
       {% elsif dimension_selector_CRM_3._parameter_value == 'flow_name' %}
             ${flow_name}
       {% elsif dimension_selector_CRM_3._parameter_value == 'subflow' %}
