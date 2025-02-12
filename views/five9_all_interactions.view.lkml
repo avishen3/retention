@@ -956,8 +956,8 @@ view: five9_all_interactions {
   dimension: is_Abandon{
     type: string
     sql:
-    case when ${disposition_name} = Abandon then "Abandon" else "Not Abandon" end
-    ) ;;
+    case when ${disposition_name} = "Abandon" then "Abandon" else "Not Abandon" end
+     ;;
   }
 
 
