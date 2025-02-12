@@ -948,8 +948,8 @@ view: five9_all_interactions {
     type: string
     sql:
     FORMAT_TIMESTAMP('%H:%M',
-      TIMESTAMP(DATETIME_TRUNC(${transaction_time}, HOUR)) +
-      INTERVAL CAST(FLOOR(EXTRACT(MINUTE FROM ${transaction_time}) / 30) * 30 AS INT64) MINUTE
+      TIMESTAMP(DATETIME_TRUNC(DATETIME(${transaction_time}), HOUR)) +
+      INTERVAL CAST(FLOOR(EXTRACT(MINUTE FROM DATETIME(${transaction_time})) / 30) * 30 AS INT64) MINUTE
     ) ;;
   }
 
