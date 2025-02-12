@@ -77,7 +77,7 @@ view: five9_all_interactions {
   }
   dimension: correspondencetype {
     type: string
-    sql: ${TABLE}.correspondencetype ;;
+    sql: LOWER(${TABLE}.correspondencetype) ;;
   }
   dimension: created_chat_from {
     type: string
