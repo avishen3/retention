@@ -944,6 +944,15 @@ view: five9_all_interactions {
   }
 
 
+  dimension: half_hour_interval {
+    type: string
+    sql:
+    FORMAT_TIMESTAMP('%H:%M',
+      TIMESTAMP(DATETIME_TRUNC(${transaction_time}, HOUR)) +
+      INTERVAL CAST(FLOOR(EXTRACT(MINUTE FROM ${transaction_time}) / 30) * 30 AS INT64) MINUTE
+    ) ;;
+  }
+
 
 
 }
