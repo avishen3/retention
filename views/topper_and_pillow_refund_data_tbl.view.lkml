@@ -192,7 +192,7 @@ view: topper_and_pillow_refund_data_tbl {
 
   measure: total_mattress_orders_that_were_sent_toppers{
     type: count_distinct
-    sql:case when ${category} = "topper" then short_id else;;
+    sql:case when ${category} = "topper" then short_id else null end ;;
     value_format: "#,##0"
     group_label: "Mattress Measures"
   }
@@ -217,7 +217,7 @@ view: topper_and_pillow_refund_data_tbl {
 
   measure: total_mattress_orders_that_were_sent_pillow{
     type: count_distinct
-    sql:case when ${category} = "pillow" then short_id else;;
+    sql:case when ${category} = "pillow" then short_id else null end;;
     value_format: "#,##0"
     group_label: "Mattress Measures"
   }
