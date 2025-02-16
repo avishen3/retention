@@ -208,7 +208,7 @@ view: topper_and_pillow_refund_data_tbl {
 
   measure: total_topper_refund_mattress_rate {
     type: number
-    sql:  ${total_refund_mattress_order_with_toppers}/${total_mattress_orders_that_were_sent_toppers}  ;;
+    sql: case when ${total_mattress_orders_that_were_sent_toppers}>0 then   ${total_refund_mattress_order_with_toppers}/${total_mattress_orders_that_were_sent_toppers} else null end  ;;
     value_format: "####.##%"
     group_label: "Mattress Measures"
   }
@@ -233,7 +233,7 @@ view: topper_and_pillow_refund_data_tbl {
 
   measure: total_pillow_refund_mattress_rate {
     type: number
-    sql:  ${total_refund_mattress_order_with_pillow}/${total_mattress_orders_that_were_sent_pillow}  ;;
+    sql: case when ${total_mattress_orders_that_were_sent_pillow}>0 then  ${total_refund_mattress_order_with_pillow}/${total_mattress_orders_that_were_sent_pillow} else null end  ;;
     value_format: "####.##%"
     group_label: "Mattress Measures"
   }
