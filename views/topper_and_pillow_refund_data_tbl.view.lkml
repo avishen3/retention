@@ -239,4 +239,62 @@ view: topper_and_pillow_refund_data_tbl {
   }
 
 
+
+
+# date granularity - order_created #
+
+  parameter: Date_Granularity_order_created_date {
+    type: string
+    allowed_value: { value: "Day" }
+    allowed_value: { value: "Week" }
+    allowed_value: { value: "Month" }
+    allowed_value: { value: "Quarter" }
+    allowed_value: { value: "Year" }
+  }
+
+
+
+  dimension: order_created {
+    label_from_parameter: Date_Granularity_order_created_date
+    sql:
+            CASE
+             WHEN {% parameter Date_Granularity_order_created_date %} = 'Day' THEN cast(${order_created_date} as string)
+             WHEN {% parameter Date_Granularity_order_created_date %} = 'Week' THEN cast(${order_created_week} as string)
+             WHEN {% parameter Date_Granularity_order_created_date %} = 'Month' THEN cast(${order_created_month} as string)
+             WHEN {% parameter Date_Granularity_order_created_date %} = 'Quarter' THEN cast(${order_created_quarter} as string)
+             WHEN {% parameter Date_Granularity_order_created_date %} = 'Year' THEN cast(${order_created_year} as string)
+            ELSE null
+            END ;;
+  }
+
+
+
+# date granularity - order_created_topper #
+
+  parameter: Date_Granularity_order_created_topper_date {
+    type: string
+    allowed_value: { value: "Day" }
+    allowed_value: { value: "Week" }
+    allowed_value: { value: "Month" }
+    allowed_value: { value: "Quarter" }
+    allowed_value: { value: "Year" }
+  }
+
+
+
+  dimension: order_created_topper {
+    label_from_parameter: Date_Granularity_order_created_topper_date
+    sql:
+            CASE
+             WHEN {% parameter Date_Granularity_order_created_topper_date %} = 'Day' THEN cast(${order_created_topper_date} as string)
+             WHEN {% parameter Date_Granularity_order_created_topper_date %} = 'Week' THEN cast(${order_created_topper_week} as string)
+             WHEN {% parameter Date_Granularity_order_created_topper_date %} = 'Month' THEN cast(${order_created_topper_month} as string)
+             WHEN {% parameter Date_Granularity_order_created_topper_date %} = 'Quarter' THEN cast(${order_created_topper_quarter} as string)
+             WHEN {% parameter Date_Granularity_order_created_topper_date %} = 'Year' THEN cast(${order_created_topper_year} as string)
+            ELSE null
+            END ;;
+  }
+
+
+
 }
