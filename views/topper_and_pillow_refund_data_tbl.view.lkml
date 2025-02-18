@@ -296,5 +296,26 @@ view: topper_and_pillow_refund_data_tbl {
   }
 
 
+  dimension: days_from_original_order_to_topper_cohort {
+    type: string
+    sql: case
+              when ${days_from_original_order_to_topper} between 0 and 8 then "1: 0-8"
+              when ${days_from_original_order_to_topper} between 9 and 30 then "2: 9-30"
+              when ${days_from_original_order_to_topper} between 31 and 60 then "3: 31-60"
+              when ${days_from_original_order_to_topper} between 61 and 90 then "4: 61-90"
+              when ${days_from_original_order_to_topper} between 91 and 120 then "5: 91-120"
+              when ${days_from_original_order_to_topper} between 121 and 150 then "6: 121-150"
+              when ${days_from_original_order_to_topper} between 151 and 180 then "7: 151-180"
+              when ${days_from_original_order_to_topper} between 181 and 250 then "8: 181-250"
+              when ${days_from_original_order_to_topper} between 251 and 300 then "9: 251-300"
+              when ${days_from_original_order_to_topper} between 301 and 330 then "10: 301-330"
+              when ${days_from_original_order_to_topper} between 331 and 365 then "11: 331-365"
+
+              when ${days_from_original_order_to_topper} > 365 then "12: more then 365"
+
+      else null end
+      ;;
+  }
+
 
 }
