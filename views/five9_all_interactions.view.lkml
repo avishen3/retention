@@ -988,17 +988,29 @@ view: five9_all_interactions {
     sql:
     FORMAT_TIMESTAMP('%H:%M:%S', TIMESTAMP_SECONDS(CAST(${avg_Handle_time_in_sec} AS INT64)))
  ;;
-  }
+    group_label: "formatted_time"
 
+  }
 
   measure: avg_Ivr_time_formatted_time {
     type: string
-    sql: SEC_TO_TIME(${avg_Ivr_time_in_sec}) ;;
+    sql:
+    FORMAT_TIMESTAMP('%H:%M:%S', TIMESTAMP_SECONDS(CAST(${avg_Ivr_time_in_sec} AS INT64)))
+ ;;
+    group_label: "formatted_time"
+
   }
+
+
 
   measure: avg_Acw_time_formatted_time {
     type: string
-    sql: SEC_TO_TIME(${avg_Acw_time_in_sec}) ;;
+    sql:
+    FORMAT_TIMESTAMP('%H:%M:%S', TIMESTAMP_SECONDS(CAST(${avg_Acw_time_in_sec} AS INT64)))
+ ;;
+    group_label: "formatted_time"
+
   }
+
 
 }
