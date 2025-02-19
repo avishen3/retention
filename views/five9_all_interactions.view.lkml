@@ -960,5 +960,43 @@ view: five9_all_interactions {
      ;;
   }
 
+  ###
+
+
+  measure: avg_Handle_time_in_sec {
+    type: number
+    sql: AVG(${handle_time}) ;;
+  }
+
+
+
+
+  measure: avg_Ivr_time_in_sec {
+    type: number
+    sql: AVG(${ivr_time}) ;;
+  }
+
+
+
+  measure: avg_Acw_time_in_sec {
+    type: number
+    sql: AVG(${acw_time}) ;;
+  }
+
+  measure: avg_Handle_time_formatted_time {
+    type: string
+    sql: SEC_TO_TIME(${avg_Handle_time_in_sec}) ;;
+  }
+
+
+  measure: avg_Ivr_time_formatted_time {
+    type: string
+    sql: SEC_TO_TIME(${avg_Ivr_time_in_sec}) ;;
+  }
+
+  measure: avg_Acw_time_formatted_time {
+    type: string
+    sql: SEC_TO_TIME(${avg_Acw_time_in_sec}) ;;
+  }
 
 }
