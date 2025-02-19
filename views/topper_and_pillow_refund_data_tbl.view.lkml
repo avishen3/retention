@@ -299,19 +299,19 @@ view: topper_and_pillow_refund_data_tbl {
   dimension: days_from_original_order_to_topper_cohort {
     type: string
     sql: case
-              when ${days_from_original_order_to_topper} between 0 and 7 then "1: 0-7"
-              when ${days_from_original_order_to_topper} between 8 and 30 then "2: 8-30"
-              when ${days_from_original_order_to_topper} between 31 and 60 then "3: 31-60"
-              when ${days_from_original_order_to_topper} between 61 and 90 then "4: 61-90"
-              when ${days_from_original_order_to_topper} between 91 and 120 then "5: 91-120"
-              when ${days_from_original_order_to_topper} between 121 and 150 then "6: 121-150"
-              when ${days_from_original_order_to_topper} between 151 and 180 then "7: 151-180"
-              when ${days_from_original_order_to_topper} between 181 and 250 then "8: 181-250"
-              when ${days_from_original_order_to_topper} between 251 and 300 then "9: 251-300"
-              when ${days_from_original_order_to_topper} between 301 and 330 then "10: 301-330"
-              when ${days_from_original_order_to_topper} between 331 and 365 then "11: 331-365"
+              when ${days_from_original_order_to_topper} between 0 and 7 then "a: 0-7"
+              when ${days_from_original_order_to_topper} between 8 and 30 then "b: 8-30"
+              when ${days_from_original_order_to_topper} between 31 and 60 then "c: 31-60"
+              when ${days_from_original_order_to_topper} between 61 and 90 then "d: 61-90"
+              when ${days_from_original_order_to_topper} between 91 and 120 then "e: 91-120"
+              when ${days_from_original_order_to_topper} between 121 and 150 then "f: 121-150"
+              when ${days_from_original_order_to_topper} between 151 and 180 then "g: 151-180"
+              when ${days_from_original_order_to_topper} between 181 and 250 then "h: 181-250"
+              when ${days_from_original_order_to_topper} between 251 and 300 then "i: 251-300"
+              when ${days_from_original_order_to_topper} between 301 and 330 then "j: 301-330"
+              when ${days_from_original_order_to_topper} between 331 and 365 then "k: 331-365"
 
-              when ${days_from_original_order_to_topper} > 365 then "12: more then 365"
+              when ${days_from_original_order_to_topper} > 365 then "l: more then 365"
 
       else null end
       ;;
