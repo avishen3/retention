@@ -985,7 +985,9 @@ view: five9_all_interactions {
 
   measure: avg_Handle_time_formatted_time {
     type: string
-    sql: SEC_TO_TIME(${avg_Handle_time_in_sec}) ;;
+    sql:
+    FORMAT_TIMESTAMP('%H:%M:%S', TIMESTAMP_SECONDS(CAST(${avg_Handle_time_in_sec} AS INT64)))
+ ;;
   }
 
 
