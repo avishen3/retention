@@ -299,8 +299,8 @@ view: topper_and_pillow_refund_data_tbl {
   dimension: days_from_original_order_to_topper_cohort {
     type: string
     sql: case
-              when ${days_from_original_order_to_topper} between 0 and 8 then "1: 0-8"
-              when ${days_from_original_order_to_topper} between 9 and 30 then "2: 9-30"
+              when ${days_from_original_order_to_topper} between 0 and 7 then "1: 0-7"
+              when ${days_from_original_order_to_topper} between 8 and 30 then "2: 8-30"
               when ${days_from_original_order_to_topper} between 31 and 60 then "3: 31-60"
               when ${days_from_original_order_to_topper} between 61 and 90 then "4: 61-90"
               when ${days_from_original_order_to_topper} between 91 and 120 then "5: 91-120"
