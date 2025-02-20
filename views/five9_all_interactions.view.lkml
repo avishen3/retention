@@ -1037,4 +1037,20 @@ view: five9_all_interactions {
 
 }
 
+
+  measure: SLA_120_Rate {
+    type: number
+    sql: ${SLA_120_SESSIONS}/${total_session_id}
+      ;;
+
+  }
+
+
+  measure: SLA_90_Rate {
+    type: number
+    sql: ${SLA_90_SESSIONS}/${total_session_id}
+      ;;
+
+}
+
 }
