@@ -1054,7 +1054,7 @@ view: five9_all_interactions {
 
   measure: Abandon_sessions{
     type: count_distinct
-    sql: CASE WHEN ${disposition_name} = "Abandon"  ${providersessionid} ELSE NULL END
+    sql: CASE WHEN ${disposition_name} = "Abandon"  then ${providersessionid} ELSE NULL END
 
        ;;
 }
