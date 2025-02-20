@@ -1039,20 +1039,32 @@ view: five9_all_interactions {
 
 
 
-
   measure: SLA_120_Rate {
     type: number
     sql: ${SLA_120_SESSIONS} / NULLIF(${total_session_id}, 0) ;;
-    value_format: "0.00%"  # Formats as percentage
+    value_format: "0.00%"
   }
-
-
 
 
   measure: SLA_90_Rate {
     type: number
     sql: ${SLA_90_SESSIONS} / NULLIF(${total_session_id}, 0) ;;
-    value_format: "0.00%"  # Formats as percentage
+    value_format: "0.00%"
   }
+
+  measure: Abandon_sessions{
+    type: count_distinct
+    sql: CASE WHEN ${disposition_name} = "Abandon"  ${providersessionid} ELSE NULL END
+
+       ;;
+}
+
+
+    measure: Abandon_Rate {
+      type: number
+      sql: ${Abandon_sessions} / NULLIF(${total_session_id}, 0) ;;
+      value_format: "0.00%"
+    }
+
 
 }
