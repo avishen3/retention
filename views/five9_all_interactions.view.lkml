@@ -1012,5 +1012,16 @@ view: five9_all_interactions {
 
   }
 
+  ### 20-02-2025 SLA calculation
+
+  dimension: SLA_90_SECONED_TF {
+    type: yesno
+    sql: ${queue_time} <=90 ;;
+  }
+
+  dimension: SLA_12_SECONED_TF {
+    type: yesno
+    sql: ${queue_time} <=120 ;;
+  }
 
 }
