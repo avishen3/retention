@@ -1019,9 +1019,22 @@ view: five9_all_interactions {
     sql: ${queue_time} <=90 ;;
   }
 
-  dimension: SLA_12_SECONED_TF {
+  dimension: SLA_120_SECONED_TF {
     type: yesno
     sql: ${queue_time} <=120 ;;
   }
+
+  measure: SLA_90_SESSIONS {
+    type: number
+    sql: CASE WHEN ${SLA_90_SECONED_TF} IS TRUE THEN ${providersessionid} ELSE NULL END
+
+ ;;
+}
+    measure: SLA_120_SESSIONS {
+      type: number
+      sql: CASE WHEN ${SLA_120_SECONED_TF} IS TRUE THEN ${providersessionid} ELSE NULL END
+        ;;
+
+}
 
 }
