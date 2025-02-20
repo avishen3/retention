@@ -439,6 +439,14 @@ view: five9_all_interactions {
     type: string
     sql: ${TABLE}.wrapup_time ;;
   }
+
+
+
+  dimension: LOB {
+    type: string
+    sql: ${TABLE}.LOB ;;
+  }
+
   measure: count {
     type: count
     drill_fields: [detail*]
