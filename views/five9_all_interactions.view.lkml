@@ -1025,13 +1025,13 @@ view: five9_all_interactions {
   }
 
   measure: SLA_90_SESSIONS {
-    type: number
+    type: count_distinct
     sql: CASE WHEN ${SLA_90_SECONED_TF} IS TRUE THEN ${providersessionid} ELSE NULL END
 
  ;;
 }
     measure: SLA_120_SESSIONS {
-      type: number
+      type: count_distinct
       sql: CASE WHEN ${SLA_120_SECONED_TF} IS TRUE THEN ${providersessionid} ELSE NULL END
         ;;
 
