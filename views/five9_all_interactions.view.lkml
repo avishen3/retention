@@ -1024,12 +1024,12 @@ view: five9_all_interactions {
 
   dimension: SLA_90_SECONED_TF {
     type: yesno
-    sql: ${queue_time} <=90 ;;
+    sql: ${queue_time} <=90/60 ;;
   }
 
   dimension: SLA_120_SECONED_TF {
     type: yesno
-    sql: ${queue_time} <=120 ;;
+    sql: ${queue_time} <=120/60 ;;
   }
 
   measure: SLA_90_SESSIONS {
