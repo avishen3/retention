@@ -916,10 +916,17 @@ view: alerts_outgoing_calls_five9_tbl {
     group_label: "conversation"
   }
 
+  measure: total_session_id_answerd_short_id {
+    type: count_distinct
+    sql: case when ${is_call_in_five9_answerd} is true then ${short_id}  else null end ;;
+    value_format: "#,##0"
+    group_label: "five9 Measures - session"
+  }
+
   measure: obs_sold_swapt_of_answerd_calls{
-    label: "% upsell out of answerd calls"
+    label: "% obs sold swap out of answerd calls"
     type: number
-    sql: ${total_obs_sold_swap} / nullif(${total_session_id_answerd}, 0) ;;
+    sql: ${total_obs_sold_swap} / nullif(${total_session_id_answerd_short_id}, 0) ;;
     value_format: "0.0%"
     group_label: "conversation"
   }
