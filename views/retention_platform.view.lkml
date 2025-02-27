@@ -712,5 +712,11 @@ view: retention_platform {
     value_format: "0.00%"
   }
 
+  measure: Total_forms{
+    type: count_distinct
+    sql: ${form_id};;
+
+  }
+
 
 }
