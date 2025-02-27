@@ -890,6 +890,14 @@ view: alerts_outgoing_calls_five9_tbl {
     sql: ${TABLE}.exchange_type ;;
   }
 
+### 27022025
+
+  measure: total_short_id {
+    type: count_distinct
+    sql: ${short_id_num} ;;
+    value_format: "#,##0"
+  }
+
 
 
 }
