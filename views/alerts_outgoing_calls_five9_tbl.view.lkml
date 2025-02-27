@@ -916,4 +916,12 @@ view: alerts_outgoing_calls_five9_tbl {
     group_label: "conversation"
   }
 
+  measure: obs_sold_swapt_of_answerd_calls{
+    label: "% upsell out of answerd calls"
+    type: number
+    sql: ${total_obs_sold_swap} / nullif(${total_session_id_answerd}, 0) ;;
+    value_format: "0.0%"
+    group_label: "conversation"
+  }
+
 }
