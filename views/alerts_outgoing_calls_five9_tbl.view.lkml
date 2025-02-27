@@ -899,5 +899,21 @@ view: alerts_outgoing_calls_five9_tbl {
   }
 
 
+## swap
+
+  measure: total_obs_sold_swap{
+    type: count_distinct
+    sql: case when (${resolve_reason} = "obs_sold" ) then  ${five9_short_id} else null end
+      ;;
+    value_format: "#,##0"
+  }
+
+  measure: obs_sold_swap_of_alerts {
+    label: "% obs sold swap out of alerts"
+    type: number
+    sql: ${total_obs_sold_swap} / nullif(${total_alerts_created}, 0) ;;
+    value_format: "0.0%"
+    group_label: "conversation"
+  }
 
 }
