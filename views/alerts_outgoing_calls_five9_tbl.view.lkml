@@ -903,7 +903,7 @@ view: alerts_outgoing_calls_five9_tbl {
 
   measure: total_obs_sold_swap{
     type: count_distinct
-    sql: case when (${resolve_reason} = "obs_sold" ) then  ${five9_short_id} else null end
+    sql: case when (${resolve_reason} = "obs_sold" ) then  ${short_id} else null end
       ;;
     value_format: "#,##0"
   }
