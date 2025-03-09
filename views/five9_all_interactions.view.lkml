@@ -1075,4 +1075,29 @@ view: five9_all_interactions {
     }
 
 
+
+    ###09032025
+
+  dimension: interaction_type {
+    type: string
+    sql:
+    case  when lower(${skill_name}) like '%chat%' then 'chat'
+      when lower(${correspondencetype}) = 'chat' and lower(${skill_name}) not like '%sms%' then 'chat'
+      when lower(${correspondencetype}) = 'phone-call' and lower(${skill_name}) not like '%sms%' then 'voice'
+      when lower(${skill_name} like '%voice%' then 'voice'
+end
+    ;;
+  }
+
+  dimension: Sale_Suppoert_Type {
+    type: string
+    sql:
+case when ${skill_name} like '%Inbound Sales%' then 'sales'
+when (${skill_name}like "%Support%" or ${skill_name} like "%Returns%" or ${skill_name} like "%Transit%" or ${skill_name} like "%Delivered%"
+) and ${skill_name} not like "%CAN%" then 'support'
+end
+    ;;
+  }
+
+
 }
