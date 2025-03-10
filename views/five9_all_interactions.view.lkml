@@ -1078,7 +1078,7 @@ view: five9_all_interactions {
 
     ###09032025
 
-  dimension: interaction_type {
+  dimension: interaction_type_a {
     type: string
     sql:
     case  when lower(${skill_name}) like '%chat%' then 'chat'
@@ -1093,7 +1093,7 @@ end
     type: string
     sql:
 case when ${skill_name} like '%Inbound Sales%' then 'sales'
-when (${skill_name}like "%Support%" or ${skill_name} like "%Returns%" or ${skill_name} like "%Transit%" or ${skill_name} like "%Delivered%"
+when (${skill_name} like "%Support%" or ${skill_name} like "%Returns%" or ${skill_name} like "%Transit%" or ${skill_name} like "%Delivered%"
 ) and ${skill_name} not like "%CAN%" then 'support'
 end
     ;;
