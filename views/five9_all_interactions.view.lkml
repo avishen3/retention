@@ -1084,8 +1084,7 @@ view: five9_all_interactions {
     case  when lower(${skill_name}) like '%chat%' then 'chat'
       when lower(${correspondencetype}) = 'chat' and lower(${skill_name}) not like '%sms%' then 'chat'
       when lower(${correspondencetype}) = 'phone-call' and lower(${skill_name}) not like '%sms%' then 'voice'
-      when lower(${skill_name} like '%voice%' then 'voice'
-end
+      when lower(${skill_name}) like '%voice%' then 'voice'  end
     ;;
   }
 
