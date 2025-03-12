@@ -280,5 +280,134 @@ view: refund_items_24h_repeat_order_tbl {
   }
 
 
+  dimension: Agent_Grouping_by_Team_Lead_RP_agent {
+    sql:
+        CASE
+    WHEN ${rp_agent_email} IN (
+        'argie.cayetano@residenthome.com',
+        'charbel.mahinay@residenthome.com',
+        'edeson.aboabo@residenthome.com',
+        'heidi.suicano@residenthome.com',
+        'irene.bahandi@residenthome.com',
+        'janea@residenthome.com',
+        'jessuelle.patrimonio@residenthome.com',
+        'jimboy.corciega@residenthome.com',
+        'joanc@residenthome.com',
+        'john.balingit@residenthome.com',
+        'jonn.torres@residenthome.com',
+        'junrey.nocos@residenthome.com',
+        'marlo.labrador@residenthome.com',
+        'ray.sun@residenthome.com'
+    ) THEN 'johnt@residenthome.com'
+
+      WHEN ${rp_agent_email} IN (
+      'jessa.casido@residenthome.com',
+      'shan.gajegan@residenthome.com',
+      'christopher.tagnipis@residenthome.com',
+      'rose.bangcat@residenthome.com',
+      'rosemariec@residenthome.com',
+      'mikaela.barrera@residenthome.com',
+      'ej.samson@residenthome.com',
+      'ginab@residenthome.com',
+      'archie.osa@residenthome.com',
+      'honeylen.landisa@residenthome.com',
+      'lourdes.unajan@residenthome.com',
+      'jerald.olasiman@residenthome.com',
+      'thelma.laurena@residenthome.com',
+      'xavierc@residenthome.com',
+      'michelle.sandoval@residenthome.com'
+      ) THEN 'robinp@residenthome.com'
+
+      WHEN ${rp_agent_email} IN (
+      'arianei@residenthome.com',
+      'cj.vios@residenthome.com',
+      'crisannr@residenthome.com',
+      'cynthia.nesnia@residenthome.com',
+      'diannep@residenthome.com',
+      'eva.violeta@residenthome.com',
+      'fredalyn.demayo@residenthome.com',
+      'jayson.caminos@residenthome.com',
+      'jereeb@residenthome.com',
+      'jerome.olarte@residenthome.com',
+      'kimberly.garol@residenthome.com',
+      'paul.tan@residenthome.com',
+      'paul.valerio@residenthome.com',
+      'rey.buagas@residenthome.com',
+      'roselyn.laure@residenthome.com'
+      ) THEN 'mariab@residenthome.com'
+
+      WHEN ${rp_agent_email} IN (
+      'belmarie.zamora@residenthome.com',
+      'genilyn.asenas@residenthome.com',
+      'hazel.macamay@residenthome.com',
+      'jose.inocente@residenthome.com',
+      'jubille.ganaganag@residenthome.com',
+      'mae.sasil@residenthome.com',
+      'marites.agustin@residenthome.com',
+      'nholrhi.distrito@residenthome.com',
+      'reynold.marino@residenthome.com',
+      'romenette.tambahoyot@residenthome.com',
+      'shelamae.bohol@residenthome.com',
+      'sherlane.secuya@residenthome.com',
+      'wilmam@residenthome.com'
+      ) THEN 'glecerio.jumawan@residenthome.com'
+
+      WHEN ${rp_agent_email} IN (
+      'alliah.aliaviado@residenthome.com',
+      'anthony.bueno@residenthome.com',
+      'antoniette.camay@residenthome.com',
+      'crystal.beron@residenthome.com',
+      'diana.solibio@residenthome.com',
+      'heinz.acson@residenthome.com',
+      'jesselaine.siglos@residenthome.com',
+      'johno@residenthome.com',
+      'jopely@residenthome.com',
+      'june.lucilla@residenthome.com',
+      'mickel.noay@residenthome.com',
+      'nhova.venenoso@residenthome.com',
+      'rhodora.quinol@residenthome.com',
+      'rosean.lambayan@residenthome.com',
+      'wisdom.alama@residenthome.com'
+      ) THEN 'melrose.baybay@residenthome.com'
+
+      WHEN ${rp_agent_email} IN (
+      'aiva.abalos@residenthome.com',
+      'alving@residenthome.com',
+      'edmar.baylon@residenthome.com',
+      'isaac.ignacio@residenthome.com',
+      'josephineo@residenthome.com',
+      'junbell.banatanto@residenthome.com',
+      'krizha.abia@residenthome.com',
+      'margaritab@residenthome.com',
+      'marian.gragasin@residenthome.com',
+      'melissac@residenthome.com',
+      'oliver.tuayon@residenthome.com',
+      'vincent.banlat@residenthome.com'
+      ) THEN 'rizap@residenthome.com'
+
+      WHEN ${rp_agent_email} IN (
+      'alexies@residenthome.com',
+      'alina.amaya@residenthome.com',
+      'anna@residenthome.com',
+      'darwin.data@residenthome.com',
+      'dino.balaga@residenthome.com',
+      'irenee@residenthome.com',
+      'jessa.amparado@residenthome.com',
+      'jessica.montecillo@residenthome.com',
+      'johann.aran@residenthome.com',
+      'john.romano@residenthome.com',
+      'john.tismo@residenthome.com',
+      'kevin.elumba@residenthome.com',
+      'kristine.ramos@residenthome.com',
+      'sheena.marino@residenthome.com',
+      'vica.verden@residenthome.com'
+      ) THEN 'von.asioche@residenthome.com'
+
+      ELSE NULL
+      END
+      ;;
+  }
+
+
 
 }
