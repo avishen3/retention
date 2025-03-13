@@ -930,6 +930,12 @@ view: attentive_by_user {
     sql: ${TABLE}.Percent ;;
   }
 
+  dimension: key {
+    type: string
+    sql: ${TABLE}.key ;;
+  }
+
+
 #### MTA Like dash build 06/2024
 
 
