@@ -44,6 +44,7 @@ view: a_i_journeys_test_march_2025_tbl {
   dimension: is_order_after_first_email {
     type: yesno
     sql: ${TABLE}.is_order_after_first_email ;;
+    label: "is order after first SMS"
   }
   dimension: key {
     type: string
