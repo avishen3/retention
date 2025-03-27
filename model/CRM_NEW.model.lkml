@@ -120,6 +120,13 @@ explore: klaviyo_attentive_combined_data{
   description: "Klaviyo Attentive by User Combined data"}
 
 
+### a_i_journeys_test_march_2025_tbl
+
+
+explore: a_i_journeys_test_march_2025_tbl {
+  label: "a_i_journeys_test_march_2025_tbl"
+}
+
 
 #   join: orders {
 #     relationship: many_to_one

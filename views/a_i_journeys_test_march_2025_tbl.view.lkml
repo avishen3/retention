@@ -103,13 +103,10 @@ view: a_i_journeys_test_march_2025_tbl {
     type: string
     sql: ${TABLE}.traffic_source ;;
   }
-  measure: count {
-    type: count
-    drill_fields: [marketing_campaign_name]
-  }
+
 
   measure: Total_orders {
-    type: count
+    type: count_distinct
     sql: ${TABLE}.short_id ;;
     }
 
