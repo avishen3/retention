@@ -128,6 +128,8 @@ explore: a_i_journeys_test_march_2025_tbl {
 }
 
 
+
+
 #   join: orders {
 #     relationship: many_to_one
 #     sql_on: ${orders.id} = ${order_items.order_id} ;;
