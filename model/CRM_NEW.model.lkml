@@ -129,6 +129,9 @@ explore: a_i_journeys_test_march_2025_tbl {
 
 
 
+explore: ai_journeys_test_march_2025_cvr_tbl {
+  label: "ai_journeys_test_march_2025_cvr_tbl"
+}
 
 #   join: orders {
 #     relationship: many_to_one
