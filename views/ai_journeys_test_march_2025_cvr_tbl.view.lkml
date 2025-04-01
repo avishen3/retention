@@ -106,6 +106,7 @@ view: ai_journeys_test_march_2025_cvr_tbl {
   measure: CVR {
     type: number
     sql:  ${count_dis_short_id}/${total_user} ;;
+    value_format: "0.0%"
   }
 
 }
