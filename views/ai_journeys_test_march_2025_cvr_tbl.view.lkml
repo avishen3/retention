@@ -112,21 +112,21 @@ view: ai_journeys_test_march_2025_cvr_tbl {
   measure: Total_price {
     type: sum
     sql:  ${price} ;;
-    value_format: "0.0"
+    value_format: "0."
 
   }
 
   measure: Total_tax {
     type: sum
-    sql:  ${price} ;;
-    value_format: "0.0"
+    sql:  ${tax} ;;
+    value_format: "0."
 
   }
 
   measure: Total_revenue{
     type: sum
     sql:  ${price}-${tax} ;;
-    value_format: "0.0"
+    value_format: "0."
 
   }
 
