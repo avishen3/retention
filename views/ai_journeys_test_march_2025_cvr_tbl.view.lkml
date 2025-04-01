@@ -109,4 +109,14 @@ view: ai_journeys_test_march_2025_cvr_tbl {
     value_format: "0.0%"
   }
 
+  measure: Total_price {
+    type: sum
+    sql:  ${price} ;;
+  }
+
+  measure: Total_revenue{
+    type: sum
+    sql:  ${price}${tax} ;;
+  }
+
 }
