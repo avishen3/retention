@@ -82,6 +82,14 @@ view: ai_journeys_test_march_2025_cvr_tbl {
     type: string
     sql: ${TABLE}.traffic_source ;;
   }
+
+
+  dimension: number_of_group {
+    type: number
+    sql: ${TABLE}.number_of_group ;;
+  }
+
+
   measure: count {
     type: count
     drill_fields: [marketing_campaign_name]
