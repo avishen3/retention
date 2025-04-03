@@ -127,4 +127,9 @@ view: ai_journeys_test_march_2025_cvr_tbl {
     value_format: "#,##0"
   }
 
+  measure: how_many_groups {
+    type: count_distinct
+    sql:  ${group_ing} ;;
+  }
+
 }
