@@ -1,8 +1,5 @@
-view: ai_journeys_test_march_2025_cvr_tbl {
-##  sql_table_name: `omega-post-184817.crm.AI_Journeys_Test_March_2025_CVR_tbl` ;;
+view: ai_journeys_test_march_2025_cvr_legal_control_tbl {
   sql_table_name: `omega-post-184817.crm.AI_Journeys_Test_March_2025_CVR_legal_control_tbl` ;;
-
-
 
   dimension: admin_key {
     type: string
@@ -55,6 +52,10 @@ view: ai_journeys_test_march_2025_cvr_tbl {
     type: string
     sql: ${TABLE}.marketing_source ;;
   }
+  dimension: number_of_group {
+    type: number
+    sql: ${TABLE}.number_of_group ;;
+  }
   dimension_group: order_created {
     type: time
     timeframes: [raw, time, date, week, month, quarter, year]
@@ -85,62 +86,8 @@ view: ai_journeys_test_march_2025_cvr_tbl {
     type: string
     sql: ${TABLE}.traffic_source ;;
   }
-
-
-  dimension: number_of_group {
-    type: number
-    sql: ${TABLE}.number_of_group ;;
-  }
-
-
   measure: count {
     type: count
     drill_fields: [marketing_campaign_name]
   }
-
-
-  measure: total_user {
-    type: count_distinct
-  sql:  ${key} ;;
-  }
-
-  measure: count_dis_short_id {
-    type: count_distinct
-    sql:  ${short_id} ;;
-  }
-
-  measure: Total_orders {
-    type: sum
-    sql:  ${is_order_placed} ;;
-  }
-
-  measure: CVR {
-    type: number
-    sql:  ${count_dis_short_id}/${total_user} ;;
-    value_format: "0.0%"
-  }
-
-  measure: Total_price {
-    type: sum
-    sql:  ${price} ;;
-    value_format: "#,##0"
-  }
-
-  measure: Total_tax {
-    type: sum
-    sql:  ${tax} ;;
-    value_format: "#,##0"
-  }
-
-  measure: Total_revenue{
-    type: sum
-    sql:  ${price}-${tax} ;;
-    value_format: "#,##0"
-  }
-
-  measure: how_many_groups {
-    type: count_distinct
-    sql:  ${group_ing} ;;
-  }
-
 }
