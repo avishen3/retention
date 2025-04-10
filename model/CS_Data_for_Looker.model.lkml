@@ -180,4 +180,6 @@ explore: refund_items_24h_repeat_order_tbl {}
 
 explore: topper_and_pillow_refund_data_tbl {}
 
-explore: specialoffer_agent_coupon_item_level_tbl {}
+explore: specialoffer_agent_coupon_item_level_tbl {
+  label: "coupon special offer item level"
+}
