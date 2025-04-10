@@ -183,3 +183,10 @@ explore: topper_and_pillow_refund_data_tbl {}
 explore: specialoffer_agent_coupon_item_level_tbl {
   label: "coupon special offer item level"
 }
+
+
+
+
+explore: specialoffer_agent_coupon_order_level_tbl {
+  label: "coupon special offer order level"
+}
