@@ -88,4 +88,12 @@ view: specialoffer_agent_coupon_item_level_tbl {
     type: count
     drill_fields: [agent_name]
   }
+
+  measure: total_short_id {
+    type: count_distinct
+    drill_fields: [agent_name]
+    sql: ${short_id} ;;
+  }
+
+
 }
