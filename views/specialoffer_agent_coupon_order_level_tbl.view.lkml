@@ -69,10 +69,17 @@ view: specialoffer_agent_coupon_order_level_tbl {
     drill_fields: [agent_name]
   }
 
+  measure: total_admin_short_id {
+    type: count_distinct
+    drill_fields: [agent_name]
+    sql: ${admin_short_id} ;;
+  }
+
   measure: total_short_id {
     type: count_distinct
     drill_fields: [agent_name]
     sql: ${short_id} ;;
   }
+
 
 }
