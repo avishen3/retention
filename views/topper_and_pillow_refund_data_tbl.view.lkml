@@ -167,17 +167,17 @@ view: topper_and_pillow_refund_data_tbl {
   dimension: days_from_topper_order_to_refound_cohort {
     type: string
     sql: case
-              when ${days_from_topper_order_to_refound} <=0  then "0: less then 0"
-              when ${days_from_topper_order_to_refound} =1  then "1: 1"
-              when ${days_from_topper_order_to_refound} between 2 and 5 then "2: 2-5"
-              when ${days_from_topper_order_to_refound} between 6 and 10 then "3: 6-10"
-              when ${days_from_topper_order_to_refound} between 11 and 20 then "4: 11-20"
-              when ${days_from_topper_order_to_refound} between 21 and 35 then "5: 21-35"
-              when ${days_from_topper_order_to_refound} between 36 and 50 then "6: 36-50"
-              when ${days_from_topper_order_to_refound} between 51 and 100 then "7: 51-100"
-              when ${days_from_topper_order_to_refound} between 101 and 200 then "8: 101-200"
-              when ${days_from_topper_order_to_refound} > 201 then "9: more then 200"
-
+              when ${days_from_topper_order_to_refound} is null then "a: Not refound"
+              when ${days_from_topper_order_to_refound} <=0  then "b: 0: less then 0 days"
+              when ${days_from_topper_order_to_refound} =1  then "c: same day"
+              when ${days_from_topper_order_to_refound} between 2 and 5 then "d: 2-5"
+              when ${days_from_topper_order_to_refound} between 6 and 10 then "e: 6-10"
+              when ${days_from_topper_order_to_refound} between 11 and 20 then "f: 11-20"
+              when ${days_from_topper_order_to_refound} between 21 and 35 then "g: 21-35"
+              when ${days_from_topper_order_to_refound} between 36 and 50 then "h: 36-50"
+              when ${days_from_topper_order_to_refound} between 51 and 100 then "i: 51-100"
+              when ${days_from_topper_order_to_refound} between 101 and 200 then "j: 101-200"
+              when ${days_from_topper_order_to_refound} > 201 then "k: more then 200"
       else null end
       ;;
   }
@@ -316,6 +316,8 @@ view: topper_and_pillow_refund_data_tbl {
       else null end
       ;;
   }
+
+
 
 
 }
