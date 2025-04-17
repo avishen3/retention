@@ -64,6 +64,8 @@ view: ods_sftp_attentive_nectar {
   dimension: phone {
     type: number
     sql: ${TABLE}.phone ;;
+    value_format: "###########"
+
   }
   dimension: raw_external_id {
     type: string
