@@ -133,6 +133,11 @@ explore: ai_journeys_test_march_2025_cvr_tbl {
   label: "ai_journeys_test_march_2025_cvr_tbl"
 }
 
+explore: ods_sftp_attentive_nectar {
+  label: "ods_sftp_attentive_nectar"
+}
+
+
 #   join: orders {
 #     relationship: many_to_one
 #     sql_on: ${orders.id} = ${order_items.order_id} ;;
