@@ -317,6 +317,75 @@ view: topper_and_pillow_refund_data_tbl {
       ;;
   }
 
+  dimension: placed_order_id {
+    type: string
+    sql: ${TABLE}.placed_order_id ;;
+  }
+
+  dimension: placed_short_id {
+    type: string
+    sql: ${TABLE}.placed_short_id ;;
+  }
+
+
+
+  dimension_group: form_created_date {
+    type: time
+    timeframes: [raw, time, date, week, month, quarter, year]
+    datatype: datetime
+    sql: ${TABLE}.form_created_date ;;
+  }
+
+
+  dimension: rp_item_id {
+    type: string
+    sql: ${TABLE}.rp_item_id ;;
+  }
+
+  dimension: form_id {
+    type: string
+    sql: ${TABLE}.form_id ;;
+  }
+
+  dimension: reship_shipment_id {
+    type: string
+    sql: ${TABLE}.reship_shipment_id ;;
+  }
+
+  dimension: rp_step_reached {
+    type: string
+    sql: ${TABLE}.rp_step_reached ;;
+  }
+
+  dimension: reason {
+    type: string
+    sql: ${TABLE}.reason ;;
+  }
+
+  dimension: subreason {
+    type: string
+    sql: ${TABLE}.subreason ;;
+  }
+
+  dimension: package_status {
+    type: string
+    sql: ${TABLE}.package_status ;;
+  }
+
+  dimension: list_of_save_attempts {
+    type: string
+    sql: ${TABLE}.list_of_save_attempts ;;
+  }
+
+  dimension: accepted_save_attempt {
+    type: string
+    sql: ${TABLE}.accepted_save_attempt ;;
+  }
+
+  dimension: rp_agent_email {
+    type: string
+    sql: ${TABLE}.rp_agent_email ;;
+  }
 
 
 
