@@ -415,7 +415,7 @@ view: five9_all_interactions {
   }
   dimension_group: transaction {
     type: time
-    timeframes: [raw, time, date, week, month, quarter, year]
+    timeframes: [raw, time, hour2,day_of_week,date, week, month, quarter, year]
     datatype: datetime
     sql: ${TABLE}.transaction_time ;;
   }
@@ -1226,5 +1226,23 @@ END
 ;;
   }
 
-
+#dimensions for CS forecasting
+  dimension: prediction_type {
+    type: string
+    sql:
+    case when ${short_id_before} is null then 'sales'
+      when ${skill_name} not like "%CAN%" and ${skill_name} not like "%Spanish Agents%" then 'support'
+      end
+        ;;
+  }
+  dimension: interaction_type_for_pred {
+    type: string
+    sql:
+    case  when lower(${skill_name}) like '%chat%' then 'chat'
+      when lower(${correspondencetype}) = 'chat' and lower(${skill_name}) not like '%sms%' then 'chat'
+      when lower(${correspondencetype}) = 'phone-call' and lower(${skill_name}) not like '%sms%' then 'voice'
+      when lower(${skill_name}) like '%voice%' then 'voice'
+      end
+        ;;
+  }
 }
