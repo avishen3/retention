@@ -419,6 +419,18 @@ view: five9_all_interactions {
     datatype: datetime
     sql: ${TABLE}.transaction_time ;;
   }
+
+  dimension: week_starting_sunday {
+    type: string
+    sql: date(DATE_TRUNC(${transaction_raw}, WEEK(SUNDAY))) ;;
+    label: "Week Starting Sunday"
+  }
+
+  dimension: day_of_week_number {
+    type: number
+    sql: EXTRACT(DAYOFWEEK FROM ${transaction_raw}) ;;
+  }
+
   dimension: type_name {
     type: string
     sql: ${TABLE}.type_name ;;
