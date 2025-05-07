@@ -1078,7 +1078,7 @@ view: five9_all_interactions {
 
     ###09032025
 
-  dimension: interaction_type_a {
+  dimension: interaction_type_I {
     type: string
     sql:
     case  when lower(${skill_name}) like '%chat%' then 'chat'
@@ -1097,6 +1097,19 @@ when (${skill_name} like "%Support%" or ${skill_name} like "%Returns%" or ${skil
 end
     ;;
   }
+
+  ##07052025
+
+  dimension: pred_type_I {
+    type: string
+    sql:
+    CASE
+      WHEN ${customer_type} = 'prospect' THEN 'sales'
+      WHEN ${skill_name} NOT LIKE '%CAN%' AND ${skill_name} NOT LIKE '%Spanish Agents%' THEN 'support'
+      ELSE NULL
+    END ;;
+  }
+
 
   dimension: Agent_Grouping_by_Team_Lead {
     sql:
