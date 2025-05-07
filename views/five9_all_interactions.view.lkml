@@ -1003,6 +1003,12 @@ view: five9_all_interactions {
     sql: AVG(${acw_time}) ;;
   }
 
+
+  measure: avg_total_hold_duration_time_in_sec {
+    type: number
+    sql: AVG(${total_hold_duration_seconds}) ;;
+  }
+
   measure: avg_Handle_time_formatted_time {
     type: string
     sql:
@@ -1031,6 +1037,16 @@ view: five9_all_interactions {
     group_label: "formatted_time"
 
   }
+
+
+  measure: avg_total_hold_duration_formatted_time {
+    type: string
+    sql:
+    FORMAT_TIMESTAMP('%H:%M:%S', TIMESTAMP_SECONDS(CAST(${avg_total_hold_duration_time_in_sec} AS INT64)))
+ ;;
+    group_label: "formatted_time"
+  }
+
 
   ### 20-02-2025 SLA calculation
 
