@@ -297,14 +297,14 @@ view: cs_sale_by_agents_for_looker {
 
   measure: AOV {
   type: number
-  sql: ${total_revenue}/${num_of_orders} ;;
+  sql:${total_revenue}/${num_of_orders} ;;
   value_format: "$#,##0.00"
   }
 
 
   measure: AOV_with_out_non_zero_orders {
     type: number
-    sql: ${total_revenue}/${num_of_orders_non_zero} ;;
+    sql:case when ${num_of_orders_non_zero}>0 then ${total_revenue}/${num_of_orders_non_zero} else null end  ;;
     value_format: "$#,##0.00"
   }
 
