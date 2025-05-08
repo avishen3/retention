@@ -306,6 +306,7 @@ view: cs_sale_by_agents_for_looker {
     type: number
     sql:case when ${num_of_orders_non_zero}>0 then ${total_revenue}/${num_of_orders_non_zero} else null end  ;;
     value_format: "$#,##0.00"
+    label: "AOV (Excludes $0 Orders)"
   }
 
   measure: total_coupun_used {
