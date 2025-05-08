@@ -281,9 +281,17 @@ view: cs_sale_by_agents_for_looker {
   }
 
 
+
+
   measure: num_of_orders  {
     type: count_distinct
     sql: ${short_id} ;;
+
+  }
+
+  measure: num_of_orders_non_zero  {
+    type: count_distinct
+    sql: case when ${price}>0 then ${short_id} else null end ;;
 
   }
 
@@ -293,6 +301,12 @@ view: cs_sale_by_agents_for_looker {
   value_format: "$#,##0.00"
   }
 
+
+  measure: AOV_with_out_non_zero_orders {
+    type: number
+    sql: ${total_revenue}/${num_of_orders_non_zero} ;;
+    value_format: "$#,##0.00"
+  }
 
   measure: total_coupun_used {
     type: count_distinct
