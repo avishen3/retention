@@ -315,6 +315,11 @@ view: cs_sale_by_agents_for_looker {
 
   }
 
+  dimension: is_zero_order {
+    type: string
+    sql: case when ${price} = 0 then "Zero Order" else "Price Order" end  ;;
+  }
+
 
 
 }
