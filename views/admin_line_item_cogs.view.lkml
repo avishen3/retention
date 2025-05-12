@@ -906,4 +906,10 @@ view: admin_line_item_cogs {
     sql: ${TABLE}.order_done_first_ts ;;
   }
 
+  measure: count_dis_short_id {
+    type: count_distinct
+    sql: ${short_id} ;;
+
+  }
+
 }
