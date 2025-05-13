@@ -718,5 +718,13 @@ view: retention_platform {
 
   }
 
+  dimension: placed_order_id {
+    type: string
+    sql: ${TABLE}.placed_order_id ;;
+  }
+
+
+
+
 
 }
