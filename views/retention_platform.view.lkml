@@ -715,7 +715,6 @@ view: retention_platform {
   measure: Total_forms{
     type: count_distinct
     sql: ${form_id};;
-
   }
 
   dimension: placed_order_id {
@@ -724,6 +723,10 @@ view: retention_platform {
   }
 
 
+  measure: Total_placed_order_id{
+    type: count_distinct
+    sql: ${placed_order_id};;
+  }
 
 
 
