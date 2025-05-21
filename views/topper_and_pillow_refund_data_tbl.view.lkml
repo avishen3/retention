@@ -388,5 +388,28 @@ view: topper_and_pillow_refund_data_tbl {
   }
 
 
+  dimension: topper_sku {
+    type: string
+    sql: ${TABLE}.topper_sku ;;
+  }
+
+
+  dimension: is_price_0 {
+    type: yesno
+    sql: ${TABLE}.is_price_0 ;;
+  }
+
+
+  dimension: topper_single_price {
+    type: number
+    sql: ${TABLE}.topper_single_price ;;
+  }
+
+  dimension: topper_total_price {
+    type: number
+    sql: ${TABLE}.topper_total_price ;;
+  }
+
+
 
 }
