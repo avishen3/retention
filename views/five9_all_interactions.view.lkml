@@ -1306,7 +1306,7 @@ END
   dimension: is_in_prediction_interaction{
     type: string
     sql:
-    case  correspondenceType not in ('Email','email','VisualIvr','sms','Agent','PreviewTask')
+    case when correspondenceType not in ('Email','email','VisualIvr','sms','Agent','PreviewTask')
     and disposition_name not in ('No Disposition','Duplicated Callback Request') -- ('Unresponsive Customer')
     and (not regexp_contains(lower(campaign_name),r'outreach|upsell|outbound') or campaign_name is null)
     and regexp_contains(lower(skill_name),r'inbound sales|support|returns|transit|delivered') then "Prediction interaction" else "Non-prediction interaction"
