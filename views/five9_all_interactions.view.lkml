@@ -1039,6 +1039,13 @@ view: five9_all_interactions {
   }
 
 
+  measure: avg_acw_time_seconds_display {
+    type: average
+    sql: ${acw_time} ;;
+    value_format_name: decimal_2
+  }
+
+
   measure: avg_total_hold_duration_formatted_time {
     type: string
     sql:
