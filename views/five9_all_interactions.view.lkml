@@ -1134,16 +1134,23 @@ end
   }
 
   ##07052025
-
+## Changed 29052025
   dimension: pred_type_I {
     type: string
     sql:
     CASE
-      WHEN ${customer_type} = 'prospect' THEN 'sales'
-      WHEN ${skill_name} NOT LIKE '%CAN%' AND ${skill_name} NOT LIKE '%Spanish Agents%' THEN 'support'
+      when short_id_before is null then 'sales'
+      when skill_name not like "%CAN%" and skill_name not like "%Spanish Agents%" then 'support'
       ELSE NULL
     END ;;
   }
+
+  dimension: interaction_pred_type_I{
+    type: string
+    sql: ${interaction_type_I} || ' - ' || ${pred_type_I} ;;
+  }
+
+
 
 
   dimension: Agent_Grouping_by_Team_Lead {
