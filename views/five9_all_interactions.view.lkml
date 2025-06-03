@@ -986,6 +986,8 @@ view: five9_all_interactions {
   measure: avg_Handle_time_in_sec {
     type: number
     sql: AVG(${handle_time}) ;;
+    value_format_name: decimal_2
+
   }
 
 
@@ -994,6 +996,8 @@ view: five9_all_interactions {
   measure: avg_Ivr_time_in_sec {
     type: number
     sql: AVG(${ivr_time}) ;;
+    value_format_name: decimal_2
+
   }
 
 
@@ -1001,12 +1005,16 @@ view: five9_all_interactions {
   measure: avg_Acw_time_in_sec {
     type: number
     sql: AVG(${acw_time}) ;;
+    value_format_name: decimal_2
+
   }
 
 
   measure: avg_total_hold_duration_time_in_sec {
     type: number
     sql: AVG(${total_hold_duration_seconds}) ;;
+    value_format_name: decimal_2
+
   }
 
   measure: avg_Handle_time_formatted_time {

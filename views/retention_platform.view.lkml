@@ -633,7 +633,7 @@ view: retention_platform {
 
   }
 
-### Accepted Rate
+### Accepted Rate out of offred
 
   measure: Accepted_Save_Rate_giftAccessories {
     type: number
@@ -728,6 +728,86 @@ view: retention_platform {
     sql: ${placed_order_id};;
   }
 
+##0362025
+
+### Accepted Rate out of all forms
+
+  measure: Accepted_Save_Rate_giftAccessories_of_all_forms {
+    type: number
+    sql: case when ${Total_forms}>0 then ${Total_accepted_save_giftAccessories}/${Total_forms} else null end;;
+    group_label: "Save Rate out of all forms"
+    value_format: "0.00%"
+
+
+  }
+
+  measure: Accepted_Save_Rate_giftSoftTopper_of_all_forms {
+    type: number
+    sql: case when ${Total_forms}>0 then ${Total_accepted_save_giftSoftTopper}/${Total_forms} else null end;;
+    group_label: "Save Rate out of all forms"
+    value_format: "0.00%"
+
+
+  }
+
+  measure: Accepted_Save_Rate_finalSalePreset_of_all_forms {
+    type: number
+    sql: case when ${Total_forms}>0 then ${Total_accepted_save_finalSalePreset}/${Total_forms} else null end;;
+    group_label: "Save Rate out of all forms"
+    value_format: "0.00%"
+
+
+  }
+
+  measure: Accepted_Save_Rate_replaceItem_of_all_forms {
+    type: number
+    sql: case when ${Total_forms}>0 then ${Total_accepted_save_replaceItem}/${Total_forms} else null end;;
+    group_label: "Save Rate out of all forms"
+    value_format: "0.00%"
+  }
+
+  measure: Accepted_Save_Rate_crossSell_of_all_forms {
+    type: number
+    sql: case when ${Total_forms}>0 then ${Total_accepted_save_crossSell}/${Total_forms} else null end;;
+    group_label: "Save Rate out of all forms"
+    value_format: "0.00%"
+  }
+
+
+  measure: Accepted_Save_Rate_finalSale_of_all_forms {
+    type: number
+    sql: case when ${Total_forms}>0 then ${Total_accepted_save_finalSale}/${Total_forms} else null end;;
+    group_label: "Save Rate out of all forms"
+    value_format: "0.00%"
+  }
+
+  measure: Accepted_Save_Rate_reship_of_all_forms {
+    type: number
+    sql: case when ${Total_forms}>0 then ${Total_accepted_save_reship}/${Total_forms} else null end;;
+    group_label: "Save Rate out of all forms"
+    value_format: "0.00%"
+  }
+
+  measure: Accepted_Save_Rate_appeasementAndReship_of_all_forms {
+    type: number
+    sql: case when ${Total_forms}>0 then ${Total_accepted_save_appeasementAndReship}/${Total_forms} else null end;;
+    group_label: "Save Rate out of all forms"
+    value_format: "0.00%"
+  }
+
+  measure: Accepted_Save_Rate_giftFirmTopper_of_all_forms {
+    type: number
+    sql: case when ${Total_forms}>0 then ${Total_accepted_save_giftFirmTopper}/${Total_forms} else null end;;
+    group_label: "Save Rate out of all forms"
+    value_format: "0.00%"
+  }
+
+  measure: Accepted_Save_Rate_appeasement_of_all_forms {
+    type: number
+    sql: case when ${Total_forms}>0 then ${Total_accepted_save_appeasement}/${Total_forms} else null end;;
+    group_label: "Save Rate out of all forms"
+    value_format: "0.00%"
+  }
 
 
 }
