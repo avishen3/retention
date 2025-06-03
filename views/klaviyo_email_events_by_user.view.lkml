@@ -1030,7 +1030,7 @@ view: klaviyo_email_events_by_user {
     label: "CVR - Unique Users"
     type: number
     sql: case when ${Total_Received_Emails} is not null then ${Total_Orders_From_Email}/${Total_Received_Emails} end  ;;
-    value_format: "0.00%"
+    value_format: "0.000%"
 
   }
 
