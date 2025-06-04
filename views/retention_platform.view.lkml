@@ -487,6 +487,7 @@ view: retention_platform {
   }
 
 
+
 ### Measure total offered
 
   measure: Total_Offerd_appeasement {
@@ -555,7 +556,7 @@ view: retention_platform {
 
   measure: Total_Offerd_giftAccessories {
     type: count_distinct
-    sql:  case when ${Offered_Save_Attempts_giftAccessories} = 'giftAccessories}' then item_id else null end ;;
+    sql:  case when ${Offered_Save_Attempts_giftAccessories} = 'giftAccessories' then item_id else null end ;;
   group_label: "Total Offered Save Attempts"
 
   }
@@ -628,7 +629,7 @@ view: retention_platform {
 
   measure: Total_accepted_save_giftAccessories {
     type: count_distinct
-    sql:  case when ${accepted_save_attempt} = 'giftAccessories}' then item_id else null end ;;
+    sql:  case when ${accepted_save_attempt} = 'giftAccessories' then item_id else null end ;;
     group_label: "Total Accepted Save"
 
   }
