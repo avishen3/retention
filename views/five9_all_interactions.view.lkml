@@ -1322,6 +1322,23 @@ END
         ;;
   }
 
+### 05062025
 
+  dimension: csat_agent {
+    type: string
+    sql: ${TABLE}.csat_agent ;;
+  }
+  dimension: csat_score {
+    type: number
+    sql: ${TABLE}.csat_score ;;
+  }
+
+
+  measure: avg_csat_score {
+    type: number
+    sql: AVG(${handle_time}) ;;
+    value_format_name: decimal_2
+
+  }
 
 }
