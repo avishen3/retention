@@ -1336,7 +1336,7 @@ END
 
   measure: avg_csat_score {
     type: number
-    sql: AVG(${handle_time}) ;;
+    sql: AVG(${csat_score}) ;;
     value_format_name: decimal_2
 
   }
