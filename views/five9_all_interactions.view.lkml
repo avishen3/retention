@@ -1341,13 +1341,13 @@ END
 
   }
 
-  measure: order_is_wgs_before {
+  dimension: order_is_wgs_before {
     type: yesno
     sql:  ${TABLE}.order_is_wgs_before ;;
 
   }
 
-  measure: order_is_wgs_after {
+  dimension: order_is_wgs_after {
     type: yesno
     sql:  ${TABLE}.order_is_wgs_after ;;
 
