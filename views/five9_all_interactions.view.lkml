@@ -964,6 +964,25 @@ view: five9_all_interactions {
   }
 
 
+
+### 08062025
+
+  measure: total_short_id_after{
+    type: count_distinct
+    sql:  ${short_id_after}    ;;
+    value_format: "#,##0"
+    group_label: "five9 Measures - short_id_after"
+  }
+
+
+  measure: total_short_id_before{
+    type: count_distinct
+    sql:  ${short_id_before}    ;;
+    value_format: "#,##0"
+    group_label: "five9 Measures - short_id_before"
+  }
+
+
   dimension: half_hour_interval {
     type: string
     sql:
