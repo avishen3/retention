@@ -931,4 +931,13 @@ view: alerts_outgoing_calls_five9_tbl {
     group_label: "conversation"
   }
 
+  ### 10602025
+
+
+  dimension: alert_type {
+    type: string
+    sql: ${TABLE}.alert_type ;;
+  }
+
+
 }
