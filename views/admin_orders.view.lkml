@@ -1161,5 +1161,12 @@ measure: total_price {
     else null end ;;
   }
 
+#### 11/06/2025
+
+  dimension: is_insurance_order {
+    type: yesno
+    sql: ${amount_insurance}>0;;
+  }
+
 
 }
