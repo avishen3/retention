@@ -1168,5 +1168,9 @@ measure: total_price {
     sql: ${amount_insurance}>0;;
   }
 
+  dimension: is_Adj_Bundle {
+    type: yesno
+    sql:  ${amount_mattress}>0 and ${total_bases} >0;;
+  }
 
 }
