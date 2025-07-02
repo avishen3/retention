@@ -658,7 +658,7 @@ view: nps_data_item_order_tbl {
 
   dimension: is_mattress {
     type: yesno
-    sql: ${TABLE}.is_mattress ;;
+    sql:when ${total_matresses_order_level}>0  ;;
   }
 
   dimension: is_physical_item {
