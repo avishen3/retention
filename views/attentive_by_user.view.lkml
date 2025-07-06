@@ -1715,5 +1715,11 @@ view: attentive_by_user {
     sql: case when ${is_add_to_cart} = 1  then ${phone} end  ;;
   }
 
+  dimension: page_url_link_tracker {
+    type: string
+    sql: ${TABLE}.page_url_link_tracker ;;
+  }
+
+
 
 }
