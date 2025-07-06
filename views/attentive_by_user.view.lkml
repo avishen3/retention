@@ -1718,8 +1718,48 @@ view: attentive_by_user {
   dimension: page_url_link_tracker {
     type: string
     sql: ${TABLE}.page_url_link_tracker ;;
+    group_label: "page url tracker"
   }
 
 
+  dimension: first_url_from_link_tracker {
+    type: string
+    sql: REGEXP_EXTRACT(${page_url_link_tracker}, '^([^\\(]+)\\s*\\((\\d+)\\)\\s*,\\s*([^\\(]+)\\s*\\((\\d+)\\)$', 1) ;;
+    ##description: "Extracts the first URL from the raw data string."
+    group_label: "page url tracker"
+
+}
+    dimension: first_url_clicks {
+    type: number
+    sql: CAST(REGEXP_EXTRACT(${page_url_link_tracker}, '^([^\\(]+)\\s*\\((\\d+)\\)\\s*,\\s*([^\\(]+)\\s*\\((\\d+)\\)$', 2) AS INT64) ;;
+     ## description: "Extracts the click count for the first URL and casts it to an integer."
+      group_label: "page url tracker"
+}
+
+    dimension: second_url_from_link_tracker {
+    type: string
+    sql: REGEXP_EXTRACT(${page_url_link_tracker}, '^([^\\(]+)\\s*\\((\\d+)\\)\\s*,\\s*([^\\(]+)\\s*\\((\\d+)\\)$', 3) ;;
+      ##description: "Extracts the first URL from the raw data string."
+      group_label: "page url tracker"
+ }
+    dimension: second_url_clicks {
+    type: number
+    sql: CAST(REGEXP_EXTRACT(${page_url_link_tracker}, '^([^\\(]+)\\s*\\((\\d+)\\)\\s*,\\s*([^\\(]+)\\s*\\((\\d+)\\)$', 4) AS INT64) ;;
+    ## description: "Extracts the click count for the first URL and casts it to an integer."
+      group_label: "page url tracker"
+}
+
+  dimension: third_url_from_link_tracker {
+    type: string
+    sql: REGEXP_EXTRACT(${page_url_link_tracker}, '^([^\\(]+)\\s*\\((\\d+)\\)\\s*,\\s*([^\\(]+)\\s*\\((\\d+)\\)$', 3) ;;
+    ##description: "Extracts the first URL from the raw data string."
+    group_label: "page url tracker"
+  }
+  dimension: third_url_clicks {
+    type: number
+    sql: CAST(REGEXP_EXTRACT(${page_url_link_tracker}, '^([^\\(]+)\\s*\\((\\d+)\\)\\s*,\\s*([^\\(]+)\\s*\\((\\d+)\\)$', 4) AS INT64) ;;
+    ## description: "Extracts the click count for the first URL and casts it to an integer."
+    group_label: "page url tracker"
+  }
 
 }
