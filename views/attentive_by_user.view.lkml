@@ -1675,4 +1675,45 @@ view: attentive_by_user {
     type: string
     sql: ${TABLE}.segment ;;
   }
+
+## 06-07-2025
+
+  dimension: sms_product_cogs {
+    type: number
+    sql: ${TABLE}.sms_product_cogs ;;
+  }
+
+  dimension: sms_shipping_cogs {
+    type: number
+    sql: ${TABLE}.sms_product_cogs ;;
+  }
+
+  dimension: SMS_Order_Margin_Cogs {
+    type: number
+    sql: ${sms_order_price}-${sms_product_cogs} ;;
+  }
+
+  dimension: SMS_Order_Margin_Cogs_and_Shipping{
+    type: number
+    sql: ${sms_order_price}-(${sms_product_cogs}+${sms_shipping_cogs} ;;
+  }
+
+
+
+  dimension: is_add_to_cart {
+    type: number
+    sql: ${TABLE}.is_add_to_cart ;;
+  }
+
+  measure: Total_add_to_cart_specific_SMS{
+    type: count_distinct
+    sql: case when ${is_add_to_cart} = 1 then (concat(${phone},${message_name})) end  ;;
+  }
+
+  measure: Total_add_to_cart_uniqe_users{
+    type: count_distinct
+    sql: case when ${is_add_to_cart} = 1  then ${phone} end  ;;
+  }
+
+
 }
