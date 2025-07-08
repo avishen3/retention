@@ -634,6 +634,16 @@ view: retention_platform {
 
   }
 
+
+  measure: Total_accepted_all_saves {
+    type: count_distinct
+    sql:  case when ${accepted_save_attempt} in ('giftAccessories', 'appeasement',  'giftFirmTopper', 'appeasementAndReship', 'reship', 'finalSale', 'crossSell', 'replaceItem',  'finalSalePreset', 'giftSoftTopper')  then item_id else null end ;;
+    group_label: "Total Accepted Save"
+
+  }
+
+
+
 ### Accepted Rate out of offred
 
   measure: Accepted_Save_Rate_giftAccessories {
