@@ -1745,7 +1745,7 @@ view: attentive_by_user {
   }
   dimension: second_url_clicks {
     type: number
-    sql: CAST(REGEXP_EXTRACT(${page_url_link_tracker}, ',\\s*[^\\(]+\\s*\\((\\d+)\\)$') AS INT64)  ;;
+    sql: CAST(REGEXP_EXTRACT(${page_url_link_tracker}, '.*?\\(\\d+\\).*?\\((\\d+)\\)') AS INT64)  ;;
     ## description: "Extracts the click count for the first URL and casts it to an integer."
     group_label: "page url tracker"
   }
