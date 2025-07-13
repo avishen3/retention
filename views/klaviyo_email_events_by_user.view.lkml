@@ -2715,5 +2715,36 @@ value: "Variant"
     sql: ${TABLE}.Trial ;;
   }
 
+### 13072025
+
+
+
+
+  dimension: email_product_cogs {
+    type: number
+    sql: ${TABLE}.email_product_cogs ;;
+  }
+
+  dimension: email_shipping_cogs {
+    type: number
+    sql: ${TABLE}.email_shipping_cogs ;;
+  }
+
+  dimension: is_add_to_cart {
+    type: number
+    sql: ${TABLE}.is_add_to_cart ;;
+  }
+
+  measure: Total_add_to_cart_specific_email{
+    type: count_distinct
+    sql: case when ${is_add_to_cart} = 1 then (concat(${email},${campaign})) end  ;;
+  }
+
+  measure: Total_add_to_cart_uniqe_users{
+    type: count_distinct
+    sql: case when ${is_add_to_cart} = 1  then ${email} end  ;;
+  }
+
+
 
 }
