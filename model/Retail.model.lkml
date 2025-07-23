@@ -26,4 +26,11 @@ explore: mattressfirm_sales_by_store_basic_tbl {
   description: "mattressfirm sales by store basic tbl"
 }
 
+
+
+
+explore: mattress_firm_sales {
+  label: "mattress firm sales"
+}
+
 # }
