@@ -27,8 +27,6 @@ explore: mattressfirm_sales_by_store_basic_tbl {
 }
 
 
-
-
 explore: mattress_firm_sales {
   label: "mattress firm sales"
 }
