@@ -1175,7 +1175,12 @@ view: five9_prospect_customer_tbl {
     type: average
     sql:  ${csat_score} ;;
     value_format: "0.00"
-    group_label: "revenue"
+  }
+
+  measure: csat_score_number_of_interaction_count {
+    type: count_distinct
+    sql:  case when  ${csat_score} is not null (${provider_session_id} else null end;;
+    value_format: "0.00"
   }
 
 
