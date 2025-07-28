@@ -1179,7 +1179,7 @@ view: five9_prospect_customer_tbl {
 
   measure: csat_score_number_of_interaction_count {
     type: count_distinct
-    sql:  case when  ${csat_score} is not null (${provider_session_id} else null end;;
+    sql:  case when  ${csat_score} is not null ${provider_session_id} else null end;;
     value_format: "0.00"
   }
 
