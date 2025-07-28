@@ -1157,4 +1157,25 @@ view: five9_prospect_customer_tbl {
 ##      ;;}
 
 
+###28072025 csat_score
+
+
+
+  dimension: csat_score {
+    type: number
+    sql: ${TABLE}.csat_score ;;
+  }
+
+  dimension: csat_agent {
+    type: string
+    sql: ${TABLE}.csat_agent ;;
+  }
+
+  measure: csat_score_avg {
+    type: average
+    sql:  ${csat_score} ;;
+
+  }
+
+
 }
