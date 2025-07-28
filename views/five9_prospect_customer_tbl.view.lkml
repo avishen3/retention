@@ -1174,7 +1174,8 @@ view: five9_prospect_customer_tbl {
   measure: csat_score_avg {
     type: average
     sql:  ${csat_score} ;;
-
+    value_format: "0.00"
+    group_label: "revenue"
   }
 
 
