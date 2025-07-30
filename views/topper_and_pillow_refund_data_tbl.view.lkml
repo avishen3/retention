@@ -445,4 +445,11 @@ view: topper_and_pillow_refund_data_tbl {
   }
 
 
+  measure: total_refund_mattress_order_with_toppers_mattress_price {
+    type: sum
+    sql: case when (${refund_type} = 'full refund' and ${category} = "topper") then ${actual_price} else null end ;;
+    value_format: "#,##0"
+    group_label: "Mattress Measures"
+  }
+
 }
