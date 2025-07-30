@@ -433,12 +433,14 @@ view: topper_and_pillow_refund_data_tbl {
   measure: total_mattress_price {
     type: sum
     sql:  ${actual_price} ;;
+    value_format: "#,##0"
 
   }
 
   measure: total_topper_product_cost_actual {
     type: sum
     sql:  ${topper_product_cost_actual} ;;
+    value_format: "#,##0"
 
   }
 
