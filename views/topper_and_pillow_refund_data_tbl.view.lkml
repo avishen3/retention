@@ -411,5 +411,36 @@ view: topper_and_pillow_refund_data_tbl {
   }
 
 
+### 30072025
+
+
+  dimension: actual_price {
+    type: string
+    sql: ${TABLE}.actual_price ;;
+  }
+
+  dimension: item_tax {
+    type: string
+    sql: ${TABLE}.item_tax ;;
+  }
+
+  dimension: topper_product_cost_actual {
+    type: string
+    sql: ${TABLE}.topper_product_cost_actual ;;
+  }
+
+
+  measure: total_mattress_price {
+    type: sum
+    sql:  ${actual_price} ;;
+
+  }
+
+  measure: total_topper_product_cost_actual {
+    type: sum
+    sql:  ${topper_product_cost_actual} ;;
+
+  }
+
 
 }
