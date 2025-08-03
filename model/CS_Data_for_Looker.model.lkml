@@ -190,3 +190,5 @@ explore: specialoffer_agent_coupon_item_level_tbl {
 explore: specialoffer_agent_coupon_order_level_tbl {
   label: "coupon special offer order level"
 }
+
+explore: pre_transit_agentlevel_retention_data_tbl {}
