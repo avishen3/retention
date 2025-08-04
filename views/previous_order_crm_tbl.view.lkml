@@ -163,7 +163,7 @@ view: previous_order_crm_tbl {
       WHEN ${days_between_orders} BETWEEN 151 AND 365 THEN 7
       WHEN ${days_between_orders} BETWEEN 366 AND 450 THEN 8
       WHEN ${days_between_orders} >= 451 THEN 9
-      ELSE 0 -- This handles NULL or unexpected values
+      ELSE null
     END ;;
   }
 
@@ -183,7 +183,7 @@ view: previous_order_crm_tbl {
       WHEN ${days_between_orders} BETWEEN 151 AND 365 THEN '151-365 days'
       WHEN ${days_between_orders} BETWEEN 366 AND 450 THEN '366-450 days'
       WHEN ${days_between_orders} >= 451 THEN '451+ days'
-      ELSE 'N/A'
+      ELSE null
     END ;;
   }
 
