@@ -145,4 +145,53 @@ view: previous_order_crm_tbl {
     type: count
     drill_fields: [campaign_name]
   }
+
+
+# Hidden dimension to control the sort order of the cohorts.
+# This ensures they appear logically in charts and tables.
+  dimension: cohort_days_between_orders_sort_order {
+    type: number
+    hidden: yes
+    sql:
+    CASE
+      WHEN ${days_between_orders} = 0  THEN 1
+      WHEN ${days_between_orders} = 1  THEN 2
+      WHEN ${days_between_orders} BETWEEN 2 AND 7 THEN 3
+      WHEN ${days_between_orders} BETWEEN 8 AND 30 THEN 4
+      WHEN ${days_between_orders} BETWEEN 31 AND 60 THEN 5
+      WHEN ${days_between_orders} BETWEEN 61 AND 150 THEN 6
+      WHEN ${days_between_orders} BETWEEN 151 AND 365 THEN 7
+      WHEN ${days_between_orders} BETWEEN 366 AND 450 THEN 8
+      WHEN ${days_between_orders} >= 451 THEN 9
+      ELSE 0 -- This handles NULL or unexpected values
+    END ;;
+  }
+
+# The cohort dimension that users will see and use in the Explore.
+  dimension: cohort_days_between_orders {
+    label: "Cohort - Days Between Orders" # Optional: A user-friendly label
+    type: string
+    order_by_field: cohort_days_between_orders_sort_order # Links to the sorting dimension
+    sql:
+    CASE
+      WHEN ${days_between_orders} = 0  THEN '0 days'
+      WHEN ${days_between_orders} = 1  THEN '1 day'
+      WHEN ${days_between_orders} BETWEEN 2 AND 7 THEN '2-7 days'
+      WHEN ${days_between_orders} BETWEEN 8 AND 30 THEN '8-30 days'
+      WHEN ${days_between_orders} BETWEEN 31 AND 60 THEN '31-60 days'
+      WHEN ${days_between_orders} BETWEEN 61 AND 150 THEN '61-150 days'
+      WHEN ${days_between_orders} BETWEEN 151 AND 365 THEN '151-365 days'
+      WHEN ${days_between_orders} BETWEEN 366 AND 450 THEN '366-450 days'
+      WHEN ${days_between_orders} >= 451 THEN '451+ days'
+      ELSE 'N/A'
+    END ;;
+  }
+
+  measure: Total_current_orders {
+    type: count_distinct
+    sql: ${current_short_id} ;;
+    drill_fields: [campaign_name]
+  }
+
+
 }
