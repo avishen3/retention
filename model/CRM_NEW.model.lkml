@@ -137,6 +137,10 @@ explore: ods_sftp_attentive_nectar {
   label: "ods_sftp_attentive_nectar"
 }
 
+explore: previous_order_crm_tbl {}
+
+
+
 
 #   join: orders {
 #     relationship: many_to_one
