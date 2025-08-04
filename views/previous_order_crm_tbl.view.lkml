@@ -193,5 +193,16 @@ view: previous_order_crm_tbl {
     drill_fields: [campaign_name]
   }
 
+  dimension: current_brand {
+    type: string
+    sql: ${TABLE}.current_brand ;;
+  }
+
+  dimension: previous_brand {
+    type: string
+    sql: ${TABLE}.previous_brand ;;
+  }
+
+
 
 }
