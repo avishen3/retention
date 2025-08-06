@@ -821,4 +821,40 @@ view: retention_platform {
   }
 
 
+
+    dimension: days_from_order_to_form {
+      description: "The number of days between the original order and the form creation date."
+      type: number
+      hidden: yes
+      # IMPORTANT: Replace with your actual field names. Use the _raw timeframe for precision.
+      sql: DATE_DIFF(${TABLE}.form_created_date, ${TABLE}.order_created, day) ;;
+    }
+
+    # Second, create the user-facing cohort dimension that groups the days into buckets.
+    dimension: order_to_form_cohort {
+      label: "Order to Form Cohort"
+      description: "Groups users into cohorts based on the time between their order and form creation."
+      type: string
+      # This ensures the cohorts sort in the correct order (a, b, c...) in visualizations.
+      order_by_field: days_from_order_to_form
+      sql:
+      CASE
+        WHEN ${days_from_order_to_form} BETWEEN 0 AND 7    THEN 'a: 0-7'
+        WHEN ${days_from_order_to_form} BETWEEN 8 AND 30    THEN 'b: 8-30'
+        WHEN ${days_from_order_to_form} BETWEEN 31 AND 60   THEN 'c: 31-60'
+        WHEN ${days_from_order_to_form} BETWEEN 61 AND 90   THEN 'd: 61-90'
+        WHEN ${days_from_order_to_form} BETWEEN 91 AND 120  THEN 'e: 91-120'
+        WHEN ${days_from_order_to_form} BETWEEN 121 AND 150 THEN 'f: 121-150'
+        WHEN ${days_from_order_to_form} BETWEEN 151 AND 180 THEN 'g: 151-180'
+        WHEN ${days_from_order_to_form} BETWEEN 181 AND 250 THEN 'h: 181-250'
+        WHEN ${days_from_order_to_form} BETWEEN 251 AND 300 THEN 'i: 251-300'
+        WHEN ${days_from_order_to_form} BETWEEN 301 AND 330 THEN 'j: 301-330'
+        WHEN ${days_from_order_to_form} BETWEEN 331 AND 365 THEN 'k: 331-365'
+        WHEN ${days_from_order_to_form} > 365               THEN 'l: more then 365'
+        ELSE 'Other' -- Catches negative days or any other edge cases
+      END ;;
+    }
+
+
+
 }
