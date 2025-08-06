@@ -830,17 +830,19 @@ view: retention_platform {
     sql: DATE_DIFF(${TABLE}.form_created_date, ${TABLE}.order_created, day) ;;
   }
 
+# --- CORRECTED COHORT DIMENSION ---
   dimension: order_to_form_cohort {
     label: "Order to Form Cohort"
-    description: "Groups users into cohorts based on the time between their order and form creation."
+    description: "Groups forms into cohorts based on the time between their order and creation."
     type: string
-    # This ensures the cohorts sort in the correct order (a, b, c...) in visualizations.
+    # Assuming 'orders' is the name of the join to your orders view
+    # The order_by_field now also needs to reference the join
     order_by_field: days_from_order_to_form
     sql:
       CASE
-        WHEN ${days_from_order_to_form} BETWEEN 0 AND 7    THEN 'a: 0-7'
-        WHEN ${days_from_order_to_form} BETWEEN 8 AND 30    THEN 'b: 8-30'
-        WHEN ${days_from_order_to_form} BETWEEN 31 AND 60   THEN 'c: 31-60'
+        WHEN ${days_from_order_to_form} BETWEEN 0 AND 7 THEN 'a: 0-7'
+        WHEN  ${days_from_order_to_form}) BETWEEN 8 AND 30    THEN 'b: 8-30'
+        WHEN  ${days_from_order_to_form} BETWEEN 31 AND 60   THEN 'c: 31-60'
         WHEN ${days_from_order_to_form} BETWEEN 61 AND 90   THEN 'd: 61-90'
         WHEN ${days_from_order_to_form} BETWEEN 91 AND 120  THEN 'e: 91-120'
         WHEN ${days_from_order_to_form} BETWEEN 121 AND 150 THEN 'f: 121-150'
@@ -850,7 +852,7 @@ view: retention_platform {
         WHEN ${days_from_order_to_form} BETWEEN 301 AND 330 THEN 'j: 301-330'
         WHEN ${days_from_order_to_form} BETWEEN 331 AND 365 THEN 'k: 331-365'
         WHEN ${days_from_order_to_form} > 365               THEN 'l: more then 365'
-        ELSE 'Other' -- Catches negative days or any other edge cases
+        ELSE 'Other'
       END ;;
   }
 
