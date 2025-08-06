@@ -827,7 +827,7 @@ view: retention_platform {
     description: "The number of days between the original order and the form creation date."
     type: number
 ##    hidden: yes
-    sql: DATE_DIFF(${form_created_raw}, ${order_created_raw}, day) ;;
+    sql: DATE_DIFF(${form_created_date}, ${order_created_date}, day) ;;
   }
 
 # --- CORRECTED COHORT DIMENSION ---
