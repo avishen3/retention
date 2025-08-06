@@ -1750,5 +1750,19 @@ view: attentive_by_user {
     group_label: "page url tracker"
   }
 
+## 06082025
+
+  dimension: state {
+    type: string
+    sql: ${TABLE}.state ;;
+  }
+
+  dimension: rcs_grouping {
+    type: string
+    sql: ${TABLE}.rcs_grouping ;;
+  }
+
+
+
 
 }
