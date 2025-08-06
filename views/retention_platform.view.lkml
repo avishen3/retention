@@ -852,7 +852,7 @@ view: retention_platform {
         WHEN ${days_from_order_to_form} BETWEEN 301 AND 330 THEN 'j: 301-330'
         WHEN ${days_from_order_to_form} BETWEEN 331 AND 365 THEN 'k: 331-365'
         WHEN ${days_from_order_to_form} > 365               THEN 'l: more then 365'
-        ELSE 'Other'
+        ELSE NULL
       END ;;
   }
 
