@@ -827,7 +827,7 @@ view: retention_platform {
     description: "The number of days between the original order and the form creation date."
     type: number
 ##    hidden: yes
-    sql: DATE_DIFF(${TABLE}.form_created_date, ${TABLE}.order_created, day) ;;
+    sql: DATE_DIFF(${form_created_raw}, ${order_created_raw}, day) ;;
   }
 
 # --- CORRECTED COHORT DIMENSION ---
@@ -841,8 +841,8 @@ view: retention_platform {
     sql:
       CASE
         WHEN ${days_from_order_to_form} BETWEEN 0 AND 7 THEN 'a: 0-7'
-        WHEN  ${days_from_order_to_form} BETWEEN 8 AND 30    THEN 'b: 8-30'
-        WHEN  ${days_from_order_to_form} BETWEEN 31 AND 60   THEN 'c: 31-60'
+        WHEN ${days_from_order_to_form} BETWEEN 8 AND 30    THEN 'b: 8-30'
+        WHEN ${days_from_order_to_form} BETWEEN 31 AND 60   THEN 'c: 31-60'
         WHEN ${days_from_order_to_form} BETWEEN 61 AND 90   THEN 'd: 61-90'
         WHEN ${days_from_order_to_form} BETWEEN 91 AND 120  THEN 'e: 91-120'
         WHEN ${days_from_order_to_form} BETWEEN 121 AND 150 THEN 'f: 121-150'
