@@ -833,11 +833,8 @@ view: retention_platform {
 # --- CORRECTED COHORT DIMENSION ---
   dimension: order_to_form_cohort {
     label: "Order to Form Cohort"
-    description: "Groups forms into cohorts based on the time between their order and creation."
     type: string
-    # Assuming 'orders' is the name of the join to your orders view
-    # The order_by_field now also needs to reference the join
-    order_by_field: days_from_order_to_form
+   # order_by_field: days_from_order_to_form
     sql:
       CASE
         WHEN ${days_from_order_to_form} BETWEEN 0 AND 7 THEN 'a: 0-7'
