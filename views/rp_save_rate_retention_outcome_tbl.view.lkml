@@ -234,4 +234,55 @@ view: rp_save_rate_retention_outcome_tbl {
     description: "Save Rate"
   }
 
+
+  dimension: order_update_cohort {
+    type: string
+    sql: ${TABLE}.order_update_cohort ;;
+  }
+
+
+  dimension: rp_update_cohort {
+    type: string
+    sql: ${TABLE}.rp_update_cohort ;;
+  }
+
+  dimension: days_from_order_to_last_update {
+    type: number
+    sql: ${TABLE}.days_from_order_to_last_update ;;
+  }
+
+  dimension: days_from_rp_to_last_update {
+    type: number
+    sql: ${TABLE}.days_from_rp_to_last_update ;;
+  }
+
+
+  dimension_group: last_approved_at {
+    type: time
+    timeframes: [raw, time, date, week, month, quarter, year]
+    datatype: datetime
+    sql: ${TABLE}.last_approved_at ;;
+  }
+
+  dimension_group: last_step_reached {
+    type: time
+    timeframes: [raw, time, date, week, month, quarter, year]
+    datatype: datetime
+    sql: ${TABLE}.last_step_reached ;;
+  }
+
+  dimension_group: max_cancelled_at {
+    type: time
+    timeframes: [raw, time, date, week, month, quarter, year]
+    datatype: datetime
+    sql: ${TABLE}.max_cancelled_at ;;
+  }
+
+  dimension_group: last_datetime_for_item {
+    type: time
+    timeframes: [raw, time, date, week, month, quarter, year]
+    datatype: datetime
+    sql: ${TABLE}.last_datetime_for_item ;;
+  }
+
 }
