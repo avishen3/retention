@@ -229,7 +229,7 @@ view: rp_save_rate_retention_outcome_tbl {
 
   measure: true_save_rate {
     type: number
-    sql: ${total_items_True_Saves_Saved_with_Cost}/(${total_items_True_Saves_Saved_with_Cost}+${total_items_Wasted_Effort_Canceled_with_Cost} ;;
+    sql: ${total_items_True_Saves_Saved_with_Cost}/(${total_items_True_Saves_Saved_with_Cost}+${total_items_Wasted_Effort_Canceled_with_Cost}) ;;
     value_format: "0.00%"
     description: "Save Rate"
   }
