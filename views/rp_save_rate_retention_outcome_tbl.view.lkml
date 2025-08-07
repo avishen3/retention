@@ -140,4 +140,98 @@ view: rp_save_rate_retention_outcome_tbl {
   measure: count {
     type: count
   }
+
+# date granularity - first_rp_created #
+
+  parameter: Date_Granularity_first_rp_created {
+    type: string
+    allowed_value: { value: "Day" }
+    allowed_value: { value: "Week" }
+    allowed_value: { value: "Month" }
+    allowed_value: { value: "Quarter" }
+    allowed_value: { value: "Year" }
+  }
+
+
+
+  dimension: first_rp_created {
+    label_from_parameter: Date_Granularity_first_rp_created
+    sql:
+            CASE
+             WHEN {% parameter Date_Granularity_first_rp_created %} = 'Day' THEN cast(${first_rp_created_date} as string)
+             WHEN {% parameter Date_Granularity_first_rp_created %} = 'Week' THEN cast(${first_rp_created_week} as string)
+             WHEN {% parameter Date_Granularity_first_rp_created %} = 'Month' THEN cast(${first_rp_created_month} as string)
+             WHEN {% parameter Date_Granularity_first_rp_created %} = 'Quarter' THEN cast(${first_rp_created_quarter} as string)
+             WHEN {% parameter Date_Granularity_first_rp_created %} = 'Year' THEN cast(${first_rp_created_year} as string)
+            ELSE null
+            END ;;
+  }
+
+# date granularity - order created #
+
+  parameter: Date_Granularity_order_created {
+    type: string
+    allowed_value: { value: "Day" }
+    allowed_value: { value: "Week" }
+    allowed_value: { value: "Month" }
+    allowed_value: { value: "Quarter" }
+    allowed_value: { value: "Year" }
+  }
+
+
+
+  dimension: order_created {
+    label_from_parameter: Date_Granularity_order_created
+    sql:
+            CASE
+             WHEN {% parameter Date_Granularity_order_created %} = 'Day' THEN cast(${order_created_date} as string)
+             WHEN {% parameter Date_Granularity_order_created %} = 'Week' THEN cast(${order_created_week} as string)
+             WHEN {% parameter Date_Granularity_order_created %} = 'Month' THEN cast(${order_created_month} as string)
+             WHEN {% parameter Date_Granularity_order_created %} = 'Quarter' THEN cast(${order_created_quarter} as string)
+             WHEN {% parameter Date_Granularity_order_created %} = 'Year' THEN cast(${order_created_year} as string)
+            ELSE null
+            END ;;
+  }
+
+
+  measure: total_items_Wasted_Effort_Canceled_with_Cost{
+    type: count_distinct
+    sql: case when ${retention_outcome} = "Canceled with Cost (Wasted Effort)" then ${item_id} else null end ;;
+    value_format: "#,##0"
+    description: "Canceled with Cost (Wasted Effort)"
+    group_label: "outcome"
+  }
+
+  measure: total_items_Canceled_No_Cost{
+    type: count_distinct
+    sql: case when ${retention_outcome} = "Canceled, No Cost" then ${item_id} else null end ;;
+    value_format: "#,##0"
+    description: "Canceled, No Cost"
+    group_label: "outcome"
+  }
+
+  measure: total_items_True_Saves_Saved_with_Cost {
+    type: count_distinct
+    sql: case when ${retention_outcome} = "Saved with Cost (True Saves)" then ${item_id} else null end ;;
+    value_format: "#,##0"
+    description: "Saved with Cost (True Saves)"
+    group_label: "outcome"
+  }
+
+  measure: total_items_Saved_No_Cost {
+    type: count_distinct
+    sql: case when ${retention_outcome} = "Saved, No Cost" then ${item_id} else null end ;;
+    value_format: "#,##0"
+    description: "Saved, No Cost"
+    group_label: "outcome"
+  }
+
+
+  measure: true_save_rate {
+    type: number
+    sql: ${total_items_True_Saves_Saved_with_Cost}/(${total_items_True_Saves_Saved_with_Cost}+${total_items_Wasted_Effort_Canceled_with_Cost} ;;
+    value_format: "0.00%"
+    description: "Save Rate"
+  }
+
 }
