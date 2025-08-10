@@ -1198,5 +1198,10 @@ view: five9_prospect_customer_tbl {
     sql: ${TABLE}.is_mqa_name_active ;;
   }
 
+  measure: qm_total_score_avg {
+    type: average
+    sql:  ${qm_total_score} ;;
+    value_format: "0.00"
+  }
 
 }
