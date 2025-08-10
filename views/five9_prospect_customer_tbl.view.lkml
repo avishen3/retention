@@ -1183,5 +1183,20 @@ view: five9_prospect_customer_tbl {
     value_format: "0.00"
   }
 
+  dimension: qm_name {
+    type: string
+    sql: ${TABLE}.qm_name ;;
+  }
+
+  dimension: qm_total_score {
+    type: number
+    sql: ${TABLE}.qm_total_score ;;
+  }
+
+  dimension: is_mqa_name_active {
+    type: yesno
+    sql: ${TABLE}.is_mqa_name_active ;;
+  }
+
 
 }
