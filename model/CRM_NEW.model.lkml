@@ -140,6 +140,10 @@ explore: ods_sftp_attentive_nectar {
 explore: previous_order_crm_tbl {}
 
 
+### Prizm data
+
+explore: crm_prizm_databased_with_events_dates_tbl {}
+
 
 
 #   join: orders {
