@@ -41,9 +41,30 @@ view: crm_prizm_databased_with_events_dates_tbl {
     type: string
     sql: ${TABLE}.H_37109_2 ;;
   }
+
+
+  dimension: income_group_sort_order {
+    type: number
+    hidden: yes  # Hides this field from users in the Explore UI
+    sql:
+    CASE
+      WHEN ${TABLE}.income_group = 'Low Income' THEN 1
+      WHEN ${TABLE}.income_group = 'Lower-Middle Income' THEN 2
+      WHEN ${TABLE}.income_group = 'Middle Income' THEN 3
+      WHEN ${TABLE}.income_group = 'Upper-Middle Income' THEN 4
+      WHEN ${TABLE}.income_group = 'High Income' THEN 5
+      ELSE 6
+    END ;;
+  }
+
+
+
+
   dimension: income_group_5 {
     type: string
     sql: ${TABLE}.Income_Group_5 ;;
+    order_by_field: income_group_sort_order
+
   }
   dimension: lifestage_segments_target_index {
     type: string
@@ -113,16 +134,21 @@ view: crm_prizm_databased_with_events_dates_tbl {
   measure: total_orders {
     type: count_distinct
     sql: ${short_id} ;;
+    value_format: "#,##0"
+
   }
 
   measure: total_price {
     type: sum
     sql: ${price} ;;
+    value_format: "$#,##0"
+
   }
 
 
   measure: AOV {
     type: number
     sql: ${total_price}/${total_orders} ;;
+    value_format: "00.00%"
   }
 }
