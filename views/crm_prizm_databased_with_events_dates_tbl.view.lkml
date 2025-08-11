@@ -48,11 +48,11 @@ view: crm_prizm_databased_with_events_dates_tbl {
     hidden: yes  # Hides this field from users in the Explore UI
     sql:
     CASE
-      WHEN ${TABLE}.income_group = 'Low Income' THEN 1
-      WHEN ${TABLE}.income_group = 'Lower-Middle Income' THEN 2
-      WHEN ${TABLE}.income_group = 'Middle Income' THEN 3
-      WHEN ${TABLE}.income_group = 'Upper-Middle Income' THEN 4
-      WHEN ${TABLE}.income_group = 'High Income' THEN 5
+      WHEN ${TABLE}.income_group_5 = 'Low Income' THEN 1
+      WHEN ${TABLE}.income_group_5 = 'Lower-Middle Income' THEN 2
+      WHEN ${TABLE}.income_group_5 = 'Middle Income' THEN 3
+      WHEN ${TABLE}.income_group_5 = 'Upper-Middle Income' THEN 4
+      WHEN ${TABLE}.income_group_5 = 'High Income' THEN 5
       ELSE 6
     END ;;
   }
