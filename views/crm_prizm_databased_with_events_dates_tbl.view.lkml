@@ -31,7 +31,7 @@ view: crm_prizm_databased_with_events_dates_tbl {
       WHEN ${TABLE}.Advantage_Target_Narrow_Band_Income = '$75,000 - $79,999' THEN 14
       WHEN ${TABLE}.Advantage_Target_Narrow_Band_Income = '$80,000 - $84,999' THEN 15
       WHEN ${TABLE}.Advantage_Target_Narrow_Band_Income = '$85,000 - $89,999' THEN 16
-      WHEN ${TABLE}.Advadvantage_Target_Narrow_Band_Income = '$90,000 - $94,999' THEN 17
+      WHEN ${TABLE}.Advantage_Target_Narrow_Band_Income = '$90,000 - $94,999' THEN 17
       WHEN ${TABLE}.Advantage_Target_Narrow_Band_Income = '$95,000 - $99,999' THEN 18
       WHEN ${TABLE}.Advantage_Target_Narrow_Band_Income = '$100,000 - $104,999' THEN 19
       WHEN ${TABLE}.Advantage_Target_Narrow_Band_Income = '$105,000 - $109,999' THEN 20
