@@ -293,4 +293,24 @@ view: rp_save_rate_retention_outcome_tbl {
     sql: ${TABLE}.last_datetime_for_item ;;
   }
 
+
+  dimension: first_form_package_status {
+    type: string
+    sql: ${TABLE}.first_form_package_status ;;
+  }
+
+
+  dimension: category {
+    type: string
+    sql: ${TABLE}.category ;;
+  }
+
+
+  dimension: Number_of_Reason {
+    type: number
+    sql: ${TABLE}.Number_of_Reason ;;
+  }
+
+
+
 }
