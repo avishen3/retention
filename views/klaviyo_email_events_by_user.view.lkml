@@ -2746,5 +2746,11 @@ value: "Variant"
   }
 
 
+  dimension: is_PP {
+    type: yesno
+    sql: date_diff(date(order_created),date(ts_Received_email),day)>0;;
+  }
+
+
 
 }
