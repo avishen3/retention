@@ -1,7 +1,7 @@
 view: rp_save_rate_retention_outcome_tbl {
   sql_table_name: `omega-post-184817.CS_NEW.rp_save_rate_retention_outcome_tbl` ;;
 
-  dimension: b2_b {
+  dimension: B2B {
     type: string
     sql: ${TABLE}.B2B ;;
   }
@@ -17,7 +17,7 @@ view: rp_save_rate_retention_outcome_tbl {
     type: string
     sql: ${TABLE}.Comfort ;;
   }
-  dimension: coupon_not_applied {
+  dimension: couponNotApplied {
     type: string
     sql: ${TABLE}.couponNotApplied ;;
   }
@@ -311,6 +311,108 @@ view: rp_save_rate_retention_outcome_tbl {
     sql: ${TABLE}.Number_of_Reason ;;
   }
 
+
+  dimension: wgs {
+    type: string
+    sql: ${TABLE}.wgs ;;
+  }
+
+
+  dimension: warrantyClaim {
+    type: string
+    sql: ${TABLE}.warrantyClaim ;;
+  }
+
+
+  dimension: lateDelivery {
+    type: string
+    sql: ${TABLE}.lateDelivery ;;
+  }
+
+
+  dimension: itemExchangeWHFault {
+    type: string
+    sql: ${TABLE}.itemExchangeWHFault ;;
+  }
+
+  dimension: itemExchangeEmployeeError {
+    type: string
+    sql: ${TABLE}.itemExchangeEmployeeError ;;
+  }
+
+  dimension: itemExchangeCustomerError {
+    type: string
+    sql: ${TABLE}.itemExchangeCustomerError ;;
+  }
+
+  dimension: duplicateItemReceived {
+    type: string
+    sql: ${TABLE}.duplicateItemReceived ;;
+  }
+
+
+  dimension: damagedInTransit {
+    type: string
+    sql: ${TABLE}.duplicateItemReceived ;;
+  }
+
+  dimension: damagedByCustomer {
+    type: string
+    sql: ${TABLE}.damagedByCustomer ;;
+  }
+
+  dimension: Warranty_Replacement {
+    type: string
+    sql: ${TABLE}.Warranty_Replacement ;;
+  }
+
+  dimension: Buyers_Remorse {
+    type: string
+    sql: ${TABLE}.Buyers_Remorse ;;
+  }
+
+
+
+
+  dimension: Clean_all_reason_list {
+    type: string
+    sql:
+    CASE
+      WHEN ${Number_of_Reason} = 1
+      THEN COALESCE(
+       ${wgs},
+        ${warrantyClaim},
+        ${lateDelivery},
+        ${itemExchangeWHFault},
+        ${itemExchangeEmployeeError},
+        ${itemExchangeCustomerError},
+        ${duplicateItemReceived},
+        ${damagedInTransit},
+        ${damagedByCustomer},
+        ${Warranty_Replacement},
+        ${Buyers_Remorse},
+        ${B2B},
+        ${bought_somewhere_else},
+        ${change_of_address},
+        ${comfort},
+        ${damaged_product},
+        ${duplicate_order},
+        ${fraud},
+        ${incorrect_order},
+        ${manufacturing_defect},
+        ${no_longer_needed},
+        ${payment_issue},
+        ${quality_issue},
+        ${shipping_time_frame},
+        ${test_order},
+        ${wgs_post_delivery},
+        ${wgs_pre_delivery},
+        ${warranty_claim_61_plus_days},
+        ${couponNotApplied}
+      )
+      ELSE NULL
+    END ;;
+  }
 
 
 }
