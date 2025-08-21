@@ -1756,4 +1756,11 @@ view: nps_data_item_order_tbl {
 
 
 
+
+  dimension: survicate_review_answer_order_level {
+    type: string
+    sql: ${TABLE}.survicate_review_answer_order_level ;;
+  }
+
+
 }
