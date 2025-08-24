@@ -1204,4 +1204,26 @@ view: five9_prospect_customer_tbl {
     value_format: "0.00"
   }
 
+##24082025
+
+  dimension: order_coupon_name_before {
+    type: string
+    sql: ${TABLE}.order_coupon_name_before ;;
+  }
+
+  dimension: order_coupon_code_before {
+    type: string
+    sql: ${TABLE}.order_coupon_code_before ;;
+  }
+
+  dimension: order_coupon_name_after {
+    type: string
+    sql: ${TABLE}.order_coupon_name_after ;;
+  }
+
+  dimension: order_coupon_code_after {
+    type: string
+    sql: ${TABLE}.order_coupon_code_after ;;
+  }
+
 }
