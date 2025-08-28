@@ -422,4 +422,28 @@ view: rp_save_rate_retention_outcome_tbl {
     }
 
 
+dimension: days_from_order_to_first_rp_cohort {
+  type: string
+  sql: CASE
+    WHEN ${days_between_order_and_first_rp} BETWEEN 0 AND 30 THEN 'A- 0-30 days'
+    WHEN ${days_between_order_and_first_rp} BETWEEN 31 AND 60 THEN 'B- 31-60 days'
+    WHEN ${days_between_order_and_first_rp} BETWEEN 61 AND 90 THEN 'C- 61-90 days'
+    WHEN ${days_between_order_and_first_rp} BETWEEN 91 AND 120 THEN 'D- 91-120 days'
+    WHEN ${days_between_order_and_first_rp} BETWEEN 121 AND 150 THEN 'E- 121-150 days'
+    WHEN ${days_between_order_and_first_rp} BETWEEN 151 AND 180 THEN 'F- 151-180 days'
+    WHEN ${days_between_order_and_first_rp} BETWEEN 181 AND 210 THEN 'G- 181-210 days'
+    WHEN ${days_between_order_and_first_rp} BETWEEN 211 AND 240 THEN 'H- 211-240 days'
+    WHEN ${days_between_order_and_first_rp} BETWEEN 241 AND 270 THEN 'I- 241-270 days'
+    WHEN ${days_between_order_and_first_rp} BETWEEN 271 AND 300 THEN 'J- 271-300 days'
+    WHEN ${days_between_order_and_first_rp} BETWEEN 301 AND 330 THEN 'K- 301-330 days'
+    WHEN ${days_between_order_and_first_rp} BETWEEN 331 AND 365 THEN 'L- 331-365 days'
+    WHEN ${days_between_order_and_first_rp} > 366 THEN 'M- 365+ days'
+    ELSE null
+
+  ;;
+
+}
+
+
+
 }
