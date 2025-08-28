@@ -415,4 +415,11 @@ view: rp_save_rate_retention_outcome_tbl {
   }
 
 
+  dimension: days_between_order_and_first_rp {
+    label: "Days Between Order and First RP"
+    type: number
+    sql: DATEDIFF(day, ${order_created_raw}, ${first_rp_created_raw}) ;;
+  }
+
+
 }
