@@ -438,7 +438,7 @@ dimension: days_from_order_to_first_rp_cohort {
     WHEN ${days_between_order_and_first_rp} BETWEEN 301 AND 330 THEN 'K- 301-330 days'
     WHEN ${days_between_order_and_first_rp} BETWEEN 331 AND 365 THEN 'L- 331-365 days'
     WHEN ${days_between_order_and_first_rp} > 366 THEN 'M- 365+ days'
-    ELSE null
+    ELSE null end
 
   ;;
 
