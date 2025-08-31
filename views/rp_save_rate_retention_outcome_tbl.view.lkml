@@ -441,9 +441,19 @@ dimension: days_from_order_to_first_rp_cohort {
     ELSE null end
 
   ;;
-
 }
 
+
+  dimension: days_from_order_to_first_rp_cohort_half_year {
+    type: string
+    sql: CASE
+          WHEN ${days_between_order_and_first_rp} BETWEEN 0 AND 180 THEN '1- 0-180 days'
+          WHEN ${days_between_order_and_first_rp} BETWEEN 181 AND 365 THEN '2- 181-365 days'
+          WHEN ${days_between_order_and_first_rp} > 366 THEN '3 - 365+ days'
+          ELSE null end
+
+      ;;
+  }
 
 
 }
