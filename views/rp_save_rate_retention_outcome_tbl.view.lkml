@@ -456,4 +456,12 @@ dimension: days_from_order_to_first_rp_cohort {
   }
 
 
+  dimension: brand {
+    type: string
+    sql: ${TABLE}.brand ;;
+  }
+
+
+
+
 }
