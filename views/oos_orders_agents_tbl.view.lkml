@@ -91,4 +91,16 @@ view: oos_orders_agents_tbl {
     type: count
     drill_fields: [agent_name, product_name, original_product_name]
   }
+
+  measure: total_orders {
+    type: count_distinct
+sql: ${admin_short_id} ;;  }
+
+
+  measure: total_items {
+    type: count_distinct
+    sql: ${item_id} ;;  }
+
+
+
 }
