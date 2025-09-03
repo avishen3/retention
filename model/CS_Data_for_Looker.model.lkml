@@ -194,3 +194,5 @@ explore: specialoffer_agent_coupon_order_level_tbl {
 explore: pre_transit_agentlevel_retention_data_tbl {}
 
 explore: rp_save_rate_retention_outcome_tbl {}
+
+explore: oos_orders_agents_tbl {}
