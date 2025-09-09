@@ -461,7 +461,10 @@ dimension: days_from_order_to_first_rp_cohort {
     sql: ${TABLE}.brand ;;
   }
 
-
+  measure: total_items {
+    type: count_distinct
+    sql: ${item_id} ;;
+  }
 
 
 }
