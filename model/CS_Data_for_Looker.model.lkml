@@ -196,3 +196,6 @@ explore: pre_transit_agentlevel_retention_data_tbl {}
 explore: rp_save_rate_retention_outcome_tbl {}
 
 explore: oos_orders_agents_tbl {}
+
+
+explore: ptc_first_24_hours_refund_five9_interaction_tbl {}
