@@ -220,9 +220,9 @@ view: out_of_stock_shipments_snapshot_five9_interactions_tbl {
     sql: ${phone_number} ;;
   }
 
-  measure: count_shipment_sku_that_had_interactions {
+  measure: count_shipment_id_that_had_interactions {
     type: count_distinct
-    sql: case when ${providersessionid} is not null then  ${shipment_sku} else null end  ;;
+    sql: case when ${providersessionid} is not null then  ${shipment_id} else null end  ;;
   }
 
 
