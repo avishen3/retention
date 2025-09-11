@@ -237,9 +237,10 @@ view: out_of_stock_shipments_snapshot_five9_interactions_tbl {
     sql: ${age_of_the_order_to_report_date} ;;
   }
 
-  dimension: max_age_of_the_order_to_report_date_dimension {
-    type: number
-    sql: MAX(${age_of_the_order_to_report_date}) OVER (PARTITION BY ${short_id}) ;;
-  }
+dimension: Days_from_order {
+  type: number
+  sql: DATE_DIFF(CURRENT_DATE(), CAST(${order_created_raw} AS DATE), DAY) ;;
+}
+
 
 }
