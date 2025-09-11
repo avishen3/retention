@@ -193,4 +193,33 @@ view: out_of_stock_shipments_snapshot_five9_interactions_tbl {
   ]
   }
 
+  measure: count_short_ids {
+    type: count_distinct
+    sql: ${short_id} ;;
+  }
+
+  measure: count_shipment_id {
+    type: count_distinct
+    sql: ${shipment_id} ;;
+  }
+
+
+  measure: count_shipment_sku {
+    type: count_distinct
+    sql: ${shipment_sku} ;;
+  }
+
+  measure: count_five_9_sessions {
+    type: count_distinct
+    sql: ${providersessionid} ;;
+  }
+
+
+  measure: count_phone_number {
+    type: count_distinct
+    sql: ${phone_number} ;;
+  }
+
+
+
 }
