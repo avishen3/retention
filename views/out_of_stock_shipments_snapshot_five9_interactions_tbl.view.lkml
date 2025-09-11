@@ -58,6 +58,11 @@ view: out_of_stock_shipments_snapshot_five9_interactions_tbl {
     sql: ${TABLE}.insert_timestamp ;;
   }
 
+  dimension: insert_hour_string {
+    label: "Insert Hour (String)"
+    type: string
+    sql: TO_CHAR(${insert_timestamp_raw}, 'YYYY-MM-DD HH24') ;;
+  }
 
 
   dimension: is_callback {
