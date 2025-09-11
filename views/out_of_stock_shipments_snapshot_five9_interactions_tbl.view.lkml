@@ -62,6 +62,7 @@ view: out_of_stock_shipments_snapshot_five9_interactions_tbl {
     label: "Insert Hour (String)"
     type: string
     sql: TO_CHAR(${insert_timestamp_raw}, 'YYYY-MM-DD HH24') ;;
+    can_filter: yes
   }
 
 
