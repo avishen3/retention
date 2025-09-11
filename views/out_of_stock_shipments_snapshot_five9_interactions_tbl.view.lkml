@@ -62,6 +62,7 @@ view: out_of_stock_shipments_snapshot_five9_interactions_tbl {
     label: "Insert Exact Timestamp"
     type: string
     sql: ${TABLE}.insert_timestamp ;;
+    can_filter: yes
   }
 
 
