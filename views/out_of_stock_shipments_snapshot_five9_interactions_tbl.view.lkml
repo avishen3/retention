@@ -54,7 +54,7 @@ view: out_of_stock_shipments_snapshot_five9_interactions_tbl {
   }
   dimension_group: insert_timestamp {
     type: time
-    timeframes: [raw,  hour,  time, date, week, month, quarter, year]
+    timeframes: [raw,  hour, hour_of_day,  time, date, week, month, quarter, year]
     sql: ${TABLE}.insert_timestamp ;;
   }
 
