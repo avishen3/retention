@@ -57,6 +57,14 @@ view: out_of_stock_shipments_snapshot_five9_interactions_tbl {
     timeframes: [raw, time, date, week, month, quarter, year]
     sql: ${TABLE}.insert_timestamp ;;
   }
+
+  dimension: insert_exact_time {
+    label: "Insert Exact Timestamp"
+    type: string
+    sql: ${TABLE}.insert_timestamp ;;
+  }
+
+
   dimension: is_callback {
     type: yesno
     sql: ${TABLE}.Is_callback ;;
@@ -173,13 +181,13 @@ view: out_of_stock_shipments_snapshot_five9_interactions_tbl {
   # ----- Sets of fields for drilling ------
   set: detail {
     fields: [
-	type_name,
-	campaignname,
-	campaign_name,
-	original_product_name,
-	product_name,
-	disposition_name
-	]
+  type_name,
+  campaignname,
+  campaign_name,
+  original_product_name,
+  product_name,
+  disposition_name
+  ]
   }
 
 }
