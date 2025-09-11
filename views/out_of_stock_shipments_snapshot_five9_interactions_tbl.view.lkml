@@ -227,4 +227,9 @@ view: out_of_stock_shipments_snapshot_five9_interactions_tbl {
 
 
 
+  measure: count_five_9_sessions_without_skipped {
+    type: count_distinct
+    sql: case when ${disposition_name} <> "Skipped" then ${providersessionid}  else null end  ;;
+  }
+
 }
