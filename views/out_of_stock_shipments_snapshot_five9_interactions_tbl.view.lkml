@@ -235,7 +235,11 @@ view: out_of_stock_shipments_snapshot_five9_interactions_tbl {
   measure: max_age_of_the_order_to_report_date {
     type: max
     sql: ${age_of_the_order_to_report_date} ;;
+  }
 
+  dimension: max_age_of_the_order_to_report_date_dimension {
+    type: number
+    sql: MAX(${age_of_the_order_to_report_date}) OVER (PARTITION BY ${short_id}) ;;
   }
 
 }
