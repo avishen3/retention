@@ -54,16 +54,10 @@ view: out_of_stock_shipments_snapshot_five9_interactions_tbl {
   }
   dimension_group: insert_timestamp {
     type: time
-    timeframes: [raw, time, date, week, month, quarter, year]
+    timeframes: [raw,  hour,  time, date, week, month, quarter, year]
     sql: ${TABLE}.insert_timestamp ;;
   }
 
-  dimension: insert_exact_time {
-    label: "Insert Exact Timestamp"
-    type: string
-    sql: ${TABLE}.insert_timestamp ;;
-    can_filter: yes
-  }
 
 
   dimension: is_callback {
