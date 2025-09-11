@@ -58,11 +58,13 @@ view: out_of_stock_shipments_snapshot_five9_interactions_tbl {
     sql: ${TABLE}.insert_timestamp ;;
   }
 
-  dimension: insert_hour_string {
-    label: "Insert Hour (String)"
+  dimension: insert_timestamp_am_pm {
     type: string
-    sql: TO_CHAR(${insert_timestamp_raw}, 'YYYY-MM-DD HH24') ;;
-    can_filter: yes
+    sql:
+      CASE
+        WHEN ${insert_timestamp_hour_of_day} < 12 THEN 'AM'
+        ELSE 'PM'
+      END ;;
   }
 
 
