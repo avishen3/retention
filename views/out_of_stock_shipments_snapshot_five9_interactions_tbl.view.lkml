@@ -232,4 +232,10 @@ view: out_of_stock_shipments_snapshot_five9_interactions_tbl {
     sql: case when ${disposition_name} <> "Skipped" then ${providersessionid}  else null end  ;;
   }
 
+  measure: max_age_of_the_order_to_report_date {
+    type: max
+    sql: ${age_of_the_order_to_report_date} ;;
+
+  }
+
 }
