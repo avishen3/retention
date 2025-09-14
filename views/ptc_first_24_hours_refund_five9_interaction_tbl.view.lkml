@@ -5,7 +5,7 @@ view: ptc_first_24_hours_refund_five9_interaction_tbl {
     type: string
     sql: ${TABLE}.agent_email_2_order ;;
   }
-  dimension: agentemail {
+  dimension: five_9_agentemail {
     type: string
     sql: ${TABLE}.agentemail ;;
   }
@@ -138,5 +138,10 @@ view: ptc_first_24_hours_refund_five9_interaction_tbl {
     sql: ${short_id_2_order} ;;
   }
 
+
+  measure: total_short_id_before_five9 {
+    type: count_distinct
+    sql: ${short_id_before} ;;
+  }
 
 }
