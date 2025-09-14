@@ -97,6 +97,8 @@ view: ptc_first_24_hours_refund_five9_interaction_tbl {
     type: string
     sql: ${TABLE}.short_id_pre_delivery_24h_full_refund ;;
   }
+
+
   dimension: skill_name {
     type: string
     sql: ${TABLE}.skill_name ;;
@@ -121,6 +123,20 @@ view: ptc_first_24_hours_refund_five9_interaction_tbl {
   }
   measure: count {
     type: count
-    drill_fields: [skill_name, disposition_name]
+    drill_fields: [skill_name, disposition_name]}
+
+
+
+  measure: total_short_id_pre_delivery_24h_full_refund {
+    type: count_distinct
+    sql: ${short_id_pre_delivery_24h_full_refund} ;;
   }
+
+
+  measure: total_short_id_2_order {
+    type: count_distinct
+    sql: ${short_id_2_order} ;;
+  }
+
+
 }
