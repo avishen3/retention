@@ -144,4 +144,10 @@ view: ptc_first_24_hours_refund_five9_interaction_tbl {
     sql: ${short_id_before} ;;
   }
 
+  dimension: Is_five9_agent_rp_agent {
+    type: yesno
+    sql: ${five_9_agentemail}=${rp_agent_email};;
+  }
+
+
 }
