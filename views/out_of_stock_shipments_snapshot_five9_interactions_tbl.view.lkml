@@ -48,6 +48,9 @@ view: out_of_stock_shipments_snapshot_five9_interactions_tbl {
     type: string
     sql: ${TABLE}.disposition_name ;;
   }
+
+  ###
+
   dimension: email {
     type: string
     sql: ${TABLE}.email ;;
