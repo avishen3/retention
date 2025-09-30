@@ -246,4 +246,19 @@ dimension: Days_from_order {
 }
 
 
+  dimension: Days_from_order_agg {
+    type: string
+    sql: case when ${Days_from_order} = 0 then "a- 0"
+              when ${Days_from_order} = 1 then "b- 1"
+              when ${Days_from_order} between 2 and 5  then "c- 2-5"
+              when ${Days_from_order} between 6 and 10  then "d- 6-10"
+              when ${Days_from_order} between 11 and 15  then "d- 11-15"
+              when ${Days_from_order} between 16 and 20  then "e- 16-20"
+              when ${Days_from_order} > 21  then "f- 21+"
+else null end
+
+    ;;
+  }
+
+
 }
