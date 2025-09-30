@@ -254,7 +254,7 @@ dimension: Days_from_order {
               when ${Days_from_order} between 6 and 10  then "d- 6-10"
               when ${Days_from_order} between 11 and 15  then "d- 11-15"
               when ${Days_from_order} between 16 and 20  then "e- 16-20"
-              when ${Days_from_order} > 21  then "f- 21+"
+              when ${Days_from_order} => 21  then "f- 21+"
 else null end
 
     ;;
