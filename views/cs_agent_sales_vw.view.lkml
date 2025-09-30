@@ -237,7 +237,7 @@ view: cs_agent_sales_vw {
     type: number
     sql:case when ${num_of_orders_non_zero}>0 then ${Total_Price}/${num_of_orders_non_zero} else null end  ;;
     value_format: "$#,##0.00"
-    label: "AOV (Excludes $0 Orders)"
+    label: "AOV (Excludes $0 Orders) w tax"
   }
 
 }
