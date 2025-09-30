@@ -225,4 +225,19 @@ view: cs_agent_sales_vw {
     label: "AOV (Excludes $0 Orders)"
   }
 
+
+  measure: AOV_with_tax{
+    type: number
+    sql:${Total_Price}/${num_of_orders} ;;
+    value_format: "$#,##0.00"
+  }
+
+
+  measure: AOV_with_out_non_zero_orders_with_tax{
+    type: number
+    sql:case when ${num_of_orders_non_zero}>0 then ${Total_Price}/${num_of_orders_non_zero} else null end  ;;
+    value_format: "$#,##0.00"
+    label: "AOV (Excludes $0 Orders)"
+  }
+
 }
