@@ -149,5 +149,12 @@ view: ptc_first_24_hours_refund_five9_interaction_tbl {
     sql: ${five_9_agentemail}=${rp_agent_email};;
   }
 
+  dimension: sku_pre_delivery_24h_full_refund {
+    type: string
+    sql: ${TABLE}.sku_pre_delivery_24h_full_refund ;;
+  }
+
+
+
 
 }
