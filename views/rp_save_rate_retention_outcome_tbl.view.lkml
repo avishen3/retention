@@ -466,5 +466,50 @@ dimension: days_from_order_to_first_rp_cohort {
     sql: ${item_id} ;;
   }
 
+##15102025
+
+  dimension: item_id_line_item_cogs {
+    type: string
+    sql: ${TABLE}.item_id_line_item_cogs ;;
+  }
+
+
+  dimension: product_title {
+    type: string
+    sql: ${TABLE}.product_title ;;
+  }
+
+
+  dimension: total_price {
+    type: number
+    sql: ${TABLE}.total_price ;;
+  }
+
+
+  dimension: single_price {
+    type: number
+    sql: ${TABLE}.single_price ;;
+  }
+
+  dimension: category_line_item_cogs {
+    type: string
+    sql: ${TABLE}.category_line_item_cogs ;;
+  }
+
+  dimension: is_physical_item {
+    type: string
+    sql: ${TABLE}.is_physical_item ;;
+  }
+
+  measure: sum_single_price {
+    type: sum
+    sql: ${single_price} ;;
+  }
+
+
+  measure: sum_total_price {
+    type: sum
+    sql: ${total_price} ;;
+  }
 
 }
