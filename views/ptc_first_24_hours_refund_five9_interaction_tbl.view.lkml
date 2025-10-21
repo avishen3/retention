@@ -89,6 +89,7 @@ view: ptc_first_24_hours_refund_five9_interaction_tbl {
     type: string
     sql: ${TABLE}.short_id_2_order ;;
   }
+
   dimension: short_id_before {
     type: string
     sql: ${TABLE}.short_id_before ;;
@@ -154,6 +155,10 @@ view: ptc_first_24_hours_refund_five9_interaction_tbl {
     sql: ${TABLE}.sku_pre_delivery_24h_full_refund ;;
   }
 
+  dimension: actual_refund_short_id_refund {
+    type: string
+    sql: case when ${short_id_2_order} is null then ${short_id_pre_delivery_24h_full_refund} ;;
+  }
 
 
 
