@@ -157,7 +157,7 @@ view: ptc_first_24_hours_refund_five9_interaction_tbl {
 
   dimension: actual_refund_short_id_refund {
     type: string
-    sql: case when ${short_id_2_order} is null then ${short_id_pre_delivery_24h_full_refund} ;;
+    sql: case when ${short_id_2_order} is null then ${short_id_pre_delivery_24h_full_refund} else null end  ;;
   }
 
 
