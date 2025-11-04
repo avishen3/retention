@@ -512,4 +512,12 @@ dimension: days_from_order_to_first_rp_cohort {
     sql: ${total_price} ;;
   }
 
+
+  ### 04112025
+
+  measure: total_short_id {
+    type: count_distinct
+    sql: ${short_id} ;;
+  }
+
 }
