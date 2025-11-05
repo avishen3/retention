@@ -520,4 +520,34 @@ dimension: days_from_order_to_first_rp_cohort {
     sql: ${short_id} ;;
   }
 
+
+  ### 05112025  dimension sku and modle
+
+  dimension: inventory_key {
+    type: string
+    sql: ${TABLE}.inventory_key ;;
+  }
+
+  dimension: sku {
+    type: string
+    sql: ${TABLE}.sku ;;
+  }
+
+  dimension: inventory_key_catalog {
+    type: string
+    sql: ${TABLE}.inventory_key_catalog ;;
+  }
+
+  dimension: model_catalog {
+    type: string
+    sql: ${TABLE}.model_catalog ;;
+  }
+
+
+  dimension: type_catalog {
+    type: string
+    sql: ${TABLE}.type_catalog ;;
+  }
+
+
 }
