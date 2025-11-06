@@ -121,6 +121,31 @@ view: agent_orders_real_time_vw {
     value_format: "$#,##0.0"
   }
 
+# date granularity - Order Date #
+
+  parameter: Date_Granularity_order_date {
+    type: string
+    allowed_value: { value: "Day" }
+    allowed_value: { value: "Week" }
+    allowed_value: { value: "Month" }
+    allowed_value: { value: "Quarter" }
+    allowed_value: { value: "Year" }
+  }
+
+  dimension: Order_Date {
+    label_from_parameter: Date_Granularity_order_date
+    sql:
+            CASE
+             WHEN {% parameter Date_Granularity_order_date %} = 'Day' THEN cast(${order_created_date} as string)
+             WHEN {% parameter Date_Granularity_order_date %} = 'Week' THEN cast(${order_created_week} as string)
+             WHEN {% parameter Date_Granularity_order_date %} = 'Month' THEN cast(${order_created_month} as string)
+             WHEN {% parameter Date_Granularity_order_date %} = 'Quarter' THEN cast(${order_created_quarter} as string)
+             WHEN {% parameter Date_Granularity_order_date %} = 'Year' THEN cast(${order_created_year} as string)
+            ELSE null
+            END ;;
+  }
+
+
 
 
 }
