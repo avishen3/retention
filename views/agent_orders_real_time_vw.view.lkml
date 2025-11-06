@@ -111,13 +111,13 @@ view: agent_orders_real_time_vw {
 
   measure: AOV_valid_order{
     type: number
-    sql: ${total_revenve_valid_orders}/${total_orders_valid} ;;
+    sql: ${total_revenve_valid_orders}/NULLIF(${total_orders_valid}, 0) ;;
     value_format: "$#,##0.0"
   }
 
   measure: AOV_valid_order_no_zero{
     type: number
-    sql: ${total_revenve_valid_no_zero_orders}/${total_orders_valid_no_zero} ;;
+    sql: ${total_revenve_valid_no_zero_orders}/ NULLIF(${total_orders_valid_no_zero}, 0)  ;;
     value_format: "$#,##0.0"
   }
 
