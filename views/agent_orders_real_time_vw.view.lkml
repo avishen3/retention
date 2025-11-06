@@ -82,15 +82,21 @@ view: agent_orders_real_time_vw {
   }
 
 
+  dimension: is_agent_order{
+    type: yesno
+    sql: ${agent_email} is not null  ;;
+  }
 
   measure: total_revenve_valid_orders {
     type: sum
     sql: case when ${is_valid_order} is true  then  ${price}-${tax} else null end ;;
+    value_format: "$#,##0.0"
     }
 
   measure: total_revenve_valid_no_zero_orders {
     type: sum
     sql: case when ${valid_non_zero_order} is true  then  ${price}-${tax} else null end ;;
+    value_format: "$#,##0.0"
   }
 
   measure: total_orders_valid {
@@ -106,11 +112,13 @@ view: agent_orders_real_time_vw {
   measure: AOV_valid_order{
     type: number
     sql: ${total_revenve_valid_orders}/${total_orders_valid} ;;
+    value_format: "$#,##0.0"
   }
 
   measure: AOV_valid_order_no_zero{
     type: number
     sql: ${total_revenve_valid_no_zero_orders}/${total_orders_valid_no_zero} ;;
+    value_format: "$#,##0.0"
   }
 
 
