@@ -35,7 +35,7 @@ view: agent_orders_real_time_vw {
   }
   dimension_group: order_created {
     type: time
-    timeframes: [raw, time, date, week, month, quarter, year]
+    timeframes: [raw, time, date, week, month, quarter, year, hour , hour_of_day]
     datatype: datetime
     sql: ${TABLE}.order_created ;;
   }
@@ -145,7 +145,10 @@ view: agent_orders_real_time_vw {
             END ;;
   }
 
-
+  dimension: brand {
+    type: string
+    sql: ${TABLE}.brand ;;
+  }
 
 
 }
