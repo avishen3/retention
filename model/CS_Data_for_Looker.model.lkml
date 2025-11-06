@@ -201,3 +201,5 @@ explore: oos_orders_agents_tbl {}
 explore: ptc_first_24_hours_refund_five9_interaction_tbl {}
 
 explore: out_of_stock_shipments_snapshot_five9_interactions_tbl {}
+
+explore: agent_orders_real_time_vw {}
