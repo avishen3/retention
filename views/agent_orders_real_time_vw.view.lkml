@@ -214,4 +214,12 @@ view: agent_orders_real_time_vw {
     value_format: "00.0%"
   }
 
+  measure: CS_valid_no_zero_revenue_rate {
+    type: number
+    sql: ${total_revenve_valid_no_zero_orders_agent}/${total_revenve_valid_no_zero_orders} ;;
+    group_label: "Agent Order Rate"
+    value_format: "00.0%"
+  }
+
+
 }
