@@ -170,14 +170,14 @@ view: agent_orders_real_time_vw {
 
   measure: total_orders_valid_agent {
     type: count_distinct
-    sql: case (when ${is_valid_order} is true and ${is_agent_order} is true) then  ${short_id} else null end ;;
+    sql: case when ( ${is_valid_order} is true and ${is_agent_order} is true) then  ${short_id} else null end ;;
     group_label: "Agent Order Matrics"
 
   }
 
   measure: total_orders_valid_no_zero_agent {
     type: count_distinct
-    sql: case (when ${valid_non_zero_order} is true and ${is_agent_order} is true) then  ${short_id} else null end ;;
+    sql: case when ( ${valid_non_zero_order} is true and ${is_agent_order} is true) then  ${short_id} else null end ;;
     group_label: "Agent Order Matrics"
 
   }
