@@ -182,20 +182,20 @@ view: agent_orders_real_time_vw {
 
   }
 
+
   measure: AOV_valid_order_agent{
     type: number
-    sql: case when  ${is_agent_order} is true  then ${total_revenve_valid_orders}/NULLIF(${total_orders_valid}, 0) else null end ;;
+    sql: ${total_revenve_valid_orders_agent}/NULLIF(${total_orders_valid_agent}, 0) ;;
     value_format: "$#,##0.0"
     group_label: "Agent Order Matrics"
-
   }
 
   measure: AOV_valid_order_no_zero_agent{
     type: number
-    sql: case when  ${is_agent_order} is true then ${total_revenve_valid_no_zero_orders}/ NULLIF(${total_orders_valid_no_zero}, 0) else null end   ;;
+    sql: ${total_revenve_valid_no_zero_orders_agent}/ NULLIF(${total_orders_valid_no_zero_agent}, 0)  ;;
     value_format: "$#,##0.0"
     group_label: "Agent Order Matrics"
-
   }
+
 
 }
