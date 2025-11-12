@@ -197,5 +197,21 @@ view: agent_orders_real_time_vw {
     group_label: "Agent Order Matrics"
   }
 
+####
+
+
+  measure: CS_valid_orders_rate {
+    type: number
+    sql: ${total_orders_valid_agent}/${total_orders_valid} ;;
+    group_label: "Agent Order Rate"
+    value_format: "00.0%"
+  }
+
+  measure: CS_valid_no_zero_orders_rate {
+    type: number
+    sql: ${total_orders_valid_no_zero_agent}/${total_orders_valid_no_zero} ;;
+    group_label: "Agent Order Rate"
+    value_format: "00.0%"
+  }
 
 }
