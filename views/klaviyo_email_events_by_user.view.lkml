@@ -2767,5 +2767,32 @@ value: "Variant"
     sql: ${TABLE}.de_income ;;
   }
 
+### 20112025
+
+  dimension: first_lc_widget_google_case {
+    type: string
+    case: {
+      when: {
+        sql: ${first_lc_widget} LIKE '%google%' ;;
+        label: "Contains Google"
+      }
+      else: "Does Not Contain Google"
+    }
+    label: "First LC Widget Google Status (Case Param)"
+  }
+
+
+  dimension: first_lc_widget_google_tap_checkout {
+    type: string
+
+        sql:
+        case when  ${first_lc_widget} LIKE '%google%' then "Google one tap"
+             when  lower(${first_lc_widget}) LIKE '%checkout%' then "Checkout"
+            else "all other lead cap" end
+        ;;
+        }
+
+
+
 
 }
