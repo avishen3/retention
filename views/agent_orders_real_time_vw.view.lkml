@@ -187,6 +187,7 @@ view: agent_orders_real_time_vw {
     sql: case when (${is_valid_order} is true and ${is_agent_order} is true)  then  ${price}-${tax} else null end ;;
     value_format: "$#,##0.0"
     group_label: "Agent Order Matrics"
+    label: "Total Revenue - CS"
   }
 
   measure: total_revenve_valid_no_zero_orders_agent {
