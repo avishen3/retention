@@ -353,6 +353,7 @@ view: agent_orders_real_time_vw {
     sql: ${total_revenve_valid_no_zero_orders_agent}/${total_revenve_valid_no_zero_orders} ;;
     group_label: "Agent Order Rate"
     value_format: "00.0%"
+    label: "Customer Service Order Share"
   }
 
 
