@@ -560,10 +560,10 @@ view: agent_orders_real_time_vw {
     {% if current_date_range._is_filtered %}
       CASE
         WHEN {% condition current_date_range %} ${order_created_timestamp_raw} {% endcondition %}
-        THEN TIMESTAMP_DIFF(${order_created_timestamp_raw},{% date_start current_date_range %},DAY)+2
+        THEN TIMESTAMP_DIFF(${order_created_timestamp_raw},{% date_start current_date_range %},DAY)+1
 
       WHEN ${order_created_timestamp_raw} between ${period_2_start} and ${period_2_end}
-      THEN TIMESTAMP_DIFF(${order_created_timestamp_raw}, ${period_2_start},DAY)+2
+      THEN TIMESTAMP_DIFF(${order_created_timestamp_raw}, ${period_2_start},DAY)+1
       END
 
       {% else %} NULL
