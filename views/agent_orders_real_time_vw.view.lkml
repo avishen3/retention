@@ -391,43 +391,87 @@ view: agent_orders_real_time_vw {
     hidden:  yes
   }
 
+##  dimension: period_2_start {
+##    view_label: "Timeline Comparison Fields"
+##    description: "Calculates the start of the previous period"
+##    type: date_raw
+##    sql:
+##    {% if compare_to._in_query %}
+##      {% if compare_to._parameter_value == "Period" %}
+##        TIMESTAMP_SUB({% date_start current_date_range %} , INTERVAL ${days_in_period} DAY)
+##      {% else %}
+##        TIMESTAMP(DATETIME_SUB(DATETIME({% date_start current_date_range %}) , INTERVAL 1 {% parameter compare_to %}))
+##      {% endif %}
+##    {% else %}
+##      {% date_start previous_date_range %}
+##    {% endif %};;
+##    hidden:  yes
+##  }
+
   dimension: period_2_start {
     view_label: "Timeline Comparison Fields"
     description: "Calculates the start of the previous period"
     type: date_raw
     sql:
-    {% if compare_to._in_query %}
-      {% if compare_to._parameter_value == "Period" %}
-        TIMESTAMP_SUB({% date_start current_date_range %} , INTERVAL ${days_in_period} DAY)
+      {% if compare_to._in_query %}
+        {% if compare_to._parameter_value == "Period" %}
+          TIMESTAMP_SUB({% date_start current_date_range %} , INTERVAL ${days_in_period} DAY)
+        {% elsif compare_to._parameter_value == "Year" %} // <-- NEW LOGIC HERE
+          TIMESTAMP_SUB({% date_start current_date_range %} , INTERVAL 364 DAY) // <-- Subtract 52 weeks (364 days)
+        {% else %}
+          TIMESTAMP(DATETIME_SUB(DATETIME({% date_start current_date_range %}) , INTERVAL 1 {% parameter compare_to %}))
+        {% endif %}
       {% else %}
-        TIMESTAMP(DATETIME_SUB(DATETIME({% date_start current_date_range %}) , INTERVAL 1 {% parameter compare_to %}))
-      {% endif %}
-    {% else %}
-      {% date_start previous_date_range %}
-    {% endif %};;
+        {% date_start previous_date_range %}
+      {% endif %};;
     hidden:  yes
   }
+
+
+
+##  dimension: period_2_end {
+##    view_label: "Timeline Comparison Fields"
+##    description: "Calculates the end of the previous period"
+##    type: date_raw
+##    sql:
+##    {% if compare_to._in_query %}
+##      {% if compare_to._parameter_value == "Period" %}
+##        /*TIMESTAMP_SUB({% date_start current_date_range %}, INTERVAL 1 DAY)*/
+##        {% date_start current_date_range %}
+##      {% else %}
+##        /*TIMESTAMP(DATETIME_SUB(DATETIME_SUB(
+##        DATETIME({% date_end current_date_range %}), INTERVAL 1 DAY), INTERVAL 1 {% parameter compare_to %}))*/
+##         TIMESTAMP(DATETIME_SUB(
+##        DATETIME({% date_end current_date_range %}), INTERVAL 1 {% parameter compare_to %}))
+##      {% endif %}
+##    {% else %}
+##      {% date_end previous_date_range %}
+##    {% endif %};;
+##    hidden:  yes
+##  }
 
   dimension: period_2_end {
     view_label: "Timeline Comparison Fields"
     description: "Calculates the end of the previous period"
     type: date_raw
     sql:
-    {% if compare_to._in_query %}
-      {% if compare_to._parameter_value == "Period" %}
-        /*TIMESTAMP_SUB({% date_start current_date_range %}, INTERVAL 1 DAY)*/
-        {% date_start current_date_range %}
+      {% if compare_to._in_query %}
+        {% if compare_to._parameter_value == "Period" %}
+          {% date_start current_date_range %}
+        {% elsif compare_to._parameter_value == "Year" %} // <-- NEW LOGIC HERE
+          TIMESTAMP_SUB({% date_end current_date_range %} , INTERVAL 364 DAY) // <-- Subtract 52 weeks (364 days)
+        {% else %}
+          TIMESTAMP(DATETIME_SUB(
+            DATETIME({% date_end current_date_range %}), INTERVAL 1 {% parameter compare_to %}))
+        {% endif %}
       {% else %}
-        /*TIMESTAMP(DATETIME_SUB(DATETIME_SUB(
-        DATETIME({% date_end current_date_range %}), INTERVAL 1 DAY), INTERVAL 1 {% parameter compare_to %}))*/
-         TIMESTAMP(DATETIME_SUB(
-        DATETIME({% date_end current_date_range %}), INTERVAL 1 {% parameter compare_to %}))
-      {% endif %}
-    {% else %}
-      {% date_end previous_date_range %}
-    {% endif %};;
+        {% date_end previous_date_range %}
+      {% endif %};;
     hidden:  yes
   }
+
+
+
 
   parameter: compare_to {
     description: "Choose the period you would like to compare to. Must be used with Current Date Range filter"
@@ -691,7 +735,7 @@ view: agent_orders_real_time_vw {
 
 
 
-
+### YoY fix try 01122025
 
 
 
