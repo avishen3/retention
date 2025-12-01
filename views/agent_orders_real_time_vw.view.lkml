@@ -613,7 +613,7 @@ view: agent_orders_real_time_vw {
     label: "Today VS SDLY"
     sql: case when (date_diff(current_date('America/Los_Angeles'), ${order_created_timestamp_date}, day) = 0
           and extract(hour from timestamp(${order_created_timestamp_time})) < extract(hour from timestamp(current_datetime('America/Los_Angeles')))) then "Today"
-        when(date_diff(current_date('America/Los_Angeles'), ${order_created_timestamp_date}, day) = 365
+        when(date_diff(current_date('America/Los_Angeles'), ${order_created_timestamp_date}, day) = 364
         and extract(hour from timestamp(${order_created_timestamp_time})) < extract(hour from timestamp(current_datetime('America/Los_Angeles')))) then "SDLY"
         else 'null' end  ;;
     group_label: "Date Filters"
