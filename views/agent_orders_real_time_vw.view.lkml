@@ -417,7 +417,7 @@ view: agent_orders_real_time_vw {
         {% if compare_to._parameter_value == "Period" %}
           TIMESTAMP_SUB({% date_start current_date_range %} , INTERVAL ${days_in_period} DAY)
         {% elsif compare_to._parameter_value == "Year" %} // <-- NEW LOGIC HERE
-          TIMESTAMP_SUB({% date_start current_date_range %} , INTERVAL 364 DAY) --// <-- Subtract 52 weeks (364 days)
+          TIMESTAMP_SUB({% date_start current_date_range %} , INTERVAL 364 DAY)
         {% else %}
           TIMESTAMP(DATETIME_SUB(DATETIME({% date_start current_date_range %}) , INTERVAL 1 {% parameter compare_to %}))
         {% endif %}
@@ -459,7 +459,7 @@ view: agent_orders_real_time_vw {
         {% if compare_to._parameter_value == "Period" %}
           {% date_start current_date_range %}
         {% elsif compare_to._parameter_value == "Year" %} // <-- NEW LOGIC HERE
-          TIMESTAMP_SUB({% date_end current_date_range %} , INTERVAL 364 DAY) --// <-- Subtract 52 weeks (364 days)
+          TIMESTAMP_SUB({% date_end current_date_range %} , INTERVAL 364 DAY)
         {% else %}
           TIMESTAMP(DATETIME_SUB(
             DATETIME({% date_end current_date_range %}), INTERVAL 1 {% parameter compare_to %}))
