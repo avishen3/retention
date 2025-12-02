@@ -121,7 +121,7 @@ view: agent_orders_real_time_vw {
   measure: total_revenve_valid_no_zero_orders {
     type: sum
     sql: case when ${valid_non_zero_order} is true  then  ${price}-${tax} else null end ;;
-    value_format: "$#,##0.0"
+    value_format: "$#,##0"
     label: "Revenve"
 
   }
