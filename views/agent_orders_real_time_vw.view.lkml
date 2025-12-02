@@ -115,7 +115,7 @@ view: agent_orders_real_time_vw {
   measure: total_revenve_valid_orders {
     type: sum
     sql: case when ${is_valid_order} is true  then  ${price}-${tax} else null end ;;
-    value_format: "$#,##0.0"
+    value_format: "$#,##0"
     }
 
   measure: total_revenve_valid_no_zero_orders {
@@ -139,13 +139,13 @@ view: agent_orders_real_time_vw {
   measure: AOV_valid_order{
     type: number
     sql: ${total_revenve_valid_orders}/NULLIF(${total_orders_valid}, 0) ;;
-    value_format: "$#,##0.0"
+    value_format: "$#,##0"
   }
 
   measure: AOV_valid_order_no_zero{
     type: number
     sql: ${total_revenve_valid_no_zero_orders}/ NULLIF(${total_orders_valid_no_zero}, 0)  ;;
-    value_format: "$#,##0.0"
+    value_format: "$#,##0"
     label: "AOV Company"
 
   }
@@ -185,7 +185,7 @@ view: agent_orders_real_time_vw {
   measure: total_revenve_valid_orders_agent {
     type: sum
     sql: case when (${is_valid_order} is true and ${is_agent_order} is true)  then  ${price}-${tax} else null end ;;
-    value_format: "$#,##0.0"
+    value_format: "$#,##0"
     group_label: "Agent Order Matrics"
     label: "Total Revenue - CS"
   }
@@ -193,7 +193,7 @@ view: agent_orders_real_time_vw {
   measure: total_revenve_valid_no_zero_orders_agent {
     type: sum
     sql: case when (${valid_non_zero_order} is true  and ${is_agent_order} is true)  then  ${price}-${tax} else null end ;;
-    value_format: "$#,##0.0"
+    value_format: "$#,##0"
     group_label: "Agent Order Matrics"
 
   }
@@ -217,14 +217,14 @@ view: agent_orders_real_time_vw {
   measure: AOV_valid_order_agent{
     type: number
     sql: ${total_revenve_valid_orders_agent}/NULLIF(${total_orders_valid_agent}, 0) ;;
-    value_format: "$#,##0.0"
+    value_format: "$#,##0"
     group_label: "Agent Order Matrics"
   }
 
   measure: AOV_valid_order_no_zero_agent{
     type: number
     sql: ${total_revenve_valid_no_zero_orders_agent}/ NULLIF(${total_orders_valid_no_zero_agent}, 0)  ;;
-    value_format: "$#,##0.0"
+    value_format: "$#,##0"
     group_label: "Agent Order Matrics"
     label: "AOV CS orders"
 
@@ -236,14 +236,14 @@ view: agent_orders_real_time_vw {
   measure: total_revenve_valid_orders_SALE_agent {
     type: sum
     sql: case when (${is_valid_order} is true and ${is_cs_sales_agent} is true)  then  ${price}-${tax} else null end ;;
-    value_format: "$#,##0.0"
+    value_format: "$#,##0"
     group_label: "Sale Agent Order Matrics"
   }
 
   measure: total_revenve_valid_no_zero_orders_SALE_agent {
     type: sum
     sql: case when (${valid_non_zero_order} is true  and ${is_cs_sales_agent} is true)  then  ${price}-${tax} else null end ;;
-    value_format: "$#,##0.0"
+    value_format: "$#,##0"
     group_label: "Sale Agent Order Matrics"
 
   }
@@ -266,14 +266,14 @@ view: agent_orders_real_time_vw {
   measure: AOV_valid_order_SALE_agent{
     type: number
     sql: ${total_revenve_valid_orders_SALE_agent}/NULLIF(${total_orders_valid_SALE_agent}, 0) ;;
-    value_format: "$#,##0.0"
+    value_format: "$#,##0"
     group_label: "Sale Agent Order Matrics"
     }
 
   measure: AOV_valid_order_no_zero_SALE_agent{
     type: number
     sql: ${total_revenve_valid_no_zero_orders_SALE_agent}/ NULLIF(${total_orders_valid_no_zero_SALE_agent}, 0)  ;;
-    value_format: "$#,##0.0"
+    value_format: "$#,##0"
     group_label: "Sale Agent Order Matrics"
     label: "AOV CS Sales orders"
 
@@ -289,14 +289,14 @@ view: agent_orders_real_time_vw {
   measure: total_revenve_valid_orders_NON_agent {
     type: sum
     sql: case when (${is_valid_order} is true and ${is_agent_order} is false)  then  ${price}-${tax} else null end ;;
-    value_format: "$#,##0.0"
+    value_format: "$#,##0"
     group_label: "NON Agent Order Matrics"
   }
 
   measure: total_revenve_valid_no_zero_orders_NON_agent {
     type: sum
     sql: case when (${valid_non_zero_order} is true  and ${is_agent_order} is false)  then  ${price}-${tax} else null end ;;
-    value_format: "$#,##0.0"
+    value_format: "$#,##0"
     group_label: "NON Agent Order Matrics"
 
   }
@@ -319,14 +319,14 @@ view: agent_orders_real_time_vw {
   measure: AOV_valid_order_NON_agent{
     type: number
     sql: ${total_revenve_valid_orders_NON_agent}/NULLIF(${total_orders_valid_NON_agent}, 0) ;;
-    value_format: "$#,##0.0"
+    value_format: "$#,##0"
     group_label: "NON Agent Order Matrics"
   }
 
   measure: AOV_valid_order_no_zero_NON_agent{
     type: number
     sql: ${total_revenve_valid_no_zero_orders_NON_agent}/ NULLIF(${total_orders_valid_no_zero_NON_agent}, 0)  ;;
-    value_format: "$#,##0.0"
+    value_format: "$#,##0"
     group_label: "NON Agent Order Matrics"
     label: "AOV without CS orders"
   }
