@@ -203,6 +203,46 @@ view: crm_prizm_databased_with_events_dates_tbl {
     value_format: "$#,##0"
 
   }
+
+  ### Orders flag addition - 03122025
+
+  dimension: highest_product_type {
+    type: string
+    sql: ${TABLE}.highest_product_type ;;
+  }
+
+  dimension: highest_product_model {
+    type: string
+    sql: ${TABLE}.highest_product_model ;;
+  }
+
+  dimension: highest_product_feature {
+    type: string
+    sql: ${TABLE}.highest_product_feature ;;
+  }
+
+  dimension: is_bundle {
+    type: string
+    sql: ${TABLE}.is_bundle ;;
+  }
+
+  dimension: is_adjustable_in_cart {
+    type: string
+    sql: ${TABLE}.is_adjustable_in_cart ;;
+  }
+
+  dimension: total_matresses {
+    type: number
+    sql: ${TABLE}.total_matresses ;;
+  }
+
+  dimension: total_bases {
+    type: number
+    sql: ${TABLE}.total_bases ;;
+  }
+
+
+
 }
 
 
