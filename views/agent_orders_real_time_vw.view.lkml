@@ -735,13 +735,24 @@ view: agent_orders_real_time_vw {
 
 
 
-### YoY fix try 01122025
+### 08122025
 
 
 
+  dimension: highest_product_type {
+    type: string
+    sql: ${TABLE}.highest_product_type ;;
+  }
 
+  dimension: highest_product_model {
+    type: string
+    sql: ${TABLE}.highest_product_model ;;
+  }
 
-
+  dimension: highest_product_feature {
+    type: string
+    sql: ${TABLE}.highest_product_feature ;;
+  }
 
 
 
