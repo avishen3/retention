@@ -1762,7 +1762,16 @@ view: attentive_by_user {
     sql: ${TABLE}.rcs_grouping ;;
   }
 
+### 08122025
 
+  dimension: first_lc_os {
+    type: string
+    sql: ${TABLE}.first_lc_os ;;
+  }
 
+  dimension: os_last {
+    type: string
+    sql: ${TABLE}.os_last ;;
+  }
 
 }
