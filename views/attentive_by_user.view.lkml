@@ -1774,4 +1774,24 @@ view: attentive_by_user {
     sql: ${TABLE}.os_last ;;
   }
 
+  ###
+
+
+
+  dimension: de_age {
+    type: string
+    sql: ${TABLE}.de_age ;;
+  }
+
+  dimension: de_gender {
+    type: string
+    sql: ${TABLE}.de_gender ;;
+  }
+
+  dimension: de_income {
+    type: string
+    sql: ${TABLE}.de_income ;;
+  }
+
+
 }
