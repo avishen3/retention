@@ -149,7 +149,7 @@ view: nps_outbound_dialer_tracker_tbl {
     sql: CASE
     WHEN (${TABLE}.correspondencetype = 'phone-call'
     AND ${TABLE}.relevent_NPS_call = true
-    AND ${TABLE}.is_answered_call = true)
+    AND ${TABLE}.is_answered_call = "call answer")
     THEN ${providersessionid}
     ELSE NULL
     END ;;
