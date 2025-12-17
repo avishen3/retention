@@ -138,7 +138,10 @@ view: nps_outbound_dialer_tracker_tbl {
 
   measure: total_outbound_to_nps_number_calls {
     type: count_distinct
-    sql: case when (correspondencetype = "phone-call" and relevent_NPS_call = "yes")  then ${providersessionid} else null end ;;
+    sql:sql: CASE WHEN ${TABLE}.correspondencetype = 'phone-call'
+    AND ${TABLE}.relevent_NPS_call = 'yes'
+    THEN ${providersessionid}
+    ELSE NULL ENd;;
   }
 
   measure: total_outbound_to_nps_number_calls_answered_call {
