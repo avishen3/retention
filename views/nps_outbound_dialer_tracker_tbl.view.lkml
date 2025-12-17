@@ -149,5 +149,9 @@ view: nps_outbound_dialer_tracker_tbl {
     sql: case when (correspondencetype = "phone-call" and relevent_NPS_call = true and is_answered_call = true)  then ${providersessionid} else null end ;;
   }
 
+  measure: total_alerts{
+    type: count_distinct
+    sql: ${email_address} ;;
+  }
 
 }
