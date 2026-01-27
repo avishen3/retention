@@ -1226,4 +1226,11 @@ view: five9_prospect_customer_tbl {
     sql: ${TABLE}.order_coupon_code_after ;;
   }
 
+  dimension: providerName {
+    type: string
+    sql: ${TABLE}.providerName ;;
+  }
+
+
+
 }
