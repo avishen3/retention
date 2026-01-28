@@ -624,7 +624,7 @@ view: five9_prospect_customer_tbl {
 
   measure: total_session_id_NO_abandon_unresolved_interaction{
     type: count_distinct
-    sql: WHEN ${disposition_name} NOT IN ('Abandon', 'Unresolved Interaction')
+    sql: case WHEN ${disposition_name} NOT IN ('Abandon', 'Unresolved Interaction')
              OR ${disposition_name} IS NULL
         THEN ${provider_session_id}
         ELSE NULL
