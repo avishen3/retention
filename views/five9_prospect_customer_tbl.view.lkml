@@ -621,6 +621,16 @@ view: five9_prospect_customer_tbl {
     group_label: "five9 Measures - session"
   }
 
+
+  measure: total_session_id_NO_abandon_unresolved_interaction{
+    type: count_distinct
+    sql:case when disposition_name not in ("Abandon","Unresolved Interaction") then  ${provider_session_id} else null end  ;;
+    value_format: "#,##0"
+    group_label: "five9 Measures - session"
+  }
+
+
+
   measure: total_customer_Id {
     type: count_distinct
     sql: ${customer_id} ;;
