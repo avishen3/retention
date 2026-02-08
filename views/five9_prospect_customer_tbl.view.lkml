@@ -1271,6 +1271,33 @@ view: five9_prospect_customer_tbl {
   }
 
 
+  measure: total_customer_with_cs_assisted_orders_48h_key{
+    type: count_distinct
+    sql: case when ${is_cs_assisted_order_TF} = true then ${customer_key} else null end ;;
+    value_format: "#,##0"
+    group_label: "five9 Measures - customer"
+  }
+
+  measure: total_customer_with_cs_agent_orders_key{
+    type: count_distinct
+    sql: case when ${is_cs_agent_order_TF} = true then ${customer_key} else null end ;;
+    value_format: "#,##0"
+    group_label: "five9 Measures - customer"
+  }
+
+  measure: total_customer_with_cs_agent_orders_within48h_key{
+    type: count_distinct
+    sql: case when (${is_cs_agent_order_TF} = true and ${is_cs_assisted_order_TF} = true) then ${customer_key} else null end ;;
+    value_format: "#,##0"
+    group_label: "five9 Measures - customer"
+  }
+
+  measure: total_customer_with_cs_assisted_orders_only_no_agent_48h_key{
+    type: count_distinct
+    sql: case when (${is_cs_assisted_order_NOT_agent_TF} = true ) then ${customer_key} else null end ;;
+    value_format: "#,##0"
+    group_label: "five9 Measures - customer"
+  }
 
 
 
