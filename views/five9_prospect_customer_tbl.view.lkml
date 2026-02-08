@@ -1246,7 +1246,29 @@ view: five9_prospect_customer_tbl {
   }
 
 
+  dimension: customer_key {
+    type: string
+    sql: ${TABLE}.customer_key ;;
+  }
 
+
+
+
+
+  measure: total_customer_Id_key {
+    type: count_distinct
+    sql: ${customer_key} ;;
+    value_format: "#,##0"
+    group_label: "five9 Measures - customer"
+  }
+
+
+  measure: total_prospect_customer_Id_key {
+    type: count_distinct
+    sql: case when ${customer_type} = "prospect" then ${customer_key} else null end ;;
+    value_format: "#,##0"
+    group_label: "five9 Measures - customer"
+  }
 
 
 
