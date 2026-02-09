@@ -1300,5 +1300,399 @@ view: five9_prospect_customer_tbl {
   }
 
 
+### 09-02-2026
+
+##!
+
+  dimension: cart_id {
+    type: string
+    sql: ${TABLE}.cart_id ;;
+  }
+
+  dimension: engagement_type {
+    type: string
+    sql: ${TABLE}.engagement_type ;;
+  }
+
+  dimension: intent {
+    type: string
+    sql: ${TABLE}.intent ;;
+  }
+
+
+  ## ?
+  dimension: engagement {
+    type: string
+    sql: ${TABLE}.engagement ;;
+  }
+  ## ?
+
+  dimension: cancellation_outcome {
+    type: string
+    sql: ${TABLE}.cancellation_outcome ;;
+  }
+
+  dimension: order_status {
+    type: string
+    sql: ${TABLE}.order_status ;;
+  }
+
+  dimension: cancellation_reason {
+    type: string
+    sql: ${TABLE}.cancellation_reason ;;
+  }
+
+  dimension: admin_url {
+    type: string
+    sql: ${TABLE}.admin_url ;;
+  }
+
+  dimension_group: created {
+    type: time
+    timeframes: [raw, time, date, week, month, quarter, year]
+    sql: ${TABLE}.creation_date ;;
+  }
+
+  dimension: creation_time_formatted {
+    type: string
+    sql: ${TABLE}.creation_time_formatted ;;
+  }
+
+  dimension: earliest_customer_service_interaction {
+    type: string
+    sql: ${TABLE}.earliest_customer_service_interaction ;;
+  }
+
+  dimension: earliest_customer_service_interaction_formatted {
+    type: string
+    sql: ${TABLE}.earliest_customer_service_interaction_formatted ;;
+  }
+
+  dimension: has_active_dispute {
+    type: string
+    sql: ${TABLE}.has_active_dispute ;;
+  }
+
+  dimension: hide_interaction_in_admin_platform {
+    type: string
+    sql: ${TABLE}.hide_interaction_in_admin_platform ;;
+  }
+
+  dimension: is_canada_brand {
+    type: string
+    sql: ${TABLE}.is_canada_brand ;;
+  }
+
+  dimension: language {
+    type: string
+    sql: ${TABLE}.Language ;;
+  }
+
+  dimension: latest_customer_service_interaction_formatted {
+    type: string
+    sql: ${TABLE}.latest_customer_service_interaction_formatted ;;
+  }
+
+  dimension: number_of_latest_interactions {
+    type: string
+    sql: ${TABLE}.number_of_latest_interactions ;;
+  }
+
+  dimension: order_brand {
+    type: string
+    sql: ${TABLE}.order_brand ;;
+  }
+
+  dimension: order_language {
+    type: string
+    sql: ${TABLE}.order_language ;;
+  }
+
+  dimension: order_latest_customer_service_interaction {
+    type: string
+    sql: ${TABLE}.order_latest_customer_service_interaction ;;
+  }
+
+  dimension: order_number_of_customer_service_interactions_for_order {
+    type: string
+    sql: ${TABLE}.order_number_of_customer_service_interactions_for_order ;;
+  }
+
+  dimension: order_ships_in {
+    type: string
+    sql: ${TABLE}.order_ships_in ;;
+  }
+
+  dimension: order_wismo_page_url {
+    type: string
+    sql: ${TABLE}.order_wismo_page_url ;;
+  }
+
+  dimension: order_branded_short_id {
+    type: string
+    sql: ${TABLE}.order_branded_short_id ;;
+  }
+
+  dimension: order_delayed {
+    type: string
+    sql: ${TABLE}.order_delayed ;;
+  }
+
+  dimension: order_has_active_retention_platform {
+    type: string
+    sql: ${TABLE}.order_has_active_retention_platform ;;
+  }
+
+  dimension: order_is_wgs {
+    type: string
+    sql: ${TABLE}.order_is_wgs ;;
+  }
+
+  dimension: order_time_since_status_change {
+    type: string
+    sql: ${TABLE}.order_time_since_status_change ;;
+  }
+
+  dimension: order_total_amount {
+    type: string
+    sql: ${TABLE}.order_total_amount ;;
+  }
+
+  dimension: order_total_number_of_customer_service_interactions {
+    type: string
+    sql: ${TABLE}.order_total_number_of_customer_service_interactions ;;
+  }
+
+  dimension: status_changed_at {
+    type: string
+    sql: ${TABLE}.status_changed_at ;;
+  }
+
+  dimension: auto_translated {
+    type: string
+    sql: ${TABLE}.auto_translated ;;
+  }
+
+  dimension: copilot_used {
+    type: string
+    sql: ${TABLE}.copilot_used ;;
+  }
+
+  dimension: fin_ai_agent_image_used_in_reply {
+    type: string
+    sql: ${TABLE}.fin_ai_agent_image_used_in_reply ;;
+  }
+
+  dimension: fin_ai_agent_preview {
+    type: string
+    sql: ${TABLE}.fin_ai_agent_preview ;;
+  }
+
+  dimension: has_attachments {
+    type: string
+    sql: ${TABLE}.has_attachments ;;
+  }
+
+  dimension: imported_via_standalone {
+    type: string
+    sql: ${TABLE}.imported_via_standalone ;;
+  }
+
+  dimension: conversation_title {
+    type: string
+    sql: ${TABLE}.conversation_title ;;
+  }
+
+  dimension: conversation_status {
+    type: string
+    sql: ${TABLE}.conversation_status ;;
+  }
+
+  dimension_group: conversation_created {
+    type: time
+    timeframes: [raw, time, date, week, month, quarter, year]
+    sql: ${TABLE}.conversation_created_at ;;
+  }
+
+  dimension_group: last_activity {
+    type: time
+    timeframes: [raw, time, date, week, month, quarter, year]
+    sql: ${TABLE}.last_activity_at ;;
+  }
+
+  dimension_group: first_response {
+    type: time
+    timeframes: [raw, time, date, week, month, quarter, year]
+    sql: ${TABLE}.first_response_at ;;
+  }
+
+  dimension_group: conversation_closed {
+    type: time
+    timeframes: [raw, time, date, week, month, quarter, year]
+    sql: ${TABLE}.conversation_closed_at ;;
+  }
+
+  dimension: first_response_time_seconds {
+    type: number
+    sql: ${TABLE}.first_response_time_seconds ;;
+  }
+
+  dimension: resolution_time_seconds {
+    type: number
+    sql: ${TABLE}.resolution_time_seconds ;;
+  }
+
+  dimension: time_to_assignment_seconds {
+    type: number
+    sql: ${TABLE}.time_to_assignment_seconds ;;
+  }
+
+  dimension: handling_time_seconds {
+    type: number
+    sql: ${TABLE}.handling_time_seconds ;;
+  }
+
+  dimension: agent_replies_count {
+    type: number
+    sql: ${TABLE}.agent_replies_count ;;
+  }
+
+  dimension: customer_messages_count {
+    type: number
+    sql: ${TABLE}.customer_messages_count ;;
+  }
+
+  dimension: reopen_count {
+    type: number
+    sql: ${TABLE}.reopen_count ;;
+  }
+
+  dimension: reopen_flag {
+    type: yesno
+    sql: ${TABLE}.reopen_flag ;;
+  }
+
+  dimension: agent_reassignment_count {
+    type: number
+    sql: ${TABLE}.agent_reassignment_count ;;
+  }
+
+  dimension: assigned_agent_id {
+    type: string
+    sql: ${TABLE}.assigned_agent_id ;;
+  }
+
+  dimension: agent_team_id {
+    type: string
+    sql: ${TABLE}.agent_team_id ;;
+  }
+
+  dimension: last_closing_agent_name {
+    type: string
+    sql: ${TABLE}.last_closing_agent_name ;;
+  }
+
+  dimension_group: rated {
+    type: time
+    timeframes: [raw, time, date, week, month, quarter, year]
+    sql: ${TABLE}.rated_at ;;
+  }
+
+  dimension: cx_score {
+    type: string
+    sql: ${TABLE}.cx_score ;;
+  }
+
+  dimension: cx_explanation {
+    type: string
+    sql: ${TABLE}.cx_explanation ;;
+  }
+
+  dimension: conversation_topic {
+    type: string
+    sql: ${TABLE}.conversation_topic ;;
+  }
+
+  dimension: source_url {
+    type: string
+    sql: ${TABLE}.source_url ;;
+  }
+
+  # Topic dimensions 0-8
+  dimension: topic_0 { type: string sql: ${TABLE}.topic_0 ;; }
+  dimension: topic_1 { type: string sql: ${TABLE}.topic_1 ;; }
+  dimension: topic_2 { type: string sql: ${TABLE}.topic_2 ;; }
+  dimension: topic_3 { type: string sql: ${TABLE}.topic_3 ;; }
+  dimension: topic_4 { type: string sql: ${TABLE}.topic_4 ;; }
+  dimension: topic_5 { type: string sql: ${TABLE}.topic_5 ;; }
+  dimension: topic_6 { type: string sql: ${TABLE}.topic_6 ;; }
+  dimension: topic_7 { type: string sql: ${TABLE}.topic_7 ;; }
+  dimension: topic_8 { type: string sql: ${TABLE}.topic_8 ;; }
+
+  dimension: webhook_order_id {
+    type: string
+    sql: ${TABLE}.webhook_order_id ;;
+  }
+
+  dimension: webhook_order_status {
+    type: string
+    sql: ${TABLE}.webhook_order_status ;;
+  }
+
+  dimension: carrier {
+    type: string
+    sql: ${TABLE}.carrier ;;
+  }
+  dimension: tracking_number {
+    type: string
+    sql: ${TABLE}.tracking_number ;;
+  }
+
+  dimension: order_short_id {
+    type: string
+    sql: ${TABLE}.order_short_id ;;
+  }
+
+  dimension: webhook_order_total_amount {
+    type: string
+    sql: ${TABLE}.webhook_order_total_amount ;;
+  }
+
+  dimension: is_order_delayed {
+    type: string
+    sql: ${TABLE}.is_order_delayed ;;
+  }
+
+  dimension: webhook_language {
+    type: string
+    sql: ${TABLE}.webhook_language ;;
+  }
+
+  dimension: webhook_brand {
+    type: string
+    sql: ${TABLE}.webhook_brand ;;
+  }
+
+  dimension: webhook_client_id {
+    type: string
+    sql: ${TABLE}.webhook_client_id ;;
+  }
+
+  dimension: webhook_csat_score {
+    type: number
+    sql: ${TABLE}.webhook_csat_score ;;
+  }
+
+  dimension: webhook_csat_comment {
+    type: string
+    sql: ${TABLE}.webhook_csat_comment ;;
+  }
+
+  dimension: webhook_csat_agent_id {
+    type: string
+    sql: ${TABLE}.webhook_csat_agent_id ;;
+  }
+
+
 
 }
