@@ -205,3 +205,5 @@ explore: out_of_stock_shipments_snapshot_five9_interactions_tbl {}
 explore: agent_orders_real_time_vw {}
 
 explore: nps_outbound_dialer_tracker_tbl {}
+
+explore: fc_kate_file_google_sheet_2025_a {}
