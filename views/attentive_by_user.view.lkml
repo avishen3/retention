@@ -680,6 +680,18 @@ view: attentive_by_user {
             end ;;
   }
 
+## 09032026
+
+##  dimension: compared_period {
+##    type: string
+##    sql:
+##    case
+##      when {% condition date_filter %} ${ts_first_received_raw} {% endcondition %} then 'First period'
+##      when {% condition date_filter_2 %} ${ts_first_received_raw} {% endcondition %} then 'Second period'
+##    end ;;
+##  }
+
+
 
   dimension_group: date_in_period_a {
     description: "Use this as your date dimension when comparing periods. Aligns all periods onto the current period"
@@ -1913,27 +1925,47 @@ view: attentive_by_user {
     hidden:  yes
   }
 
+##  dimension: period {
+##    view_label: "Timeline Comparison Fields"
+##    label: "Period"
+##    description: "Pivot me! Returns which period the data belongs to: 'Current Period', 'Period 2', or 'Period 3'"
+##    type: string
+##    order_by_field: order_for_period
+##    sql:
+##       {% if current_date_range._is_filtered %}
+##         CASE
+##           WHEN {% condition current_date_range %} ${ts_first_received_raw} {% endcondition %}
+##           THEN "Current Period"
+##           WHEN ${ts_first_received_raw} between ${period_2_start} and ${period_2_end}
+##           THEN "Period 2"
+##           WHEN ${ts_first_received_raw} between ${period_3_start} and ${period_3_end}
+##           THEN "Period 3"
+##         END
+##       {% else %}
+##         NULL
+##       {% endif %}
+##       ;;
+##  }
+
+
   dimension: period {
-    view_label: "Timeline Comparison Fields"
-    label: "Period"
-    description: "Pivot me! Returns which period the data belongs to: 'Current Period', 'Period 2', or 'Period 3'"
-    type: string
-    order_by_field: order_for_period
     sql:
-       {% if current_date_range._is_filtered %}
-         CASE
-           WHEN {% condition current_date_range %} ${ts_first_received_raw} {% endcondition %}
-           THEN "Current Period"
-           WHEN ${ts_first_received_raw} between ${period_2_start} and ${period_2_end}
-           THEN "Period 2"
-           WHEN ${ts_first_received_raw} between ${period_3_start} and ${period_3_end}
-           THEN "Period 3"
-         END
-       {% else %}
-         NULL
-       {% endif %}
-       ;;
+    {% if current_date_range._is_filtered %}
+      CASE
+        WHEN {% condition current_date_range %} ${ts_first_received_raw} {% endcondition %}
+        THEN "Current Period"
+        WHEN TIMESTAMP(${ts_first_received_raw}) between TIMESTAMP(${period_2_start}) and TIMESTAMP(${period_2_end})
+        THEN "Period 2"
+        WHEN TIMESTAMP(${ts_first_received_raw}) between TIMESTAMP(${period_3_start}) and TIMESTAMP(${period_3_end})
+        THEN "Period 3"
+      END
+    {% else %} NULL
+    {% endif %} ;;
   }
+
+
+
+
 
   dimension: order_for_period {
     hidden: yes
