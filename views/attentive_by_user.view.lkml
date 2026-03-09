@@ -260,13 +260,25 @@ view: attentive_by_user {
     datatype: datetime
     sql: ${TABLE}.ts_first_clicked ;;
   }
+
+
+##  dimension_group: ts_first_received {
+##    type: time
+##    timeframes: [raw, time, date, week, month, quarter, year, day_of_week,
+##    day_of_week_index, hour]
+##    datatype: datetime
+##    sql: ${TABLE}.ts_first_received ;;
+##  }
+
+
   dimension_group: ts_first_received {
     type: time
     timeframes: [raw, time, date, week, month, quarter, year, day_of_week,
-    day_of_week_index, hour]
-    datatype: datetime
+      day_of_week_index, hour]
+    datatype: timestamp
     sql: ${TABLE}.ts_first_received ;;
   }
+
 
   #### date granulraty
 
@@ -674,7 +686,7 @@ view: attentive_by_user {
     label: "Current Period"
     type: time
     sql: TIMESTAMP_ADD({% date_start date_filter %}, INTERVAL (${minute_in_period}-1) MINUTE) ;;
-    view_label: "Timeline Comparison Fields"
+    view_label: "Timeline Comparison Fields a"
     timeframes: [date, week, month, quarter, year, time, hour, hour2]
   }
 
