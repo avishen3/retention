@@ -1967,24 +1967,44 @@ view: attentive_by_user {
 
 
 
+ ## dimension: order_for_period {
+  ##  hidden: yes
+  ##  view_label: "Timeline Comparison Fields"
+  ##  type: string
+  ##  sql:
+  ##     {% if current_date_range._is_filtered %}
+  ##       CASE
+  ##         WHEN {% condition current_date_range %} ${ts_first_received_raw} {% endcondition %}
+  ##         THEN 1
+  ##         WHEN ${ts_first_received_raw} between ${period_2_start} and ${period_2_end}
+  ##         THEN 2
+  ##         WHEN ${ts_first_received_raw} between ${period_3_start} and ${period_3_end}
+  ##         THEN 3
+  ##       END
+  ##     {% else %}
+  ##       NULL
+  ##     {% endif %}
+  ##     ;;
+  ##}
+
+
   dimension: order_for_period {
     hidden: yes
     view_label: "Timeline Comparison Fields"
     type: string
     sql:
-       {% if current_date_range._is_filtered %}
-         CASE
-           WHEN {% condition current_date_range %} ${ts_first_received_raw} {% endcondition %}
-           THEN 1
-           WHEN ${ts_first_received_raw} between ${period_2_start} and ${period_2_end}
-           THEN 2
-           WHEN ${ts_first_received_raw} between ${period_3_start} and ${period_3_end}
-           THEN 3
-         END
-       {% else %}
-         NULL
-       {% endif %}
-       ;;
+     {% if current_date_range._is_filtered %}
+       CASE
+         WHEN {% condition current_date_range %} ${ts_first_received_raw} {% endcondition %}
+         THEN 1
+         WHEN TIMESTAMP(${ts_first_received_raw}) between TIMESTAMP(${period_2_start}) and TIMESTAMP(${period_2_end})
+         THEN 2
+         WHEN TIMESTAMP(${ts_first_received_raw}) between TIMESTAMP(${period_3_start}) and TIMESTAMP(${period_3_end})
+         THEN 3
+       END
+     {% else %}
+       NULL
+     {% endif %} ;;
   }
 
   dimension_group: date_in_period {
@@ -2000,45 +2020,82 @@ view: attentive_by_user {
     view_label: "Timeline Comparison Fields"
     description: "Gives the number of minutes since the start of each period. Use this to align the event dates onto the same axis."
     type: number
+
     sql:
     {% if current_date_range._is_filtered %}
-      CASE
-        WHEN {% condition current_date_range %} ${ts_first_received_raw} {% endcondition %}
-        THEN TIMESTAMP_DIFF(${ts_first_received_raw}, {% date_start current_date_range %}, MINUTE) + 1
+    CASE
+    WHEN {% condition current_date_range %} ${ts_first_received_raw} {% endcondition %}
+    THEN TIMESTAMP_DIFF(${ts_first_received_raw}, {% date_start current_date_range %}, MINUTE) + 1
+    WHEN TIMESTAMP(${ts_first_received_raw}) between TIMESTAMP(${period_2_start}) and TIMESTAMP(${period_2_end})
+    THEN TIMESTAMP_DIFF(${ts_first_received_raw}, TIMESTAMP(${period_2_start}), MINUTE) + 1
+    WHEN TIMESTAMP(${ts_first_received_raw}) between TIMESTAMP(${period_3_start}) and TIMESTAMP(${period_3_end})
+    THEN TIMESTAMP_DIFF(${ts_first_received_raw}, TIMESTAMP(${period_3_start}), MINUTE) + 1
+    ELSE null
+    END
+    {% else %} NULL
+    {% endif %} ;;
 
-      WHEN ${ts_first_received_raw} between ${period_2_start} and ${period_2_end}
-      THEN TIMESTAMP_DIFF(${ts_first_received_raw}, ${period_2_start}, MINUTE) + 1
+  ##  sql:
+  ##  {% if current_date_range._is_filtered %}
+  ##    CASE
+  ##      WHEN {% condition current_date_range %} ${ts_first_received_raw} {% endcondition %}
+  ##      THEN TIMESTAMP_DIFF(${ts_first_received_raw}, {% date_start current_date_range %}, MINUTE) + 1
+  ##
+  ##    WHEN ${ts_first_received_raw} between ${period_2_start} and ${period_2_end}
+  ##    THEN TIMESTAMP_DIFF(${ts_first_received_raw}, ${period_2_start}, MINUTE) + 1
+  ##
+  ##    WHEN ${ts_first_received_raw} between ${period_3_start} and ${period_3_end}
+  ##    THEN TIMESTAMP_DIFF(${ts_first_received_raw}, ${period_3_start}, MINUTE) + 1
+  ##
+  ##    ELSE null
+  ##    END
+  ##    {% else %} NULL
+  ##    {% endif %}
+  ##    ;;
 
-      WHEN ${ts_first_received_raw} between ${period_3_start} and ${period_3_end}
-      THEN TIMESTAMP_DIFF(${ts_first_received_raw}, ${period_3_start}, MINUTE) + 1
 
-      ELSE null
-      END
-      {% else %} NULL
-      {% endif %}
-      ;;
+
     hidden: no
   }
+
+
+
 
   dimension: day_in_period {
     view_label: "Timeline Comparison Fields"
     description: "Gives the number of days since the start of each period. Use this to align the event dates onto the same axis."
     type: number
+
     sql:
     {% if current_date_range._is_filtered %}
-      CASE
-        WHEN {% condition current_date_range %} ${ts_first_received_raw} {% endcondition %}
-        THEN TIMESTAMP_DIFF(${ts_first_received_raw}, {% date_start current_date_range %}, DAY) + 1
+    CASE
+    WHEN {% condition current_date_range %} ${ts_first_received_raw} {% endcondition %}
+    THEN TIMESTAMP_DIFF(${ts_first_received_raw}, {% date_start current_date_range %}, DAY) + 1
+    WHEN TIMESTAMP(${ts_first_received_raw}) between TIMESTAMP(${period_2_start}) and TIMESTAMP(${period_2_end})
+    THEN TIMESTAMP_DIFF(${ts_first_received_raw}, TIMESTAMP(${period_2_start}), DAY) + 1
+    WHEN TIMESTAMP(${ts_first_received_raw}) between TIMESTAMP(${period_3_start}) and TIMESTAMP(${period_3_end})
+    THEN TIMESTAMP_DIFF(${ts_first_received_raw}, TIMESTAMP(${period_3_start}), DAY) + 1
+    END
+    {% else %} NULL
+    {% endif %} ;;
 
-      WHEN ${ts_first_received_raw} between ${period_2_start} and ${period_2_end}
-      THEN TIMESTAMP_DIFF(${ts_first_received_raw}, ${period_2_start}, DAY) + 1
 
-      WHEN ${ts_first_received_raw} between ${period_3_start} and ${period_3_end}
-      THEN TIMESTAMP_DIFF(${ts_first_received_raw}, ${period_3_start}, DAY) + 1
-      END
-      {% else %} NULL
-      {% endif %}
-      ;;
+  ##  sql:
+  ##  {% if current_date_range._is_filtered %}
+  ##    CASE
+  ##      WHEN {% condition current_date_range %} ${ts_first_received_raw} {% endcondition %}
+  ##      THEN TIMESTAMP_DIFF(${ts_first_received_raw}, {% date_start current_date_range %}, DAY) + 1
+  ##
+  ##    WHEN ${ts_first_received_raw} between ${period_2_start} and ${period_2_end}
+  ##    THEN TIMESTAMP_DIFF(${ts_first_received_raw}, ${period_2_start}, DAY) + 1
+
+  ##    WHEN ${ts_first_received_raw} between ${period_3_start} and ${period_3_end}
+  ##    THEN TIMESTAMP_DIFF(${ts_first_received_raw}, ${period_3_start}, DAY) + 1
+  ##    END
+  ##    {% else %} NULL
+  ##    {% endif %}
+
+  ##    ;;
     hidden: no
   }
 
