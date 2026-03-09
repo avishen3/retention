@@ -1811,11 +1811,12 @@ view: attentive_by_user {
 
 ### 09032026 - clude code
 
-###  Period Comparison Block
+###  Period Comparison Block - 03/09/2026
 
   filter: current_date_range {
     view_label: "Timeline Comparison Fields"
     label: "1. Current Period Date Range"
+    description: "Select the date range for your current period."
     type: date
   }
 
@@ -1823,33 +1824,65 @@ view: attentive_by_user {
     view_label: "Timeline Comparison Fields"
     label: "2. Period 2 Date Range (Custom)"
     group_label: "Compare to:"
+    description: "Select the date range for Period 2 comparison."
+    type: date
+  }
+
+  filter: period_3_date_range {
+    view_label: "Timeline Comparison Fields"
+    label: "3. Period 3 Date Range (Custom)"
+    group_label: "Compare to:"
+    description: "Select the date range for Period 3 comparison."
     type: date
   }
 
   dimension: period_2_start {
+    view_label: "Timeline Comparison Fields"
+    description: "Start of Period 2"
     type: date_raw
     sql: {% date_start previous_date_range %} ;;
     hidden: yes
   }
 
   dimension: period_2_end {
+    view_label: "Timeline Comparison Fields"
+    description: "End of Period 2"
     type: date_raw
     sql: {% date_end previous_date_range %} ;;
+    hidden: yes
+  }
+
+  dimension: period_3_start {
+    view_label: "Timeline Comparison Fields"
+    description: "Start of Period 3"
+    type: date_raw
+    sql: {% date_start period_3_date_range %} ;;
+    hidden: yes
+  }
+
+  dimension: period_3_end {
+    view_label: "Timeline Comparison Fields"
+    description: "End of Period 3"
+    type: date_raw
+    sql: {% date_end period_3_date_range %} ;;
     hidden: yes
   }
 
   dimension: period {
     view_label: "Timeline Comparison Fields"
     label: "Period"
+    description: "Pivot me! Returns which period the data belongs to: 'Current Period', 'Period 2', or 'Period 3'"
     type: string
     order_by_field: order_for_period
     sql:
       {% if current_date_range._is_filtered %}
         CASE
-          WHEN {% condition current_date_range %} ${ts_first_received_raw} {% endcondition %}
+          WHEN {% condition current_date_range %} TIMESTAMP(${ts_first_received_raw}) {% endcondition %}
           THEN "Current Period"
           WHEN TIMESTAMP(${ts_first_received_raw}) BETWEEN TIMESTAMP(${period_2_start}) AND TIMESTAMP(${period_2_end})
           THEN "Period 2"
+          WHEN TIMESTAMP(${ts_first_received_raw}) BETWEEN TIMESTAMP(${period_3_start}) AND TIMESTAMP(${period_3_end})
+          THEN "Period 3"
         END
       {% else %} NULL
       {% endif %} ;;
@@ -1857,12 +1890,14 @@ view: attentive_by_user {
 
   dimension: order_for_period {
     hidden: yes
+    view_label: "Timeline Comparison Fields"
     type: number
     sql:
       {% if current_date_range._is_filtered %}
         CASE
-          WHEN {% condition current_date_range %} ${ts_first_received_raw} {% endcondition %} THEN 1
+          WHEN {% condition current_date_range %} TIMESTAMP(${ts_first_received_raw}) {% endcondition %} THEN 1
           WHEN TIMESTAMP(${ts_first_received_raw}) BETWEEN TIMESTAMP(${period_2_start}) AND TIMESTAMP(${period_2_end}) THEN 2
+          WHEN TIMESTAMP(${ts_first_received_raw}) BETWEEN TIMESTAMP(${period_3_start}) AND TIMESTAMP(${period_3_end}) THEN 3
         END
       {% else %} NULL
       {% endif %} ;;
@@ -1870,23 +1905,45 @@ view: attentive_by_user {
 
   dimension: minute_in_period {
     view_label: "Timeline Comparison Fields"
+    description: "Gives the number of minutes since the start of each period. Used internally by date_in_period."
     type: number
+    hidden: yes
     sql:
       {% if current_date_range._is_filtered %}
         CASE
-          WHEN {% condition current_date_range %} ${ts_first_received_raw} {% endcondition %}
-          THEN TIMESTAMP_DIFF(${ts_first_received_raw}, {% date_start current_date_range %}, MINUTE) + 1
+          WHEN {% condition current_date_range %} TIMESTAMP(${ts_first_received_raw}) {% endcondition %}
+          THEN TIMESTAMP_DIFF(TIMESTAMP(${ts_first_received_raw}), {% date_start current_date_range %}, MINUTE) + 1
           WHEN TIMESTAMP(${ts_first_received_raw}) BETWEEN TIMESTAMP(${period_2_start}) AND TIMESTAMP(${period_2_end})
-          THEN TIMESTAMP_DIFF(${ts_first_received_raw}, TIMESTAMP(${period_2_start}), MINUTE) + 1
+          THEN TIMESTAMP_DIFF(TIMESTAMP(${ts_first_received_raw}), TIMESTAMP(${period_2_start}), MINUTE) + 1
+          WHEN TIMESTAMP(${ts_first_received_raw}) BETWEEN TIMESTAMP(${period_3_start}) AND TIMESTAMP(${period_3_end})
+          THEN TIMESTAMP_DIFF(TIMESTAMP(${ts_first_received_raw}), TIMESTAMP(${period_3_start}), MINUTE) + 1
           ELSE NULL
         END
       {% else %} NULL
       {% endif %} ;;
-    hidden: yes
+  }
+
+  dimension: day_in_period {
+    view_label: "Timeline Comparison Fields"
+    description: "Gives the number of days since the start of each period. Use to align periods on the same axis."
+    type: number
+    hidden: no
+    sql:
+      {% if current_date_range._is_filtered %}
+        CASE
+          WHEN {% condition current_date_range %} TIMESTAMP(${ts_first_received_raw}) {% endcondition %}
+          THEN TIMESTAMP_DIFF(TIMESTAMP(${ts_first_received_raw}), {% date_start current_date_range %}, DAY) + 1
+          WHEN TIMESTAMP(${ts_first_received_raw}) BETWEEN TIMESTAMP(${period_2_start}) AND TIMESTAMP(${period_2_end})
+          THEN TIMESTAMP_DIFF(TIMESTAMP(${ts_first_received_raw}), TIMESTAMP(${period_2_start}), DAY) + 1
+          WHEN TIMESTAMP(${ts_first_received_raw}) BETWEEN TIMESTAMP(${period_3_start}) AND TIMESTAMP(${period_3_end})
+          THEN TIMESTAMP_DIFF(TIMESTAMP(${ts_first_received_raw}), TIMESTAMP(${period_3_start}), DAY) + 1
+        END
+      {% else %} NULL
+      {% endif %} ;;
   }
 
   dimension_group: date_in_period {
-    description: "Use this as your date dimension when comparing periods. Aligns both periods onto the current period's dates."
+    description: "Use this as your date dimension when comparing periods. Aligns all periods onto the current period's dates."
     label: "Aligned Period"
     type: time
     sql: TIMESTAMP_ADD({% date_start current_date_range %}, INTERVAL (${minute_in_period}-1) MINUTE) ;;
@@ -1894,23 +1951,33 @@ view: attentive_by_user {
     timeframes: [date, week, month, quarter, year, hour]
   }
 
-  dimension: day_in_period {
+  parameter: Date_Granularity_for_compare {
     view_label: "Timeline Comparison Fields"
-    description: "Day number since period start. Use to align both periods on the same axis."
-    type: number
-    sql:
-      {% if current_date_range._is_filtered %}
-        CASE
-          WHEN {% condition current_date_range %} ${ts_first_received_raw} {% endcondition %}
-          THEN TIMESTAMP_DIFF(${ts_first_received_raw}, {% date_start current_date_range %}, DAY) + 1
-          WHEN TIMESTAMP(${ts_first_received_raw}) BETWEEN TIMESTAMP(${period_2_start}) AND TIMESTAMP(${period_2_end})
-          THEN TIMESTAMP_DIFF(${ts_first_received_raw}, TIMESTAMP(${period_2_start}), DAY) + 1
-        END
-      {% else %} NULL
-      {% endif %} ;;
+    label: "Date Granularity"
+    type: string
+    allowed_value: { value: "Hour" }
+    allowed_value: { value: "Day" }
+    allowed_value: { value: "Week" }
+    allowed_value: { value: "Month" }
+    allowed_value: { value: "Quarter" }
+    allowed_value: { value: "Year" }
   }
 
-
+  dimension: event_date_for_compare {
+    view_label: "Timeline Comparison Fields"
+    label_from_parameter: Date_Granularity_for_compare
+    description: "Use with 'Date Granularity' selector to control the date grouping when comparing periods."
+    sql:
+      CASE
+        WHEN {% parameter Date_Granularity_for_compare %} = 'Hour'    THEN CAST(${ts_first_received_hour} AS STRING)
+        WHEN {% parameter Date_Granularity_for_compare %} = 'Day'     THEN CAST(${ts_first_received_date} AS STRING)
+        WHEN {% parameter Date_Granularity_for_compare %} = 'Week'    THEN CAST(${ts_first_received_week} AS STRING)
+        WHEN {% parameter Date_Granularity_for_compare %} = 'Month'   THEN CAST(${ts_first_received_month} AS STRING)
+        WHEN {% parameter Date_Granularity_for_compare %} = 'Quarter' THEN CAST(${ts_first_received_quarter} AS STRING)
+        WHEN {% parameter Date_Granularity_for_compare %} = 'Year'    THEN CAST(${ts_first_received_year} AS STRING)
+        ELSE NULL
+      END ;;
+  }
 
 
 }
