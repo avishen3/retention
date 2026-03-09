@@ -669,6 +669,40 @@ view: attentive_by_user {
   }
 
 
+  dimension_group: date_in_period_a {
+    description: "Use this as your date dimension when comparing periods. Aligns all periods onto the current period"
+    label: "Current Period"
+    type: time
+    sql: TIMESTAMP_ADD({% date_start date_filter %}, INTERVAL (${minute_in_period}-1) MINUTE) ;;
+    view_label: "Timeline Comparison Fields"
+    timeframes: [date, week, month, quarter, year, time, hour, hour2]
+  }
+
+  dimension: minute_in_period_a {
+    view_label: "Timeline Comparison Fields"
+    description: "Gives the number of minutes since the start of each period. Use this to align the event dates onto the same axis."
+    type: number
+    sql:
+    {% if date_filter._is_filtered %}
+      CASE
+        WHEN {% condition date_filter %} ${ts_first_received_raw} {% endcondition %}
+        THEN TIMESTAMP_DIFF(${ts_first_received_raw}, {% date_start current_date_range %}, MINUTE) + 1
+
+      WHEN ${ts_first_received_raw} between ${period_2_start} and ${period_2_end}
+      THEN TIMESTAMP_DIFF(${ts_first_received_raw}, ${period_2_start}, MINUTE) + 1
+
+      WHEN ${ts_first_received_raw} between ${period_3_start} and ${period_3_end}
+      THEN TIMESTAMP_DIFF(${ts_first_received_raw}, ${period_3_start}, MINUTE) + 1
+
+      ELSE null
+      END
+      {% else %} NULL
+      {% endif %}
+      ;;
+    hidden: no
+  }
+
+
 
 
 
