@@ -1809,7 +1809,106 @@ view: attentive_by_user {
   }
 
 
+### 09032026 - clude code
 
+###  Period Comparison Block
+
+  filter: current_date_range {
+    view_label: "Timeline Comparison Fields"
+    label: "1. Current Period Date Range"
+    type: date
+  }
+
+  filter: previous_date_range {
+    view_label: "Timeline Comparison Fields"
+    label: "2. Period 2 Date Range (Custom)"
+    group_label: "Compare to:"
+    type: date
+  }
+
+  dimension: period_2_start {
+    type: date_raw
+    sql: {% date_start previous_date_range %} ;;
+    hidden: yes
+  }
+
+  dimension: period_2_end {
+    type: date_raw
+    sql: {% date_end previous_date_range %} ;;
+    hidden: yes
+  }
+
+  dimension: period {
+    view_label: "Timeline Comparison Fields"
+    label: "Period"
+    type: string
+    order_by_field: order_for_period
+    sql:
+      {% if current_date_range._is_filtered %}
+        CASE
+          WHEN {% condition current_date_range %} ${ts_first_received_raw} {% endcondition %}
+          THEN "Current Period"
+          WHEN TIMESTAMP(${ts_first_received_raw}) BETWEEN TIMESTAMP(${period_2_start}) AND TIMESTAMP(${period_2_end})
+          THEN "Period 2"
+        END
+      {% else %} NULL
+      {% endif %} ;;
+  }
+
+  dimension: order_for_period {
+    hidden: yes
+    type: number
+    sql:
+      {% if current_date_range._is_filtered %}
+        CASE
+          WHEN {% condition current_date_range %} ${ts_first_received_raw} {% endcondition %} THEN 1
+          WHEN TIMESTAMP(${ts_first_received_raw}) BETWEEN TIMESTAMP(${period_2_start}) AND TIMESTAMP(${period_2_end}) THEN 2
+        END
+      {% else %} NULL
+      {% endif %} ;;
+  }
+
+  dimension: minute_in_period {
+    view_label: "Timeline Comparison Fields"
+    type: number
+    sql:
+      {% if current_date_range._is_filtered %}
+        CASE
+          WHEN {% condition current_date_range %} ${ts_first_received_raw} {% endcondition %}
+          THEN TIMESTAMP_DIFF(${ts_first_received_raw}, {% date_start current_date_range %}, MINUTE) + 1
+          WHEN TIMESTAMP(${ts_first_received_raw}) BETWEEN TIMESTAMP(${period_2_start}) AND TIMESTAMP(${period_2_end})
+          THEN TIMESTAMP_DIFF(${ts_first_received_raw}, TIMESTAMP(${period_2_start}), MINUTE) + 1
+          ELSE NULL
+        END
+      {% else %} NULL
+      {% endif %} ;;
+    hidden: yes
+  }
+
+  dimension_group: date_in_period {
+    description: "Use this as your date dimension when comparing periods. Aligns both periods onto the current period's dates."
+    label: "Aligned Period"
+    type: time
+    sql: TIMESTAMP_ADD({% date_start current_date_range %}, INTERVAL (${minute_in_period}-1) MINUTE) ;;
+    view_label: "Timeline Comparison Fields"
+    timeframes: [date, week, month, quarter, year, hour]
+  }
+
+  dimension: day_in_period {
+    view_label: "Timeline Comparison Fields"
+    description: "Day number since period start. Use to align both periods on the same axis."
+    type: number
+    sql:
+      {% if current_date_range._is_filtered %}
+        CASE
+          WHEN {% condition current_date_range %} ${ts_first_received_raw} {% endcondition %}
+          THEN TIMESTAMP_DIFF(${ts_first_received_raw}, {% date_start current_date_range %}, DAY) + 1
+          WHEN TIMESTAMP(${ts_first_received_raw}) BETWEEN TIMESTAMP(${period_2_start}) AND TIMESTAMP(${period_2_end})
+          THEN TIMESTAMP_DIFF(${ts_first_received_raw}, TIMESTAMP(${period_2_start}), DAY) + 1
+        END
+      {% else %} NULL
+      {% endif %} ;;
+  }
 
 
 
