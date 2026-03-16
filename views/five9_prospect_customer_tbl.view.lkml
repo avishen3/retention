@@ -1694,89 +1694,167 @@ view: five9_prospect_customer_tbl {
   }
 
 
+  ###16032026
+
   dimension: webhook_copilot_used {
     type: string
     sql: ${TABLE}.webhook_copilot_used ;;
+    group_label: "Intercome - AI metrics"
+
   }
 
   dimension: ai_title {
     type: string
     sql: ${TABLE}.ai_title ;;
+    group_label: "Intercome - AI metrics"
+
   }
 
   dimension: ai_answer_length {
     type: string
     sql: ${TABLE}.ai_answer_length ;;
+    group_label: "Intercome - AI metrics"
+
   }
 
   dimension: ai_tone_of_voice {
     type: string
     sql: ${TABLE}.ai_tone_of_voice ;;
+    group_label: "Intercome - AI metrics"
+
   }
 
   dimension: ai_pronoun_formality {
     type: string
     sql: ${TABLE}.ai_pronoun_formality ;;
+    group_label: "Intercome - AI metrics"
+
   }
 
   dimension: fin_resolution_state {
     type: string
     sql: ${TABLE}.fin_resolution_state ;;
+    group_label: "Intercome - AI metrics"
+
   }
 
   dimension: fin_preview {
     type: string
     sql: ${TABLE}.fin_preview ;;
+    group_label: "Intercome - AI metrics"
+
   }
 
   dimension: fin_image_used {
     type: string
     sql: ${TABLE}.fin_image_used ;;
+    group_label: "Intercome - AI metrics"
+
   }
 
   dimension: fraudulent_transaction_reported {
     type: string
     sql: ${TABLE}.fraudulent_transaction_reported ;;
+    group_label: "Intercome - AI metrics"
+
   }
 
   dimension: webhook_has_attachments {
     type: string
     sql: ${TABLE}.webhook_has_attachments ;;
+    group_label: "Intercome - AI metrics"
+
   }
 
   dimension: webhook_imported_via_standalone {
     type: string
     sql: ${TABLE}.webhook_imported_via_standalone ;;
+    group_label: "Intercome - AI metrics"
+
   }
 
   dimension: ai_agent_participated {
     type: string
     sql: ${TABLE}.ai_agent_participated ;;
+    group_label: "Intercome - AI metrics"
+
   }
 
   dimension: ai_resolution_state {
     type: string
     sql: ${TABLE}.ai_resolution_state ;;
+    group_label: "Intercome - AI metrics"
+
   }
 
   dimension: ai_last_answer_type {
     type: string
     sql: ${TABLE}.ai_last_answer_type ;;
+    group_label: "Intercome - AI metrics"
+
   }
 
   dimension: ai_source_title {
     type: string
     sql: ${TABLE}.ai_source_title ;;
+    group_label: "Intercome - AI metrics"
+
   }
 
   dimension: ai_source_type {
     type: string
     sql: ${TABLE}.ai_source_type ;;
+    group_label: "Intercome - AI metrics"
+
   }
 
   dimension: ai_agent_rating {
     type: string
     sql: ${TABLE}.ai_agent_rating ;;
+    group_label: "Intercome - AI metrics"
+
+  }
+
+  dimension: webhook_engagement_type {
+    type: string
+    sql: ${TABLE}.webhook_engagement_type ;;
+    group_label: "Intercome - AI metrics"
+
+  }
+
+  dimension: fin_outcome {
+    type: string
+    sql: ${TABLE}.fin_outcome ;;
+    group_label: "Intercome - AI metrics"
+
+  }
+
+  dimension: fin_sub_intent {
+    type: string
+    sql: ${TABLE}.fin_sub_intent ;;
+    group_label: "Intercome - AI metrics"
+
+  }
+
+  dimension: beyond_general_inquiry {
+    type: string
+    sql: ${TABLE}.beyond_general_inquiry ;;
+    group_label: "Intercome - AI metrics"
+
+  }
+
+  dimension: resolution_status {
+    type: string
+    sql: ${TABLE}.resolution_status ;;
+    group_label: "Intercome - AI metrics"
+
+  }
+
+  dimension: fin_fraudulent_transaction_reported {
+    type: string
+    sql: ${TABLE}.fin_fraudulent_transaction_reported ;;
+    group_label: "Intercome - AI metrics"
+
   }
 
 
