@@ -1694,5 +1694,90 @@ view: five9_prospect_customer_tbl {
   }
 
 
+  dimension: webhook_copilot_used {
+    type: string
+    sql: ${TABLE}.webhook_copilot_used ;;
+  }
+
+  dimension: ai_title {
+    type: string
+    sql: ${TABLE}.ai_title ;;
+  }
+
+  dimension: ai_answer_length {
+    type: string
+    sql: ${TABLE}.ai_answer_length ;;
+  }
+
+  dimension: ai_tone_of_voice {
+    type: string
+    sql: ${TABLE}.ai_tone_of_voice ;;
+  }
+
+  dimension: ai_pronoun_formality {
+    type: string
+    sql: ${TABLE}.ai_pronoun_formality ;;
+  }
+
+  dimension: fin_resolution_state {
+    type: string
+    sql: ${TABLE}.fin_resolution_state ;;
+  }
+
+  dimension: fin_preview {
+    type: string
+    sql: ${TABLE}.fin_preview ;;
+  }
+
+  dimension: fin_image_used {
+    type: string
+    sql: ${TABLE}.fin_image_used ;;
+  }
+
+  dimension: fraudulent_transaction_reported {
+    type: string
+    sql: ${TABLE}.fraudulent_transaction_reported ;;
+  }
+
+  dimension: webhook_has_attachments {
+    type: string
+    sql: ${TABLE}.webhook_has_attachments ;;
+  }
+
+  dimension: webhook_imported_via_standalone {
+    type: string
+    sql: ${TABLE}.webhook_imported_via_standalone ;;
+  }
+
+  dimension: ai_agent_participated {
+    type: string
+    sql: ${TABLE}.ai_agent_participated ;;
+  }
+
+  dimension: ai_resolution_state {
+    type: string
+    sql: ${TABLE}.ai_resolution_state ;;
+  }
+
+  dimension: ai_last_answer_type {
+    type: string
+    sql: ${TABLE}.ai_last_answer_type ;;
+  }
+
+  dimension: ai_source_title {
+    type: string
+    sql: ${TABLE}.ai_source_title ;;
+  }
+
+  dimension: ai_source_type {
+    type: string
+    sql: ${TABLE}.ai_source_type ;;
+  }
+
+  dimension: ai_agent_rating {
+    type: string
+    sql: ${TABLE}.ai_agent_rating ;;
+  }
+
 
 }
