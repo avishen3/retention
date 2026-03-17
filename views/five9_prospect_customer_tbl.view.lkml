@@ -1829,6 +1829,14 @@ view: five9_prospect_customer_tbl {
 
   }
 
+  dimension: fin_intent {
+    type: string
+    sql: ${TABLE}.fin_intent ;;
+    group_label: "Intercome - AI metrics"
+
+  }
+
+
   dimension: fin_sub_intent {
     type: string
     sql: ${TABLE}.fin_sub_intent ;;
