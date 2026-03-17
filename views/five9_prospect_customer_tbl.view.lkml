@@ -1867,4 +1867,12 @@ view: five9_prospect_customer_tbl {
     }
 
 
+  measure:  Fin_AI_agent_involvement_rate{
+    type: number
+    sql: ${total_sessions_with_ai_agent_participated}/${total_session_id} ;;
+    value_format: "#,##0"
+    group_label: "Intercome - AI Measures"
+  }
+
+
 }
