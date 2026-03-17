@@ -1857,5 +1857,14 @@ view: five9_prospect_customer_tbl {
 
   }
 
+### 17-03-2026
+
+  measure: total_sessions_with_ai_agent_participated{
+    type: count_distinct
+    sql: case when ${ai_agent_participated} =true then ${provider_session_id} else null end ;;
+    value_format: "#,##0"
+    group_label: "Intercome - AI Measures"
+    }
+
 
 }
