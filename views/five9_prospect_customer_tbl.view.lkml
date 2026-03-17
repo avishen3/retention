@@ -1861,7 +1861,7 @@ view: five9_prospect_customer_tbl {
 
   measure: total_sessions_with_ai_agent_participated{
     type: count_distinct
-    sql: case when ${ai_agent_participated} is true then ${provider_session_id} else null end ;;
+    sql: case when ${ai_agent_participated} = "true" then ${provider_session_id} else null end ;;
     value_format: "#,##0"
     group_label: "Intercome - AI Measures"
     }
