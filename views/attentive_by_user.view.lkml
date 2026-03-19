@@ -1980,4 +1980,30 @@ view: attentive_by_user {
   }
 
 
+### 19032026
+
+
+  dimension: short_id_is_bundle {
+    type: yesno
+    sql: ${TABLE}.short_id_is_bundle ;;
+  }
+
+  dimension: short_id_is_adjustable_in_cart {
+    type: yesno
+    sql: ${TABLE}.short_id_is_adjustable_in_cart ;;
+  }
+
+  dimension: sms_short_id_is_bundle {
+    type: yesno
+    sql: ${TABLE}.sms_short_id_is_bundle ;;
+  }
+
+  dimension: sms_short_id_is_adjustable_in_cart {
+    type: yesno
+    sql: ${TABLE}.sms_short_id_is_adjustable_in_cart ;;
+  }
+
+
+
+
 }
