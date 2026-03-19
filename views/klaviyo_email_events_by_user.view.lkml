@@ -2792,6 +2792,29 @@ value: "Variant"
         ;;
         }
 
+##19032026
+
+
+  dimension: short_id_is_bundle {
+    type: yesno
+    sql: ${TABLE}.short_id_is_bundle ;;
+  }
+
+  dimension: short_id_is_adjustable_in_cart {
+    type: yesno
+    sql: ${TABLE}.short_id_is_adjustable_in_cart ;;
+  }
+
+  dimension: email_short_id_is_bundle {
+    type: yesno
+    sql: ${TABLE}.email_short_id_is_bundle ;;
+  }
+
+  dimension: email_short_id_is_adjustable_in_cart {
+    type: yesno
+    sql: ${TABLE}.email_short_id_is_adjustable_in_cart ;;
+  }
+
 
 
 
