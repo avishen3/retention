@@ -1882,7 +1882,7 @@ view: five9_prospect_customer_tbl {
     group_label: "Intercome - AI Measures"
   }
 
-##WGS V2 - adding in wgs dimentions fron the table
+##WGS V2 - adding in wgs dimentions fron the table - 26/03/2026
 
   dimension: order_is_wgs_before {
     type: yesno
