@@ -207,3 +207,5 @@ explore: agent_orders_real_time_vw {}
 explore: nps_outbound_dialer_tracker_tbl {}
 
 explore: fc_kate_file_google_sheet_2025_a {}
+
+explore: intercom_conversation {}
