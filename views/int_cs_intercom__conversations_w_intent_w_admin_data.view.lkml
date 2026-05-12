@@ -1592,6 +1592,35 @@ view: intercom_conversation {
   }
 
 
+  # -------------------------------------------------------
+  # MEASURES - aov
+  # ----
+
+
+  measure: aov_cs_assisted_48h {
+    description: "AOV - CS assisted orders within 48h (revenue / distinct orders)"
+    type: number
+    sql: ${distinct_revenue_cs_assisted_48h} / NULLIF(${total_short_id_after_cs_assisted_48h}, 0) ;;
+    value_format: "$#,##0"
+    group_label: "Intercom Measures - Revenue"
+  }
+
+  measure: aov_cs_agent_order_within_48h {
+    description: "AOV - CS agent-placed orders within 48h (revenue / distinct orders)"
+    type: number
+    sql: ${distinct_revenue_cs_agent_within_48h} / NULLIF(${total_short_id_after_cs_agent_order_within_48h}, 0) ;;
+    value_format: "$#,##0"
+    group_label: "Intercom Measures - Revenue"
+  }
+
+  measure: aov_cs_agent_order {
+    description: "AOV - all CS agent-placed orders regardless of time (revenue / distinct orders)"
+    type: number
+    sql: ${distinct_revenue_cs_agent_within_48h} / NULLIF(${total_conversations_cs_agent_order}, 0) ;;
+    value_format: "$#,##0"
+    group_label: "Intercom Measures - Revenue"
+  }
+
 
 
   # -------------------------------------------------------
