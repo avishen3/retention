@@ -1473,6 +1473,23 @@ view: intercom_conversation {
 
 
 
+  dimension: handling_duration_minutes {
+    description: "Handle time in minutes (numeric, use for charts)"
+    type: number
+    sql: ROUND(${handling_duration_seconds} / 60.0, 2) ;;
+    value_format: "0.00"
+    group_label: "Conversation - Durations"
+  }
+
+  measure: avg_handling_duration_minutes {
+    description: "Average handle time in minutes (numeric, sortable, use for charts)"
+    type: average
+    sql: ${handling_duration_seconds} / 60.0 ;;
+    value_format: "0.0"
+    group_label: "Intercom Measures - Durations"
+  }
+
+
 #---
 
   # -------------------------------------------------------
