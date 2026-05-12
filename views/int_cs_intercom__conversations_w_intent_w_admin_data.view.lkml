@@ -1559,6 +1559,41 @@ view: intercom_conversation {
   }
 
 
+  measure: cvr_cs_assisted_48h {
+    description: "CVR - CS assisted orders within 48h out of total conversations"
+    type: number
+    sql: ${total_conversations_cs_assisted_48h} / NULLIF(${total_conversations}, 0) ;;
+    value_format: "0.0%"
+    group_label: "Intercom Measures - CS Attribution"
+  }
+
+  measure: cvr_cs_agent_order_within_48h {
+    description: "CVR - CS agent-placed orders within 48h out of total conversations"
+    type: number
+    sql: ${total_conversations_cs_agent_order_within_48h} / NULLIF(${total_conversations}, 0) ;;
+    value_format: "0.0%"
+    group_label: "Intercom Measures - CS Attribution"
+  }
+
+  measure: cvr_cs_assisted_only_no_agent_48h {
+    description: "CVR - CS assisted (non-agent) orders within 48h out of total conversations"
+    type: number
+    sql: ${total_conversations_cs_assisted_only_no_agent_48h} / NULLIF(${total_conversations}, 0) ;;
+    value_format: "0.0%"
+    group_label: "Intercom Measures - CS Attribution"
+  }
+
+  measure: cvr_cs_agent_order {
+    description: "CVR - all CS agent-placed orders out of total conversations"
+    type: number
+    sql: ${total_conversations_cs_agent_order} / NULLIF(${total_conversations}, 0) ;;
+    value_format: "0.0%"
+    group_label: "Intercom Measures - CS Attribution"
+  }
+
+
+
+
   # -------------------------------------------------------
   # MEASURES - CSAT
   # -------------------------------------------------------
