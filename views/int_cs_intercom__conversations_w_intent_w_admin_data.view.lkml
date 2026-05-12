@@ -1687,6 +1687,17 @@ view: intercom_conversation {
   }
 
 
+#-- avg_touches_per_client_client_id
+
+  measure: avg_touches_per_client {
+    description: "Average number of conversations per unique client ID"
+    type: number
+    sql: ${total_conversations} / NULLIF(COUNT(DISTINCT ${client_id}), 0) ;;
+    value_format: "0.00"
+    group_label: "Intercom Measures - Conversations"
+  }
+
+
   # -------------------------------------------------------
   # DRILL FIELDS
   # -------------------------------------------------------
