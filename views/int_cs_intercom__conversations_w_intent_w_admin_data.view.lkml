@@ -1687,15 +1687,7 @@ view: intercom_conversation {
   }
 
 
-#-- avg_touches_per_client_client_id
 
-  measure: avg_touches_per_client {
-    description: "Average number of conversations per unique client ID"
-    type: number
-    sql: ${total_conversations} / NULLIF(COUNT(DISTINCT ${client_id}), 0) ;;
-    value_format: "0.00"
-    group_label: "Intercom Measures - Conversations"
-  }
 
 
 ## -composite customer key
@@ -1712,6 +1704,35 @@ view: intercom_conversation {
     description: "Average number of customer-initiated conversations per unique customer (using composite_customer_key). Excludes admin-initiated interactions."
     type: number
     sql: COUNTIF(${initiated_type} = 'customer_initiated') / NULLIF(COUNT(DISTINCT CASE WHEN ${initiated_type} = 'customer_initiated' THEN ${composite_customer_key} END), 0) ;;
+    value_format: "0.00"
+    group_label: "Intercom Measures - Conversations"
+  }
+
+
+
+####
+
+
+  measure: total_customer_initiated_conversations {
+    description: "Total customer-initiated conversations"
+    type: count_distinct
+    sql: CASE WHEN ${initiated_type} = 'customer_initiated' THEN ${conversation_id} ELSE NULL END ;;
+    value_format: "#,##0"
+    group_label: "Intercom Measures - Conversations"
+  }
+
+  measure: total_distinct_customers {
+    description: "Total distinct customers (composite key, customer-initiated only)"
+    type: count_distinct
+    sql: CASE WHEN ${initiated_type} = 'customer_initiated' THEN ${composite_customer_key} ELSE NULL END ;;
+    value_format: "#,##0"
+    group_label: "Intercom Measures - Conversations"
+  }
+
+  measure: avg_touches_per_customer_2 {
+    description: "Average number of customer-initiated conversations per unique customer. Excludes admin-initiated interactions."
+    type: number
+    sql: ${total_customer_initiated_conversations} / NULLIF(${total_distinct_customers}, 0) ;;
     value_format: "0.00"
     group_label: "Intercom Measures - Conversations"
   }
