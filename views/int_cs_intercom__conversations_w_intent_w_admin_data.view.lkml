@@ -1698,6 +1698,25 @@ view: intercom_conversation {
   }
 
 
+## -composite customer key
+
+  dimension: composite_customer_key {
+    description: "Best available customer identifier — customer email, with phone number fallback, then outbound email fallback. Admin-initiated interactions (outbound calls) may still be unidentifiable."
+    type: string
+    sql: COALESCE(${TABLE}.customer_email, ${TABLE}.customer_phone_number, ${TABLE}.customer_email_outbound) ;;
+    group_label: "Customer"
+  }
+
+
+  measure: avg_touches_per_customer {
+    description: "Average number of customer-initiated conversations per unique customer (using composite_customer_key). Excludes admin-initiated interactions."
+    type: number
+    sql: COUNTIF(${initiated_type} = 'customer_initiated') / NULLIF(COUNT(DISTINCT CASE WHEN ${initiated_type} = 'customer_initiated' THEN ${composite_customer_key} END), 0) ;;
+    value_format: "0.00"
+    group_label: "Intercom Measures - Conversations"
+  }
+
+
   # -------------------------------------------------------
   # DRILL FIELDS
   # -------------------------------------------------------
