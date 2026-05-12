@@ -1777,6 +1777,19 @@ view: attentive_by_user {
     sql: ${TABLE}.rcs_grouping ;;
   }
 
+
+### 12052026
+
+
+
+  dimension_group: rcs_first_date {
+    type: time
+    timeframes: [raw, time, date, week, month, quarter, year]
+    datatype: datetime
+    sql: ${TABLE}.rcs_first_date ;;
+  }
+
+
 ### 08122025
 
   dimension: first_lc_os {
