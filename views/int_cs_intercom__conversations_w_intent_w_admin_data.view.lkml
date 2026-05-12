@@ -1447,6 +1447,34 @@ view: intercom_conversation {
   }
 
 
+#------
+
+  dimension: handling_duration_mmss {
+    description: "Handle time formatted as MM:SS"
+    type: string
+    sql: CONCAT(
+           LPAD(CAST(FLOOR(${handling_duration_seconds} / 60) AS STRING), 2, '0'),
+           ':',
+           LPAD(CAST(MOD(CAST(${handling_duration_seconds} AS INT64), 60) AS STRING), 2, '0')
+         ) ;;
+    group_label: "Conversation - Durations"
+  }
+
+  measure: avg_handling_duration_mmss {
+    description: "Average handle time formatted as MM:SS"
+    type: string
+    sql: CONCAT(
+           LPAD(CAST(FLOOR(AVG(${handling_duration_seconds}) / 60) AS STRING), 2, '0'),
+           ':',
+           LPAD(CAST(MOD(CAST(ROUND(AVG(${handling_duration_seconds})) AS INT64), 60) AS STRING), 2, '0')
+         ) ;;
+    group_label: "Intercom Measures - Durations"
+  }
+
+
+
+#---
+
   # -------------------------------------------------------
   # MEASURES - CS ATTRIBUTION
   # -------------------------------------------------------
