@@ -1738,6 +1738,81 @@ view: intercom_conversation {
   }
 
 
+
+
+### Abandon Calls
+
+  dimension: is_abandoned_call {
+    description: "Call was abandoned - includes abandoned routing, in queue, or on hold"
+    type: yesno
+    sql: ${call_status} IN ('Abandoned routing', 'Abandoned in queue', 'Abandoned on hold') ;;
+    group_label: "Conversation - Core"
+  }
+
+  dimension: is_abandoned_routing {
+    description: "Call was abandoned during routing before reaching queue"
+    type: yesno
+    sql: ${call_status} = 'Abandoned routing' ;;
+    group_label: "Conversation - Core"
+  }
+
+  dimension: is_abandoned_in_queue {
+    description: "Call was abandoned while waiting in queue"
+    type: yesno
+    sql: ${call_status} = 'Abandoned in queue' ;;
+    group_label: "Conversation - Core"
+  }
+
+  dimension: is_abandoned_on_hold {
+    description: "Call was abandoned while placed on hold by agent"
+    type: yesno
+    sql: ${call_status} = 'Abandoned on hold' ;;
+    group_label: "Conversation - Core"
+  }
+
+
+  measure: total_abandoned_calls {
+    description: "Total abandoned calls - routing, queue, or on hold"
+    type: count_distinct
+    sql: CASE WHEN ${is_abandoned_call} = TRUE THEN ${conversation_id} ELSE NULL END ;;
+    value_format: "#,##0"
+    group_label: "Intercom Measures - Conversations"
+  }
+
+  measure: total_abandoned_routing {
+    description: "Total calls abandoned during routing"
+    type: count_distinct
+    sql: CASE WHEN ${is_abandoned_routing} = TRUE THEN ${conversation_id} ELSE NULL END ;;
+    value_format: "#,##0"
+    group_label: "Intercom Measures - Conversations"
+  }
+
+  measure: total_abandoned_in_queue {
+    description: "Total calls abandoned while in queue"
+    type: count_distinct
+    sql: CASE WHEN ${is_abandoned_in_queue} = TRUE THEN ${conversation_id} ELSE NULL END ;;
+    value_format: "#,##0"
+    group_label: "Intercom Measures - Conversations"
+  }
+
+  measure: total_abandoned_on_hold {
+    description: "Total calls abandoned while on hold"
+    type: count_distinct
+    sql: CASE WHEN ${is_abandoned_on_hold} = TRUE THEN ${conversation_id} ELSE NULL END ;;
+    value_format: "#,##0"
+    group_label: "Intercom Measures - Conversations"
+  }
+
+  measure: abandon_rate {
+    description: "Rate of abandoned calls (routing + queue + on hold) out of all phone calls"
+    type: number
+    sql: ${total_abandoned_calls} / NULLIF(COUNT(DISTINCT CASE WHEN ${source_type} = 'phone_call' THEN ${conversation_id} END), 0) ;;
+    value_format: "0.0%"
+    group_label: "Intercom Measures - Conversations"
+  }
+
+
+
   # -------------------------------------------------------
   # DRILL FIELDS
   # -------------------------------------------------------
