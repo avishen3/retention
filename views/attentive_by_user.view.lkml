@@ -27,7 +27,7 @@ view: attentive_by_user {
   }
   dimension: type {
     type: string
-    sql: ${TABLE}.type ;;
+    sql: lower(${TABLE}.type) ;;
   }
   dimension: cart_cookie_id {
     type: string
