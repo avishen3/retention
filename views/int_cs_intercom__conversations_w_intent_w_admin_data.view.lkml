@@ -1,5 +1,10 @@
 view: intercom_conversation {
-  sql_table_name: `omega-post-184817.Keshet.int_cs_intercom__conversations_w_intent_w_admin_data`  ;;
+  sql_table_name:  `omega-post-184817.marts_cs_intercom.conversations_w_intent_w_admin_data`   ;;
+
+
+
+  ###sql_table_name: `omega-post-184817.Keshet.int_cs_intercom__conversations_w_intent_w_admin_data`  ;;
+
 
 
   # -------------------------------------------------------
