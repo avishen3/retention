@@ -1390,12 +1390,12 @@ view: intercom_conversation {
     group_label: "Intercom Measures - AI Fin"
   }
 
-  measure: total_conversations_ai_resolved {
-    type: count_distinct
-    sql: CASE WHEN ${ai_fin_resolution_state} = 'resolved' THEN ${conversation_id} ELSE NULL END ;;
-    value_format: "#,##0"
-    group_label: "Intercom Measures - AI Fin"
-  }
+ ## measure: total_conversations_ai_resolved {
+##    type: count_distinct
+##    sql: CASE WHEN ${ai_fin_resolution_state} = 'resolved' THEN ${conversation_id} ELSE NULL END ;;
+##    value_format: "#,##0"
+##    group_label: "Intercom Measures - AI Fin"
+##  }
 
   measure: fin_ai_involvement_rate {
     type: number
@@ -1404,12 +1404,12 @@ view: intercom_conversation {
     group_label: "Intercom Measures - AI Fin"
   }
 
-  measure: fin_ai_resolution_rate {
-    type: number
-    sql: ${total_conversations_ai_resolved} / NULLIF(${total_conversations_ai_participated}, 0) ;;
-    value_format: "0.0%"
-    group_label: "Intercom Measures - AI Fin"
-  }
+##  measure: fin_ai_resolution_rate {
+##    type: number
+##    sql: ${total_conversations_ai_resolved} / NULLIF(${total_conversations_ai_participated}, 0) ;;
+##    value_format: "0.0%"
+##    group_label: "Intercom Measures - AI Fin"
+##  }
 
 
   # -------------------------------------------------------
@@ -1839,5 +1839,170 @@ view: intercom_conversation {
       agent_email_after
     ]
   }
+
+### 18052026
+
+
+
+### fix existing measure - correct case value
+  measure: total_conversations_ai_resolved {
+    description: "Total conversations where Fin confirmed resolution"
+    type: count_distinct
+    sql: CASE WHEN ${ai_fin_resolution_state} = 'Confirmed Resolution' THEN ${conversation_id} ELSE NULL END ;;
+    value_format: "#,##0"
+    group_label: "Intercom Measures - AI Fin"
+  }
+
+  ### fix existing measure - correct case value
+  measure: fin_ai_resolution_rate {
+    description: "Rate of Fin confirmed resolutions out of total Fin participated conversations"
+    type: number
+    sql: ${total_conversations_ai_resolved} / NULLIF(${total_conversations_ai_participated}, 0) ;;
+    value_format: "0.0%"
+    group_label: "Intercom Measures - AI Fin"
+  }
+
+
+  # -------------------------------------------------------
+  # Fin Assumed Resolution
+  # -------------------------------------------------------
+
+  measure: total_conversations_ai_assumed_resolution {
+    description: "Total conversations where Fin assumed resolution (no customer confirmation)"
+    type: count_distinct
+    sql: CASE WHEN ${ai_fin_resolution_state} = 'Assumed Resolution' THEN ${conversation_id} ELSE NULL END ;;
+    value_format: "#,##0"
+    group_label: "Intercom Measures - AI Fin"
+  }
+
+  measure: fin_assumed_resolution_rate {
+    description: "Rate of Fin assumed resolutions out of total Fin participated conversations"
+    type: number
+    sql: ${total_conversations_ai_assumed_resolution} / NULLIF(${total_conversations_ai_participated}, 0) ;;
+    value_format: "0.0%"
+    group_label: "Intercom Measures - AI Fin"
+  }
+
+
+  # -------------------------------------------------------
+  # Fin Escalation
+  # -------------------------------------------------------
+
+  measure: total_conversations_ai_escalated {
+    description: "Total conversations where Fin escalated to human agent (Routed to team)"
+    type: count_distinct
+    sql: CASE WHEN ${ai_fin_resolution_state} = 'Routed to team' THEN ${conversation_id} ELSE NULL END ;;
+    value_format: "#,##0"
+    group_label: "Intercom Measures - AI Fin"
+  }
+
+  measure: fin_escalation_rate {
+    description: "Rate of Fin escalations to human agent out of total Fin participated conversations"
+    type: number
+    sql: ${total_conversations_ai_escalated} / NULLIF(${total_conversations_ai_participated}, 0) ;;
+    value_format: "0.0%"
+    group_label: "Intercom Measures - AI Fin"
+  }
+
+
+  # -------------------------------------------------------
+  # Fin Containment
+  # -------------------------------------------------------
+
+  measure: total_conversations_ai_contained {
+    description: "Total conversations contained by Fin - Confirmed Resolution + Assumed Resolution"
+    type: count_distinct
+    sql: CASE WHEN ${ai_fin_resolution_state} IN ('Confirmed Resolution', 'Assumed Resolution') THEN ${conversation_id} ELSE NULL END ;;
+    value_format: "#,##0"
+    group_label: "Intercom Measures - AI Fin"
+  }
+
+  measure: fin_containment_rate {
+    description: "Rate of Fin contained conversations (Confirmed + Assumed) out of total Fin participated"
+    type: number
+    sql: ${total_conversations_ai_contained} / NULLIF(${total_conversations_ai_participated}, 0) ;;
+    value_format: "0.0%"
+    group_label: "Intercom Measures - AI Fin"
+  }
+
+
+  # -------------------------------------------------------
+  # Fin Beyond General Inquiry
+  # -------------------------------------------------------
+
+  measure: total_conversations_beyond_general_inquiry {
+    description: "Total conversations Fin classified as beyond a general inquiry (complex issues)"
+    type: count_distinct
+    sql: CASE WHEN ${ai_fin_beyond_general_inquiry} = 'Interaction is beyond a general inquiry' THEN ${conversation_id} ELSE NULL END ;;
+    value_format: "#,##0"
+    group_label: "Intercom Measures - AI Fin"
+  }
+
+  measure: fin_beyond_general_inquiry_rate {
+    description: "Rate of complex interactions out of total Fin participated conversations"
+    type: number
+    sql: ${total_conversations_beyond_general_inquiry} / NULLIF(${total_conversations_ai_participated}, 0) ;;
+    value_format: "0.0%"
+    group_label: "Intercom Measures - AI Fin"
+  }
+
+
+  # -------------------------------------------------------
+  # Fin Answer Type
+  # -------------------------------------------------------
+
+  measure: total_conversations_ai_answer {
+    description: "Total conversations where Fin used a dynamic AI-generated answer"
+    type: count_distinct
+    sql: CASE WHEN ${ai_agent_last_answer_type} = 'ai_answer' THEN ${conversation_id} ELSE NULL END ;;
+    value_format: "#,##0"
+    group_label: "Intercom Measures - AI Fin"
+  }
+
+  measure: total_conversations_custom_answer {
+    description: "Total conversations where Fin used a pre-written custom answer"
+    type: count_distinct
+    sql: CASE WHEN ${ai_agent_last_answer_type} = 'custom_answer' THEN ${conversation_id} ELSE NULL END ;;
+    value_format: "#,##0"
+    group_label: "Intercom Measures - AI Fin"
+  }
+
+  measure: fin_ai_answer_rate {
+    description: "Rate of AI-generated answers out of total Fin participated conversations"
+    type: number
+    sql: ${total_conversations_ai_answer} / NULLIF(${total_conversations_ai_participated}, 0) ;;
+    value_format: "0.0%"
+    group_label: "Intercom Measures - AI Fin"
+  }
+
+  measure: fin_custom_answer_rate {
+    description: "Rate of custom answers out of total Fin participated conversations"
+    type: number
+    sql: ${total_conversations_custom_answer} / NULLIF(${total_conversations_ai_participated}, 0) ;;
+    value_format: "0.0%"
+    group_label: "Intercom Measures - AI Fin"
+  }
+
+
+  # -------------------------------------------------------
+  # Fin Abandonment
+  # -------------------------------------------------------
+
+  measure: total_conversations_ai_abandoned {
+    description: "Total conversations abandoned during Fin interaction"
+    type: count_distinct
+    sql: CASE WHEN ${ai_fin_resolution_state} = 'Abandoned' THEN ${conversation_id} ELSE NULL END ;;
+    value_format: "#,##0"
+    group_label: "Intercom Measures - AI Fin"
+  }
+
+  measure: fin_abandonment_rate {
+    description: "Rate of abandoned conversations out of total Fin participated conversations"
+    type: number
+    sql: ${total_conversations_ai_abandoned} / NULLIF(${total_conversations_ai_participated}, 0) ;;
+    value_format: "0.0%"
+    group_label: "Intercom Measures - AI Fin"
+  }
+
 
 }
