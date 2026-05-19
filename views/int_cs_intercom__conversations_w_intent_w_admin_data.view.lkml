@@ -2005,4 +2005,24 @@ view: intercom_conversation {
   }
 
 
+## 19052026
+
+  dimension: is_valid_conversation {
+    description: "Valid conversation - source type is conversation with at least admin or user part. Not Valid if conversation type but only bot or no parts at all. Null for all other source types."
+    type: string
+    sql:
+      CASE
+        WHEN ${source_type} = 'conversation'
+          AND (${conv_has_admin_part} = TRUE OR ${conv_has_user_part} = TRUE)
+          THEN 'Valid conversation'
+        WHEN ${source_type} = 'conversation'
+          AND ${conv_has_admin_part} = FALSE
+          AND ${conv_has_user_part} = FALSE
+          THEN 'Not Valid conversation'
+        ELSE NULL
+      END ;;
+    group_label: "Conversation - Core"
+  }
+
+
 }
