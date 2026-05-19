@@ -2018,7 +2018,7 @@ view: intercom_conversation {
         WHEN ${source_type} = 'conversation'
           AND ${conv_has_admin_part} = FALSE
           AND ${conv_has_user_part} = FALSE
-          THEN 'Not Valid conversation'
+          THEN 'Only BOT conversation'
         ELSE NULL
       END ;;
     group_label: "Conversation - Core"
