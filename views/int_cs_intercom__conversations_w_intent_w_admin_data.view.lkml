@@ -2024,5 +2024,111 @@ view: intercom_conversation {
     group_label: "Conversation - Core"
   }
 
+## 20052026
+
+  dimension: interaction_handling_type {
+    description: "Classifies how the interaction was handled — Fully Automated (bot/AI only), AI Assisted (AI + human agent), Human Only (agent, no AI), Unhandled (customer messaged but no response), No Interaction (no parts at all)"
+    type: string
+    sql:
+      CASE
+        -- Fully Automated: bot/AI participated, no human agent involved
+        WHEN (${conv_has_bot_part} = TRUE OR ${ai_agent_participated} = 'true')
+          AND ${conv_has_admin_part} = FALSE
+          THEN 'Fully Automated'
+
+      -- AI Assisted: both AI/bot and human agent involved
+      WHEN (${conv_has_bot_part} = TRUE OR ${ai_agent_participated} = 'true')
+      AND ${conv_has_admin_part} = TRUE
+      THEN 'AI Assisted'
+
+      -- Human Only: human agent involved, no AI or bot
+      WHEN ${conv_has_admin_part} = TRUE
+      AND ${conv_has_bot_part} = FALSE
+      AND ${ai_agent_participated} = 'false'
+      THEN 'Human Only'
+
+      -- Unhandled: customer messaged but no agent or bot responded
+      WHEN ${conv_has_user_part} = TRUE
+      AND ${conv_has_admin_part} = FALSE
+      AND ${conv_has_bot_part} = FALSE
+      AND ${ai_agent_participated} = 'false'
+      THEN 'Unhandled'
+
+      -- No Interaction: no parts at all
+      WHEN ${conv_has_admin_part} = FALSE
+      AND ${conv_has_bot_part} = FALSE
+      AND ${conv_has_user_part} = FALSE
+      THEN 'No Interaction'
+
+      ELSE NULL
+      END ;;
+    group_label: "Conversation - Core"
+  }
+
+  measure: total_fully_automated {
+    description: "Total interactions handled by bot/AI only with no human agent"
+    type: count_distinct
+    sql: CASE WHEN ${interaction_handling_type} = 'Fully Automated' THEN ${conversation_id} ELSE NULL END ;;
+    value_format: "#,##0"
+    group_label: "Intercom Measures - Conversations"
+  }
+
+  measure: total_ai_assisted {
+    description: "Total interactions handled by both AI and human agent"
+    type: count_distinct
+    sql: CASE WHEN ${interaction_handling_type} = 'AI Assisted' THEN ${conversation_id} ELSE NULL END ;;
+    value_format: "#,##0"
+    group_label: "Intercom Measures - Conversations"
+  }
+
+  measure: total_human_only {
+    description: "Total interactions handled by human agent only with no AI or bot involvement"
+    type: count_distinct
+    sql: CASE WHEN ${interaction_handling_type} = 'Human Only' THEN ${conversation_id} ELSE NULL END ;;
+    value_format: "#,##0"
+    group_label: "Intercom Measures - Conversations"
+  }
+
+  measure: total_unhandled {
+    description: "Total interactions where customer messaged but received no response"
+    type: count_distinct
+    sql: CASE WHEN ${interaction_handling_type} = 'Unhandled' THEN ${conversation_id} ELSE NULL END ;;
+    value_format: "#,##0"
+    group_label: "Intercom Measures - Conversations"
+  }
+
+  measure: total_no_interaction {
+    description: "Total interactions with no parts at all - ghost or system rows"
+    type: count_distinct
+    sql: CASE WHEN ${interaction_handling_type} = 'No Interaction' THEN ${conversation_id} ELSE NULL END ;;
+    value_format: "#,##0"
+    group_label: "Intercom Measures - Conversations"
+  }
+
+  measure: fully_automated_rate {
+    description: "Rate of fully automated interactions out of total conversations"
+    type: number
+    sql: ${total_fully_automated} / NULLIF(${total_conversations}, 0) ;;
+    value_format: "0.0%"
+    group_label: "Intercom Measures - Conversations"
+  }
+
+  measure: ai_assisted_rate {
+    description: "Rate of AI assisted interactions out of total conversations"
+    type: number
+    sql: ${total_ai_assisted} / NULLIF(${total_conversations}, 0) ;;
+    value_format: "0.0%"
+    group_label: "Intercom Measures - Conversations"
+  }
+
+  measure: human_only_rate {
+    description: "Rate of human only interactions out of total conversations"
+    type: number
+    sql: ${total_human_only} / NULLIF(${total_conversations}, 0) ;;
+    value_format: "0.0%"
+    group_label: "Intercom Measures - Conversations"
+  }
+
+
 
 }
