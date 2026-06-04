@@ -466,6 +466,53 @@ view: intercom_conversation {
   }
 
 
+  dimension: agent_team_name {
+    type: string
+    sql: CASE ${TABLE}.agent_team_id
+          WHEN '9476198' THEN 'Inbound Sales – Email'
+          WHEN '9476200' THEN 'Service Recovery – Email'
+          WHEN '9476201' THEN 'Spanish Agents - Email'
+          WHEN '9476213' THEN 'Retail – Email'
+          WHEN '9476214' THEN 'B2B Sales - Email'
+          WHEN '9476223' THEN 'Transit Support - Email'
+          WHEN '9476225' THEN 'Review Support - Email'
+          WHEN '9476228' THEN 'White Glove Support - Email'
+          WHEN '9476255' THEN 'Escalations - Email'
+          WHEN '9476258' THEN 'Fiberglass - Email'
+          WHEN '9481186' THEN 'Service Recovery Leadership - Email'
+          WHEN '9540784' THEN 'Inbound Sales - Chat'
+          WHEN '9540787' THEN 'Spanish Agents - Chat'
+          WHEN '9540789' THEN 'Service Recovery - Chat'
+          WHEN '9569999' THEN 'DSAT Responses - Email'
+          WHEN '9631204' THEN 'Recovery Escalations - Chat'
+          WHEN '9903543' THEN 'Pre Delivery Support - Chat'
+          WHEN '9903546' THEN 'Post Delivery Support - Chat'
+          WHEN '9903549' THEN 'Pre Delivery Support - Email'
+          WHEN '9903550' THEN 'Post Delivery Support - Email'
+          WHEN '9922472' THEN 'Transit FedEx - Email'
+          WHEN '9969012' THEN 'Sales - SMS'
+          WHEN '9969018' THEN 'Support - SMS'
+          WHEN '9981672' THEN 'Service Recovery - SMS'
+          WHEN '10117691' THEN 'Inbound Sales - Voice'
+          WHEN '10117711' THEN 'Pre Delivery Support - Voice'
+          WHEN '10117732' THEN 'Post Delivery Support - Voice'
+          WHEN '10117736' THEN 'Service Recovery - Voice'
+          WHEN '10126739' THEN 'B2B - Voice'
+          WHEN '10126744' THEN 'Retail - Voice'
+          WHEN '10126750' THEN 'Spanish Sales - Voice'
+          WHEN '10126764' THEN 'Spanish Support - Voice'
+          WHEN '10126767' THEN 'Recovery Escalations - Voice'
+          WHEN '10126778' THEN 'Recall - Voice'
+          WHEN '10126781' THEN 'Transit - Voice'
+          WHEN '10126784' THEN 'Legal Escalations - Voice'
+          ELSE 'Unknown'
+        END ;;
+    group_label: "Agent - Admin"
+    label: "Agent Team Name"
+  }
+
+
+
   # -------------------------------------------------------
   # INTENT
   # -------------------------------------------------------
