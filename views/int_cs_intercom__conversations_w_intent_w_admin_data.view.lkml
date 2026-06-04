@@ -459,6 +459,14 @@ view: intercom_conversation {
     group_label: "Agent - Admin"
   }
 
+
+  measure: total_assigned_agent_id {
+    type: count_distinct
+    sql: assigned_agent_id  ;;
+    value_format: "#,##0"
+    group_label: "agent Measures"
+  }
+
   dimension: agent_team_id {
     type: string
     sql: ${TABLE}.agent_team_id ;;
