@@ -48,6 +48,16 @@ view: klaviyo_email_events_by_user {
     sql: ${TABLE}.campaign_name ;;
   }
 
+  ### 07602026
+
+
+
+  dimension: message_name {
+    type: string
+    sql: ${TABLE}.message_name ;;
+  }
+
+
   dimension: campaign_type {
     type: string
     sql: ${TABLE}.campaign_type ;;
