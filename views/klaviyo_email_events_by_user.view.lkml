@@ -57,6 +57,7 @@ view: klaviyo_email_events_by_user {
     sql: ${TABLE}.message_name ;;
   }
 
+####
 
   dimension: campaign_type {
     type: string
@@ -2824,6 +2825,42 @@ value: "Variant"
     type: yesno
     sql: ${TABLE}.email_short_id_is_adjustable_in_cart ;;
   }
+
+
+
+###11062026 , , , , ,
+
+
+  dimension: utm_string_first {
+    type: string
+    sql: ${TABLE}.utm_string_first ;;
+  }
+
+  dimension: utm_string_last {
+    type: string
+    sql: ${TABLE}.utm_string_last ;;
+  }
+
+  dimension: utm_string_transaction {
+    type: string
+    sql: ${TABLE}.utm_string_transaction ;;
+  }
+
+  dimension: content_first {
+    type: string
+    sql: ${TABLE}.content_first ;;
+  }
+
+  dimension: content_last {
+    type: string
+    sql: ${TABLE}.content_last ;;
+  }
+
+  dimension: content_transaction {
+    type: string
+    sql: ${TABLE}.content_transaction ;;
+  }
+
 
 
 
