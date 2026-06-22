@@ -2861,7 +2861,22 @@ value: "Variant"
     sql: ${TABLE}.content_transaction ;;
   }
 
+### 22062026
 
+  dimension: is_utm_content_gmail_annotation_first {
+    type: yesno
+    sql: ${utm_string_first} LIKE '%utm_content=gmail_annotation%' ;;
+  }
+
+  dimension: is_utm_content_gmail_annotation_last {
+    type: yesno
+    sql: ${utm_string_last} LIKE '%utm_content=gmail_annotation%' ;;
+  }
+
+  dimension: is_utm_content_gmail_annotation_transaction {
+    type: yesno
+    sql: ${utm_string_transaction} LIKE '%utm_content=gmail_annotation%' ;;
+  }
 
 
 
