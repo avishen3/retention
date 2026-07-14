@@ -728,8 +728,8 @@ view: agent_orders_real_time_vw {
 'vincent.banlat@residenthome.com',
 'vincentg@residenthome.com',
 'wilma.rodriguez@residenthome.com',
-'xyzaa@residenthome.com'
-
+'xyzaa@residenthome.com',
+'brandon.santos@residenthome.com'
     )
     ;;
 
