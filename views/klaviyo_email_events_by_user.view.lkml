@@ -2940,7 +2940,7 @@ value: "Variant"
 
   measure: Total_Revenue_From_attribute_orders {
     type: sum
-    sql:${attribute_order_price}-${attribute_order_tax} end  ;;
+    sql:${attribute_order_price}-${attribute_order_tax}   ;;
     value_format: "$#,##0"
   }
 
