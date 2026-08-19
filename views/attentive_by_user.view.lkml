@@ -2016,7 +2016,61 @@ view: attentive_by_user {
     sql: ${TABLE}.sms_short_id_is_adjustable_in_cart ;;
   }
 
+### 19/08/2026
 
+
+### Attribute Orders
+
+  dimension_group: attribute_order_click_timestamp {
+    type: time
+    timeframes: [raw, time, date, week, month, quarter, year]
+    datatype: datetime
+    sql: ${TABLE}.attribute_order_click_timestamp ;;
+  }
+
+  dimension: attribute_short_id {
+    type: string
+    sql: ${TABLE}.attribute_short_id ;;
+  }
+
+  dimension_group: attribute_order_created {
+    type: time
+    timeframes: [raw, time, date, week, month, quarter, year]
+    datatype: datetime
+    sql: ${TABLE}.attribute_order_created ;;
+  }
+
+  dimension: attribute_order_price {
+    type: number
+    value_format_name: usd
+    sql: ${TABLE}.attribute_order_price ;;
+  }
+
+  dimension: attribute_order_tax {
+    type: number
+    value_format_name: usd
+    sql: ${TABLE}.attribute_order_tax ;;
+  }
+
+  dimension: attribute_marketing_platform {
+    type: string
+    sql: ${TABLE}.attribute_marketing_platform ;;
+  }
+
+  measure: count_attribute_orders {
+    type: count_distinct
+    sql: ${attribute_short_id} ;;
+    label: "Total Orders (Attributed)"
+    description: "Distinct count of attributed orders based on short_id."
+  }
+
+  measure: total_revenue_attribute_orders {
+    type: sum
+    sql: COALESCE(${attribute_order_price}, 0) - COALESCE(${attribute_order_tax}, 0) ;;
+    value_format_name: usd_0
+    label: "Total Revenue (Attributed Orders)"
+    description: "Sum of attributed order price minus tax."
+  }
 
 
 }
