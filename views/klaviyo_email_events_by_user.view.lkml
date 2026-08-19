@@ -2879,5 +2879,70 @@ value: "Variant"
   }
 
 
+### 1908202 attribure orders
+
+  dimension_group: attribute_order_click_timestamp {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    datatype: datetime
+    sql: ${TABLE}.attribute_order_click_timestamp ;;
+  }
+
+
+  dimension_group: attribute_order_created {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    datatype: datetime
+    sql: ${TABLE}.attribute_order_created ;;
+  }
+
+  dimension: attribute_short_id {
+    type: string
+    sql: ${TABLE}.attribute_short_id ;;
+  }
+
+
+  dimension: attribute_order_price {
+    type: number
+    sql: ${TABLE}.attribute_order_price ;;
+  }
+
+  dimension: attribute_order_tax {
+    type: number
+    sql: ${TABLE}.attribute_order_tax ;;
+  }
+
+  dimension: attribute_marketing_platform {
+    type: number
+    sql: ${TABLE}.attribute_marketing_platform ;;
+  }
+
+  measure: Total_Orders_attribute_short_id{
+    type: count_distinct
+    sql: ${attribute_short_id}  ;;
+  }
+
+  measure: Total_Revenue_From_attribute_orders {
+    type: sum
+    sql:${attribute_order_price}-${attribute_order_tax} end  ;;
+    value_format: "$#,##0"
+  }
+
 
 }
