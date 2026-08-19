@@ -2881,35 +2881,14 @@ value: "Variant"
 
 ### 1908202 attribure orders
 
+
+  ### Attribute Orders
+
   dimension_group: attribute_order_click_timestamp {
     type: time
-    timeframes: [
-      raw,
-      time,
-      date,
-      week,
-      month,
-      quarter,
-      year
-    ]
+    timeframes: [raw, time, date, week, month, quarter, year]
     datatype: datetime
     sql: ${TABLE}.attribute_order_click_timestamp ;;
-  }
-
-
-  dimension_group: attribute_order_created {
-    type: time
-    timeframes: [
-      raw,
-      time,
-      date,
-      week,
-      month,
-      quarter,
-      year
-    ]
-    datatype: datetime
-    sql: ${TABLE}.attribute_order_created ;;
   }
 
   dimension: attribute_short_id {
@@ -2917,14 +2896,22 @@ value: "Variant"
     sql: ${TABLE}.attribute_short_id ;;
   }
 
+  dimension_group: attribute_order_created {
+    type: time
+    timeframes: [raw, time, date, week, month, quarter, year]
+    datatype: datetime
+    sql: ${TABLE}.attribute_order_created ;;
+  }
 
   dimension: attribute_order_price {
     type: number
+    value_format_name: usd
     sql: ${TABLE}.attribute_order_price ;;
   }
 
   dimension: attribute_order_tax {
     type: number
+    value_format_name: usd
     sql: ${TABLE}.attribute_order_tax ;;
   }
 
@@ -2933,16 +2920,23 @@ value: "Variant"
     sql: ${TABLE}.attribute_marketing_platform ;;
   }
 
-  measure: Total_Orders_attribute_short_id{
+  measure: count_attribute_orders {
     type: count_distinct
-    sql: ${attribute_short_id}  ;;
+    sql: ${attribute_short_id} ;;
+    label: "Total Orders (Attributed)"
+    description: "Distinct count of attributed orders based on short_id."
   }
 
-  measure: Total_Revenue_From_attribute_orders {
+  measure: total_revenue_attribute_orders {
     type: sum
-    sql:${attribute_order_price}-${attribute_order_tax}   ;;
-    value_format: "$#,##0"
+    sql: COALESCE(${attribute_order_price}, 0) - COALESCE(${attribute_order_tax}, 0) ;;
+    value_format_name: usd_0
+    label: "Total Revenue (Attributed Orders)"
+    description: "Sum of attributed order price minus tax."
   }
+
+
+
 
 
 }
