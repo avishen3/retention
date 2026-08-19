@@ -2929,7 +2929,7 @@ value: "Variant"
   }
 
   dimension: attribute_marketing_platform {
-    type: number
+    type: string
     sql: ${TABLE}.attribute_marketing_platform ;;
   }
 
