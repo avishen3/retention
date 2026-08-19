@@ -2909,10 +2909,10 @@ value: "Variant"
     sql: ${TABLE}.attribute_order_price ;;
   }
 
-  dimension: attribute_order_tax {
+  dimension: attribute_tax {
     type: number
     value_format_name: usd
-    sql: ${TABLE}.attribute_order_tax ;;
+    sql: ${TABLE}.attribute_tax ;;
   }
 
   dimension: attribute_marketing_platform {
@@ -2929,7 +2929,7 @@ value: "Variant"
 
   measure: total_revenue_attribute_orders {
     type: sum
-    sql: COALESCE(${attribute_order_price}, 0) - COALESCE(${attribute_order_tax}, 0) ;;
+    sql: COALESCE(${attribute_order_price}, 0) - COALESCE(${attribute_tax}, 0) ;;
     value_format_name: usd_0
     label: "Total Revenue (Attributed Orders)"
     description: "Sum of attributed order price minus tax."
