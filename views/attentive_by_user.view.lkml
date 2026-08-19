@@ -2099,5 +2099,30 @@ view: attentive_by_user {
   }
 
 
+  parameter: sms_order_created_date_granularity {
+    type: string
+    description: "Use this selector to change the date granularity of 'SMS Order Created Date' dimension only"
+    allowed_value: { label: "Day"     value: "Day" }
+    allowed_value: { label: "Week"    value: "Week" }
+    allowed_value: { label: "Month"   value: "Month" }
+    allowed_value: { label: "Quarter" value: "Quarter" }
+    allowed_value: { label: "Year"    value: "Year" }
+    allowed_value: { label: "None"    value: "None" }
+  }
+
+  dimension: date_sms_order_created {
+    label_from_parameter: sms_order_created_date_granularity
+    description: "Use 'SMS Order Created Date Granularity' selector to modify the date granularity"
+    sql:
+      CASE
+        WHEN {% parameter sms_order_created_date_granularity %} = 'Day' THEN CAST(${sms_order_created_date} AS STRING)
+        WHEN {% parameter sms_order_created_date_granularity %} = 'Week' THEN CAST(${sms_order_created_week} AS STRING)
+        WHEN {% parameter sms_order_created_date_granularity %} = 'Month' THEN CAST(${sms_order_created_month} AS STRING)
+        WHEN {% parameter sms_order_created_date_granularity %} = 'Quarter' THEN CAST(${sms_order_created_quarter} AS STRING)
+        WHEN {% parameter sms_order_created_date_granularity %} = 'Year' THEN CAST(${sms_order_created_year} AS STRING)
+        ELSE NULL
+      END ;;
+  }
+
 
 }
