@@ -2962,4 +2962,32 @@ value: "Variant"
   }
 
 
+
+
+  parameter: email_order_created_date_granularity {
+    type: string
+    description: "Use this selector to change the date granularity of 'Email Order Created Date' dimension only"
+    allowed_value: { label: "Day"     value: "Day" }
+    allowed_value: { label: "Week"    value: "Week" }
+    allowed_value: { label: "Month"   value: "Month" }
+    allowed_value: { label: "Quarter" value: "Quarter" }
+    allowed_value: { label: "Year"    value: "Year" }
+    allowed_value: { label: "None"    value: "None" }
+  }
+
+  dimension: date_email_order_created {
+    label_from_parameter: email_order_created_date_granularity
+    description: "Use 'Email Order Created Date Granularity' selector to modify the date granularity"
+    sql:
+      CASE
+        WHEN {% parameter email_order_created_date_granularity %} = 'Day' THEN CAST(${email_order_created_date} AS STRING)
+        WHEN {% parameter email_order_created_date_granularity %} = 'Week' THEN CAST(${email_order_created_week} AS STRING)
+        WHEN {% parameter email_order_created_date_granularity %} = 'Month' THEN CAST(${email_order_created_month} AS STRING)
+        WHEN {% parameter email_order_created_date_granularity %} = 'Quarter' THEN CAST(${email_order_created_quarter} AS STRING)
+        WHEN {% parameter email_order_created_date_granularity %} = 'Year' THEN CAST(${email_order_created_year} AS STRING)
+        ELSE NULL
+      END ;;
+  }
+
+
 }

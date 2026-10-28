@@ -2185,5 +2185,113 @@ view: intercom_conversation {
   }
 
 
+### 28-10-2026
+
+
+  # -------------------------------------------------------
+  # MEASURES - PROSPECT CVR
+  # -------------------------------------------------------
+
+  measure: total_prospect_customers {
+    description: "Distinct prospect customers (composite customer key)"
+    type: count_distinct
+    sql: CASE WHEN ${customer_type} = 'prospect' THEN ${composite_customer_key} ELSE NULL END ;;
+    value_format: "#,##0"
+    group_label: "Intercom Measures - Prospect CVR"
+  }
+
+  measure: total_prospect_customers_cs_agent_order_within_48h {
+    description: "Distinct prospect customers with an agent-placed order within 48h of the interaction"
+    type: count_distinct
+    sql: CASE WHEN ${customer_type} = 'prospect'
+               AND ${is_cs_agent_order} = TRUE
+               AND ${is_cs_assisted_order_48h} = TRUE
+              THEN ${composite_customer_key} ELSE NULL END ;;
+    value_format: "#,##0"
+    group_label: "Intercom Measures - Prospect CVR"
+  }
+
+  measure: total_prospect_customers_cs_assisted_48h {
+    description: "Distinct prospect customers with any order within 48h of the interaction"
+    type: count_distinct
+    sql: CASE WHEN ${customer_type} = 'prospect'
+               AND ${is_cs_assisted_order_48h} = TRUE
+              THEN ${composite_customer_key} ELSE NULL END ;;
+    value_format: "#,##0"
+    group_label: "Intercom Measures - Prospect CVR"
+  }
+
+  measure: cvr_prospect_agent_orders {
+    label: "CVR (prospect) - agent orders"
+    description: "Prospects with an agent order within 48h / total prospects"
+    type: number
+    sql: ${total_prospect_customers_cs_agent_order_within_48h} / NULLIF(${total_prospect_customers}, 0) ;;
+    value_format_name: percent_2
+    group_label: "Intercom Measures - Prospect CVR"
+  }
+
+  measure: cvr_prospect_assisted_cs_orders {
+    label: "CVR (prospect) - assisted cs orders"
+    description: "Prospects with any CS-assisted order within 48h / total prospects"
+    type: number
+    sql: ${total_prospect_customers_cs_assisted_48h} / NULLIF(${total_prospect_customers}, 0) ;;
+    value_format_name: percent_2
+    group_label: "Intercom Measures - Prospect CVR"
+  }
+
+  # -------------------------------------------------------
+  # FIN-ONLY DEFINITION
+  # -------------------------------------------------------
+
+  dimension: ai_claimed_resolved {
+    description: "Fin participated and claimed resolution (Confirmed or Assumed). Used as the definition of 'Fin only'."
+    type: yesno
+    sql: ${ai_agent_participated} = 'true'
+      AND ${ai_fin_resolution_state} IN ('Confirmed Resolution', 'Assumed Resolution') ;;
+    group_label: "AI - Fin Agent"
+  }
+
+  # -------------------------------------------------------
+  # MEASURES - PROSPECT CVR SPLIT BY FIN (CUSTOMER LEVEL)
+  # -------------------------------------------------------
+
+  measure: total_prospect_customers_assisted_48h_not_fin {
+    description: "Distinct prospects with an order within 48h who had at least one assisted conversation NOT claimed by Fin"
+    type: count_distinct
+    sql: CASE WHEN ${customer_type} = 'prospect'
+               AND ${is_cs_assisted_order_48h} = TRUE
+               AND ${ai_claimed_resolved} = FALSE
+              THEN ${composite_customer_key} ELSE NULL END ;;
+    value_format: "#,##0"
+    group_label: "Intercom Measures - Prospect CVR"
+  }
+
+  measure: total_prospect_customers_assisted_48h_fin_only {
+    description: "Distinct prospects with an order within 48h where Fin claimed resolution in ALL of their assisted conversations (Fin was the only interaction)"
+    type: number
+    sql: ${total_prospect_customers_cs_assisted_48h} - ${total_prospect_customers_assisted_48h_not_fin} ;;
+    value_format: "#,##0"
+    group_label: "Intercom Measures - Prospect CVR"
+  }
+
+  measure: cvr_prospect_assisted_fin_only {
+    label: "CVR (prospect) - assisted orders, Fin only"
+    description: "Prospects whose only interaction(s) in the 48h before purchase were Fin-claimed / total prospects"
+    type: number
+    sql: ${total_prospect_customers_assisted_48h_fin_only} / NULLIF(${total_prospect_customers}, 0) ;;
+    value_format_name: percent_2
+    group_label: "Intercom Measures - Prospect CVR"
+  }
+
+  measure: cvr_prospect_assisted_not_fin {
+    label: "CVR (prospect) - assisted orders, not Fin only"
+    description: "Prospects with at least one non-Fin-claimed assisted interaction before purchase / total prospects"
+    type: number
+    sql: ${total_prospect_customers_assisted_48h_not_fin} / NULLIF(${total_prospect_customers}, 0) ;;
+    value_format_name: percent_2
+    group_label: "Intercom Measures - Prospect CVR"
+  }
+
+
 
 }
