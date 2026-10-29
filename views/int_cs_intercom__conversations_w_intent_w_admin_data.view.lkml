@@ -2296,24 +2296,15 @@ view: intercom_conversation {
 ### 29/10/2026
 
   # -------------------------------------------------------
-  # MEASURES - PROSPECT INTERACTION MIX (CUSTOMER LEVEL, ALL PROSPECTS)
+  # MEASURES - PROSPECT INTERACTION MIX (FIN ONLY vs HAD HUMAN INTERACTION)
   # -------------------------------------------------------
 
-  measure: total_prospects_with_non_fin_conversation {
-    description: "Distinct prospects with at least one conversation NOT claimed by Fin"
+  measure: total_prospects_had_human_interaction {
+    label: "Prospects - Had human interaction"
+    description: "Distinct prospects with at least one conversation NOT claimed by Fin (everything that is not Fin only), whether or not they bought"
     type: count_distinct
     sql: CASE WHEN ${customer_type} = 'prospect'
                AND ${ai_claimed_resolved} = FALSE
-              THEN ${composite_customer_key} ELSE NULL END ;;
-    value_format: "#,##0"
-    group_label: "Intercom Measures - Prospect Interaction Mix"
-  }
-
-  measure: total_prospects_with_non_human_only_conversation {
-    description: "Distinct prospects with at least one conversation that is NOT Human Only"
-    type: count_distinct
-    sql: CASE WHEN ${customer_type} = 'prospect'
-               AND ${interaction_handling_type} IS DISTINCT FROM 'Human Only'
               THEN ${composite_customer_key} ELSE NULL END ;;
     value_format: "#,##0"
     group_label: "Intercom Measures - Prospect Interaction Mix"
@@ -2323,25 +2314,7 @@ view: intercom_conversation {
     label: "Prospects - Fin only"
     description: "Distinct prospects whose conversations were ALL claimed by Fin (Confirmed or Assumed resolution), whether or not they bought"
     type: number
-    sql: ${total_prospect_customers} - ${total_prospects_with_non_fin_conversation} ;;
-    value_format: "#,##0"
-    group_label: "Intercom Measures - Prospect Interaction Mix"
-  }
-
-  measure: total_prospects_human_only {
-    label: "Prospects - Human only"
-    description: "Distinct prospects whose conversations were ALL Human Only (agent, no bot or Fin), whether or not they bought"
-    type: number
-    sql: ${total_prospect_customers} - ${total_prospects_with_non_human_only_conversation} ;;
-    value_format: "#,##0"
-    group_label: "Intercom Measures - Prospect Interaction Mix"
-  }
-
-  measure: total_prospects_mixed_or_other {
-    label: "Prospects - Mixed / other"
-    description: "Prospects who are neither Fin only nor Human only (mixed conversations, Fin not claimed, unhandled, etc.)"
-    type: number
-    sql: ${total_prospect_customers} - ${total_prospects_fin_only} - ${total_prospects_human_only} ;;
+    sql: ${total_prospect_customers} - ${total_prospects_had_human_interaction} ;;
     value_format: "#,##0"
     group_label: "Intercom Measures - Prospect Interaction Mix"
   }
@@ -2354,10 +2327,10 @@ view: intercom_conversation {
     group_label: "Intercom Measures - Prospect Interaction Mix"
   }
 
-  measure: prospects_human_only_rate {
-    label: "Prospects - Human only %"
+  measure: prospects_had_human_interaction_rate {
+    label: "Prospects - Had human interaction %"
     type: number
-    sql: ${total_prospects_human_only} / NULLIF(${total_prospect_customers}, 0) ;;
+    sql: ${total_prospects_had_human_interaction} / NULLIF(${total_prospect_customers}, 0) ;;
     value_format_name: percent_1
     group_label: "Intercom Measures - Prospect Interaction Mix"
   }
