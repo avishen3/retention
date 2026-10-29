@@ -2311,7 +2311,7 @@ view: intercom_conversation {
   }
 
   measure: total_prospects_fin_only {
-    label: "Tatal Prospects - Fin only"
+    label: "Total Prospects - Fin only"
     description: "Distinct prospects whose conversations were ALL claimed by Fin (Confirmed or Assumed resolution), whether or not they bought"
     type: number
     sql: ${total_prospect_customers} - ${total_prospects_had_human_interaction} ;;
@@ -2334,5 +2334,237 @@ view: intercom_conversation {
     value_format_name: percent_1
     group_label: "Intercom Measures - Prospect Interaction Mix"
   }
+
+
+  # =======================================================
+  # PROSPECT DEFINITIONS (ALTERNATIVE)
+  # =======================================================
+
+  dimension: is_prospect_ds_sales {
+    label: "Is Prospect (DS Intent = Sales)"
+    description: "Prospect definition 1: DS model intent classification is 'Sales'"
+    type: yesno
+    sql: ${ds_intent} = 'Sales' ;;
+    group_label: "Prospect Definitions"
+  }
+
+  dimension: is_prospect_tag_sales {
+    label: "Is Prospect (Sales Tag)"
+    description: "Prospect definition 2: conversation has the tag 'Sales-procedure' or 'sales-procedure-ai-handled' in any tag slot (tag_0 to tag_11)"
+    type: yesno
+    sql: 'Sales-procedure' IN (${tag_0}, ${tag_1}, ${tag_2}, ${tag_3}, ${tag_4}, ${tag_5}, ${tag_6}, ${tag_7}, ${tag_8}, ${tag_9}, ${tag_10}, ${tag_11})
+      OR 'sales-procedure-ai-handled' IN (${tag_0}, ${tag_1}, ${tag_2}, ${tag_3}, ${tag_4}, ${tag_5}, ${tag_6}, ${tag_7}, ${tag_8}, ${tag_9}, ${tag_10}, ${tag_11}) ;;
+    group_label: "Prospect Definitions"
+  }
+
+
+  # =======================================================
+  # PROSPECT CVR - DEFINITION 1: DS INTENT = SALES
+  # =======================================================
+
+  measure: total_prospect_customers_ds_sales {
+    label: "Prospects (DS Sales) - Total"
+    description: "Distinct customers with at least one conversation where ds_intent = 'Sales'"
+    type: count_distinct
+    sql: CASE WHEN ${is_prospect_ds_sales} = TRUE THEN ${composite_customer_key} ELSE NULL END ;;
+    value_format: "#,##0"
+    group_label: "Intercom Measures - Prospect CVR (DS Sales)"
+  }
+
+  measure: total_prospect_customers_ds_sales_cs_agent_order_within_48h {
+    label: "Prospects (DS Sales) - Agent order within 48h"
+    description: "Prospects (DS Sales) with an agent-placed order within 48h of the interaction"
+    type: count_distinct
+    sql: CASE WHEN ${is_prospect_ds_sales} = TRUE
+               AND ${is_cs_agent_order} = TRUE
+               AND ${is_cs_assisted_order_48h} = TRUE
+              THEN ${composite_customer_key} ELSE NULL END ;;
+    value_format: "#,##0"
+    group_label: "Intercom Measures - Prospect CVR (DS Sales)"
+  }
+
+  measure: total_prospect_customers_ds_sales_cs_assisted_48h {
+    label: "Prospects (DS Sales) - Assisted order within 48h"
+    description: "Prospects (DS Sales) with any order within 48h of the interaction"
+    type: count_distinct
+    sql: CASE WHEN ${is_prospect_ds_sales} = TRUE
+               AND ${is_cs_assisted_order_48h} = TRUE
+              THEN ${composite_customer_key} ELSE NULL END ;;
+    value_format: "#,##0"
+    group_label: "Intercom Measures - Prospect CVR (DS Sales)"
+  }
+
+  measure: total_prospect_customers_ds_sales_assisted_48h_not_fin {
+    label: "Prospects (DS Sales) - Assisted order, had human interaction"
+    description: "Prospects (DS Sales) with an order within 48h and at least one assisted conversation NOT claimed by Fin"
+    type: count_distinct
+    sql: CASE WHEN ${is_prospect_ds_sales} = TRUE
+               AND ${is_cs_assisted_order_48h} = TRUE
+               AND ${ai_claimed_resolved} = FALSE
+              THEN ${composite_customer_key} ELSE NULL END ;;
+    value_format: "#,##0"
+    group_label: "Intercom Measures - Prospect CVR (DS Sales)"
+  }
+
+  measure: total_prospect_customers_ds_sales_assisted_48h_fin_only {
+    label: "Prospects (DS Sales) - Assisted order, Fin only"
+    description: "Prospects (DS Sales) with an order within 48h where Fin claimed resolution in ALL of their assisted conversations"
+    type: number
+    sql: ${total_prospect_customers_ds_sales_cs_assisted_48h} - ${total_prospect_customers_ds_sales_assisted_48h_not_fin} ;;
+    value_format: "#,##0"
+    group_label: "Intercom Measures - Prospect CVR (DS Sales)"
+  }
+
+  measure: cvr_prospect_ds_sales_agent_orders {
+    label: "CVR (prospect: DS Sales) - agent orders"
+    description: "Prospects (DS Sales) with an agent order within 48h / total prospects (DS Sales)"
+    type: number
+    sql: ${total_prospect_customers_ds_sales_cs_agent_order_within_48h} / NULLIF(${total_prospect_customers_ds_sales}, 0) ;;
+    value_format_name: percent_2
+    group_label: "Intercom Measures - Prospect CVR (DS Sales)"
+  }
+
+  measure: cvr_prospect_ds_sales_assisted_cs_orders {
+    label: "CVR (prospect: DS Sales) - assisted cs orders"
+    description: "Prospects (DS Sales) with any order within 48h / total prospects (DS Sales)"
+    type: number
+    sql: ${total_prospect_customers_ds_sales_cs_assisted_48h} / NULLIF(${total_prospect_customers_ds_sales}, 0) ;;
+    value_format_name: percent_2
+    group_label: "Intercom Measures - Prospect CVR (DS Sales)"
+  }
+
+  measure: cvr_prospect_ds_sales_assisted_fin_only {
+    label: "CVR (prospect: DS Sales) - assisted orders, Fin only"
+    description: "Prospects (DS Sales) whose only assisted interaction(s) were Fin-claimed / total prospects (DS Sales)"
+    type: number
+    sql: ${total_prospect_customers_ds_sales_assisted_48h_fin_only} / NULLIF(${total_prospect_customers_ds_sales}, 0) ;;
+    value_format_name: percent_2
+    group_label: "Intercom Measures - Prospect CVR (DS Sales)"
+  }
+
+  measure: cvr_prospect_ds_sales_assisted_not_fin {
+    label: "CVR (prospect: DS Sales) - assisted orders, had human interaction"
+    description: "Prospects (DS Sales) with at least one non-Fin-claimed assisted interaction / total prospects (DS Sales)"
+    type: number
+    sql: ${total_prospect_customers_ds_sales_assisted_48h_not_fin} / NULLIF(${total_prospect_customers_ds_sales}, 0) ;;
+    value_format_name: percent_2
+    group_label: "Intercom Measures - Prospect CVR (DS Sales)"
+  }
+
+  measure: fin_only_share_of_assisted_prospects_ds_sales {
+    label: "Fin only (DS Sales) - share of assisted prospects"
+    description: "Of prospects (DS Sales) who ordered within 48h, the share where Fin was the only interaction"
+    type: number
+    sql: ${total_prospect_customers_ds_sales_assisted_48h_fin_only} / NULLIF(${total_prospect_customers_ds_sales_cs_assisted_48h}, 0) ;;
+    value_format_name: percent_1
+    group_label: "Intercom Measures - Prospect CVR (DS Sales)"
+  }
+
+
+  # =======================================================
+  # PROSPECT CVR - DEFINITION 2: SALES TAG
+  # =======================================================
+
+  measure: total_prospect_customers_tag_sales {
+    label: "Prospects (Sales Tag) - Total"
+    description: "Distinct customers with at least one conversation tagged Sales-procedure or sales-procedure-ai-handled"
+    type: count_distinct
+    sql: CASE WHEN ${is_prospect_tag_sales} = TRUE THEN ${composite_customer_key} ELSE NULL END ;;
+    value_format: "#,##0"
+    group_label: "Intercom Measures - Prospect CVR (Sales Tag)"
+  }
+
+  measure: total_prospect_customers_tag_sales_cs_agent_order_within_48h {
+    label: "Prospects (Sales Tag) - Agent order within 48h"
+    description: "Prospects (Sales Tag) with an agent-placed order within 48h of the interaction"
+    type: count_distinct
+    sql: CASE WHEN ${is_prospect_tag_sales} = TRUE
+               AND ${is_cs_agent_order} = TRUE
+               AND ${is_cs_assisted_order_48h} = TRUE
+              THEN ${composite_customer_key} ELSE NULL END ;;
+    value_format: "#,##0"
+    group_label: "Intercom Measures - Prospect CVR (Sales Tag)"
+  }
+
+  measure: total_prospect_customers_tag_sales_cs_assisted_48h {
+    label: "Prospects (Sales Tag) - Assisted order within 48h"
+    description: "Prospects (Sales Tag) with any order within 48h of the interaction"
+    type: count_distinct
+    sql: CASE WHEN ${is_prospect_tag_sales} = TRUE
+               AND ${is_cs_assisted_order_48h} = TRUE
+              THEN ${composite_customer_key} ELSE NULL END ;;
+    value_format: "#,##0"
+    group_label: "Intercom Measures - Prospect CVR (Sales Tag)"
+  }
+
+  measure: total_prospect_customers_tag_sales_assisted_48h_not_fin {
+    label: "Prospects (Sales Tag) - Assisted order, had human interaction"
+    description: "Prospects (Sales Tag) with an order within 48h and at least one assisted conversation NOT claimed by Fin"
+    type: count_distinct
+    sql: CASE WHEN ${is_prospect_tag_sales} = TRUE
+               AND ${is_cs_assisted_order_48h} = TRUE
+               AND ${ai_claimed_resolved} = FALSE
+              THEN ${composite_customer_key} ELSE NULL END ;;
+    value_format: "#,##0"
+    group_label: "Intercom Measures - Prospect CVR (Sales Tag)"
+  }
+
+  measure: total_prospect_customers_tag_sales_assisted_48h_fin_only {
+    label: "Prospects (Sales Tag) - Assisted order, Fin only"
+    description: "Prospects (Sales Tag) with an order within 48h where Fin claimed resolution in ALL of their assisted conversations"
+    type: number
+    sql: ${total_prospect_customers_tag_sales_cs_assisted_48h} - ${total_prospect_customers_tag_sales_assisted_48h_not_fin} ;;
+    value_format: "#,##0"
+    group_label: "Intercom Measures - Prospect CVR (Sales Tag)"
+  }
+
+  measure: cvr_prospect_tag_sales_agent_orders {
+    label: "CVR (prospect: Sales Tag) - agent orders"
+    description: "Prospects (Sales Tag) with an agent order within 48h / total prospects (Sales Tag)"
+    type: number
+    sql: ${total_prospect_customers_tag_sales_cs_agent_order_within_48h} / NULLIF(${total_prospect_customers_tag_sales}, 0) ;;
+    value_format_name: percent_2
+    group_label: "Intercom Measures - Prospect CVR (Sales Tag)"
+  }
+
+  measure: cvr_prospect_tag_sales_assisted_cs_orders {
+    label: "CVR (prospect: Sales Tag) - assisted cs orders"
+    description: "Prospects (Sales Tag) with any order within 48h / total prospects (Sales Tag)"
+    type: number
+    sql: ${total_prospect_customers_tag_sales_cs_assisted_48h} / NULLIF(${total_prospect_customers_tag_sales}, 0) ;;
+    value_format_name: percent_2
+    group_label: "Intercom Measures - Prospect CVR (Sales Tag)"
+  }
+
+  measure: cvr_prospect_tag_sales_assisted_fin_only {
+    label: "CVR (prospect: Sales Tag) - assisted orders, Fin only"
+    description: "Prospects (Sales Tag) whose only assisted interaction(s) were Fin-claimed / total prospects (Sales Tag)"
+    type: number
+    sql: ${total_prospect_customers_tag_sales_assisted_48h_fin_only} / NULLIF(${total_prospect_customers_tag_sales}, 0) ;;
+    value_format_name: percent_2
+    group_label: "Intercom Measures - Prospect CVR (Sales Tag)"
+  }
+
+  measure: cvr_prospect_tag_sales_assisted_not_fin {
+    label: "CVR (prospect: Sales Tag) - assisted orders, had human interaction"
+    description: "Prospects (Sales Tag) with at least one non-Fin-claimed assisted interaction / total prospects (Sales Tag)"
+    type: number
+    sql: ${total_prospect_customers_tag_sales_assisted_48h_not_fin} / NULLIF(${total_prospect_customers_tag_sales}, 0) ;;
+    value_format_name: percent_2
+    group_label: "Intercom Measures - Prospect CVR (Sales Tag)"
+  }
+
+  measure: fin_only_share_of_assisted_prospects_tag_sales {
+    label: "Fin only (Sales Tag) - share of assisted prospects"
+    description: "Of prospects (Sales Tag) who ordered within 48h, the share where Fin was the only interaction"
+    type: number
+    sql: ${total_prospect_customers_tag_sales_assisted_48h_fin_only} / NULLIF(${total_prospect_customers_tag_sales_cs_assisted_48h}, 0) ;;
+    value_format_name: percent_1
+    group_label: "Intercom Measures - Prospect CVR (Sales Tag)"
+  }
+
+
+
+
 
 }
