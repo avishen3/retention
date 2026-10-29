@@ -2300,7 +2300,7 @@ view: intercom_conversation {
   # -------------------------------------------------------
 
   measure: total_prospects_had_human_interaction {
-    label: "Prospects - Had human interaction"
+    label: "Total Prospects - Had human interaction"
     description: "Distinct prospects with at least one conversation NOT claimed by Fin (everything that is not Fin only), whether or not they bought"
     type: count_distinct
     sql: CASE WHEN ${customer_type} = 'prospect'
@@ -2311,7 +2311,7 @@ view: intercom_conversation {
   }
 
   measure: total_prospects_fin_only {
-    label: "Prospects - Fin only"
+    label: "Tatal Prospects - Fin only"
     description: "Distinct prospects whose conversations were ALL claimed by Fin (Confirmed or Assumed resolution), whether or not they bought"
     type: number
     sql: ${total_prospect_customers} - ${total_prospects_had_human_interaction} ;;
