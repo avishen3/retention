@@ -2359,12 +2359,12 @@ view: intercom_conversation {
 
 
   # =======================================================
-  # PROSPECT CVR - DEFINITION 1: DS INTENT = SALES
+  # PROSPECT CVR - DEFINITION 1: DS INTENT = SALES INQUIRY
   # =======================================================
 
   measure: total_prospect_customers_ds_sales {
     label: "Prospects (DS Sales) - Total"
-    description: "Distinct customers with at least one conversation where ds_intent = 'Sales'"
+    description: "Distinct customers with at least one conversation where ds_intent = 'Sales Inquiry'"
     type: count_distinct
     sql: CASE WHEN ${is_prospect_ds_sales} = TRUE THEN ${composite_customer_key} ELSE NULL END ;;
     value_format: "#,##0"
