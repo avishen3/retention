@@ -2611,6 +2611,356 @@ view: intercom_conversation {
   }
 
 
+  ## just chats
+
+  # =======================================================
+  # PROSPECT DEFINITIONS - CONVERSATION SOURCE ONLY
+  # =======================================================
+
+  dimension: is_prospect_ct_conv {
+    label: "Is Prospect (Customer Type) - Conversation only"
+    description: "Definition A: customer_type = 'prospect' AND source_type = 'conversation'"
+    type: yesno
+    sql: ${TABLE}.source_type = 'conversation' AND ${TABLE}.customer_type = 'prospect' ;;
+    group_label: "Prospect Definitions (Conversation only)"
+  }
+
+  dimension: is_prospect_ds_sales_inquiry_conv {
+    label: "Is Prospect (DS Sales Inquiry) - Conversation only"
+    description: "Definition B: ds_intent = 'Sales Inquiry' AND source_type = 'conversation'"
+    type: yesno
+    sql: ${TABLE}.source_type = 'conversation' AND ${TABLE}.ds_intent = 'Sales Inquiry' ;;
+    group_label: "Prospect Definitions (Conversation only)"
+  }
+
+  dimension: is_prospect_sales_tag_conv {
+    label: "Is Prospect (Sales Tag) - Conversation only"
+    description: "Definition C: has tag 'Sales-procedure' or 'sales-procedure-ai-handled' in any tag slot AND source_type = 'conversation'"
+    type: yesno
+    sql: ${TABLE}.source_type = 'conversation'
+         AND (
+           'Sales-procedure' IN (${TABLE}.tag_0, ${TABLE}.tag_1, ${TABLE}.tag_2, ${TABLE}.tag_3, ${TABLE}.tag_4, ${TABLE}.tag_5, ${TABLE}.tag_6, ${TABLE}.tag_7, ${TABLE}.tag_8, ${TABLE}.tag_9, ${TABLE}.tag_10, ${TABLE}.tag_11)
+           OR 'sales-procedure-ai-handled' IN (${TABLE}.tag_0, ${TABLE}.tag_1, ${TABLE}.tag_2, ${TABLE}.tag_3, ${TABLE}.tag_4, ${TABLE}.tag_5, ${TABLE}.tag_6, ${TABLE}.tag_7, ${TABLE}.tag_8, ${TABLE}.tag_9, ${TABLE}.tag_10, ${TABLE}.tag_11)
+         ) ;;
+    group_label: "Prospect Definitions (Conversation only)"
+  }
+
+
+  # =======================================================
+  # SANITY CHECK MEASURES (conversation counts per definition)
+  # =======================================================
+
+  measure: check_conversations_ct_conv {
+    label: "CHECK - Conversations (Customer Type, Conversation only)"
+    type: count_distinct
+    sql: CASE WHEN ${is_prospect_ct_conv} = TRUE THEN ${conversation_id} ELSE NULL END ;;
+    value_format: "#,##0"
+    group_label: "Prospect Definitions (Conversation only)"
+  }
+
+  measure: check_conversations_ds_sales_inquiry_conv {
+    label: "CHECK - Conversations (DS Sales Inquiry, Conversation only)"
+    type: count_distinct
+    sql: CASE WHEN ${is_prospect_ds_sales_inquiry_conv} = TRUE THEN ${conversation_id} ELSE NULL END ;;
+    value_format: "#,##0"
+    group_label: "Prospect Definitions (Conversation only)"
+  }
+
+  measure: check_conversations_sales_tag_conv {
+    label: "CHECK - Conversations (Sales Tag, Conversation only)"
+    type: count_distinct
+    sql: CASE WHEN ${is_prospect_sales_tag_conv} = TRUE THEN ${conversation_id} ELSE NULL END ;;
+    value_format: "#,##0"
+    group_label: "Prospect Definitions (Conversation only)"
+  }
+
+
+  # =======================================================
+  # PROSPECT CVR - DEFINITION A: CUSTOMER TYPE (CONVERSATION ONLY)
+  # =======================================================
+
+  measure: total_prospect_customers_ct_conv {
+    label: "Prospects (Customer Type | Conversation) - Total"
+    description: "Distinct customers with at least one conversation (source_type = conversation) where customer_type = 'prospect'"
+    type: count_distinct
+    sql: CASE WHEN ${is_prospect_ct_conv} = TRUE THEN ${composite_customer_key} ELSE NULL END ;;
+    value_format: "#,##0"
+    group_label: "Prospect CVR - Customer Type (Conversation only)"
+  }
+
+  measure: total_prospect_customers_ct_conv_agent_order_within_48h {
+    label: "Prospects (Customer Type | Conversation) - Agent order within 48h"
+    type: count_distinct
+    sql: CASE WHEN ${is_prospect_ct_conv} = TRUE
+               AND ${is_cs_agent_order} = TRUE
+               AND ${is_cs_assisted_order_48h} = TRUE
+              THEN ${composite_customer_key} ELSE NULL END ;;
+    value_format: "#,##0"
+    group_label: "Prospect CVR - Customer Type (Conversation only)"
+  }
+
+  measure: total_prospect_customers_ct_conv_assisted_48h {
+    label: "Prospects (Customer Type | Conversation) - Assisted order within 48h"
+    type: count_distinct
+    sql: CASE WHEN ${is_prospect_ct_conv} = TRUE
+               AND ${is_cs_assisted_order_48h} = TRUE
+              THEN ${composite_customer_key} ELSE NULL END ;;
+    value_format: "#,##0"
+    group_label: "Prospect CVR - Customer Type (Conversation only)"
+  }
+
+  measure: total_prospect_customers_ct_conv_assisted_48h_not_fin {
+    label: "Prospects (Customer Type | Conversation) - Assisted order, had human interaction"
+    description: "Assisted prospects with at least one assisted conversation NOT claimed by Fin"
+    type: count_distinct
+    sql: CASE WHEN ${is_prospect_ct_conv} = TRUE
+               AND ${is_cs_assisted_order_48h} = TRUE
+               AND ${ai_claimed_resolved} = FALSE
+              THEN ${composite_customer_key} ELSE NULL END ;;
+    value_format: "#,##0"
+    group_label: "Prospect CVR - Customer Type (Conversation only)"
+  }
+
+  measure: total_prospect_customers_ct_conv_assisted_48h_fin_only {
+    label: "Prospects (Customer Type | Conversation) - Assisted order, Fin only"
+    description: "Assisted prospects where Fin claimed resolution in ALL of their assisted conversations"
+    type: number
+    sql: ${total_prospect_customers_ct_conv_assisted_48h} - ${total_prospect_customers_ct_conv_assisted_48h_not_fin} ;;
+    value_format: "#,##0"
+    group_label: "Prospect CVR - Customer Type (Conversation only)"
+  }
+
+  measure: cvr_prospect_ct_conv_agent_orders {
+    label: "CVR (prospect: Customer Type | Conversation) - agent orders"
+    type: number
+    sql: ${total_prospect_customers_ct_conv_agent_order_within_48h} / NULLIF(${total_prospect_customers_ct_conv}, 0) ;;
+    value_format_name: percent_2
+    group_label: "Prospect CVR - Customer Type (Conversation only)"
+  }
+
+  measure: cvr_prospect_ct_conv_assisted_cs_orders {
+    label: "CVR (prospect: Customer Type | Conversation) - assisted cs orders"
+    type: number
+    sql: ${total_prospect_customers_ct_conv_assisted_48h} / NULLIF(${total_prospect_customers_ct_conv}, 0) ;;
+    value_format_name: percent_2
+    group_label: "Prospect CVR - Customer Type (Conversation only)"
+  }
+
+  measure: cvr_prospect_ct_conv_assisted_fin_only {
+    label: "CVR (prospect: Customer Type | Conversation) - assisted orders, Fin only"
+    type: number
+    sql: ${total_prospect_customers_ct_conv_assisted_48h_fin_only} / NULLIF(${total_prospect_customers_ct_conv}, 0) ;;
+    value_format_name: percent_2
+    group_label: "Prospect CVR - Customer Type (Conversation only)"
+  }
+
+  measure: cvr_prospect_ct_conv_assisted_not_fin {
+    label: "CVR (prospect: Customer Type | Conversation) - assisted orders, had human interaction"
+    type: number
+    sql: ${total_prospect_customers_ct_conv_assisted_48h_not_fin} / NULLIF(${total_prospect_customers_ct_conv}, 0) ;;
+    value_format_name: percent_2
+    group_label: "Prospect CVR - Customer Type (Conversation only)"
+  }
+
+  measure: fin_only_share_of_assisted_prospects_ct_conv {
+    label: "Fin only (Customer Type | Conversation) - share of assisted prospects"
+    type: number
+    sql: ${total_prospect_customers_ct_conv_assisted_48h_fin_only} / NULLIF(${total_prospect_customers_ct_conv_assisted_48h}, 0) ;;
+    value_format_name: percent_1
+    group_label: "Prospect CVR - Customer Type (Conversation only)"
+  }
+
+
+  # =======================================================
+  # PROSPECT CVR - DEFINITION B: DS SALES INQUIRY (CONVERSATION ONLY)
+  # =======================================================
+
+  measure: total_prospect_customers_ds_conv {
+    label: "Prospects (DS Sales Inquiry | Conversation) - Total"
+    description: "Distinct customers with at least one conversation (source_type = conversation) where ds_intent = 'Sales Inquiry'"
+    type: count_distinct
+    sql: CASE WHEN ${is_prospect_ds_sales_inquiry_conv} = TRUE THEN ${composite_customer_key} ELSE NULL END ;;
+    value_format: "#,##0"
+    group_label: "Prospect CVR - DS Sales Inquiry (Conversation only)"
+  }
+
+  measure: total_prospect_customers_ds_conv_agent_order_within_48h {
+    label: "Prospects (DS Sales Inquiry | Conversation) - Agent order within 48h"
+    type: count_distinct
+    sql: CASE WHEN ${is_prospect_ds_sales_inquiry_conv} = TRUE
+               AND ${is_cs_agent_order} = TRUE
+               AND ${is_cs_assisted_order_48h} = TRUE
+              THEN ${composite_customer_key} ELSE NULL END ;;
+    value_format: "#,##0"
+    group_label: "Prospect CVR - DS Sales Inquiry (Conversation only)"
+  }
+
+  measure: total_prospect_customers_ds_conv_assisted_48h {
+    label: "Prospects (DS Sales Inquiry | Conversation) - Assisted order within 48h"
+    type: count_distinct
+    sql: CASE WHEN ${is_prospect_ds_sales_inquiry_conv} = TRUE
+               AND ${is_cs_assisted_order_48h} = TRUE
+              THEN ${composite_customer_key} ELSE NULL END ;;
+    value_format: "#,##0"
+    group_label: "Prospect CVR - DS Sales Inquiry (Conversation only)"
+  }
+
+  measure: total_prospect_customers_ds_conv_assisted_48h_not_fin {
+    label: "Prospects (DS Sales Inquiry | Conversation) - Assisted order, had human interaction"
+    description: "Assisted prospects with at least one assisted conversation NOT claimed by Fin"
+    type: count_distinct
+    sql: CASE WHEN ${is_prospect_ds_sales_inquiry_conv} = TRUE
+               AND ${is_cs_assisted_order_48h} = TRUE
+               AND ${ai_claimed_resolved} = FALSE
+              THEN ${composite_customer_key} ELSE NULL END ;;
+    value_format: "#,##0"
+    group_label: "Prospect CVR - DS Sales Inquiry (Conversation only)"
+  }
+
+  measure: total_prospect_customers_ds_conv_assisted_48h_fin_only {
+    label: "Prospects (DS Sales Inquiry | Conversation) - Assisted order, Fin only"
+    description: "Assisted prospects where Fin claimed resolution in ALL of their assisted conversations"
+    type: number
+    sql: ${total_prospect_customers_ds_conv_assisted_48h} - ${total_prospect_customers_ds_conv_assisted_48h_not_fin} ;;
+    value_format: "#,##0"
+    group_label: "Prospect CVR - DS Sales Inquiry (Conversation only)"
+  }
+
+  measure: cvr_prospect_ds_conv_agent_orders {
+    label: "CVR (prospect: DS Sales Inquiry | Conversation) - agent orders"
+    type: number
+    sql: ${total_prospect_customers_ds_conv_agent_order_within_48h} / NULLIF(${total_prospect_customers_ds_conv}, 0) ;;
+    value_format_name: percent_2
+    group_label: "Prospect CVR - DS Sales Inquiry (Conversation only)"
+  }
+
+  measure: cvr_prospect_ds_conv_assisted_cs_orders {
+    label: "CVR (prospect: DS Sales Inquiry | Conversation) - assisted cs orders"
+    type: number
+    sql: ${total_prospect_customers_ds_conv_assisted_48h} / NULLIF(${total_prospect_customers_ds_conv}, 0) ;;
+    value_format_name: percent_2
+    group_label: "Prospect CVR - DS Sales Inquiry (Conversation only)"
+  }
+
+  measure: cvr_prospect_ds_conv_assisted_fin_only {
+    label: "CVR (prospect: DS Sales Inquiry | Conversation) - assisted orders, Fin only"
+    type: number
+    sql: ${total_prospect_customers_ds_conv_assisted_48h_fin_only} / NULLIF(${total_prospect_customers_ds_conv}, 0) ;;
+    value_format_name: percent_2
+    group_label: "Prospect CVR - DS Sales Inquiry (Conversation only)"
+  }
+
+  measure: cvr_prospect_ds_conv_assisted_not_fin {
+    label: "CVR (prospect: DS Sales Inquiry | Conversation) - assisted orders, had human interaction"
+    type: number
+    sql: ${total_prospect_customers_ds_conv_assisted_48h_not_fin} / NULLIF(${total_prospect_customers_ds_conv}, 0) ;;
+    value_format_name: percent_2
+    group_label: "Prospect CVR - DS Sales Inquiry (Conversation only)"
+  }
+
+  measure: fin_only_share_of_assisted_prospects_ds_conv {
+    label: "Fin only (DS Sales Inquiry | Conversation) - share of assisted prospects"
+    type: number
+    sql: ${total_prospect_customers_ds_conv_assisted_48h_fin_only} / NULLIF(${total_prospect_customers_ds_conv_assisted_48h}, 0) ;;
+    value_format_name: percent_1
+    group_label: "Prospect CVR - DS Sales Inquiry (Conversation only)"
+  }
+
+
+  # =======================================================
+  # PROSPECT CVR - DEFINITION C: SALES TAG (CONVERSATION ONLY)
+  # =======================================================
+
+  measure: total_prospect_customers_tag_conv {
+    label: "Prospects (Sales Tag | Conversation) - Total"
+    description: "Distinct customers with at least one conversation (source_type = conversation) tagged Sales-procedure or sales-procedure-ai-handled"
+    type: count_distinct
+    sql: CASE WHEN ${is_prospect_sales_tag_conv} = TRUE THEN ${composite_customer_key} ELSE NULL END ;;
+    value_format: "#,##0"
+    group_label: "Prospect CVR - Sales Tag (Conversation only)"
+  }
+
+  measure: total_prospect_customers_tag_conv_agent_order_within_48h {
+    label: "Prospects (Sales Tag | Conversation) - Agent order within 48h"
+    type: count_distinct
+    sql: CASE WHEN ${is_prospect_sales_tag_conv} = TRUE
+               AND ${is_cs_agent_order} = TRUE
+               AND ${is_cs_assisted_order_48h} = TRUE
+              THEN ${composite_customer_key} ELSE NULL END ;;
+    value_format: "#,##0"
+    group_label: "Prospect CVR - Sales Tag (Conversation only)"
+  }
+
+  measure: total_prospect_customers_tag_conv_assisted_48h {
+    label: "Prospects (Sales Tag | Conversation) - Assisted order within 48h"
+    type: count_distinct
+    sql: CASE WHEN ${is_prospect_sales_tag_conv} = TRUE
+               AND ${is_cs_assisted_order_48h} = TRUE
+              THEN ${composite_customer_key} ELSE NULL END ;;
+    value_format: "#,##0"
+    group_label: "Prospect CVR - Sales Tag (Conversation only)"
+  }
+
+  measure: total_prospect_customers_tag_conv_assisted_48h_not_fin {
+    label: "Prospects (Sales Tag | Conversation) - Assisted order, had human interaction"
+    description: "Assisted prospects with at least one assisted conversation NOT claimed by Fin"
+    type: count_distinct
+    sql: CASE WHEN ${is_prospect_sales_tag_conv} = TRUE
+               AND ${is_cs_assisted_order_48h} = TRUE
+               AND ${ai_claimed_resolved} = FALSE
+              THEN ${composite_customer_key} ELSE NULL END ;;
+    value_format: "#,##0"
+    group_label: "Prospect CVR - Sales Tag (Conversation only)"
+  }
+
+  measure: total_prospect_customers_tag_conv_assisted_48h_fin_only {
+    label: "Prospects (Sales Tag | Conversation) - Assisted order, Fin only"
+    description: "Assisted prospects where Fin claimed resolution in ALL of their assisted conversations"
+    type: number
+    sql: ${total_prospect_customers_tag_conv_assisted_48h} - ${total_prospect_customers_tag_conv_assisted_48h_not_fin} ;;
+    value_format: "#,##0"
+    group_label: "Prospect CVR - Sales Tag (Conversation only)"
+  }
+
+  measure: cvr_prospect_tag_conv_agent_orders {
+    label: "CVR (prospect: Sales Tag | Conversation) - agent orders"
+    type: number
+    sql: ${total_prospect_customers_tag_conv_agent_order_within_48h} / NULLIF(${total_prospect_customers_tag_conv}, 0) ;;
+    value_format_name: percent_2
+    group_label: "Prospect CVR - Sales Tag (Conversation only)"
+  }
+
+  measure: cvr_prospect_tag_conv_assisted_cs_orders {
+    label: "CVR (prospect: Sales Tag | Conversation) - assisted cs orders"
+    type: number
+    sql: ${total_prospect_customers_tag_conv_assisted_48h} / NULLIF(${total_prospect_customers_tag_conv}, 0) ;;
+    value_format_name: percent_2
+    group_label: "Prospect CVR - Sales Tag (Conversation only)"
+  }
+
+  measure: cvr_prospect_tag_conv_assisted_fin_only {
+    label: "CVR (prospect: Sales Tag | Conversation) - assisted orders, Fin only"
+    type: number
+    sql: ${total_prospect_customers_tag_conv_assisted_48h_fin_only} / NULLIF(${total_prospect_customers_tag_conv}, 0) ;;
+    value_format_name: percent_2
+    group_label: "Prospect CVR - Sales Tag (Conversation only)"
+  }
+
+  measure: cvr_prospect_tag_conv_assisted_not_fin {
+    label: "CVR (prospect: Sales Tag | Conversation) - assisted orders, had human interaction"
+    type: number
+    sql: ${total_prospect_customers_tag_conv_assisted_48h_not_fin} / NULLIF(${total_prospect_customers_tag_conv}, 0) ;;
+    value_format_name: percent_2
+    group_label: "Prospect CVR - Sales Tag (Conversation only)"
+  }
+
+  measure: fin_only_share_of_assisted_prospects_tag_conv {
+    label: "Fin only (Sales Tag | Conversation) - share of assisted prospects"
+    type: number
+    sql: ${total_prospect_customers_tag_conv_assisted_48h_fin_only} / NULLIF(${total_prospect_customers_tag_conv_assisted_48h}, 0) ;;
+    value_format_name: percent_1
+    group_label: "Prospect CVR - Sales Tag (Conversation only)"
+  }
 
 
 }
