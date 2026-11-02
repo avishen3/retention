@@ -2963,4 +2963,113 @@ view: intercom_conversation {
   }
 
 
+### 02/11/2026
+
+  # =======================================================
+  # AGENT CVR - OUT OF PROSPECTS WHO HAD HUMAN INTERACTION
+  # (same definition as before: at least one conversation NOT claimed by Fin)
+  # =======================================================
+
+  # ---------- Definition A: Customer Type (Conversation only) ----------
+
+  measure: total_prospect_customers_ct_conv_had_human {
+    label: "Prospects (Customer Type | Conversation) - Had human interaction"
+    description: "Distinct prospects with at least one conversation NOT claimed by Fin, whether or not they bought"
+    type: count_distinct
+    sql: CASE WHEN ${is_prospect_ct_conv} = TRUE
+               AND ${ai_claimed_resolved} = FALSE
+              THEN ${composite_customer_key} ELSE NULL END ;;
+    value_format: "#,##0"
+    group_label: "Prospect CVR - Customer Type (Conversation only)"
+  }
+
+  measure: total_prospect_customers_ct_conv_had_human_agent_order_48h {
+    label: "Prospects (Customer Type | Conversation) - Had human interaction AND agent order within 48h"
+    description: "Prospects with an agent-placed order within 48h, where the same conversation was NOT claimed by Fin"
+    type: count_distinct
+    sql: CASE WHEN ${is_prospect_ct_conv} = TRUE
+               AND ${ai_claimed_resolved} = FALSE
+               AND ${is_cs_agent_order} = TRUE
+               AND ${is_cs_assisted_order_48h} = TRUE
+              THEN ${composite_customer_key} ELSE NULL END ;;
+    value_format: "#,##0"
+    group_label: "Prospect CVR - Customer Type (Conversation only)"
+  }
+
+  measure: cvr_prospect_ct_conv_agent_orders_of_had_human {
+    label: "CVR (prospect: Customer Type | Conversation) - agent orders, out of prospects who had human interaction"
+    type: number
+    sql: ${total_prospect_customers_ct_conv_had_human_agent_order_48h} / NULLIF(${total_prospect_customers_ct_conv_had_human}, 0) ;;
+    value_format_name: percent_2
+    group_label: "Prospect CVR - Customer Type (Conversation only)"
+  }
+
+  # ---------- Definition B: DS Sales Inquiry (Conversation only) ----------
+
+  measure: total_prospect_customers_ds_conv_had_human {
+    label: "Prospects (DS Sales Inquiry | Conversation) - Had human interaction"
+    description: "Distinct prospects with at least one conversation NOT claimed by Fin, whether or not they bought"
+    type: count_distinct
+    sql: CASE WHEN ${is_prospect_ds_sales_inquiry_conv} = TRUE
+               AND ${ai_claimed_resolved} = FALSE
+              THEN ${composite_customer_key} ELSE NULL END ;;
+    value_format: "#,##0"
+    group_label: "Prospect CVR - DS Sales Inquiry (Conversation only)"
+  }
+
+  measure: total_prospect_customers_ds_conv_had_human_agent_order_48h {
+    label: "Prospects (DS Sales Inquiry | Conversation) - Had human interaction AND agent order within 48h"
+    description: "Prospects with an agent-placed order within 48h, where the same conversation was NOT claimed by Fin"
+    type: count_distinct
+    sql: CASE WHEN ${is_prospect_ds_sales_inquiry_conv} = TRUE
+               AND ${ai_claimed_resolved} = FALSE
+               AND ${is_cs_agent_order} = TRUE
+               AND ${is_cs_assisted_order_48h} = TRUE
+              THEN ${composite_customer_key} ELSE NULL END ;;
+    value_format: "#,##0"
+    group_label: "Prospect CVR - DS Sales Inquiry (Conversation only)"
+  }
+
+  measure: cvr_prospect_ds_conv_agent_orders_of_had_human {
+    label: "CVR (prospect: DS Sales Inquiry | Conversation) - agent orders, out of prospects who had human interaction"
+    type: number
+    sql: ${total_prospect_customers_ds_conv_had_human_agent_order_48h} / NULLIF(${total_prospect_customers_ds_conv_had_human}, 0) ;;
+    value_format_name: percent_2
+    group_label: "Prospect CVR - DS Sales Inquiry (Conversation only)"
+  }
+
+  # ---------- Definition C: Sales Tag (Conversation only) ----------
+
+  measure: total_prospect_customers_tag_conv_had_human {
+    label: "Prospects (Sales Tag | Conversation) - Had human interaction"
+    description: "Distinct prospects with at least one conversation NOT claimed by Fin, whether or not they bought"
+    type: count_distinct
+    sql: CASE WHEN ${is_prospect_sales_tag_conv} = TRUE
+               AND ${ai_claimed_resolved} = FALSE
+              THEN ${composite_customer_key} ELSE NULL END ;;
+    value_format: "#,##0"
+    group_label: "Prospect CVR - Sales Tag (Conversation only)"
+  }
+
+  measure: total_prospect_customers_tag_conv_had_human_agent_order_48h {
+    label: "Prospects (Sales Tag | Conversation) - Had human interaction AND agent order within 48h"
+    description: "Prospects with an agent-placed order within 48h, where the same conversation was NOT claimed by Fin"
+    type: count_distinct
+    sql: CASE WHEN ${is_prospect_sales_tag_conv} = TRUE
+               AND ${ai_claimed_resolved} = FALSE
+               AND ${is_cs_agent_order} = TRUE
+               AND ${is_cs_assisted_order_48h} = TRUE
+              THEN ${composite_customer_key} ELSE NULL END ;;
+    value_format: "#,##0"
+    group_label: "Prospect CVR - Sales Tag (Conversation only)"
+  }
+
+  measure: cvr_prospect_tag_conv_agent_orders_of_had_human {
+    label: "CVR (prospect: Sales Tag | Conversation) - agent orders, out of prospects who had human interaction"
+    type: number
+    sql: ${total_prospect_customers_tag_conv_had_human_agent_order_48h} / NULLIF(${total_prospect_customers_tag_conv_had_human}, 0) ;;
+    value_format_name: percent_2
+    group_label: "Prospect CVR - Sales Tag (Conversation only)"
+  }
+
 }
